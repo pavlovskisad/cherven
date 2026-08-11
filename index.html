@@ -124,7 +124,7 @@
     text-decoration-thickness: 1px; cursor: pointer;
   }
   #gate .big:hover { text-decoration: none; }
-  #gate .hint { color: #888; letter-spacing: 0.04em; max-width: 30em; text-align: center; line-height: 1.7; }
+  #gate .hint { color: #888; letter-spacing: 0.04em; max-width: 30em; text-align: center; line-height: 1.7; padding: 0 1.5em; overflow-wrap: anywhere; }
   #gate input[type=file] { display: none; }
   body.dragging #gate { background: #eee; }
 
@@ -585,10 +585,20 @@
       if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') return;
       start();
     });
+    // Name the failure. "Could not load" is the same sentence whether the file
+    // is unreachable, refused, or undecodable, and on a phone the URL alone ran
+    // off the screen. The MediaError code is the one fact that separates those
+    // cases, so it goes on the wall: 2 means the fetch failed, 4 means the
+    // source was refused outright, 3 means it arrived and would not decode.
+    const MEDIA_ERR = { 1: 'load aborted', 2: 'network error', 3: 'decode error',
+                        4: 'source rejected' };
     audio.addEventListener('error', () => {
+      const e = audio.error;
       document.getElementById('gateBtn').textContent = 'Select audio file';
       document.getElementById('gateHint').textContent =
-        'Could not load ' + CONFIG.AUDIO + '. Pick the file or drop it here.';
+        'Could not load the audio — ' +
+        (e ? (MEDIA_ERR[e.code] || 'error') + ' (code ' + e.code + ')' : 'no error given') +
+        ', network state ' + audio.networkState + '. Pick the file or drop it here.';
     });
   } else {
     // No audio configured: the gate has to ask for a file, so it says so here
