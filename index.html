@@ -145,12 +145,11 @@
 <div class="feather" id="fy"></div>
 
 <div id="gate">
-  <label class="big" for="gateFile" id="gateBtn">select audio file</label>
+  <label class="big" for="gateFile" id="gateBtn">let’s go</label>
   <input type="file" id="gateFile" accept="audio/*">
-  <div class="hint" id="gateHint">
-    Pick the Cherven mp3, or drop it anywhere on this window.<br>
-    No audio to hand? Double-click here, then press <kbd>C</kbd> and drag the scrub.
-  </div>
+  <!-- Kept in the DOM and deliberately empty: the gate carries no words but the
+       two on the button. Only the no-audio and failed-load paths write to it. -->
+  <div class="hint" id="gateHint"></div>
 </div>
 
 <aside id="panel">
@@ -549,8 +548,8 @@
     audio.src = URL.createObjectURL(file);
     audio.loop = !!CONFIG.LOOP;
     audio.load();
-    document.getElementById('gateBtn').textContent = 'begin';
-    document.getElementById('gateHint').textContent = file.name;
+    document.getElementById('gateBtn').textContent = 'let’s go';
+    document.getElementById('gateHint').textContent = '';
     const start = e => {
       e.preventDefault();
       gate.classList.add('off');
@@ -572,9 +571,6 @@
     audio.src = CONFIG.AUDIO;
     audio.loop = !!CONFIG.LOOP;
     audio.load();
-    document.getElementById('gateBtn').textContent = 'begin';
-    document.getElementById('gateHint').textContent =
-      'Click to start. Press C for controls, F for fullscreen.';
     document.getElementById('gateBtn').onclick = e => { e.preventDefault(); start(); };
     gate.addEventListener('click', e => {
       if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') return;
@@ -585,6 +581,13 @@
       document.getElementById('gateHint').textContent =
         'Could not load ' + CONFIG.AUDIO + '. Pick the file or drop it here.';
     });
+  } else {
+    // No audio configured: the gate has to ask for a file, so it says so here
+    // rather than in the markup, which now opens on the projected wording.
+    document.getElementById('gateBtn').textContent = 'select audio file';
+    document.getElementById('gateHint').innerHTML =
+      'Pick the Cherven mp3, or drop it anywhere on this window.<br>' +
+      'No audio to hand? Double-click here, then press <kbd>C</kbd> and drag the scrub.';
   }
 
   ['dragenter', 'dragover'].forEach(ev => document.addEventListener(ev, e => {
