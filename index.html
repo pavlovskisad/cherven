@@ -113,8 +113,17 @@
     gap: 18px; font-size: 12px; letter-spacing: 0.1em;
   }
   #gate.off { display: none; }
-  #gate .big { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; border: 1px solid #000; padding: 14px 26px; cursor: pointer; }
-  #gate .big:hover { background: #000; color: #fff; }
+  /* The one exception to the Helvetica interface: the gate's own word is set
+     in the work's face, at the work's size, so the first thing on the wall is
+     already the piece. Everything else in #gate stays apparatus. */
+  #gate .big {
+    font-family: "Times New Roman", Times, "Liberation Serif", serif;
+    font-size: var(--size); line-height: var(--lead);
+    letter-spacing: 0; text-transform: none; color: var(--ink);
+    text-decoration: underline; text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px; cursor: pointer;
+  }
+  #gate .big:hover { text-decoration: none; }
   #gate .hint { color: #888; letter-spacing: 0.04em; max-width: 30em; text-align: center; line-height: 1.7; }
   #gate input[type=file] { display: none; }
   body.dragging #gate { background: #eee; }
@@ -145,7 +154,7 @@
 <div class="feather" id="fy"></div>
 
 <div id="gate">
-  <label class="big" for="gateFile" id="gateBtn">let’s go</label>
+  <label class="big" for="gateFile" id="gateBtn">Let’s go</label>
   <input type="file" id="gateFile" accept="audio/*">
   <!-- Kept in the DOM and deliberately empty: the gate carries no words but the
        two on the button. Only the no-audio and failed-load paths write to it. -->
@@ -548,7 +557,7 @@
     audio.src = URL.createObjectURL(file);
     audio.loop = !!CONFIG.LOOP;
     audio.load();
-    document.getElementById('gateBtn').textContent = 'let’s go';
+    document.getElementById('gateBtn').textContent = 'Let’s go';
     document.getElementById('gateHint').textContent = '';
     const start = e => {
       e.preventDefault();
@@ -577,14 +586,14 @@
       start();
     });
     audio.addEventListener('error', () => {
-      document.getElementById('gateBtn').textContent = 'select audio file';
+      document.getElementById('gateBtn').textContent = 'Select audio file';
       document.getElementById('gateHint').textContent =
         'Could not load ' + CONFIG.AUDIO + '. Pick the file or drop it here.';
     });
   } else {
     // No audio configured: the gate has to ask for a file, so it says so here
     // rather than in the markup, which now opens on the projected wording.
-    document.getElementById('gateBtn').textContent = 'select audio file';
+    document.getElementById('gateBtn').textContent = 'Select audio file';
     document.getElementById('gateHint').innerHTML =
       'Pick the Cherven mp3, or drop it anywhere on this window.<br>' +
       'No audio to hand? Double-click here, then press <kbd>C</kbd> and drag the scrub.';

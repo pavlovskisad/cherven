@@ -177,8 +177,13 @@ parameters, not the decoration.
   the block at 16% black.
 - Leading 1.3, on a slider. Zero letter-spacing (the negative tracking in the
   code is for the Helvetica toggle only).
-- The panel and gate stay in Helvetica so the interface never reads as part of
-  the work.
+- The panel stays in Helvetica so the interface never reads as part of the work.
+  The gate is Helvetica too, with one deliberate exception: its own word, `Let’s
+  go` — cue 1, the first line of the piece — is set in Times at `var(--size)`,
+  underlined, no box. The entry screen is the work beginning, not a button in
+  front of it, so it tracks the type-size slider along with the wall. Everything
+  else the gate can say (the file picker, the failed-load message) is apparatus
+  and stays Helvetica.
 
 **Justification needs measure.** At three or four columns the notes get narrow
 enough to open rivers. If more columns are wanted, drop note size first.
