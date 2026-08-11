@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cherven</title>
+<style>
+  :root {
+    --ink: #000;
+    --size: 22px;
+    --lead: 1.3;
+    --desc: 0.78;
+    --talk: 1;
+    --ghost-future: 0.10;
+    --ghost-past: 0.18;
+    --feather: 0;
+    --cols: 2;
+    --pad: 4vw;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%; background: #000; overflow: hidden;
+    font-family: "Times New Roman", Times, "Liberation Serif", serif;
+    -webkit-font-smoothing: antialiased; cursor: none;
+  }
+  body.grotesk { font-family: "Helvetica Neue", Helvetica, Inter, Arial, sans-serif; }
+  body.pointing { cursor: default; }
+
+  #stage { position: fixed; inset: 0; background: #fff; overflow: hidden; }
+
+  .row {
+    position: absolute;
+    color: var(--ink);
+    font-size: var(--size);
+    overflow: hidden;
+    opacity: 0;
+    transition: top 800ms cubic-bezier(.22,.61,.36,1);
+  }
+
+  .head { display: flex; align-items: baseline; gap: 0.4em; line-height: var(--lead); }
+  .idx {
+    flex: 0 0 auto; width: 2.2em; text-align: left;
+    font-variant-numeric: tabular-nums;
+  }
+  .title { flex: 0 1 auto; font-weight: 700; letter-spacing: 0; }
+  body.grotesk .title { letter-spacing: -0.01em; }
+  .date {
+    display: none;
+    width: 100%; margin-top: 0.15em;
+    text-align: center; font-size: 0.62em; letter-spacing: 0.01em;
+  }
+  body.showDate .date { display: block; }
+  .talk {
+    display: none;
+    margin-left: 2.2em;
+    padding-top: 0.6em;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+  }
+  body.talkOn .row.live .talk { display: block; }
+  .turn {
+    padding: 0 0 0.45em 0;
+    font-size: calc(var(--talk) * 1em);
+    text-indent: 0;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    line-height: var(--lead);
+  }
+  .who { font-weight: 700; }
+  .desc {
+    padding: 0.1em 0 0.55em 0;
+    margin: 0;
+    text-indent: 2.2em;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    font-size: calc(var(--desc) * 1em);
+    line-height: var(--lead);
+    display: none;
+  }
+  .row.live .desc { display: block; }
+  body.noDesc .desc { display: none !important; }
+
+  .row.clipped {
+    -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 74%, transparent 100%);
+  }
+  .bar {
+    position: absolute; left: 2.8em; right: 0; top: 1.3em;
+    height: 1px; background: var(--ink);
+    transform: scaleX(0); transform-origin: left center; opacity: 0;
+  }
+  .row.live .bar { opacity: 0.13; }
+  body.noBars .bar { display: none; }
+
+  #clock {
+    position: fixed; left: var(--pad); right: var(--pad);
+    bottom: calc(var(--pad) * 0.4); height: 1px;
+    background: var(--ink); opacity: 0.1;
+  }
+  #clock i { position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: left center; }
+  body.noClock #clock { display: none; }
+
+  .feather { position: fixed; inset: 0; pointer-events: none; mix-blend-mode: multiply; }
+  #fx { background: linear-gradient(to right, #000 0%, transparent calc(var(--feather)*1%), transparent calc(100% - var(--feather)*1%), #000 100%); }
+  #fy { background: linear-gradient(to bottom, #000 0%, transparent calc(var(--feather)*1%), transparent calc(100% - var(--feather)*1%), #000 100%); }
+  body.noFeather .feather { display: none; }
+
+  #gate {
+    position: fixed; inset: 0; background: #fff; z-index: 40;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 18px; font-size: 12px; letter-spacing: 0.1em;
+  }
+  #gate.off { display: none; }
+  #gate .big { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; border: 1px solid #000; padding: 14px 26px; cursor: pointer; }
+  #gate .big:hover { background: #000; color: #fff; }
+  #gate .hint { color: #888; letter-spacing: 0.04em; max-width: 30em; text-align: center; line-height: 1.7; }
+  #gate input[type=file] { display: none; }
+  body.dragging #gate { background: #eee; }
+
+  #panel {
+    position: fixed; top: 0; right: 0; width: 320px; height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #f4f4f4; border-left: 1px solid #ddd; padding: 20px;
+    overflow-y: auto; font-size: 12px; color: #111; z-index: 50;
+    transform: translateX(100%); transition: transform 240ms ease;
+  }
+  #panel.open { transform: translateX(0); }
+  #panel h2 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 500; color: #666; margin-bottom: 14px; }
+  #panel label { display: block; margin: 12px 0 4px; font-size: 11px; color: #555; }
+  #panel input[type=range] { width: 100%; }
+  #panel button { width: 100%; padding: 8px; margin-top: 8px; background: #fff; color: #000; border: 1px solid #bbb; font-family: inherit; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; }
+  #panel button.on { background: #000; color: #fff; border-color: #000; }
+  .note { margin-top: 16px; padding-top: 12px; border-top: 1px solid #ddd; color: #777; line-height: 1.6; font-size: 11px; }
+  kbd { background: #e4e4e4; padding: 1px 4px; font-size: 10px; font-family: inherit; }
+  @media (prefers-reduced-motion: reduce) { .row { transition: none; } }
+</style>
+</head>
+<body class="noFeather talkOn">
+
+<div id="stage"></div>
+<div id="clock"><i></i></div>
+<div class="feather" id="fx"></div>
+<div class="feather" id="fy"></div>
+
+<div id="gate">
+  <label class="big" for="gateFile" id="gateBtn">select audio file</label>
+  <input type="file" id="gateFile" accept="audio/*">
+  <div class="hint" id="gateHint">
+    Pick the Cherven mp3, or drop it anywhere on this window.<br>
+    No audio to hand? Double-click here, then press <kbd>C</kbd> and drag the scrub.
+  </div>
+</div>
+
+<aside id="panel">
+  <h2>Cherven — 53 cues / 45:04</h2>
+  <label>Audio file</label>
+  <input type="file" id="audioFile" accept="audio/*">
+
+  <label>Preview position <span id="clockVal">0:00</span></label>
+  <input type="range" id="scrub" min="0" max="2704" step="1" value="0">
+
+  <label>Type size <span id="sizeVal"></span></label>
+  <input type="range" id="size" min="10" max="44" step="1" value="22">
+  <label>Note size <span id="descVal"></span></label>
+  <input type="range" id="desc" min="0.5" max="1" step="0.02" value="0.78">
+  <label>Speech size <span id="talkVal"></span></label>
+  <input type="range" id="talk" min="0.6" max="1.3" step="0.02" value="1">
+  <label>Line spacing <span id="leadVal"></span></label>
+  <input type="range" id="lead" min="1" max="2.2" step="0.05" value="1.3">
+  <label>Columns <span id="colsVal"></span></label>
+  <input type="range" id="cols" min="1" max="4" step="1" value="2">
+  <label>Margin <span id="padVal"></span></label>
+  <input type="range" id="pad" min="1" max="12" step="0.5" value="4">
+  <label>Hold short cues, max sec <span id="holdVal"></span></label>
+  <input type="range" id="hold" min="0" max="60" step="1" value="20">
+  <label>Decay share of duration <span id="fadeVal"></span></label>
+  <input type="range" id="fade" min="0.1" max="1" step="0.05" value="1">
+  <label>Decay curve <span id="curveVal"></span></label>
+  <input type="range" id="curve" min="0.6" max="3" step="0.1" value="1.6">
+  <label>Dormant weight <span id="gfVal"></span></label>
+  <input type="range" id="gf" min="0" max="0.4" step="0.01" value="0.10">
+  <label>Elapsed weight <span id="gpVal"></span></label>
+  <input type="range" id="gp" min="0" max="0.5" step="0.01" value="0.18">
+  <label>Edge feather <span id="featherVal"></span></label>
+  <input type="range" id="feather" min="0" max="22" step="0.5" value="0">
+
+  <button id="mFlow" class="on">Flow — packed</button>
+  <button id="mGhost">Fixed list — titles</button>
+  <button id="talkBtn" class="on">Transcript</button>
+  <button id="descBtn" class="on">Descriptions</button>
+  <button id="dateBtn">Date in margin</button>
+  <button id="fontBtn">Grotesque instead</button>
+  <button id="bars" class="on">Progress hairlines</button>
+  <button id="clockBtn" class="on">Elapsed line</button>
+  <button id="full">Fullscreen</button>
+
+  <div class="note">
+    <kbd>C</kbd> panel &nbsp;<kbd>F</kbd> fullscreen &nbsp;<kbd>Space</kbd> play<br>
+    <kbd>1</kbd><kbd>2</kbd> modes &nbsp;<kbd>D</kbd> notes &nbsp;<kbd>T</kbd> transcript<br>
+    <kbd>←</kbd><kbd>→</kbd> seek 10s, with shift 60s
+  </div>
+</aside>
+
+<audio id="audio" preload="auto"></audio>
+
+<script>
+(function () {
+  const CUES = [{"n":1,"title":"Let’s go","start":0,"end":7,"desc":"Lisove cemetery, crowd lines up on both sides of the road, from the gates – we wait a long time for the arrival of Tokha’s body to start the funeral. A coffin appears; next to me is Andriy, one of Tokha’s closest, oldest friends, he says: “Let’s go.” August 2023","date":"August 2023","turns":[{"spk":"Andriy","text":"Let’s go...","at":0.0}]},{"n":2,"title":"Boulders","start":8,"end":176,"desc":"Evening; Hek, Frania, and I are at home; I play the ukulele, they play with LEGOs. Spring 2022","date":"Spring 2022","turns":[{"spk":"Frania","text":"Home, Hek.","at":8.0},{"spk":"Frania","text":"Home!","at":13.8},{"spk":"Hek","text":"Dad, today you're at the stone factory! At the stone factory!","at":16.7},{"spk":"Hek","text":"Here, they press the stones into one single lump — from just one type. See? They compress all the rocks, from one type of waste stone. See — they’re all getting pressed together.","at":48.6},{"spk":"Frania","text":"Who's knocking?","at":144.2},{"spk":"Hek","text":"Go, brrrrr!","at":150.0}]},{"n":3,"title":"Bohdan’s memorial luncheon","start":2,"end":279,"desc":"Memorial lunch after Bohdan’s funeral, his sister is the first to speak to everyone. People stand and sit, clattering dishes. August 2023","date":"August 2023","turns":[{"spk":"Bohdan’s mother","text":"…our dinner will be unconventional: while we reminisce about him, we will watch videos from his life... [indistinct]... We won’t be crying; instead, we’ll be as cheerful and life- loving as our son was...","at":2.0},{"spk":"Bohdan’s sister","text":"We all know what he was like… [indistinct]… he’d probably be trying to cheer us up right now…","at":106.9},{"spk":"Bogdan’s sister","text":"…when he was just a child, how he grew up, how he matured. We’ll be watching all these stages, remembering him. And as we look at him…","at":162.4}]},{"n":4,"title":"Conclusion","start":109,"end":293,"desc":"Serhii writes down a diagnosis in a patient’s record at the military hospital. Summer 2022","date":"Summer 2022","turns":[{"spk":"Serhii","text":"Yes, hold on. Plastic surgery of the medial surface defect of the foot.","at":109.0},{"spk":"Serhii","text":"Reconstruction of the sensitive surface of the foot…","at":174.8},{"spk":"Serhii","text":"Well, I'll finish writing. Raised sensitive surface of the foot, further…","at":215.3}]},{"n":5,"title":"Saving Private Ryan","start":121,"end":237,"desc":"Accidentally overheard story. Summer 2023","date":"Summer 2023","turns":[]},{"n":6,"title":"African lullaby","start":121,"end":236,"desc":"We listen to a lullaby. Summer 2023","date":"Summer 2023","turns":[]},{"n":7,"title":"Nikolaich","start":178,"end":296,"desc":"Nikolaich recalls his acquaintance, a tractor driver who had blown up on a mine in the summer of 2022; they worked together at the same company then. Summer 2023","date":"Summer 2023","turns":[{"spk":"Nikolaich","text":"Fields? Yeah, the thing is, the guy who hired me — he was working as an agronomist — stepped on a mine. I helped load him into the ambulance myself… [indistinct]… He was trying to find a better way out… A tractor passed that way, but on the way back it didn’t make it. The blast, man, could be heard from eight kilometers away…","at":178.0},{"spk":"Nikolaich","text":"Left leg was gone, the arm was shattered… [indistinct] tied it oﬀ with a tourniquet..","at":262.1}]},{"n":8,"title":"Film ne podliva","start":255,"end":281,"desc":"Sashko talks about his dream to make a film about Kyiv, “not some gravy,” but a story about the real Kyiv and its real people. Summer 2023","date":"Summer 2023","turns":[{"spk":"Sania","text":"A film about Kyiv, about real life, none of that watered-down stuﬀ!","at":255.0}]},{"n":9,"title":"Into the fire","start":291,"end":314,"desc":"Hek greets me at home with a story about why he wants to be a firefighter and what kind of firefighter he would like to be. Summer 2023","date":"Summer 2023","turns":[]},{"n":10,"title":"Chapa talks in Kutt","start":312,"end":480,"desc":"My old friend tells me about the circumstances of Bohdan’s death. August 2023","date":"August 2023","turns":[{"spk":"Chapa","text":"Just brutal. So, the unit he was in, of the 47th, went to Orikhiv. They were like far from the zero line. Well, not too far — around fifteen kilometers. They were sitting in a basement, in an HQ. And a damn 500 kg bomb hit that place — a Shahed carries 50 kg — and it blew everything to hell. Guys, the whole place. Only two people made it out alive. And we, with one of the guys...","at":312.0}]},{"n":11,"title":"Kativnya","start":327,"end":662,"desc":"A wounded man during his examination tells Serhii that he was taken prisoner — to the “torture room”— as a civilian, and upon release, immediately joined the army. December 2023","date":"December 2023","turns":[{"spk":"Serhii","text":"Do you have a copy, perhaps?","at":327.0},{"spk":"Serhii","text":"Homeostasis, next… Anyway, I’ll write all of it down.","at":336.1},{"spk":"Serhii","text":"Thank you! Nikolaich: …the second one died instantly. Hell of a guy, an accordion player — everyone knew him.","at":349.8},{"spk":"Patient","text":"…in a pit, in a torture chamber. After the torture… [indistinct] Serhii: Torture — you mean after captivity? Patient: Was in captivity! They chucked me in a pit after, like — with the taser thing — kept torturin’ me. Wanted me to say “Glory to Russia”. Serhii: Okay, and what are your complaints now? Another patient: The Russkies! Serhii: Well, that’s the main one for all of us these days.","at":378.7},{"spk":"Serhii","text":"Okay, everything written here is correct? Form 100. Injury received while on active duty on December 4th, in the combat zone, as a result of mortar shelling. First aid was provided during evacuation stages, from the 5th to the 9th at Novomoskovsk Central District Hospital in 1 Yacht club in Kyiv Dnipropetrovsk Oblast. Then transferred to surgery in Khmelnytskyi… Any serious illnesses before this? Any surgeries, apart from the injury?","at":485.0},{"spk":"Serhii","text":"And now, function-wise — is everything working? Can you move it in and out? Is the sensation still there? [indistinct]","at":591.4}]},{"n":12,"title":"Disneyland","start":378,"end":417,"desc":"A woman who once worked at the Liquor and Vodka Factory speaks during a public discussion about the developer's plans with residents of the blocks nearest to the factory building. August 2023","date":"August 2023","turns":[{"spk":"Woman at the Liquor Factory","text":"I want them to build a children’s Disneyland here! And a waterpark. I’ve dreamed about it for 20 years. Believe me, the whole of Europe will come here — we’ll feed them Ukrainian food...","at":378.0},{"spk":"Woman at the Liquor Factory","text":"And we’ll sing: Oy tam na dychku, na bazari… Grandpa of Hek and Frania: No, no — the small distillery has to stay! (laughs) Woman at the Liquor Factory: I’m begging you — hear me out! Let there be a Ukrainian Disneyland!","at":393.4}]},{"n":13,"title":"Krainia street","start":121,"end":140,"desc":"Driving from Kostya’s funeral; Lisove Cemetery is located on Krainia (“Far Edge”, “The last”) street. June 2023","date":"June 2023","turns":[]},{"n":14,"title":"Teleradiobomba","start":121,"end":633,"desc":"Jamming a bit with Bodya, Hek, and Frania at Ruslan's, for Alina's birthday. Summer 2023","date":"Summer 2023","turns":[{"spk":"Frania","text":"Home!","at":121.0}]},{"n":15,"title":"Bandura","start":121,"end":552,"desc":"Rehearsal in the Ukrainian House, a piece for bandura by Maxim Kolomiiets, written in March 2022 in Kyiv. June 2023","date":"March 2022","turns":[]},{"n":16,"title":"Damba","start":121,"end":662,"desc":"Fragment of \"Dam\" by Ed Sol, written a few days after the Hydroelectric Power Station was blown up at Kakhovka, Ed’s hometown. June 2023","date":"June 2023","turns":[]},{"n":17,"title":"Ensemble rehearses","start":121,"end":333,"desc":"Fragment of ensemble rehearsal. June 2023","date":"June 2023","turns":[]},{"n":18,"title":"Frania’s morning song","start":121,"end":616,"desc":"Frania sings morning songs while I try to wake up. Summer 2023","date":"Summer 2023","turns":[]},{"n":19,"title":"Palevo","start":121,"end":375,"desc":"Ruslan found my phone when I was recording how he lulls Una. I came to get a tattoo before Hena’s funeral. June 2023","date":"June 2023","turns":[{"spk":"Ruslan","text":"So here’s the deal — the hoof’s coming in, and it’s important to make sure there are no gaps, no moisture gets in, so the foot doesn’t start to rot. You’ve got to fit the sole exactly — it has to hug the whole contour of the hoof perfectly. And you know, especially when they take oﬀ the old hoof — it’s actually kinda nice to look at the foot. Ian: No way! I had no idea. Ruslan: You can’t even imagine how they change them, right? Ian: Never even thought about it. Ruslan: I’ll show you in a second.","at":121.0}]},{"n":20,"title":"Steps","start":121,"end":648,"desc":"Walking the stairs of the Ukrainian House during rehearsals. June 2023","date":"June 2023","turns":[]},{"n":21,"title":"Anya","start":284,"end":646,"desc":"Meeting Mrs. Anya at the playground, a resident of our district; she talks about the start of the full-scale invasion. May 2023","date":"May 2023","turns":[{"spk":"Mrs. Anya","text":"No-no, you can’t go there! This way, sweetheart.","at":284.0},{"spk":"Mrs. Anya","text":"…about 90 kilometers before Lviv — I always forget the name of that little town — anyway, she says: “Go there, there’s a big two-story house.” Grandma said her younger sister studied medicine there, finished her master’s. And I said: “Alright then!” So we got in a taxi, went there, and stayed for a bit over two months.","at":320.4},{"spk":"Mrs. Anya","text":"Oh, thank you! (laughs)","at":584.4}]},{"n":22,"title":"Last rites for Hena","start":387,"end":641,"desc":"Memorial service for Hena in St. Michael's Cathedral. June 2023","date":"June 2023","turns":[]},{"n":23,"title":"The theme of an onslaught","start":565,"end":638,"desc":"Fragment of a conversation with the composer Vitaliy Hodziatsky, one of the Sixtiers, about the start of World War II and this war. June 2023","date":"June 2023","turns":[{"spk":"Vitalii Hodziatskyi","text":"The symphony he wrote right after Leningrad — yes, that one — it has this invasion motif: tam-tam, ta-ram-tam, tam-tam-ta-ram, you know the one. He wrote it in 1941, about the fascists. And here…","at":565.0}]},{"n":24,"title":"Mykola’s vest","start":537,"end":570,"desc":"A fragment of a guide's story about the embroidered vest of Mykola Babiychuk, which he gave to Katya Libkind in early March 2022, when patients from the psychoneurological dispensary in Pushcha-Vodytsia were evacuated to Pavlivska Hospital. June 2023","date":"March 2022","turns":[]},{"n":25,"title":"Tourniquet","start":520,"end":659,"desc":"Morning with Zenon, drinking coffee and smoking on the balcony. He talks about changes in the law regarding the rules for applying and converting tourniquets. July 2023","date":"July 2023","turns":[{"spk":"Zenon","text":"…the skin tissue, the limb — it’ll start to die, and then they’ll have to amputate. But if you realize there’s a chance to save it, they pack the wound, use special gauze dressings, wrap it up, and then slowly start to loosen the tourniquet. If there’s no bleeding — then… the limb can be saved.","at":520.0}]},{"n":26,"title":"Muezzin","start":635,"end":734,"desc":"Recording of a muezzin performing azan (call to prayer); also our balcony. Summer 2022","date":"Summer 2022","turns":[]},{"n":27,"title":"Epicenter","start":655,"end":899,"desc":"Walking through a bombed Epicenter (building supplies hypermarket) in Chernihiv, visiting grandma. Spring 2022","date":"Spring 2022","turns":[]},{"n":28,"title":"Artery","start":717,"end":907,"desc":"Conversation between Serhii and Katya, Hena's wife, near the fountain at Zoloti Vorota. June 2023","date":"June 2023","turns":[{"spk":"Serhii","text":"Does it pull, hurt, burn? What’s the sensation? Patient: Just aches a bit.","at":717.0},{"spk":"Serhii","text":"Aside from that — anything else? Just this, yeah?","at":722.2},{"spk":"Serhii","text":"I’m guessing it went pretty deep? There’s a mess of nerves and arteries in there. Easy to make things worse — but we’ll try to clean it up carefully.","at":725.8},{"spk":"Serhii","text":"Hepatitis? Kidney disease? Type 1 diabetes? Ischemic or hypertensive conditions? Peptic ulcers?","at":737.5},{"spk":"Serhii","text":"Any peeling, chafing, stretch marks on the skin? Rashes?","at":742.3},{"spk":"Serhii","text":"Probably for safety. I mean, evolutionarily speaking, it’s just how it developed... Katya: No, I just… My husband was wounded. Instant death. I think — the aorta… Serhii: Very rapid drop in circulating blood volume. I mean, technically, under the right conditions, you can do something. But it has to be fast. Really precise. Like, apply a tourniquet or even a stick, anything — just not too tight, don’t crush the arm… Katya: No, it was below the collarbone. The wound was somewhere here. Serhii: Ah. There are cases people survive, it’s possible, but [indistinct] …also very fast. But they reacted very well there— they packed the wound, clamped it — and at the field hospital there happened to be a vascular surgeon on rotation, and another good surgeon too — together they saved his life. Katya: Just a stroke of luck, really. Serhii: Yeah, yeah. Exceptionally lucky. Usually, you’ve got like a minute — and that’s it. Katya: And that’s it, yeah? Serhii: You have about 10 seconds to do something. And in combat — that’s often just not realistic. Katya: He was out on a mission. Serhii: Well, meaning, if there is active combat work, then… Katya: He was a sapper. They were working, almost done with the job. Had to clear the mines so the vehicles could get through. Infantry went first, then them, sweeping — then the tech would roll in. And they were just about done — and then it hit. Probably a tank somewhere nearby — no sound, nothing. No time to duck. He was with another guy — that one got a concussion. Serhii: Sounds like he couldn’t help — no one else was nearby. Katya: Yeah. And my husband — he stood up and… and… collapsed. Serhii: Damn. Katya: The goddamn war.","at":745.9},{"spk":"Katya","text":"…we woke up — it was exactly nine days — we were having breakfast, getting ready to go to the cemetery, and the girls go: “Look, the clock is moving backwards.” Then it would freeze… But before the funeral, the clock had completely stopped.","at":866.5}]},{"n":29,"title":"Hena is dead","start":797,"end":1058,"desc":"Evening city noise from the balcony on the day we learned about Hena's death. June 2023","date":"June 2023","turns":[]},{"n":30,"title":"Molytva","start":916,"end":1082,"desc":"Prayer of a Ukrainian nationalist at Hena’s funeral. Read by his brothers-in-arms from the Third Assault Brigade. June 2023","date":"June 2023","turns":[{"spk":"Soldier","text":"To prayer. Soldier and choir of soldiers: Ukraine, holy mother of heroes, descend into my heart. Come as a storm of the Caucasian wind, the murmur of the Carpathian streams, The battles of the glorious Conqueror, Father Khmel2, The triumph and roar of the guns of revolution, The joyful chime of St. Sophia’s bells. Let my soul be reborn in you, Let it be illuminated by your glory, For you, Most Holy, are my whole life, For you are all my happiness. Ring for me with the clanking of shackles, With the creak of gallows in somber mornings. Bring me the cries of the tortured in dungeons and prisons, and in exile, So that my faith may turn to granite, So that the strength of my resolve may grow, So that I may march into battle bravely, As the heroes marched for You, O sacred one, For Your glory, for Your holy ideals, To avenge the shame of bondage, the trampled honor, The scorn of Your tormentors, the innocent blood of Your slain children, The noble death of the heroes of the Ukrainian nation And thousands more, unknown to us, Whose bones lie scattered or secretly buried. Burn away all weakness in my heart with a life-giving flame. Let me know no fear, Let me not know what hesitation is. Strengthen my spirit, Harden my will, Dwell within my heart! Raise me up to righteous deeds. And in those deeds, let me find death, A sweet death in torment for You. And I shall dissolve within You and live forever in You, Eternal Ukraine, sacred, mighty, united.","at":916.0},{"spk":"Soldier","text":"Glory to Ukraine! Choir: Glory to the heroes! Soldier: Glory to the nation! Choir: Death to the enemies! Soldier: Ukraine! Choir: Above all! Soldier: Ukraine! Choir: Above all! Soldier: Ukraine! Choir: Above all!","at":1046.0}]},{"n":31,"title":"Libkind’s tour","start":337,"end":1780,"desc":"Katya Libkind gives us a tour of the exhibition at the Khanenko Museum. March 2023","date":"March 2023","turns":[{"spk":"Tour guide","text":"…certain barriers that grow between us…","at":337.0}]},{"n":32,"title":"The bravest man I’ve known","start":1081,"end":1370,"desc":"Speech by Kostya’s commander at his funeral. June 2023","date":"June 2023","turns":[{"spk":"Commander","text":"But I want to talk about the last day. [Indistinct] … most likely, it will not end well. The unit that went on this mission consisted solely of volunteers who made this decision for themselves—because they were the best-trained people in this unit, the most combat-ready people, and only they could carry out this task. During the battle that ensued during the exit, Kostya was wounded, holding the fight for fifteen minutes before that. And I will say that if not for Kostya’s actions, I would be very sorry, but I doubt that I could be here. His actions, his training, his maximalism, and his desire to be the best, allowed all of us to get out of there. All of us who did.","at":1081.0}]},{"n":33,"title":"Kostya","start":1081,"end":1809,"desc":"Evening/night when I learned about Kostya's death. Reviewing instagram stories saved by him — about work, mountaineering, travel, sea, snowboarding. In one video, he speaks from the top of some Romanian mountain, in another, he beckons a cat somewhere in Norway. June 2023","date":"June 2023","turns":[{"spk":"Kostya","text":"…at the very beginning of all this, we volunteered with Fleet51. And he was like, “So? You ready? Gonna go?” — “Nah, not yet.” — “Well, I’ve decided. I’m going.” And now — yesterday — he fucking died under the rubble.","at":1081.0},{"spk":"Kostya","text":"Ah — and the tigers fell at my feet! Ah… 2 This refers to Bohdan Khmelnytsky, military commander of Zaporozhian Cossacks and Hetman of the Zaporozhian Host, which was then under the suzerainty of the Polish–Lithuanian Commonwealth. He led an uprising against the Commonwealth and its magnates (1648–1654) that resulted in the creation of an independent Cossack state in Ukraine. Commander: Thanks to Kostya, seventeen people made it out alive. Unfortunately, we lost our brother, but we saved seventeen lives—because of Kostya. I am proud to have known him as a warrior. He was the best soldier in this unit — the best I’ve met in my entire life. Brother… to live as a warrior is to live forever.","at":1199.9},{"spk":"Kostya","text":"Let’s go, guys, keep working!","at":1544.8},{"spk":"Kostya","text":"Kitty-kitty, come here, come, little one! Come here, oh you’re so good, oh you’re so small, oh come here to me. My good one, oh, kitty-kitty-kitty.","at":1559.3},{"spk":"Kostya","text":"I made it here! Thought I’d be climbing up that slope, but nope — the road leads this way. We’ll see what’s ahead. And now — I go that way!","at":1634.7}]},{"n":34,"title":"Marvel car","start":1231,"end":1383,"desc":"Liokha, my stepfather, shows us and the kids his “marvel car” — a soldier’s house on wheels. The kids are thrilled. We talk about his brothers-in-arms who stood in Bakhmut. Recording made the day we rushed over because he suddenly got a few days off with unclear prospects afterward. Summer 2023","date":"Summer 2023","turns":[{"spk":"Liokha","text":"Yeah, yeah — that’s where we were. Our 135th and… [unclear] Ian: That was the end of winter, right? Liokha: Ours held the line: two weeks — a hundred guys. Then another group held for five days — fifty guys. The last ones, they were near “the Plane,” maybe you heard? There were the “Garages,” that was ours too. The “Garages” — those were our boys. So in the end, we held for three weeks, and they pulled them out of there…","at":1231.0},{"spk":"Liokha","text":"Six taken prisoner — fuck…","at":1267.7},{"spk":"Liokha","text":"…five killed, thirty wounded…","at":1269.9},{"spk":"Liokha","text":"…and sixty concussed — out of 150 people. You know what a concussion is? I don’t think people get it — it’s a brain shake, man…","at":1271.7},{"spk":"Liokha","text":"…10% skull torsion. Like, you hear “concussion,” and it sounds mild — but really, it’s fucked: blood pressure at 200, splitting headaches, and early old age. That’s the outlook. Not a pretty one. I even started thinking about joining the snipers.","at":1283.3},{"spk":"Ian","text":"You think you can?","at":1301.7},{"spk":"Liokha","text":"I mean, I’m an instructor — I know everyone. And my buddy, he’s the commander of the sniper unit. So I started thinking — maybe I should go join the snipers, since I’m going back anyway. But here’s the problem: I can’t see shit. With those scopes, you gotta line everything up, and I can’t do it without glasses, you get me?","at":1303.5},{"spk":"Ian","text":"Ah, so your eyesight’s fucked, huh?","at":1331.2},{"spk":"Liokha","text":"Yeah, I gotta wear glasses for that stuﬀ (laughs). I shoot okay, but I can’t make out all the angles — and with that kind of shooting, you need precise adjustments…","at":1333.9},{"spk":"Liokha","text":"So I was thinking, maybe go in as a marksman, just straight up, fuck it. Ian: What’s that?","at":1347.8},{"spk":"Liokha","text":"Look — there’s snipers, right? They camp out for two, three days. But a marksman, he moves with the group…","at":1355.8}]},{"n":35,"title":"Air raid alarm Paskotynka","start":1189,"end":1383,"desc":"Walking with the kids at Paskotynka. Playing with stone altars built here by witches and their friends. Sudden air raid alarm. “Oooo, police!” — Frania excitedly exclaims. Summer 2023","date":"Summer 2023","turns":[{"spk":"Hek","text":"To rush straight into the fire like a firefighter, finding the courage! Showing up at their station to put out the blaze! Rushing into real fire and then extinguishing it from the ladder!","at":1189.0},{"spk":"Frania","text":"Grandpaaaaa!","at":1230.4},{"spk":"Frania","text":"Oh, the pooooolice!","at":1231.7},{"spk":"Hek","text":"Dima, we’re sorting through stuﬀ! We’re sorting! Dima: Got it, Hek. Frania, is this yours or what? Hek: We’re sorting this gear. Dima: I hauled so many chairs at my station (laughs). Go ahead, see what you can make of these.. Hek: I’ll take this one to the car, and you sort the rest here… He went that way… Dad!! The main flag of Ukraine! Dad, there’s the main flag of Ukraine — come, I’ll show you. Dima, come on, I’ll show you the main flag of Ukraine! Dima: Alright, we’re about to head out, and you’ll show me.","at":1235.4}]},{"n":36,"title":"Bečići","start":1258,"end":1384,"desc":"Recording of the sea in Montenegro, made by Katya at my request, when she and Platon went there to recover. Sounds of the beach, Platon, and other kids. July 2023","date":"July 2023","turns":[{"spk":"Platon","text":"Uncle Ian, I think your scooter won’t turn oﬀ!","at":1258.0}]},{"n":37,"title":"N","start":1292,"end":1482,"desc":"Visiting N. \"at the base.\" We are happy to see each other. Summer 2022","date":"Summer 2022","turns":[]},{"n":38,"title":"Easter","start":1425,"end":1546,"desc":"Easter, together with kids and parents, we stand in a circle of those wanting to bless their baskets. Next to us, a delegation of priests — sprinkling the holy water, singing. Courtyard of St. Michael's Cathedral. April 2023","date":"April 2023","turns":[{"spk":"Priests","text":"Christ is risen from the dead! By death He conquered death, and to those in the graves, He granted life. Christ is risen! Congregation: Truly, He is risen. Priests: Christ is risen from the dead! By death He conquered death, and to those in the graves, He granted life.","at":1425.0},{"spk":"Priests","text":"Lord, have mercy. Lord, have mercy.","at":1519.9}]},{"n":39,"title":"Pidkova","start":1293,"end":2339,"desc":"Came to Ruslan to tattoo a horseshoe in memory of Hena (his code name was Horseshoe). Rus tells me about shoeing horses — supposedly, for them, it’s the most anticipated, pleasant event. He once stumbled upon an ASMR video about it, and he now plays it for me. We discuss tattoos, Rus draws many options, we choose, I play with Una and feed her from a bottle to that ASMR soundtrack. June 2023","date":"June 2023","turns":[]},{"n":40,"title":"Work in progress","start":1445,"end":2333,"desc":"Getting a tattoo. June 2023","date":"June 2023","turns":[]},{"n":41,"title":"The only master","start":1564,"end":1618,"desc":"Returning from Volodarka from Bohdan’s funeral. Levin tells us about his tattoos (he was Bohdan’s only tattoo artist): a replica of Maria Prymachenko, a trident. Says Bohdan squealed unforgettably during sessions; we agree that tattoos are painful, and squealing is correct. Bohdan always arrived for sessions with a girlfriend, brother, brought friends — like to a celebration. August 2023\nIn February 2024 Levin joined the UAF.","date":"August 2023","turns":[{"spk":"Levin","text":"And right here he’s got — a windmill by Maria Prymachenko, and here — a trident, drawn by a neural net. Ian: Seriously, were you the only artist who ever tattooed him? Levin: Yeah, yeah. And you know, what made Bohdan really stand out was how he squealed during the sessions — no one squealed like that. I’d give him a full hour of numbing, all the gear, all the bullshit, and still — “kheeeeeeeh!” It was iconic. Totally unforgettable. Ian: I mean, for real — it hurts. Levin: Yeah, they’re jabbing you with a fucking needle.","at":1564.0}]},{"n":42,"title":"Tokha’s funeral. 88","start":4,"end":2267,"desc":"Priest conducts Tokha’s memorial service. Stands in the same place where Kostya’s commander spoke two months ago. Very hot, a girl faints in the crowd. Tokha’s comrades sit her down nearby, and an ambulance arrives. The priest sings for a very long time. After the memorial service, we go to bury Tokha. As Vova and I are here for the second time this summer, we count how many rows have been added from Kostya to Tokha: 11 rows of 8 graves each. 88 graves. August 2023","date":"August 2023","turns":[{"spk":"Priest","text":"Today, we are gathered to honor the remarkable figure of a defender of Ukraine — our comrade, a son of his nation, a son of his family. And anyone who holds great love for his memory, his heroism, and his dignity may come forward to speak words of farewell, of gratitude, of love...","at":4.0},{"spk":"Ian","text":"…and everyone was so relieved that, by sheer luck, he didn’t end up in Mariupol…","at":1556.2}]},{"n":43,"title":"Main flag","start":1677,"end":1803,"desc":"Hek, Dima, and I are gathering equipment after a concert at the Ukrainian House. Hek wants to show us “the main flag of Ukraine”. June 2023","date":"June 2023","turns":[{"spk":"Hek","text":"Look, Dad, stop right there!","at":1677.0},{"spk":"Hek","text":"Look, Dad — a little cross!","at":1694.9},{"spk":"Hek","text":"Here lie the treasures of Captain Buger!","at":1716.3},{"spk":"Hek","text":"Dad, lift this rock! Oh, it’s dirt! There’s dirt, sand, and branches here.","at":1741.4}]},{"n":44,"title":"The last salute for Bohdan","start":1713,"end":1804,"desc":"The anthem and salute shots at Bohdan’s funeral before the coffin is lowered into the grave. August 2023","date":"August 2023","turns":[{"spk":"Funeral Hostess","text":"So, dear ones — the time for farewells has come. And… lastly, the closest ones...","at":1713.0},{"spk":"Funeral Hostess","text":"…Alright, come forward to say your goodbyes.","at":1720.7},{"spk":"Commander","text":"Attention! Stand tall! Raise the State Flag over the fallen Senior Soldier Hennadiy Kolesnyk. [Bugle call]","at":1724.4},{"spk":"Commander","text":"Dear friends, family, and comrades of the fallen hero of Ukraine, Hennadiy Kolesnyk — today, we bid farewell to a warrior who gave the most precious thing he had for our country: his life. But it is precisely thanks to warriors like Hennadiy that Ukraine has existed, exists, and will continue to exist. It is men like Hennadiy who have been, are, and will always be the finest sons of our nation. We must remember this, we must honor it, and we must do everything within our power to ensure that Hennadiy’s sacrifice was not in vain. We must do everything we can to bring our victory closer — a victory that will surely come…Glory to Ukraine!","at":1732.6}]},{"n":45,"title":"Trumpet for Kostya","start":1798,"end":2262,"desc":"Trumpet and drums at Kostya's funeral. June 2023","date":"June 2023","turns":[]},{"n":46,"title":"Trumpet for Hena","start":1859,"end":2268,"desc":"The same musical theme at Hena's funeral. Speech by his brother-in-arms. June 2023","date":"June 2023","turns":[{"spk":"Crowd","text":"Glory to the heroes!","at":1859.0},{"spk":"Commander","text":"Dear family… On behalf of the command of the 3rd Assault Brigade, I ask you to accept this flag.","at":1921.6}]},{"n":47,"title":"Funeral walk","start":2092,"end":2259,"desc":"Fragment of the walk at Bohdan’s funeral — the cemetery in Volodarka is a few kilometers from the central square, where the whole city came to say goodbye to Bohdan. From the square, we walk very slowly in a huge procession, down one long street. Everyone who lives or works here has come out and is kneeling on the roadside; it looks and seems endless. Bohdan’s mother's friend gets up and runs to her, they cry and hug. We walk for about 40 minutes, maybe an hour — an eternity. August 2023","date":"August 2023","turns":[]},{"n":48,"title":"Flags","start":2325,"end":2522,"desc":"Walking through the cemetery after Kostya's funeral; flags near the graves flutter in the wind. August 2023","date":"August 2023","turns":[]},{"n":49,"title":"Yak toy miud","start":2349,"end":2704,"desc":"Sasha sings a lullaby. July 2023","date":"July 2023","turns":[{"spk":"Sasha, singing","text":"Like that honey, like that honey, sweet as that honey… Just look at that, at that…","at":2349.0},{"spk":"Sasha","text":"Just look at that…","at":2598.9}]},{"n":50,"title":"Empty","start":2485,"end":2614,"desc":"We came with the kids to support Katya and Platon, a day or two after the news about Hena. Talking to her in the kitchen, she tells about the circumstances of his death, shows Hena’s phone — all information is erased. June 2023","date":"June 2023","turns":[{"spk":"Katya","text":"I mean, that’s all that’s left… Just the phone numbers. All the photos, the messages — they got wiped.","at":2485.0},{"spk":"Ian","text":"iPhones have that feature... Katya: A backup? Ian: No, I mean — there’s a setting, like, to wipe it or not if you enter the wrong password too many times. Katya: Ah, yeah — maybe that’s what happened here too. Or maybe I pressed something by accident. Ian: Could it have been wiped remotely? Katya: No. When I tried to turn it on — I got the password wrong a few times — and there was still that photo of Platoshka on the lock screen.","at":2490.1},{"spk":"In the background","text":"Hek: These are the bad robot Transformers!! Zhanna: Are they very scary? Platon: Yeah! They’re destroying the city! Zhanna: Whoa, then we’ve got to stop them!","at":2512.8},{"spk":"Katya","text":"Honestly, with Berdiansk… every little street there is tied to Hena. It’s all Hena — that’s our life. Ian: Of course. Katya: It’s our feelings, our emotions, our memories. That kitchen garden — Hena planted it for Platon. I mean, I don’t think they’ll let us back there… but it’s part of our life. Hek: They’re smashing the city! Zhanna can’t hold them oﬀ!! Platon: Only the good Transformers can stop this! We have to run away for now!!","at":2519.8},{"spk":"Katya","text":"…and I want the child to remember it. And how Hena wanted to go back to Berdiansk. I’d suggest staying in Kyiv, and Platosha too — but Hena would say, “First we’ll go back to Berdiansk, and then we’ll see… maybe we’ll spend summers there, winters here.”","at":2541.0},{"spk":"In the background","text":"Katya: There’s a second phone too — but I can’t remember the password for that one either. I try one combo, then another — no idea if it’ll lock me out or not.","at":2553.5},{"spk":"Katya","text":"But honestly, ever since Hena died, there’s just this lump of hurt when I think about Berdiansk.","at":2562.4},{"spk":"Katya","text":"…there was this huge clock…","at":2566.9},{"spk":"Ian","text":"Platosha — your steering wheel’s on the wrong side, see?","at":2568.3},{"spk":"Katya","text":"So, there was this huge clock, and the hands — and Hena was there, pushing the hand the other way, backward. I’m telling it, and I got goosebumps. After the funeral, that evening, I told the girls about this dream. And the next day…","at":2570.9},{"spk":"Katya","text":"Don’t interrupt. Before the funeral, it had stopped completely. And then, the next day, it started going backwards. Then sometimes it would stop, go forward, then back again — sometimes really fast, sometimes just a little. And then I just started asking questions: “Sunshine, can you hear me?” The hand was still — and then suddenly, it moved back.","at":2582.7}]},{"n":51,"title":"Kitchen garden of memory","start":2537,"end":2618,"desc":"Zhanna, Katya, and the kids are walking on Volodymyrska Hill. I joined them, and we sit near the fountain. Katya reminisces about various things from her life; heard here is a fragment of her thoughts about Berdiansk, memory, about “the garden Hena planted for Platon.” Hena very much wanted to return. June 2023","date":"June 2023","turns":[{"spk":"Platon","text":"Hector, help me, I’m driving!!!","at":2537.0}]},{"n":52,"title":"Cricket","start":2637,"end":2704,"desc":"Sound of crickets from the studio window. Heard in the last stages of editing this work in August; stopped, recorded, and added here. August 2023","date":"August 2023","turns":[]},{"n":53,"title":"And then the clock hand just moved backwards","start":2608,"end":2704,"desc":"Another fragment of the same recording. Katya talks about the kitchen clock, which suddenly went off before the funeral. June 2023","date":"June 2023","turns":[]}];
+  const DUR = 2704.9;
+
+  // Deployment config. AUDIO is resolved relative to index.html.
+  // Set AUDIO to null to fall back to the file picker.
+  const CONFIG = {
+    AUDIO: './cherven.mp3',
+    LOOP: true,
+    START_AT: 0
+  };
+  const N = CUES.length;
+
+  const stage = document.getElementById('stage');
+  const audio = document.getElementById('audio');
+  const panel = document.getElementById('panel');
+  const gate  = document.getElementById('gate');
+  const clockFill = document.querySelector('#clock i');
+  const scrub = document.getElementById('scrub');
+  const clockVal = document.getElementById('clockVal');
+  const root = document.documentElement;
+
+  const rows = CUES.map(c => {
+    const el = document.createElement('div');
+    el.className = 'row';
+    el.innerHTML =
+      '<div class="head"><span class="idx"></span>' +
+      '<span class="title"></span><span class="date"></span></div>' +
+      '<div class="desc"></div><div class="talk"></div><span class="bar"></span>';
+    el.querySelector('.idx').textContent = c.n + '.';
+    el.querySelector('.title').textContent = c.title;
+    el.querySelector('.date').textContent = c.date;
+    el.querySelector('.desc').textContent = c.desc;
+
+    const talk = el.querySelector('.talk');
+    const turnEls = (c.turns || []).map(tn => {
+      const p = document.createElement('p');
+      p.className = 'turn';
+      const who = document.createElement('span');
+      who.className = 'who';
+      who.className = 'who';
+      who.textContent = tn.spk + ':';
+      p.append(who, document.createTextNode(' ' + tn.text));
+      talk.appendChild(p);
+      return p;
+    });
+
+    stage.appendChild(el);
+    return {
+      el, cue: c, bar: el.querySelector('.bar'),
+      head: el.querySelector('.head'), desc: el.querySelector('.desc'),
+      talk, turnEls, shown: 0, state: '', env: 0
+    };
+  });
+
+  let virtualT = 0, mode = 'slots', sig = '';
+  const hasAudio = () => !!audio.src;
+  const now = () => hasAudio() ? audio.currentTime : virtualT;
+  const px = v => parseFloat(getComputedStyle(root).getPropertyValue(v));
+
+  function geom() {
+    const cols = Math.round(px('--cols'));
+    const pad = stage.clientWidth * px('--pad') / 100;
+    const W = stage.clientWidth - pad * 2;
+    const H = stage.clientHeight - pad * 2;
+    const rowsPerCol = Math.ceil(N / cols);
+    const gutter = W * 0.035;
+    const colW = (W - gutter * (cols - 1)) / cols;
+    return { cols, pad, W, H, rowsPerCol, gutter, colW, rowH: H / rowsPerCol };
+  }
+
+  function place() {
+    const g = geom();
+    const top = g.pad, bottom = g.pad + g.H, gap = g.rowH * 0.35;
+    const ghosted = document.body.classList.contains('ghosted');
+    const descOn  = !document.body.classList.contains('noDesc');
+    const talkOn  = document.body.classList.contains('talkOn');
+
+    if (ghosted) {                       // the old fixed register, titles only
+      rows.forEach((r, i) => {
+        const col = Math.floor(i / g.rowsPerCol), slot = i % g.rowsPerCol;
+        r.el.style.display = 'block';
+        r.el.style.width = g.colW + 'px';
+        r.el.style.left = (g.pad + col * (g.colW + g.gutter)) + 'px';
+        r.el.style.top = (top + slot * g.rowH) + 'px';
+        r.el.style.maxHeight = g.rowH + 'px';
+        r.desc.style.display = 'none';
+        r.turnEls.forEach(el => { el.style.display = 'none'; });
+      });
+      return;
+    }
+
+    rows.forEach(r => { if (r.state !== 'live') r.el.style.display = 'none'; });
+    const live = rows.filter(r => r.state === 'live');
+    if (!live.length) return;
+
+    // One measuring pass with everything open, so allocation is pure arithmetic.
+    live.forEach(r => {
+      r.el.style.display = 'block';
+      r.el.style.width = g.colW + 'px';
+      r.el.style.maxHeight = 'none';
+      r.desc.style.display = descOn ? 'block' : 'none';
+      r.turnEls.forEach((el, k) => {
+        el.style.display = (talkOn && k < r.shown) ? 'block' : 'none';
+      });
+    });
+    const headH = live.map(r => r.head.offsetHeight);
+    const noteH = live.map((r, i) => descOn ? r.desc.offsetHeight : 0);
+    const turnH = live.map(r => r.turnEls.map((el, k) =>
+      (talkOn && k < r.shown) ? el.offsetHeight : 0));
+    const chrome = live.map((r, i) => {
+      if (!talkOn || !r.shown) return 0;
+      const sum = turnH[i].reduce((a, b) => a + b, 0);
+      return Math.max(r.talk.offsetHeight - sum, 0);
+    });
+
+    // Titles are the fixed cost. What remains is spent in order of weight:
+    // the newest speech first, then notes, so a cue at full weight speaks in
+    // full while a cue deep in its decay stands as a heading alone.
+    const order = live.map((r, i) => i).sort((a, b) => live[b].env - live[a].env);
+    const headSum = headH.reduce((a, b) => a + b, 0);
+
+    let first = [], keepNote = [], h = [];
+
+    function allocate(factor) {
+      first = live.map(r => r.shown);
+      keepNote = live.map(() => false);
+      let budget = g.H * g.cols * factor - headSum - gap * (live.length - 1);
+      // the rule above each speech block is charged before anything is granted
+      for (let i = 0; i < live.length; i++) if (live[i].shown) budget -= chrome[i];
+
+      if (talkOn) {
+        for (const i of order) {
+          for (let k = live[i].shown - 1; k >= 0; k--) {
+            if (!turnH[i][k] || budget < turnH[i][k]) break;
+            budget -= turnH[i][k];
+            first[i] = k;
+          }
+        }
+      }
+      if (descOn) {
+        for (const i of order) {
+          if (noteH[i] && budget >= noteH[i]) { keepNote[i] = true; budget -= noteH[i]; }
+        }
+      }
+      h = live.map((r, i) => {
+        let x = headH[i] + (keepNote[i] ? noteH[i] : 0);
+        if (first[i] < r.shown) x += chrome[i];
+        for (let k = first[i]; k < r.shown; k++) x += turnH[i][k];
+        return x;
+      });
+    }
+
+    // Column breaks waste room, so if the pack spills, spend less and retry.
+    function pack() {
+      let col = 0, y = top;
+      const pos = [];
+      for (let i = 0; i < live.length; i++) {
+        if (y > top && y + h[i] > bottom && col < g.cols - 1) { col++; y = top; }
+        pos.push([col, y]);
+        y += h[i] + gap;
+      }
+      return (y - gap <= bottom || col < g.cols - 1) ? pos : null;
+    }
+
+    let pos = null;
+    for (let f = 0.97; f > 0.4 && !pos; f -= 0.08) { allocate(f); pos = pack(); }
+    if (!pos) { allocate(0.4); pos = pack() || live.map(() => [0, top]); }
+
+    live.forEach((r, i) => {
+      r.desc.style.display = keepNote[i] ? 'block' : 'none';
+      r.turnEls.forEach((el, k) => {
+        el.style.display = (talkOn && k >= first[i] && k < r.shown) ? 'block' : 'none';
+      });
+      r.el.classList.toggle('clipped', first[i] > 0);
+      r.el.style.left = (g.pad + pos[i][0] * (g.colW + g.gutter)) + 'px';
+      r.el.style.top = pos[i][1] + 'px';
+      r.el.style.maxHeight = 'none';
+    });
+  }
+
+  function update() {
+    const t = now();
+    if (document.activeElement !== scrub) scrub.value = Math.round(t);
+    clockVal.textContent = Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
+
+    let changed = false, s = '';
+    const ghosted = document.body.classList.contains('ghosted');
+
+    for (const r of rows) {
+      const c = r.cue;
+
+      // Short cues carrying long notes need more screen time than they get
+      // sound time. Reading room is granted from the note's own length, so
+      // the text can outlive the recording it belongs to.
+      const chars = document.body.classList.contains('noDesc') ? 0 : c.desc.length;
+      const need = Math.min(2 + chars / 15, VAL.hold);
+      const dEnd = Math.max(c.end, c.start + need);
+
+      const state = (t >= c.start && t < dEnd) ? 'live' : (t >= dEnd ? 'past' : '');
+      if (state !== r.state) {
+        r.el.classList.toggle('live', state === 'live');
+        r.el.classList.toggle('past', state === 'past');
+        r.state = state;
+        changed = true;
+      }
+
+      // Cues arrive at full weight, then decay across a share of the window
+      // they are given, so every cue traces the same silhouette at its own scale.
+      const win = Math.max(dEnd - c.start, 0.001);
+      let env = 0;
+      if (state === 'live') {
+        const decay = Math.max(win * VAL.fade, 0.3);
+        const holdUntil = dEnd - decay;
+        env = 1;
+        if (t > holdUntil) {
+          const left = Math.max((dEnd - t) / decay, 0);
+          env = Math.pow(left, VAL.curve);
+        }
+        env = Math.min(env, (t - c.start) / 0.25);   // short attack, no flicker
+        env = Math.min(Math.max(env, 0), 1);
+      }
+
+      r.env = env;
+      const rest = ghosted ? (state === 'past' ? VAL.gp : VAL.gf) : 0;
+      r.el.style.opacity = rest + (1 - rest) * env;
+
+      const shown = (state === 'live' && c.turns)
+        ? c.turns.filter(tn => tn.at <= t).length : 0;
+      if (shown !== r.shown) { r.shown = shown; changed = true; }
+
+      if (state === 'live') {
+        s += c.n + ':' + shown + ',';
+        // The hairline tracks the recording itself, not the reading window,
+        // so it completes when the sound ends and the text is still fading.
+        const p = (t - c.start) / Math.max(c.end - c.start, 0.001);
+        r.bar.style.transform = 'scaleX(' + Math.min(Math.max(p, 0), 1) + ')';
+      }
+    }
+    if (changed || s !== sig) { sig = s; place(); }
+
+    clockFill.style.transform = 'scaleX(' + Math.min(t / DUR, 1) + ')';
+  }
+
+  // A single layout error must never take the display down, and rAF stalls
+  // whenever the window is backgrounded, so a timer picks up the slack.
+  let lastTick = 0, errs = 0;
+  function tick() {
+    lastTick = performance.now();
+    try {
+      update();
+    } catch (err) {
+      if (++errs < 5) console.error('cherven update failed:', err);
+    }
+  }
+  function loop() { tick(); requestAnimationFrame(loop); }
+  setInterval(() => { if (performance.now() - lastTick > 500) tick(); }, 250);
+
+  function seek(t) {
+    t = Math.min(Math.max(t, 0), DUR);
+    virtualT = t;
+    if (hasAudio()) audio.currentTime = t;
+  }
+  scrub.addEventListener('input', () => seek(+scrub.value));
+
+  const VAL = {};
+  const bind = (id, prop, fmt, relayout) => {
+    const el = document.getElementById(id);
+    const out = document.getElementById(id + 'Val');
+    const push = () => {
+      VAL[id] = parseFloat(el.value);
+      if (prop) root.style.setProperty(prop, fmt(el.value));
+      if (out) out.textContent = el.value;
+      if (id === 'feather') document.body.classList.toggle('noFeather', +el.value === 0);
+      if (relayout) requestAnimationFrame(place);
+    };
+    el.addEventListener('input', push);
+    push();
+  };
+  bind('hold',    null,             v => v);
+  bind('fade',    null,             v => v);
+  bind('curve',   null,             v => v);
+  bind('size',    '--size',         v => v + 'px', true);
+  bind('desc',    '--desc',         v => v,        true);
+  bind('talk',    '--talk',         v => v,        true);
+  bind('lead',    '--lead',         v => v,        true);
+  bind('cols',    '--cols',         v => v,        true);
+  bind('pad',     '--pad',          v => v + 'vw', true);
+  bind('gf',      '--ghost-future', v => v);
+  bind('gp',      '--ghost-past',   v => v);
+  bind('feather', '--feather',      v => v);
+
+  const MODES = { mFlow: 'flow', mGhost: 'ghosted' };
+  function setMode(id) {
+    mode = MODES[id];
+    document.body.classList.toggle('ghosted', mode === 'ghosted');
+    Object.keys(MODES).forEach(k => document.getElementById(k).classList.toggle('on', k === id));
+    requestAnimationFrame(place);
+  }
+  Object.keys(MODES).forEach(k =>
+    document.getElementById(k).addEventListener('click', () => setMode(k)));
+
+  const toggle = (id, cls, after) => {
+    const b = document.getElementById(id);
+    b.addEventListener('click', () => {
+      const off = document.body.classList.toggle(cls);
+      b.classList.toggle('on', !off);
+      if (after) requestAnimationFrame(place);
+    });
+  };
+  toggle('descBtn', 'noDesc', true);
+  document.getElementById('talkBtn').addEventListener('click', e => {
+    const on = document.body.classList.toggle('talkOn');
+    e.target.classList.toggle('on', on);
+    requestAnimationFrame(place);
+  });
+  document.getElementById('fontBtn').addEventListener('click', e => {
+    const on = document.body.classList.toggle('grotesk');
+    e.target.classList.toggle('on', on);
+    requestAnimationFrame(place);
+  });
+  document.getElementById('dateBtn').addEventListener('click', e => {
+    const on = document.body.classList.toggle('showDate');
+    e.target.classList.toggle('on', on);
+    requestAnimationFrame(place);
+  });
+  toggle('bars', 'noBars');
+  toggle('clockBtn', 'noClock');
+
+  document.getElementById('full').addEventListener('click', () => {
+    root.requestFullscreen?.();
+    panel.classList.remove('open');
+  });
+
+  function load(file) {
+    if (!file) return;
+    audio.src = URL.createObjectURL(file);
+    audio.loop = !!CONFIG.LOOP;
+    audio.load();
+    document.getElementById('gateBtn').textContent = 'begin';
+    document.getElementById('gateHint').textContent = file.name;
+    const start = e => {
+      e.preventDefault();
+      gate.classList.add('off');
+      audio.currentTime = virtualT;
+      audio.play().catch(() => {});
+    };
+    document.getElementById('gateBtn').onclick = start;
+  }
+  document.getElementById('gateFile').addEventListener('change', e => load(e.target.files[0]));
+  document.getElementById('audioFile').addEventListener('change', e => load(e.target.files[0]));
+
+  function start() {
+    gate.classList.add('off');
+    audio.currentTime = virtualT || CONFIG.START_AT;
+    audio.play().catch(() => {});
+  }
+
+  if (CONFIG.AUDIO) {
+    audio.src = CONFIG.AUDIO;
+    audio.loop = !!CONFIG.LOOP;
+    audio.load();
+    document.getElementById('gateBtn').textContent = 'begin';
+    document.getElementById('gateHint').textContent =
+      'Click to start. Press C for controls, F for fullscreen.';
+    document.getElementById('gateBtn').onclick = e => { e.preventDefault(); start(); };
+    gate.addEventListener('click', e => {
+      if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') return;
+      start();
+    });
+    audio.addEventListener('error', () => {
+      document.getElementById('gateBtn').textContent = 'select audio file';
+      document.getElementById('gateHint').textContent =
+        'Could not load ' + CONFIG.AUDIO + '. Pick the file or drop it here.';
+    });
+  }
+
+  ['dragenter', 'dragover'].forEach(ev => document.addEventListener(ev, e => {
+    e.preventDefault(); document.body.classList.add('dragging');
+  }));
+  ['dragleave', 'drop'].forEach(ev => document.addEventListener(ev, e => {
+    e.preventDefault(); document.body.classList.remove('dragging');
+  }));
+  document.addEventListener('drop', e => load(e.dataTransfer.files[0]));
+  gate.addEventListener('dblclick', () => gate.classList.add('off'));
+
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT') return;
+    const k = e.key.toLowerCase();
+    if (k === 'c') panel.classList.toggle('open');
+    if (k === 'f') root.requestFullscreen?.();
+    if (k === 'd') document.getElementById('descBtn').click();
+    if (k === '1') setMode('mFlow');
+    if (k === '2') setMode('mGhost');
+    if (k === 't') document.getElementById('talkBtn').click();
+    if (e.key === 'ArrowRight') { e.preventDefault(); seek(now() + (e.shiftKey ? 60 : 10)); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); seek(now() - (e.shiftKey ? 60 : 10)); }
+    if (e.code === 'Space') {
+      e.preventDefault();
+      if (!hasAudio()) return;
+      audio.paused ? audio.play() : audio.pause();
+    }
+  });
+
+  let hide;
+  document.addEventListener('mousemove', () => {
+    document.body.classList.add('pointing');
+    clearTimeout(hide);
+    hide = setTimeout(() => document.body.classList.remove('pointing'), 2000);
+  });
+
+  window.addEventListener('resize', place);
+  place();
+  loop();
+})();
+</script>
+</body>
+</html>
