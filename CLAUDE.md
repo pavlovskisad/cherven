@@ -272,6 +272,16 @@ Hidden by default; cursor auto-hides after 2s.
 | `T` | transcript |
 | `←` `→` | seek 10s, with shift 60s |
 
+Every key above needs a keyboard, and the panel needs one to open at all, so a
+touch screen had no way into fullscreen. There is a **fullscreen button** in the
+bottom right on the same 2s fade as the cursor: it appears on mouse move or
+touch and is off the wall while the piece runs. It sits above the gate, so the
+room can be set before starting, and a tap on it will not start the piece. It
+toggles, since a touch screen has no `Escape`. Where the Fullscreen API is
+missing the script removes the button instead of leaving a dead control —
+iPhone Safari has no element fullscreen at all, and the way to lose the browser
+chrome there is Add to Home Screen.
+
 The **preview scrub** drives the display with no audio loaded at all, which is
 how to tune the wall in silence before the room is ready.
 

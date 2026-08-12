@@ -101,6 +101,22 @@
   #clock i { position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: left center; }
   body.noClock #clock { display: none; }
 
+  /* Fullscreen without a keyboard. F and the panel both need one, and the panel
+     itself opens with C, so on a phone or a touch panel there was no way in.
+     Rides the same 2s fade as the cursor, so it is never on the wall while the
+     piece runs, and sits above the gate so the room can be set before starting.
+     Script removes it outright where the Fullscreen API is missing, rather than
+     leave a control that does nothing. */
+  #fs {
+    position: fixed; right: var(--pad); bottom: calc(var(--pad) * 0.4); z-index: 50;
+    border: 0; background: none; padding: 6px 2px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #999; cursor: pointer;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  }
+  body.pointing #fs { opacity: 1; pointer-events: auto; }
+
   .feather { position: fixed; inset: 0; pointer-events: none; mix-blend-mode: multiply; }
   #fx { background: linear-gradient(to right, #000 0%, transparent calc(var(--feather)*1%), transparent calc(100% - var(--feather)*1%), #000 100%); }
   #fy { background: linear-gradient(to bottom, #000 0%, transparent calc(var(--feather)*1%), transparent calc(100% - var(--feather)*1%), #000 100%); }
@@ -149,6 +165,7 @@
 <body class="noFeather talkOn noClock">
 
 <div id="stage"></div>
+<button id="fs">Fullscreen</button>
 <div id="clock"><i></i></div>
 <div class="feather" id="fx"></div>
 <div class="feather" id="fy"></div>
@@ -552,8 +569,31 @@
   toggle('bars', 'noBars');
   toggle('clockBtn', 'noClock');
 
+  // One fullscreen path for the corner button, the panel button and F. Toggles
+  // rather than only entering, so the tappable control can also get back out —
+  // there is no Escape key on a touch screen.
+  const fsEnter = root.requestFullscreen || root.webkitRequestFullscreen;
+  const inFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const toggleFull = () => {
+    if (!fsEnter) return;
+    if (inFull()) (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+    else fsEnter.call(root);
+  };
+
+  const fsBtn = document.getElementById('fs');
+  if (fsEnter) {
+    // stopPropagation so the tap cannot also fall through to the gate and start
+    // the piece before the room is set.
+    fsBtn.addEventListener('click', e => { e.stopPropagation(); toggleFull(); });
+    document.addEventListener('fullscreenchange', () => {
+      fsBtn.textContent = inFull() ? 'Exit fullscreen' : 'Fullscreen';
+    });
+  } else {
+    fsBtn.remove();   // iPhone Safari has no element fullscreen at all
+  }
+
   document.getElementById('full').addEventListener('click', () => {
-    root.requestFullscreen?.();
+    toggleFull();
     panel.classList.remove('open');
   });
 
@@ -627,7 +667,7 @@
     if (e.target.tagName === 'INPUT') return;
     const k = e.key.toLowerCase();
     if (k === 'c') panel.classList.toggle('open');
-    if (k === 'f') root.requestFullscreen?.();
+    if (k === 'f') toggleFull();
     if (k === 'd') document.getElementById('descBtn').click();
     if (k === '1') setMode('mFlow');
     if (k === '2') setMode('mGhost');
@@ -642,11 +682,15 @@
   });
 
   let hide;
-  document.addEventListener('mousemove', () => {
+  const wake = () => {
     document.body.classList.add('pointing');
     clearTimeout(hide);
     hide = setTimeout(() => document.body.classList.remove('pointing'), 2000);
-  });
+  };
+  document.addEventListener('mousemove', wake);
+  // Touch screens never fire mousemove, so without this the corner button could
+  // not be summoned on the devices that need it most.
+  document.addEventListener('touchstart', wake, { passive: true });
 
   window.addEventListener('resize', place);
   place();
