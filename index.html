@@ -220,12 +220,17 @@
 
   // Deployment config. AUDIO is resolved relative to index.html, or may be an
   // absolute URL. Set AUDIO to null to fall back to the file picker.
-  // Served from the GitHub release rather than the repo: 71 MB of master audio
-  // does not belong in git. Requires the repo to stay public — the release CDN
-  // 404s to anonymous clients on a private repo, and the gate falls back to the
-  // file picker. Swap for a Vercel Blob URL if the repo ever goes private.
+  //
+  // The audio is served from this origin, and it has to be. Hosting it on the
+  // GitHub release worked on every desktop browser and failed on every iOS one:
+  // the release CDN sends application/octet-stream with Content-Disposition:
+  // attachment, and iOS hands media to AVFoundation, which trusts the declared
+  // type and rejects it outright — MediaError code 4, networkState 3, the gate
+  // dropping to its file picker. Desktop engines sniff the bytes and never see
+  // the problem. Vercel serves this file as audio/mpeg from the extension, and
+  // that is the whole fix. Any replacement host must send a real audio type.
   const CONFIG = {
-    AUDIO: 'https://github.com/pavlovskisad/cherven/releases/download/audio/Ian.Spektor.-.Cherven.-.01.Cherven.mp3',
+    AUDIO: './cherven.mp3',
     LOOP: true,
     START_AT: 0
   };
