@@ -291,7 +291,7 @@
     return {
       el, cue: c, bar: el.querySelector('.bar'),
       head: el.querySelector('.head'), desc: el.querySelector('.desc'),
-      talk, turnEls, shown: 0, state: '', env: 0
+      talk, turnEls, shown: 0, state: '', env: 0, seen: false
     };
   });
 
@@ -371,6 +371,18 @@
       // the rule above each speech block is charged before anything is granted
       for (let i = 0; i < live.length; i++) if (live[i].shown) budget -= chrome[i];
 
+      // A note that has never been on the wall is served before anything else.
+      // Measured over the whole piece at 1920x1080, three notes — cues 8, 23 and
+      // 24 — were never shown once: they are short or speechless cues sitting in
+      // the 6:00-10:00 crowd, so they lost every pass on weight alone. Ranking
+      // them ahead of speech costs speech nothing in practice (turn-seconds went
+      // up, not down: seating a note early changes what the retry loop can pack)
+      // and it only ever applies once per cue per pass through the piece.
+      if (descOn) {
+        for (const i of order) if (!live[i].seen && noteH[i] && budget >= noteH[i]) {
+          keepNote[i] = true; budget -= noteH[i];
+        }
+      }
       if (talkOn) {
         for (const i of order) {
           for (let k = live[i].shown - 1; k >= 0; k--) {
@@ -411,6 +423,7 @@
 
     live.forEach((r, i) => {
       r.desc.style.display = keepNote[i] ? 'block' : 'none';
+      if (keepNote[i]) r.seen = true;   // marked on render, not in allocate(), which retries
       r.turnEls.forEach((el, k) => {
         el.style.display = (talkOn && k >= first[i] && k < r.shown) ? 'block' : 'none';
       });
@@ -421,8 +434,16 @@
     });
   }
 
+  let lastT = 0;
   function update() {
     const t = now();
+    // Installations loop all day. Without this, every note is "seen" after one
+    // pass and the guarantee above would only ever hold for whoever watched the
+    // first play — so the record is cleared whenever the piece rewinds, and each
+    // pass shows every note once. Scrubbing backwards clears it too, which is
+    // what you want while tuning the wall.
+    if (t < lastT - 1) for (const r of rows) r.seen = false;
+    lastT = t;
     if (document.activeElement !== scrub) scrub.value = Math.round(t);
     clockVal.textContent = Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 

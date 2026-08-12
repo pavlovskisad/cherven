@@ -125,8 +125,22 @@ changes, not every frame.
    heights, and `chrome` (the rule and padding on the `.talk` container, which
    is not part of any individual turn's height).
 2. **Allocate.** Titles are the fixed cost and never drop. The remaining budget
-   is spent in order of `env` (current weight): newest speech first, then notes.
-   Within a cue, older turns fall away before newer ones.
+   is spent in order of `env` (current weight): **any note not yet seen this
+   pass** first, then newest speech, then the remaining notes. Within a cue,
+   older turns fall away before newer ones.
+
+   The unseen-note tier exists because weight alone starved three cues
+   completely. Stepping the whole piece at 1920×1080, the notes for cues 8, 23
+   and 24 were never shown once: they are short or speechless cues sitting in
+   the 6:00–10:00 crowd, so they lost every pass. Ranking an unseen note above
+   speech fixes that and costs speech nothing measurable — turn-seconds went
+   *up* slightly (13445 → 13482), because seating a note early changes what the
+   retry loop manages to pack. It applies at most once per cue per pass.
+
+   `seen` is set on render, not inside `allocate()`, which retries. It is
+   cleared whenever time moves backwards, so a looping installation re-guarantees
+   every note on each play rather than only for whoever watched the first one.
+   Verified: all 53 notes appear on both passes, at opacity ≥ 0.5.
 3. **Pack.** Walk cues in order, accumulating height, break to the next column
    when full. No fixed addresses — cues keep order, not position.
 4. **Retry.** If the pack spills, re-allocate with a smaller budget factor
