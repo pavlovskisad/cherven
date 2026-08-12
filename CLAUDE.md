@@ -300,7 +300,39 @@ The **preview scrub** drives the display with no audio loaded at all, which is
 how to tune the wall in silence before the room is ready.
 
 Sliders: type size, note size, speech size, line spacing, columns, margin, hold,
-decay share, decay curve, dormant weight, elapsed weight, edge feather.
+decay share, decay curve, dormant weight, elapsed weight, edge feather, shrink
+dormant.
+
+### Shrink dormant — scale instead of drop
+
+`Shrink dormant to` (default 1, off) is the alternative to dropping content when
+the screen is over capacity. Each block is scaled by its own weight before the
+measuring pass: full weight sets at full size, and the further into its decay a
+cue is, the smaller it sets, down to the floor. Everything inside `.row` is
+em-relative, so a single `font-size` on the row moves title, note and speech
+together — **the ratio between the three tiers is preserved exactly**, which is
+the point. Nothing else in `place()` changes; the packer just sees smaller
+heights.
+
+Stepping the whole piece at 1920×1080:
+
+| floor | note-seconds | turn-seconds | notes dropped | smallest type |
+|---|---|---|---|---|
+| 1.00 (off) | 9559 | 13342 | 4020 | 22.0px |
+| 0.90 | 11394 | 13699 | 2185 | 19.8px |
+| 0.80 | 12674 | 13825 | 905 | 17.6px |
+| 0.70 | 12912 | 14060 | 667 | 15.4px |
+| 0.60 | 13069 | 14105 | 510 | 13.2px |
+
+0.8 is the knee: a third more note-seconds and 77% fewer dropped notes, with
+the smallest type still at 17.6px. Below that the returns flatten while the
+type keeps shrinking, and 13px on a wall is not a reading size.
+
+**It is not monotonic per moment.** At 21:33 the floor at 0.8 showed fewer notes
+than off, because the freed space went to speech: a note is one large
+indivisible block while turns are small and divisible, so under pressure many
+small turns outcompete a single note. Aggregate is much better; any given
+second may not be. Set it in the room against the actual throw.
 
 ---
 

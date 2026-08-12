@@ -210,6 +210,8 @@
   <input type="range" id="gp" min="0" max="0.5" step="0.01" value="0.18">
   <label>Edge feather <span id="featherVal"></span></label>
   <input type="range" id="feather" min="0" max="22" step="0.5" value="0">
+  <label>Shrink dormant to <span id="shrinkVal"></span></label>
+  <input type="range" id="shrink" min="0.5" max="1" step="0.02" value="1">
 
   <button id="mFlow" class="on">Flow — packed</button>
   <button id="mGhost">Fixed list — titles</button>
@@ -322,6 +324,7 @@
       rows.forEach((r, i) => {
         const col = Math.floor(i / g.rowsPerCol), slot = i % g.rowsPerCol;
         r.el.style.display = 'block';
+        r.el.style.fontSize = '';        // the register is a flat list; never scaled
         r.el.style.width = g.colW + 'px';
         r.el.style.left = (g.pad + col * (g.colW + g.gutter)) + 'px';
         r.el.style.top = (top + slot * g.rowH) + 'px';
@@ -335,6 +338,19 @@
     rows.forEach(r => { if (r.state !== 'live') r.el.style.display = 'none'; });
     const live = rows.filter(r => r.state === 'live');
     if (!live.length) return;
+
+    // Scale each block by its own weight before measuring, so the packer sees
+    // true heights and the rest of place() is unchanged arithmetic. Everything
+    // inside .row is em-relative — .desc at var(--desc)em, .turn at var(--talk)em,
+    // indents in em — so one font-size on the row moves title, note and speech
+    // together and the ratio between the three tiers is preserved exactly.
+    // A cue at full weight stays at full size; the further into its decay, the
+    // smaller it sets, down to the `shrink` floor. At 1 this is a no-op.
+    const base = px('--size'), floor = VAL.shrink;
+    live.forEach(r => {
+      const s = floor >= 1 ? 1 : floor + (1 - floor) * Math.max(0, Math.min(1, r.env));
+      r.el.style.fontSize = (base * s) + 'px';
+    });
 
     // One measuring pass with everything open, so allocation is pure arithmetic.
     live.forEach(r => {
@@ -552,6 +568,7 @@
   bind('gf',      '--ghost-future', v => v);
   bind('gp',      '--ghost-past',   v => v);
   bind('feather', '--feather',      v => v);
+  bind('shrink',  null,             v => v,        true);
 
   const MODES = { mFlow: 'flow', mGhost: 'ghosted' };
   function setMode(id) {
