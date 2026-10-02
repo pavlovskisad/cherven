@@ -1,0 +1,150 @@
+[
+ {
+  "group": "A",
+  "items": [
+   {
+    "i": 14,
+    "start": 233,
+    "end": 244,
+    "confidence": "low",
+    "evidence": "Still nothing in the pooled recognition. No segment of any pass falls between p3 «Так.»@224.88–225.62 and pass1 «Другой организация…»@261.74. The raw pass1 file only has the hallucination «Субтитры сделал DimaTorzok»@242.54–249.14 there, which the merge dropped. whisper.json has no focused (t_*) segments in 160–300; the 160–300 targeted jobs in jobs.txt left no output. Round 1's prompted «ногу»@238.02 is one word, probably prompt echo, and is not in the pooled files, so it does not count as a match.",
+    "note": "Fallback placement: the only line in the gap, set at the gap's start (end of item 13, 233.0) because playback order puts it right after Serhii's line. The end is a speaking-length estimate, not the bound (257). If the «ногу» hint is real, the start would be about 237.5."
+   },
+   {
+    "i": 16,
+    "start": 278.58,
+    "end": 279.3,
+    "confidence": "low",
+    "evidence": "No pooled segment in 262–283.24 means 'thank you'. The ones present are «Другой организация, в основном, как заказчик»@261.74, «Что это такое?»@264.72, «Это не будет с перевышением»@266.59 and @268.8, «Какой у вас … рост»@271.64 (exam chatter) and «Вот это какой-то там…»@273.66. None fits. whisper.json has no focused segments for this window. The only hint is round 1's prompted Ukrainian run, «дякую.»@278.58. It means the whole line, but it is not in the pooled data and could be prompt echo.",
+    "note": "Kept at the «дякую» hint, after the height question and before Nikolaich's «И что, второй…»@283.24. Without the hint, the spread rule would put it at 262.0."
+   },
+   {
+    "i": 33,
+    "start": 395.32,
+    "end": 401.37,
+    "confidence": "low",
+    "evidence": "Not found. The only speech in 395.32–416.37 is «И как@397.06 сюда вот это шоу(шов?), перед этим, это регистрироваться@399.68, для шоу бывает?@401.13» (pass1 and p3 agree). It does not mean 'we'll sing Oy tam na tovchku' and reads as the hospital exam, not the factory meeting. No focused segments exist for 370–420.",
+    "note": "Spread by text length (46/49/65 chars) across 395.32–416.37. In the audio, 395–401.5 holds only that one quiet voice (vocals stem equals the mix, so there is no room background). A noisier layer with loud voiced bursts starts about 401.5. If that layer is the factory meeting, items 33–35 belong in 401.5–416.4 (33≈401.5, 34≈405.8, 35≈410.3). That is an energy observation only, not a match on meaning."
+   },
+   {
+    "i": 34,
+    "start": 401.37,
+    "end": 407.82,
+    "confidence": "low",
+    "evidence": "Not found. Nothing is recognised by any pass between «…для шоу бывает?»@401.33 and «Кроме этого что-нибудь»@416.37 except the hallucination «Субтитры сделал DimaTorzok»@412.94–418.0 (raw pass1, dropped). No word for 'distillery', 'stay' or laughter.",
+    "note": "Second of three lines spread by text length across the gap, in transcript order."
+   },
+   {
+    "i": 35,
+    "start": 407.82,
+    "end": 416.37,
+    "confidence": "low",
+    "evidence": "Not found. No 'Disneyland', 'Діснейленд' or 'прошу/благаю' anywhere in 401.4–416.37. The next recognised speech is Serhii's «Кроме@416.37 этого что-нибудь» (item 36).",
+    "note": "Last of three spread lines; it ends at the after-anchor, inside cue 12 (Disneyland, 378–417)."
+   },
+   {
+    "i": 43,
+    "start": 547.62,
+    "end": 550.6,
+    "confidence": "low",
+    "evidence": "Not found. No pooled segment falls between «Зараз я їх поконую»@546.04–547.62 and «Я писал буквально…»@568.84. The only output in the gap is the p3 hallucination «Субтитры сделал DimaTorzok»@550.64–554.6, which was dropped. Nothing like 'барьеры/бар'єри … между нами'. No focused segments exist for 520–570.",
+    "note": "The only line in the gap, set at the gap's start by the spread rule, with a short speaking-length end. It belongs to cue 24 (Mykola's vest, a guide's story, 537–570), so anywhere in 547.6–568 is consistent. Round 1's 559.7 was the matcher's interpolation and had no evidence behind it either."
+   },
+   {
+    "i": 62,
+    "start": 881.6,
+    "end": 882.3,
+    "confidence": "low",
+    "evidence": "No 'Капец/Блин/Жесть/Жах' in 880.4–898.4. Pooled recognition stops at Katya's «то есть@879.51 стал@879.85 гением@880.35–881.59» (p3) and resumes at «Пятая(=Проклятая)@898.44 война». The vocals stem is near-silent from 881.6 to 898, apart from brief bursts. Round 1's targeted «Гениал!»@880.5 has no meaning link to 'Damn'.",
+    "note": "Set right after Katya's last recognised word ends (881.59) rather than at the bound (880.4), since the reply would follow her. It could equally sit just before 898.4."
+   }
+  ],
+  "verdicts": []
+ },
+ {
+  "group": "B",
+  "items": [
+   {
+    "i": 103,
+    "start": 1381.82,
+    "end": 1426.5,
+    "confidence": "low",
+    "evidence": "Stage direction, still not recognised. It starts at 102's last word, «група»@1381.22–1381.8. The focused decodes over 1380–1620 (t_original, t_vocals, t_vad) return nothing in 1382–1425. The only nearby output is Romanian «Nu uitați să vă abonați la canal!»@1433.84, a hallucination. The vocal stem is quiet over 1383–1424 (about −50 to −58 dB) with voicing at 140–170 Hz, consistent with distant chant. The direction ends where the Easter singing begins.",
+    "note": "Kept the acoustic placement. A pure text-length spread across the bounds would put the Easter troparion (104) at about 1382–1417, before the Easter cue 38 even starts (1425), so I did not use it."
+   },
+   {
+    "i": 104,
+    "start": 1426.5,
+    "end": 1459.2,
+    "confidence": "low",
+    "evidence": "Still no recognition. The added focused passes give only hallucinations: t_original «Nu uitați să vă abonați la canal!»@1433.84 and «Să vă mulțumim pentru vizionare!»@1454.18; t_vocals «Звучить музика»@1421.32/1448.16. Placed by sound. Cue 38 (Easter) starts at 1425. After a transient at 1425.0–1425.5, sustained singing in the vocal stem starts at 1426.5–1426.75 (−41 dB, F0 150–220 Hz). The closing «Христос воскресе!» is placed at the loud voiced burst at 1457.5–1458.5 (F0 about 400 Hz, a raised call).",
+    "note": "The only lexical hint is round 1's prompted run, «Христос воскресе!»@1457.54, which was prompt-induced and is not evidence. The start is good to about ±1.5 s. Where the troparion ends inside the window is an estimate."
+   },
+   {
+    "i": 105,
+    "start": 1459.2,
+    "end": 1466.6,
+    "confidence": "low",
+    "evidence": "Still no recognition. The added passes give only «Să vă mulțumim pentru vizionare!» (words at 1455.82–1463.18), a hallucination. Loud broadband bursts at 1459.25–1459.5 (−27.5 dB), 1461.75–1462.25 (unvoiced, crowd-like), 1464.5–1464.75 and 1466.0–1466.5 (−29 dB) fit a threefold call and response. The line spans them.",
+    "note": "Round 1's prompted «Воистину воскресе!»@1460.68/@1463.78 lines up with the bursts, but it was prompt-induced and so is not real evidence."
+   },
+   {
+    "i": 106,
+    "start": 1467.4,
+    "end": 1495,
+    "confidence": "low",
+    "evidence": "Still no recognition. The added passes give only hallucinations: «Nu uitați să dați like…»@1490.58 and «Звучить музика»@1498.52. Steady sung pitch (about 254–262 Hz, held across 1467.25–1468.5) resumes right after the last crowd burst ends at 1466.6. The end is set at one troparion length (about 28 s, matching 104's ~30 s), before the louder singing from 1496.",
+    "note": "The start comes from the acoustic onset. The end is an estimate."
+   },
+   {
+    "i": 107,
+    "start": 1495,
+    "end": 1531,
+    "confidence": "low",
+    "evidence": "Stage direction. Loud singing continues 1496–1543.8 (vocal stem −31 to −42 dB, F0 about 200–260 Hz). Recognition here is only music hallucination: «Песня на романе»@1510.12, «Звучить музика»@1507.08. At 1530 the 320–1000 Hz and 1–4 kHz bands drop by about 8 dB, which marks a change in the singing. The direction runs until 108's estimated start.",
+    "note": "Placed after 106. Its end is tied to 108's estimated start."
+   },
+   {
+    "i": 108,
+    "start": 1531,
+    "end": 1549.5,
+    "confidence": "low",
+    "evidence": "Only the tail is recognised, right after the chant cuts out at 1544.0: «Ты@1543.98 знаешь,@1545.38 что это?» (= 'And you know'), «Это был знак…»@1546.06, «когда@1548.2 я был в Миняке@1549.12» (≈ «когда меняют» = 'when they take off/change the old hoof'). The same voice (F0 110–170 Hz, about −50 dB) hears «меняют» as «Миняке» again in Ruslan's next line, «даже в Миняке»@1555.5 ('how they change them'), which supports the reading. The earlier part is masked by the chant. The start is back-computed by text length: the last ~22 of ~62 words take about 1544–1550.5, giving about 18–19 s for the whole line.",
+    "note": "The end is probable, around 1549.5, before Ian's «Ах…»@1550.88. The start is an estimate under the chant, ±10 s. The 1530 band drop may be where the louder singing ends, but it is not evidence of Ruslan's voice."
+   },
+   {
+    "i": 120,
+    "start": 1688.96,
+    "end": 1690.75,
+    "confidence": "low",
+    "evidence": "Stage direction. It starts at Kostya's «туда.@1688.65–1688.99». Adult voicing at 1689.0–1690.5 (F0 110–190 Hz) and a brief high blip at 1689.5 come before the sustained child voice. Nothing is recognised here, and the t_vad decode of 1660–1880 has no segment after 1687.43.",
+    "note": "Ends at the onset of Hek's child-voice burst."
+   },
+   {
+    "i": 121,
+    "start": 1690.75,
+    "end": 1693.3,
+    "confidence": "low",
+    "evidence": "Still no recognition. The focused decodes over 1660–1880 return nothing between «А теперь мне туда»@1687.43 and the hallucination «Субтитры сделал DimaTorzok»@1721.22–1731.82. Child-voice burst in the vocal stem: F0 about 430–520 Hz from 1690.75 to 1693.25, loudest at 1691.0–1691.25 (−36 dB). It is the first child speech after Kostya, and it is the right length for «Дима, мы разбираем! Разбираем!».",
+    "note": "Placed by voice activity and order only, not by words."
+   },
+   {
+    "i": 122,
+    "start": 1696.5,
+    "end": 1705.75,
+    "confidence": "low",
+    "evidence": "Still no recognition, from any pass. Adult male bursts (F0 about 115–165 Hz) at 1696.5–1699.5, 1701–1703.5 and 1705–1705.75 sit between the two child bursts, which fits two short sentences, 'Got it, Hek.' and 'Frania, is this yours or what?'.",
+    "note": "Placed by voice activity between Hek's lines. Dima is assumed to be the adult male voice."
+   },
+   {
+    "i": 123,
+    "start": 1707.5,
+    "end": 1710.3,
+    "confidence": "low",
+    "evidence": "Still no recognition. Loud child-voice burst (F0 about 530–615 Hz, up to −31.6 dB) at 1707.5–1710.25, right after the adult bursts. Its length fits «Мы разбираем эти вещи».",
+    "note": "Placed by voice activity. Another child burst at 1713.5–1714.5, and a strong one at 1731–1733.5, would also fit. From about 1713, cue 44 (Bohdan's funeral: hostess, then anthem) layers in, so a later placement anywhere up to about 1733 cannot be ruled out."
+   }
+  ],
+  "verdicts": []
+ }
+]

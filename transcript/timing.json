@@ -75,7 +75,8 @@
   "conf": "high",
   "method": "reader",
   "evidence": "«поднятый@126.09 волос(=лоскут) поддельный(=с тыльной) поверхность стопы@133.49» (p3_vocals). pass1 has «Ви піднятий волоско тильної поверхні стопи»@124.44–133.84.",
-  "note": "The vocals stem is silent from 120 to 124.5 and the voice starts about 125.9. The p3 «И»@119.08 is an artifact."
+  "note": "The vocals stem is silent from 120 to 124.5 and the voice starts about 125.9. The p3 «И»@119.08 is an artifact.",
+  "skeptic": "upheld: The cited pass1 «Ви піднятий волоско тильної поверхні стопи»@124.44 is NOT in whisper.json. Only p3_vocals supports the line: «поднятый@126.09 волос@127.11 поддельный@128.39 … поверхность@132.13 стопы.@133.49» (segment end 133.85), plus v_original «Принятый.@125.66». 'Raised flap … surface of the foot' matches the line. The segment's leading «И@119.08» is a stretched word 7 s before the next one, not a real onset, so 125.9 (between «Принятый»@125.66 and «поднятый»@126.09) is the right start. It is in order: after 116.0, before 134.3."
  },
  {
   "i": 8,
@@ -120,7 +121,8 @@
   "conf": "high",
   "method": "reader",
   "evidence": "«Поля?»@180.5, then «Да,@180.82 дело в том, что тот парень, который…» (p3). A re-run gives «Я еще его грузил»@189.70 (medium model: «…грузи его на нашу»@191.36) = 'I helped load him'. Then «Искал выехать@211.48 … куда проехал, а назад не проехал@219.0 … там было на базе@223.92».",
-  "note": "The matcher had interpolated 167.82. The closing 'blast… eight kilometers' sentence was not recognised and may run a few seconds past 224."
+  "note": "The matcher had interpolated 167.82. The closing 'blast… eight kilometers' sentence was not recognised and may run a few seconds past 224.",
+  "skeptic": "upheld: Saved p3_vocals has «Поля?@180.50», then «Да,@180.82 дело@181.84 в том, что тот парень,@183.08 который...@184.46» = 'Fields? Yeah, the thing is, the guy who…'. Later «Искал выехать@211.48 … куда проехал, а назад не проехал … там было на базе» ends at 224.22 = 'trying to find a way out … passed that way, but on the way back didn't make it'. The re-run quote «Я еще его грузил»@189.70 is not in whisper.json, but the start and end don't depend on it. It is in order: after 159.78, before 229.2."
  },
  {
   "i": 13,
@@ -164,11 +166,12 @@
   "i": 17,
   "start": 283.24,
   "end": 293.38,
-  "conf": "high",
-  "method": "adjudicated:reader",
+  "conf": "medium",
+  "method": "adjudicated:reader, skeptic adjusted",
   "evidence": "«И что,@283.9 второй@284.64 маск(=наповал?)?» «Да.»@285.26 «Да, как надо.»@285.48 … «Нужно рассказать.»@290.44 «Гармонизм(=гармонист).»@292.42–293.38 (pass1).",
   "note": "'the second one' and 'accordion player' bracket the line. The opening «И что» may be a prompt from Ian, so the start could be as late as 284.64. 'Everyone knew him' probably overlaps Hek's start. The matcher had interpolated 182.48.",
-  "adjudication": "The matcher cites the same words («И что, второй маск? … Гармонизм») but gave an interpolated start of 182.48, about 100 s before them. That start contradicts its own evidence and playback order. The reader anchors on the pooled pass1 words «И@283.24 что,@283.9 второй@284.64 маск?» «Да.»@285.26 «Да, как надо.»@285.48 «Нужно рассказать.»@290.44 «Гармонизм.»@292.42–293.38. 'второй' is 'the second one', and 'Гармонизм' is a mishearing of 'гармонист', the accordion player. The span is in order: after item 16 and right before Hek's «Хочу… прямо в огонь»@293.44. It is inside cue 7 (Nikolaich, 178–296). The vocals stem rises properly only around 284.3, so if «И что» is Ian's question, the start may be up to about 1 s later."
+  "adjudication": "The matcher cites the same words («И что, второй маск? … Гармонизм») but gave an interpolated start of 182.48, about 100 s before them. That start contradicts its own evidence and playback order. The reader anchors on the pooled pass1 words «И@283.24 что,@283.9 второй@284.64 маск?» «Да.»@285.26 «Да, как надо.»@285.48 «Нужно рассказать.»@290.44 «Гармонизм.»@292.42–293.38. 'второй' is 'the second one', and 'Гармонизм' is a mishearing of 'гармонист', the accordion player. The span is in order: after item 16 and right before Hek's «Хочу… прямо в огонь»@293.44. It is inside cue 7 (Nikolaich, 178–296). The vocals stem rises properly only around 284.3, so if «И что» is Ian's question, the start may be up to about 1 s later.",
+  "skeptic": "adjusted: The words exist in whisper_pass1: «И@283.24 что,@283.90 второй@284.64 маск?@284.90» «Да.@285.26» «Да, как надо.@285.48» «Нужно рассказать.@290.44» «Гармонизм.@292.42» (to 293.38), then Hek's «Хочу@293.44 … в огонь». The meaning rests on only two words: «второй» = 'the second one' and «Гармонизм» as a mishearing of 'гармонист' (accordion player). Nothing recognised means 'died instantly' or 'everyone knew him'. The start is in order (after 278.58, before 293.44) and sits in Nikolaich's cue, but it is thin evidence for high. If «И что» is Ian's question, the line may begin at «второй@284.64». Downgraded to medium."
  },
  {
   "i": 18,
@@ -196,7 +199,8 @@
   "method": "adjudicated:reader",
   "evidence": "«Просто@312.52 жесть.» «И вот, типа, отделение…»@313.52 «…Ореховы/Орехово»@317.56 «километров 15»@322.96 «в штабе сидели в подвале»@324.52 «прилетела, блядь, мина»@325.8 «500, типа, кг заряда… в Шахиде… 50»@328.78–332.5 «Все типов, только два человека выжило»@336.1–338.54 «И мы с одним из типов»@339.02–339.72.",
   "note": "The English ends 'And we, with one of the guys…' = «И мы с одним из типов»@339.02–339.9. The next Chapa line ('…at the very beginning…') therefore begins at «в начале»@340.16, not at the neighbour's 339.06.",
-  "adjudication": "Both methods point at the same Chapa speech. The matcher began mid-line at «от позиции километров 15»@322.46, while the English opens with 'Just brutal' = «Просто@312.52 жесть.@313.04». Then come «И вот, типа, отделение»@313.52, «Ореховы/Орехово»@316.9 (Orikhiv), «километров 15»@322.96, «в штабе сидели в подвале», «прилетела, блядь, мина»@325.56, «500, типа, кг… в Шахиде… 50»@328.78–333.7 and «только два человека выжило»@336.1–338.54. The line ends with «И@339.06 мы с одним из типов@339.7» = 'And we, with one of the guys…', just before «в@340.16 начале». The span starts at Chapa's cue 10 (312–480), after Hek's speech ends at 312.18, so it is in order."
+  "adjudication": "Both methods point at the same Chapa speech. The matcher began mid-line at «от позиции километров 15»@322.46, while the English opens with 'Just brutal' = «Просто@312.52 жесть.@313.04». Then come «И вот, типа, отделение»@313.52, «Ореховы/Орехово»@316.9 (Orikhiv), «километров 15»@322.96, «в штабе сидели в подвале», «прилетела, блядь, мина»@325.56, «500, типа, кг… в Шахиде… 50»@328.78–333.7 and «только два человека выжило»@336.1–338.54. The line ends with «И@339.06 мы с одним из типов@339.7» = 'And we, with one of the guys…', just before «в@340.16 начале». The span starts at Chapa's cue 10 (312–480), after Hek's speech ends at 312.18, so it is in order.",
+  "skeptic": "upheld: whisper_pass1 has «Просто@312.52 жесть.@313.04» = 'Just brutal', then «И вот, типа, отделение,@314.22 в котором он был…», «…Ореховы» from 316.34 (Orikhiv), «от позиции километров 15, и в штабе сидели в подвале»@322.46, «и туда прилетела, блядь, мина»@325.56, «500, типа, кг заряда, ну, если в Шахиде»@328.78, «и там только два человека выжило»@336.10. p3_vocals has «И@339.06 мы с одним из типов@339.70», with the next word «в@340.16». The start is the line's first words and is in order: 312.52 ≥ 312.2 and ≤ 339.05."
  },
  {
   "i": 21,
@@ -265,10 +269,11 @@
   "i": 28,
   "start": 381.84,
   "end": 382.74,
-  "conf": "medium",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic refuted",
   "evidence": "«Китка на поле»@381.84–382.74, probably a mishearing of «На кацапов!». It falls right before Serhii's reply «Это основная у нас…»@384.04.",
-  "note": "Supported by position and rough sound. The matcher's interpolated time happened to land on this."
+  "note": "Supported by position and rough sound. The matcher's interpolated time happened to land on this.",
+  "skeptic": "refuted: The only cited speech is whisper_pass1 «Китка@381.84 на@382.44 поле.@382.44». It does not mean 'About the katsaps!': nothing in it says кацап, and the 'mishearing' reading is an unverified guess. Context makes the slot plausible: Serhii's «Это основная у нас психика»@384.04 answers right after it. The start 381.84 is in order (≥380.0, ≤384.04), so it is kept as a low-confidence placement."
  },
  {
   "i": 29,
@@ -374,7 +379,8 @@
   "method": "adjudicated:reader",
   "evidence": "«Тут в сапарі (все правильно) написано, форма 100»@506.62–509.86; «Травму отримували під час виконання бойового… 4-го»@510.4; «мінометного обстрілу»@515.44; «Перша допомога на етапах… з 5-го по 9-й»@515.94; «Новомосковської ЦРЛ»@519.28; «Далі, на праці»@525.16; «За життєвим історією»@534.2; «операції будуть? … крім поранення (три поражения)»@536.08–538.84",
   "note": "The matcher started this at 515.94 and missed the opening \"…correct? Form 100\" at 506.62. «И все. Все правильно.»@528.9–532.06 is also inside this line.",
-  "adjudication": "The line opens with \"everything written here is correct? Form 100\", and the recognition has «Тут в сапарі написано, форма 100.» from 506.62 to 509.86 (\"here in the [record] it is written, form 100\"). Next comes «Травму отримували під час виконання бойового … 4-го»@510.4 (injury received on active duty on the 4th), then «обстрілу»@515.44 (shelling). The matcher started at «Перша допомога на етапах … з 5-го по 9-й»@515.94, which is the line's fourth sentence, so it skipped the first ~9s. The order fits: the segments just before are Mrs. Anya's item 39 («Закінчила магістратуру»@496.34, «Ми приїхали … туди»@502.3, ending 506.1), and 506.62 comes before item 41 at ~539. The speaker also fits: this is the doctor reading a soldier's Form 100 at the hospital. The tail fits the reader's end: «За життєвим історією»@534.2 (\"serious illnesses before this\") and «операції будуть … три поражения»@536.08–538.84 (\"any surgeries, apart from the injury\"). The reader's quote adds a bracketed «(все правильно)» that is not in the 506.62 segment, but the start does not depend on it."
+  "adjudication": "The line opens with \"everything written here is correct? Form 100\", and the recognition has «Тут в сапарі написано, форма 100.» from 506.62 to 509.86 (\"here in the [record] it is written, form 100\"). Next comes «Травму отримували під час виконання бойового … 4-го»@510.4 (injury received on active duty on the 4th), then «обстрілу»@515.44 (shelling). The matcher started at «Перша допомога на етапах … з 5-го по 9-й»@515.94, which is the line's fourth sentence, so it skipped the first ~9s. The order fits: the segments just before are Mrs. Anya's item 39 («Закінчила магістратуру»@496.34, «Ми приїхали … туди»@502.3, ending 506.1), and 506.62 comes before item 41 at ~539. The speaker also fits: this is the doctor reading a soldier's Form 100 at the hospital. The tail fits the reader's end: «За життєвим історією»@534.2 (\"serious illnesses before this\") and «операції будуть … три поражения»@536.08–538.84 (\"any surgeries, apart from the injury\"). The reader's quote adds a bracketed «(все правильно)» that is not in the 506.62 segment, but the start does not depend on it.",
+  "skeptic": "upheld: whisper_pass1 has «Тут@506.62 в сапарі написано,@507.48 форма@508.08 100.@509.74» = 'written here … Form 100', then «Травму@510.40 отримували під час виконання бойового … 4-го@512.80» = 'injury received on active duty … on the 4th', «…обстрілу» to 515.94, «Перша допомога на етапах … з 5-го по 9-й»@515.94, «До Московської ЦРЛ»@519.28 (Novomoskovsk CRH), «Відходили, операції будуть»@536.12 and p3 «…операций будут. Здесь у нас три поражения»@536.08–538.84. The segment before it («два мікрофони»@505.58) belongs to the previous story. It is in order: after 480.7, before 539.0."
  },
  {
   "i": 41,
@@ -392,7 +398,8 @@
   "conf": "medium",
   "method": "reader",
   "evidence": "«Зараз, як?»@541.98–542.96 (= «А зараз по функції — як?»); «Зараз я їх поконую»@546.04–547.62",
-  "note": "The later questions about movement and sensation were not recognised. «Зараз я їх поконую» may be the patient's reply, which the English marks [indistinct]. «Коли?»@540.48 does not fit."
+  "note": "The later questions about movement and sensation were not recognised. «Зараз я їх поконую» may be the patient's reply, which the English marks [indistinct]. «Коли?»@540.48 does not fit.",
+  "skeptic": "upheld: whisper_pass1 has «Зараз,@541.98 як?@542.92» = 'And now, how [is it]?', which fits the opening 'And now, function-wise—is everything working?'. Then «Зараз@546.04 я їх поконую.@547.22» runs to 547.62, which may be the reply or the [indistinct] tail. The match is a short common phrase, so medium is right. The start is the first recognised Ukrainian words after «Коли?»@540.48. It is in order: after 539.0, at or before 547.62."
  },
  {
   "i": 43,
@@ -489,7 +496,8 @@
   "method": "adjudicated:reader",
   "evidence": "«Ну да, да@745.72» (Ah.) «Я@746.7 не знаю… есть варианты, при которых выживают, и можно выжить, но это…@754.3» … gap 755–783 unrecognised … «И на ПКГ@784.17 оказался… сосудистый хирург@787.97… неплохой еще один хирург, и они вместе спасли жизнь@793.25»",
   "note": "The matcher started this turn at 782.97, the field-hospital half, which is wrong: the turn opens with «Я не знаю… есть варианты, при которых выживают» at 746.7. The middle ('[indistinct]… packed the wound, clamped it') was not recognised.",
-  "adjudication": "The matcher's 782.97 («И на ПКГ оказался… сосудистый хирург») is only the second half of the turn. Pooled p3 has the opening right after Katya's collarbone line: «Ну да, да@745.72» (the 'Ah.' acknowledgement) and then «Я@746.7 не знаю… есть варианты, при которых выживают, и можно выжить, но это…@754.3» = 'I don't know, there are cases where people survive, it's possible, but…'. The turn closes with «и они вместе спасли жизнь@793.25». A re-run on 738–790 confirms «я не знаю… есть варианты при которых выживают». The time fits order: after item 51 (741.2) and ending where Katya's «Это просто стечение»@793.25 begins. If «Ну да, да» is really Katya's, the first word is «Я»@746.7, about 1 s later."
+  "adjudication": "The matcher's 782.97 («И на ПКГ оказался… сосудистый хирург») is only the second half of the turn. Pooled p3 has the opening right after Katya's collarbone line: «Ну да, да@745.72» (the 'Ah.' acknowledgement) and then «Я@746.7 не знаю… есть варианты, при которых выживают, и можно выжить, но это…@754.3» = 'I don't know, there are cases where people survive, it's possible, but…'. The turn closes with «и они вместе спасли жизнь@793.25». A re-run on 738–790 confirms «я не знаю… есть варианты при которых выживают». The time fits order: after item 51 (741.2) and ending where Katya's «Это просто стечение»@793.25 begins. If «Ну да, да» is really Katya's, the first word is «Я»@746.7, about 1 s later.",
+  "skeptic": "upheld: p3_vocals has «Ну@745.72 да, да.@746.14» (= 'Ah.'). It comes right after line 51's «А, ниже ключи(цы)@741.20» / «Нет, у меня есть сюда…@743.42». Then «Я@746.70 не знаю,@748.26 … есть варианты,@750.82 при которых выживают,@751.94 и можно выжить,@753.62 но это...@754.30» = 'I don't know… there are cases where people survive, it's possible, but…'. The closing part is «И@782.97 на ПКГ@784.17 оказался … сосудистый хирург,@787.97 … неплохой еще один хирург, и они вместе спасли жизнь.@793.25». Nothing is recognised in 755–783, which is consistent with the '[indistinct]…' middle. It is in order: after 741.2, at or before 793.25."
  },
  {
   "i": 53,
@@ -550,10 +558,12 @@
   "start": 830.12,
   "end": 871.32,
   "conf": "high",
-  "method": "adjudicated:reader",
+  "method": "adjudicated:reader, skeptic adjusted",
   "evidence": "Targeted (orig 826–852): «Вот так вот@830.12, потому что сапёром был@833.28, и они работали@835.20, вот, и уже доделали практически работу@840.02, им надо было разминировать@841.58, чтобы техника пошла@843.86 потом, вот, шли первые@844.98… потом они зачищают@849.26, и дальше техника@850.86»; pooled «доделывали работу и прилет@856.52. Скорее всего, какой-то танчик где-то стоял@860.23… ни звука… не присесть@864.33» «И вот муж@867.14, он (был) с этим парнем@868.6» «У него того контузия@870.74 рядом@871.32»",
   "note": "The matcher started at 849.52 («зачищают и дальше техника»), which is mid-turn. Targeted re-recognition found the opening, 'My husband was a sapper' = «сапёром был», at about 832, after a «Вот так вот» lead-in at 830.1. The closing concussion clause (pass1, 869.84) overlaps Serhii's next line.",
-  "adjudication": "The matcher's 849.52 «зачищают и дальше техника» is the fourth sentence of the turn ('sweeping, and then the tech would roll in'), so it starts mid-turn. My re-run on 826–852 (original audio) reproduced the reader's text: «Вот@830.12 так вот, потому что сапёром@833.28 был, и они работали@835.20 … уже доделали практически работу@840.02, им надо было разминировать@841.58, чтобы техника пошла@843.86 потом… шли первые… зачищают@849.26, и дальше техника@850.86» = 'My husband was a sapper. They were working, almost done… had to clear the mines so the vehicles could get through. Infantry went first…'. A second run reads «Он@831.50 уже сапёром был», and vocal energy rises at about 830.5–831. The line continues through pooled «прилет@856.52… танчик… не присесть@864.33… с этим парнем… контузия@870.74 рядом@871.32». The time fits between item 58 (810.37) and item 60 (869.77)."
+  "adjudication": "The matcher's 849.52 «зачищают и дальше техника» is the fourth sentence of the turn ('sweeping, and then the tech would roll in'), so it starts mid-turn. My re-run on 826–852 (original audio) reproduced the reader's text: «Вот@830.12 так вот, потому что сапёром@833.28 был, и они работали@835.20 … уже доделали практически работу@840.02, им надо было разминировать@841.58, чтобы техника пошла@843.86 потом… шли первые… зачищают@849.26, и дальше техника@850.86» = 'My husband was a sapper. They were working, almost done… had to clear the mines so the vehicles could get through. Infantry went first…'. A second run reads «Он@831.50 уже сапёром был», and vocal energy rises at about 830.5–831. The line continues through pooled «прилет@856.52… танчик… не присесть@864.33… с этим парнем… контузия@870.74 рядом@871.32». The time fits between item 58 (810.37) and item 60 (869.77).",
+  "skeptic": "adjusted: The start's evidence, «Вот так вот@830.12 … сапёром был@833.28 … и они работали@835.20 … разминировать@841.58 …», comes from a targeted re-run that is NOT in whisper.json. Saved recognition has nothing between p3 «…активная боевая работа, то...»@810.37–815.60 and whisper_pass1 «зачищают@849.52 и дальше техника.@850.86». That is the line's 'sweeping—and then the tech would roll in', several sentences in. The rest of the line is supported: «доделывали@852.90 работу и прилет.@856.52», «скорее всего, какой-то танчик где-то стоял@860.18», «ни звука,@862.20 … не присесть.@864.24», «И вот муж,@867.14 он … с этим парнем.@868.60», «У него того контузия@870.74 рядом.@871.32». So the line is placed correctly, but its start is not reproducible from saved recognition. 830.12 is kept as an estimate (about 35 words of English precede 'sweeping', roughly 14–19 s before 849.52) and confidence drops to low. It is in order: after 810.37, before 869.77.",
+  "verification": "reproduced unprompted: «Вот так вот, потому что сапёром был, и они работали…»@830.12 (original 826–852 s); the saved passes only caught the line from its fourth sentence"
  },
  {
   "i": 60,
@@ -597,7 +607,8 @@
   "conf": "high",
   "method": "reader",
   "evidence": "pass1 «ДОМОЛИТВИ»@917.00–918.40 (= «До молитви!»)",
-  "note": "The matcher had interpolated this one (899.74–985.61). The command is recognised directly at 917.0, consistent with cue 30 (Molytva) starting at about 916."
+  "note": "The matcher had interpolated this one (899.74–985.61). The command is recognised directly at 917.0, consistent with cue 30 (Molytva) starting at about 916.",
+  "skeptic": "upheld: whisper_pass1 has «ДОМОЛИТВИ@917.00» (917.00–918.40) = «До молитви!» = 'To prayer.'. It is in order: after 898.4, before the prayer's «Украина!@921.53»."
  },
  {
   "i": 65,
@@ -644,7 +655,8 @@
    1061.7,
    1064.86
   ],
-  "adjudication": "The matcher's 985.61 «Чтоб взросла…» is line 15 of a 34-line prayer. The pooled ASR has the opening clearly: «Украина!@921.53 … Святая Матерь Героев@923.55, Дойди до сердца моего@926.27» = 'Ukraine, holy mother of heroes, come into my heart'. It then has every following line in order: «Шумом Карпатских@933.21», «Батька Хмеля@938.19», «Софіївських дзвонів@947.04» … through «Відвічна Україна@1064.86» and «Свята, могутня, соборна@1067.34–1070.64». The time fits order: right after 'To prayer' («ДОМОЛИТВИ»@917.0) and before «Слава Україні»@1071.28. It also fits cue 30, Molytva (916–1082)."
+  "adjudication": "The matcher's 985.61 «Чтоб взросла…» is line 15 of a 34-line prayer. The pooled ASR has the opening clearly: «Украина!@921.53 … Святая Матерь Героев@923.55, Дойди до сердца моего@926.27» = 'Ukraine, holy mother of heroes, come into my heart'. It then has every following line in order: «Шумом Карпатских@933.21», «Батька Хмеля@938.19», «Софіївських дзвонів@947.04» … through «Відвічна Україна@1064.86» and «Свята, могутня, соборна@1067.34–1070.64». The time fits order: right after 'To prayer' («ДОМОЛИТВИ»@917.0) and before «Слава Україні»@1071.28. It also fits cue 30, Molytva (916–1082).",
+  "skeptic": "upheld: p3_vocals has «Украина!»@921.53 and again @922.59, «Святая Матерь Героев»@923.55, «Дойди до сердца моего»@926.27, «…ветра в Кавказске»@929.19, «Шумом Карпатских ручеев»@933.21 and «Боев славного … Батька Хмеля»@936.69. whisper_pass1 has «Тріумфом і гуком гармат революції»@941.68 and «Радісним гомоном Софіївських дзвонів»@945.90. Further on: «Чтоб вера моя была гранитом»@981.55, the long pass1 segment «За твою славу … величну смерть героїв … тисяч інших незнаних нами»@994.26–1020.56, «Що їх кості порозкидані»@1022.68, «Скріпи мій дух»@1040.78, «Відвічна Україна»@1064.86 and «Свята, могутня, соборна»@1067.34–1070.64. This is the prayer from its first word to its last. It is in order: after 917.0, before «Слава Україні»@1071.34 (next line 1071.28)."
  },
  {
   "i": 66,
@@ -729,17 +741,19 @@
   "conf": "high",
   "method": "adjudicated:reader",
   "evidence": "pass1 «понад»@1080.06 «усе!»@1080.42–1080.84",
-  "adjudication": "Items 70-75 are three Soldier/Choir pairs, and pass1 has three separate «Україна понад усе!» segments: «Україна»@1075.32, «Україна»@1077.52 and «Україна»@1079.28. Item 75 is the third Choir reply, which is «понад»@1080.06 «усе!»@1080.42-1080.84. The matcher's 1075.3 is the first «Україна», so it is the Soldier's first call, not this line. 1080.06 fits the order after 74 (1079.3) and before 76 (1084.3)."
+  "adjudication": "Items 70-75 are three Soldier/Choir pairs, and pass1 has three separate «Україна понад усе!» segments: «Україна»@1075.32, «Україна»@1077.52 and «Україна»@1079.28. Item 75 is the third Choir reply, which is «понад»@1080.06 «усе!»@1080.42-1080.84. The matcher's 1075.3 is the first «Україна», so it is the Soldier's first call, not this line. 1080.06 fits the order after 74 (1079.3) and before 76 (1084.3).",
+  "skeptic": "upheld: The words are in whisper.json: pass1 segment @1079.28 «Україна»1079.28–1080.06 «понад»1080.06–1080.42 «усе!»1080.42–1080.84. «понад усе» means 'above all'. It is the third of three pass1 «Україна понад усе!» segments (@1075.32, @1077.52, @1079.28), and that fits a third call-and-reply. The start comes after 74 (1079.28) and before 76 (1084.27)."
  },
  {
   "i": 76,
   "start": 1084.27,
   "end": 1157.97,
-  "conf": "high",
-  "method": "adjudicated:reader",
+  "conf": "low",
+  "method": "adjudicated:reader, skeptic adjusted",
   "evidence": "Targeted large-v3 run on the original audio, 1084–1117: «Але я хотів би пояснити про останній день»@1084.27–1086.67 = 'But I want to talk about the last day'; «…і, скоріше за все»@1098.06–1099.76 «…вона не дуже»@1102.0–1103.14 = 'most likely it will not end well'; then pass1 «Склад, який вийшов на цю задачу… добровольці»@1106.02; «Костя отримав поранення»@1129.32; p3 «И я скажу, что если бы не действия Кости»@1137.43; last words «всем тем, кто из этого вышел»@1156.06–1157.97",
   "note": "Matcher started at 1117.04, the second sentence. It missed the opening and the volunteer sentence at 1106. The opening, 1084–1103, was not in either stored pass and was recovered by targeted recognition. Its middle part is the '[Indistinct]' stretch.",
-  "adjudication": "The matcher's 1117.04 «Це були люди найбоєздатніші» falls inside the line. The volunteers sentence comes before it: pass1 «Склад, який вийшов на цю задачу, це були суто добровольці»@1106.02. I re-ran large-v3 on 1082-1106 in three modes (original with VAD, vocals, original forced to Ukrainian), and all three confirm the reader's opening. «Але я тут розповів про останній день»@1084.04-1084.39 = 'But I want to talk about the last day'. «...і, скоріше за все ... вона не дуже»@1098.1-1103.2 = 'most likely it will not end well'. The line ends at «всем тем, кто из этого вышел»@1156.06-1157.97. This fits cue 32 (Commander's speech, which starts at 1081) and the order after 75 (1080.06)."
+  "adjudication": "The matcher's 1117.04 «Це були люди найбоєздатніші» falls inside the line. The volunteers sentence comes before it: pass1 «Склад, який вийшов на цю задачу, це були суто добровольці»@1106.02. I re-ran large-v3 on 1082-1106 in three modes (original with VAD, vocals, original forced to Ukrainian), and all three confirm the reader's opening. «Але я тут розповів про останній день»@1084.04-1084.39 = 'But I want to talk about the last day'. «...і, скоріше за все ... вона не дуже»@1098.1-1103.2 = 'most likely it will not end well'. The line ends at «всем тем, кто из этого вышел»@1156.06-1157.97. This fits cue 32 (Commander's speech, which starts at 1081) and the order after 75 (1080.06).",
+  "skeptic": "adjusted: whisper.json has no segment at all between 1080.84 and 1106.02. The opening quotes (targeted «Але я хотів би пояснити про останній день»@1084.27, «скоріше за все»@1098.06) are not in it, and neither is anything with «останн…» or «скоріше» near here. The body is supported: pass1 «Склад, який вийшов на цю задачу, це були суто добровольці»@1106.02 ('the unit that went on this mission… volunteers'), «Костя отримав поранення…з 15»@1124.52, p3 «И я скажу, что если бы не действия Кости»@1137.43, and p3 «…всем тем, кто из этого вышел» ending @1157.97. 1106.02 is the second sentence of the line, so the line does begin earlier, inside the recognition gap. I kept 1084.27 because it is in order (after 1080.06, before 1157.97), but its saved recognition cannot be reproduced, so confidence drops to low. The end of 1157.97 is supported."
  },
  {
   "i": 77,
@@ -758,7 +772,8 @@
   "method": "adjudicated:reader",
   "evidence": "Targeted run on the original audio: «Ценой Кости отсюда вышло 17 людей»@1158.66. p3 «Сыною кости»@1158.14. Vocal energy starts at 1158.25. Then «На жаль, ми страдали свого побратима»@1164.04, «Я пишаюсь, що знав його як воїна»@1172.96, and pass1 «Брат, вже воїнам жити вічно»@1185.82–1188.32.",
   "note": "Matcher's 1172.02 start was wrong: that is mid-sentence, after the 'seventeen lives' part. The line starts at «Ценой Кости».",
-  "adjudication": "'Through Kostya's sacrifice, seventeen people made it out' = «Синою Кості звідти вийшло 17 людей» (pass1 «Синою»@1158.9, p3 «Сыною»@1158.14). My targeted re-run gives «Ціною кості звідти вийшло 17 людей»@1158.62. The matcher's 1172.02 is the end of that pass1 segment, after «17 життів завдяки Кості», so it misses the opening. The line runs through «Я пишаюсь, що знав його як воїна»@1172.96 to «Брат, вже воїнам жити вічно»@1185.82-1188.32. 1158.2 lies between the p3 and targeted first-word times and fits the order after 77 (1158.0) and before 79 (1200.7)."
+  "adjudication": "'Through Kostya's sacrifice, seventeen people made it out' = «Синою Кості звідти вийшло 17 людей» (pass1 «Синою»@1158.9, p3 «Сыною»@1158.14). My targeted re-run gives «Ціною кості звідти вийшло 17 людей»@1158.62. The matcher's 1172.02 is the end of that pass1 segment, after «17 життів завдяки Кості», so it misses the opening. The line runs through «Я пишаюсь, що знав його як воїна»@1172.96 to «Брат, вже воїнам жити вічно»@1185.82-1188.32. 1158.2 lies between the p3 and targeted first-word times and fits the order after 77 (1158.0) and before 79 (1200.7).",
+  "skeptic": "upheld: The words are in whisper.json: p3 «Сыною»1158.14 «кости»1159.3, and pass1 «Синою»1158.9 «Кості» «звідти вийшло 17 людей»1160.5–1162.74. That is 'Ціною Кості… 17 людей', which means 'Through Kostya's sacrifice, seventeen people made it out'. After it: «На жаль, ми страдали свого побратима»1164.04, «врятували 17 життів», pass1 «Я пишаюсь, що знав його як воїна»@1172.96, and «Брат, вже воїнам жити вічно»1185.82–1188.32. The claimed 1158.2 is within 0.06 s of the first word (1158.14). It is in order after 77 (1157.97) and before 79 (1200.71)."
  },
  {
   "i": 79,
@@ -773,19 +788,21 @@
   "i": 80,
   "start": 1212.92,
   "end": 1219.64,
-  "conf": "medium",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic refuted",
   "evidence": "pass1 «Мама, ты нахами не хами?»@1212.92–1214.7, repeated @1217.94–1219.64. Likely a mishearing of «Папа, ты на каменоломне! На каменоломне!»",
-  "note": "The repetition matches the English 'At the stone factory! At the stone factory!'. The first instance has low word probabilities, around 0.27, and overlaps the end of the hostess's line."
+  "note": "The repetition matches the English 'At the stone factory! At the stone factory!'. The first instance has low word probabilities, around 0.27, and overlaps the end of the hostess's line.",
+  "skeptic": "refuted: The recognised words are pass1 «Мама,»1212.92 «ты»1213.12 «нахами»1213.38 «не»1214.02 «хами?»1214.28–1214.7, repeated @1217.94–1219.64. They share no word with 'Dad… stone factory': it is «Мама», not «Папа», and nothing resembling «каменоломн…» appears. Reading «нахами не хами» as «на каменоломне» is a phonetic guess. The only support is that the phrase is repeated, and that is not enough. I kept the start at 1212.92, which is in order between 79 (1200.71) and 81 (1219.96)."
  },
  {
   "i": 81,
   "start": 1219.96,
   "end": 1225.58,
-  "conf": "medium",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic refuted",
   "evidence": "pass1 «Сейчас ты у нас поводку»@1219.96–1221.3 (≈ «Сейчас, подходите…»), «Ты хочешь прощать?»@1221.52, «Да»@1223.52, «Ты хочешь прощать?»@1224.0, «Да»@1225.28–1225.58",
-  "note": "'прощать' is probably «прощаться», the goodbyes. The repeated question-and-'yes' pattern may include a second voice. End is uncertain within ~2 s."
+  "note": "'прощать' is probably «прощаться», the goodbyes. The repeated question-and-'yes' pattern may include a second voice. End is uncertain within ~2 s.",
+  "skeptic": "refuted: The recognised words are pass1 «Сейчас»1219.96 «ты у нас поводку»1220.36–1221.3, then a question-and-answer exchange: «Ты хочешь прощать?»@1221.52, «Да»@1223.52, «Ты хочешь прощать?»@1224.0, «Да»@1225.28. Nothing in it means 'come forward'; «поводку» → «подходите» is a guess. The shared farewell word «прощать» comes inside a question-and-answer exchange that the English line does not have. One common thematic word is not enough. I kept the start at 1219.96, which is in order between 80 (1212.92) and 82 (1225.6)."
  },
  {
   "i": 82,
@@ -807,12 +824,14 @@
  },
  {
   "i": 84,
-  "start": 1239.54,
+  "start": 1238.62,
   "end": 1240.6,
-  "conf": "high",
-  "method": "reader",
+  "conf": "medium",
+  "method": "reader, skeptic refuted",
   "evidence": "Targeted run, both vocals and original: «Это кино из зимы»@1239.54–1240.6 (= «Это конец зимы?»): «Это»@1239.54 «кино»@1239.74 «из»@1240.22 «зимы»@1240.38",
-  "note": "Matcher had nothing and interpolated. This was found with a targeted pass."
+  "note": "Matcher had nothing and interpolated. This was found with a targeted pass.",
+  "skeptic": "refuted: The quote «Это кино из зимы»@1239.54 is not in whisper.json. No segment contains «зимы» or «кино». The neighbours are p3 «Это как раз мы стояли… наши стояли.», which ends @1239.53, and pass1 «Ми»1240.05 «ще простояли два тижні…». The support came only from an unsaved targeted run. I kept the start at 1239.54, which is in order between 83 (1234.12) and 85 (1240.6).",
+  "verification": "reproduced unprompted: «Це кінець зими.»@1238.62 (original 1236–1244 s), «…кінець зима»(vocals 1236–1244 s)"
  },
  {
   "i": 85,
@@ -840,7 +859,8 @@
   "conf": "high",
   "method": "reader",
   "evidence": "p3 «шесть»@1267.78, «поломанных»@1270.45–1271.27. Targeted run on the original audio: «шести»@1267.64. Targeted vocals: «6»@1268.32 «поломанных»@1269.5. Large model: «Шість поломаних»@1269.54. «поломанных» ≈ «пол[он]енных» = 'taken prisoner'.",
-  "note": "Passes disagree by up to ~1.8 s, but two of them agree on ~1267.7. The after-neighbour, item 88 at an interpolated 1256.23, is wrong. Item 88 (Hek, 'Look, Dad, stop right there!') must fall between ~1271.3 and «пять»@~1273.0, the 'five killed' of item 89."
+  "note": "Passes disagree by up to ~1.8 s, but two of them agree on ~1267.7. The after-neighbour, item 88 at an interpolated 1256.23, is wrong. Item 88 (Hek, 'Look, Dad, stop right there!') must fall between ~1271.3 and «пять»@~1273.0, the 'five killed' of item 89.",
+  "skeptic": "upheld: The words are in whisper.json, p3 segment @1263.92: «около»1267.32–1267.78 «шесть»1267.78–1268.94 «поломанных,»1270.45–1271.27. «поломанных» is close to «полонених/полонённых», meaning prisoners. The count sequence that follows also matches the source exactly: «пять»1273.02 «разбитых» (89, five killed), «уранами»1277.32 (≈ раненых, thirty wounded) and pass1 «60 контузій, 150»@1282.52 (line 91, 'sixty concussed, out of 150'). The start is within 0.08 s of «шесть» and in order after 86 (1265.1) and before 88 (1271.0)."
  },
  {
   "i": 88,
@@ -859,7 +879,8 @@
   "method": "adjudicated:reader",
   "evidence": "«пять»@1273.02 «разбитых»@1273.84 (= five killed); «Крутися там уранами»@1276.42–1278.72 (likely a mishearing of «тридцать раненых»).",
   "note": "The matcher started at the segment start, 1263.92. «Их оттуда стояло… около шесть поломанных»@1263.92–1270.45 is the tail of 85 plus item 87 ('six taken prisoner').",
-  "adjudication": "The matcher's start, 1263.92, is the segment onset «Их оттуда стояло около шесть поломанных», which is the tail of 85 ('and they…'). Pass1 hears the same audio as «Тільки туди стріляли»@1263.9. «шесть поломанных»≈«шесть пленных» is item 87, 'Six taken prisoner'. The meaning of 89 starts at «пять»@1273.02 «разбитых»@1273.84, a garble of «пять убитых» (= five killed). «Крутися там уранами»@1276.42–1278.72 plausibly garbles «тридцать раненых» (= thirty wounded). This leaves room for Hek's 88 at about 1271 and fits before 91's «60 контузій»@1282.52. Liokha is in cue 34 (1231–1383)."
+  "adjudication": "The matcher's start, 1263.92, is the segment onset «Их оттуда стояло около шесть поломанных», which is the tail of 85 ('and they…'). Pass1 hears the same audio as «Тільки туди стріляли»@1263.9. «шесть поломанных»≈«шесть пленных» is item 87, 'Six taken prisoner'. The meaning of 89 starts at «пять»@1273.02 «разбитых»@1273.84, a garble of «пять убитых» (= five killed). «Крутися там уранами»@1276.42–1278.72 plausibly garbles «тридцать раненых» (= thirty wounded). This leaves room for Hek's 88 at about 1271 and fits before 91's «60 контузій»@1282.52. Liokha is in cue 34 (1231–1383).",
+  "skeptic": "upheld: The words are in whisper.json: p3 «пять»1273.02–1273.84 «разбитых,»1273.84–1274.8 (≈ «пять убитых», five killed) and pass1 «Крутися»1276.42 «там» «уранами.»1277.32–1278.72 (≈ «тридцать раненых», thirty wounded). Next comes pass1 «60 контузій, 150»@1282.52, which is line 91, so the six/five/thirty/sixty sequence lines up. The start is in order after 88 (1271.0) and before 90 (1279.2)."
  },
  {
   "i": 90,
@@ -928,10 +949,11 @@
   "i": 97,
   "start": 1344.24,
   "end": 1346.2,
-  "conf": "medium",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic refuted",
   "evidence": "«А в тебе, в керівниці, вона права.»@1344.24–1346.14. This is a garbled question about the eyesight, between Liokha's «…не бачу»@1342.66 and his reply «Це мені треба вже закуляри…»@1347.18.",
-  "note": "The matcher interpolated 1350.48 inside 98. Attribution to Ian rests on the question/answer structure; the transcription is noisy."
+  "note": "The matcher interpolated 1350.48 inside 98. Attribution to Ian rests on the question/answer structure; the transcription is noisy.",
+  "skeptic": "refuted: The recognised words are pass1 «А»1344.24 «в тебе,»1344.64–1344.94 «в керівниці,»1345.0–1345.82 «вона права.»1345.92–1346.34, meaning 'and with you, in the manager, she is right'. Nothing in it refers to eyesight or swearing. Only «А в тебе» ('and you…') corresponds. The slot is plausible: after Liokha's «А я по закулярі не бачу» (which ends @1342.98) and before «Це мені треба вже закуляри»@1347.18. But that is position, not meaning. I kept the start at 1344.24, which is in order between 96 (1321.2) and 98 (1347.18)."
  },
  {
   "i": 98,
@@ -941,7 +963,8 @@
   "method": "adjudicated:reader",
   "evidence": "«Це мені треба вже закуляри на лозу зняти»@1347.18–1349.88 (= gotta wear glasses for that); «Я стріляю, не погано, але я не бачу цих цих цих»@1352.68 (vocals «Ты стреляешь неплохо»@1351.63); «А там же треба поправитися»@1357.16–1358.92",
   "note": "The matcher started at 1351.63 and missed the glasses phrase. The vocals pass also has Hek «Папа, я хочу посмотреть что под камнем»@1347.59, a child line not in the English, overlapping here.",
-  "adjudication": "Item 96's glasses clause is already covered by «А я по закулярі не бачу»@1341.3–1342.66 ('can't do it without glasses'). The second glasses mention, «Це мені треба вже закуляри…»@1347.18, is 98's opening, 'I gotta wear glasses for that stuff'. The rest follows: «Я стріляю, не погано, але я не бачу цих цих цих»@1352.68 (= I shoot okay but can't make out…) and «А там же треба поправитися»@1357.16 (= you need adjustments). The matcher began mid-line at vocals «Ты стреляешь неплохо»@1351.63 and dropped the first clause. 1347.18 falls between 97 (about 1344.2) and Hek's 99 «Папа, подними камень»@1358.45."
+  "adjudication": "Item 96's glasses clause is already covered by «А я по закулярі не бачу»@1341.3–1342.66 ('can't do it without glasses'). The second glasses mention, «Це мені треба вже закуляри…»@1347.18, is 98's opening, 'I gotta wear glasses for that stuff'. The rest follows: «Я стріляю, не погано, але я не бачу цих цих цих»@1352.68 (= I shoot okay but can't make out…) and «А там же треба поправитися»@1357.16 (= you need adjustments). The matcher began mid-line at vocals «Ты стреляешь неплохо»@1351.63 and dropped the first clause. 1347.18 falls between 97 (about 1344.2) and Hek's 99 «Папа, подними камень»@1358.45.",
+  "skeptic": "upheld: The words are in whisper.json, pass1 segment @1344.24: «Це»1347.18 «мені треба вже закуляри»1347.58–1349.16 «на лозу зняти»…1350.48, which means 'I need glasses for that'. Then pass1 «Я стріляю, не погано, але я не бачу цих цих цих»1352.68–1355.6 ('I shoot okay but can't make out…') and «А там же треба поправитися»1357.16–1358.92 ('you need adjustments'). The start is the first word of the glasses clause, after a gap from «права.» (which ends 1346.34). It is in order after 97 (1344.24) and before 99 (1358.45)."
  },
  {
   "i": 99,
@@ -959,7 +982,8 @@
   "conf": "high",
   "method": "reader",
   "evidence": "«Так марксменам підхиляється кола.»@1361.38–1364.56 (= so as a marksman…); «Чисто блять.»@1365.02; «Тут такий хуяй…»@1366.38–1368.78 (= just straight up, fuck it)",
-  "note": "The matcher interpolated 1368.78. The words are recognised, overlapping Hek's 99 (a different recording)."
+  "note": "The matcher interpolated 1368.78. The words are recognised, overlapping Hek's 99 (a different recording).",
+  "skeptic": "upheld: The words are in whisper.json: pass1 «Так»1361.38–1362.68 «марксменам»1362.68–1363.62 «підхиляється кола»…1364.56. «марксменам» is a distinctive match for 'go as a marksman'. Then pass1 «Чисто»1365.02 «блять.»1365.94–1366.24 ('just straight up, fuck it') and «Тут такий хуяй, а хуячий.»1366.38–1368.78. The start is in order after 99 (1358.45) and before 101 (1370.9)."
  },
  {
   "i": 101,
@@ -1035,16 +1059,18 @@
   "method": "adjudicated:reader",
   "evidence": "«Ах…»@1550.88; «Ты шёл, а я вообще в холм»@1552.88–1554.48. This plausibly garbles «Да ты что! А я вообще не знал» (= No way! I had no idea). It is the loud voiced burst at 1551–1553.",
   "note": "The matcher's «Да, да, я не задувался, но прям…»@1556.98 (targeted vocals «Я не задувался ніколи»@1555.0–1559.0 = 'I never thought about it') is item 111, 'Never even thought about it'. «понятно, да. Ну, даже в Миняке [меняют]»@1554.82–1556.46 fits Ruslan's 110, 'You can't even imagine how they change them, right?'.",
-  "adjudication": "The matcher's «Да, да, я не задувался[задумывался], но прям...»@1556.98 means 'yeah, I didn't think about it'. That is Ian's later line 111, 'Never even thought about it', not 'No way! I had no idea'. Putting 109 there leaves no speech for 110 and 111 before Levin's «Это на Минке»@1562.25; only «Да.»@1559.18 remains. The reader's «Ах…»@1550.88, «Ты шёл[шо], а я вообще в холм[не знал]»@1552.88–1554.48 plausibly garbles «Ты шо! А я вообще не знал». It falls in a loud burst at about 1551.5–1553.75 (-33 to -38 dB against about -47 around it). It comes after Ruslan's 108 tail «когда я был в Миняке»@1548.2–1549.44 and before 110 and 111. The garble is loose, so confidence stays medium."
+  "adjudication": "The matcher's «Да, да, я не задувался[задумывался], но прям...»@1556.98 means 'yeah, I didn't think about it'. That is Ian's later line 111, 'Never even thought about it', not 'No way! I had no idea'. Putting 109 there leaves no speech for 110 and 111 before Levin's «Это на Минке»@1562.25; only «Да.»@1559.18 remains. The reader's «Ах…»@1550.88, «Ты шёл[шо], а я вообще в холм[не знал]»@1552.88–1554.48 plausibly garbles «Ты шо! А я вообще не знал». It falls in a loud burst at about 1551.5–1553.75 (-33 to -38 dB against about -47 around it). It comes after Ruslan's 108 tail «когда я был в Миняке»@1548.2–1549.44 and before 110 and 111. The garble is loose, so confidence stays medium.",
+  "skeptic": "upheld: EXISTS: p3_vocals «Ах...»@1550.88, «Ты@1552.88 шёл,@1553.44» «а@1553.86 я@1554.02 вообще@1554.12 в@1554.40 холм@1554.48» are in whisper.json. MEANS: «Ты шёл[шо], а я вообще в холм[не знал]» works as a garble of «Ты шо! А я вообще не знал». The decisive word «не знал» is heard as «в холм», so the meaning is loose and medium is the most it deserves. Ian's own follow-up «Да, да, я не задувался…»@1556.98 (line 111) confirms Ian is talking here. STARTS: the 'No way' exclamation could start at «Ах»@1550.88 or at «Ты»@1552.88. Keeping 1550.88 is defensible. ORDER: it sits after 108 (1531.0) and after Ruslan's «Миняке»@1549.12. Note that line 110's claim takes «а я вообще»@1553.86 out of the middle of this line. See 110."
  },
  {
   "i": 110,
-  "start": 1553.86,
+  "start": 1554.82,
   "end": 1556.46,
-  "conf": "medium",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic adjusted",
   "evidence": "p3_vocals «а я@1553.86 вообще@1554.12 в холм, понятно,@1554.82 да.@1555.12» then «Ну,@1555.5 даже@1555.92 в Миняке.@1556.18» [≈ «ты вообще… даже… как меняют…, да?»]. 'вообще/даже' carry 'even', 'Миняке'≈'меняют' carries 'change', and the tag «да» carries 'right?'.",
-  "note": "The matcher's 1559.18 is interpolated and falls after Ian's reply. Who says what in 1552.9–1556.5 is uncertain. «Ты шёл»@1552.88 is a steady ~340 Hz sound, either a non-speech noise or an excited «Ты шо!» (Ian's 'No way!'). If it is Ian, 109 owns 1552.88–1555.34 and 110 is only «Ну, даже в Миняке»@1555.5. Either way the neighbour's 1556.98 for item 109 is wrong: that segment is item 111's «я не задумывался». Item 109 belongs at or before ~1552.9, so the order conflict with the neighbour is expected here."
+  "note": "The matcher's 1559.18 is interpolated and falls after Ian's reply. Who says what in 1552.9–1556.5 is uncertain. «Ты шёл»@1552.88 is a steady ~340 Hz sound, either a non-speech noise or an excited «Ты шо!» (Ian's 'No way!'). If it is Ian, 109 owns 1552.88–1555.34 and 110 is only «Ну, даже в Миняке»@1555.5. Either way the neighbour's 1556.98 for item 109 is wrong: that segment is item 111's «я не задумывался». Item 109 belongs at or before ~1552.9, so the order conflict with the neighbour is expected here.",
+  "skeptic": "adjusted: The claimed start 1553.86 is «а@1553.86 я@1554.02 вообще@1554.12 в холм@1554.48». Line 109's evidence reads those same words as Ian's «а я вообще не знал» ('I had no idea'), and Ruslan cannot start in the middle of Ian's sentence. What remains for Ruslan is «понятно,@1554.82 да.@1555.12 Ну,@1555.50 даже@1555.92 в Миняке.@1556.18». Only «даже» ('even'), «Миняке» as a guess at «меняют» ('change') and the tag «да» support the line, and their order does not match the English. So the speech exists and the slot is right between 109 and 111 «Да,@1556.98», but the meaning is weak. Start moved to «понятно»@1554.82, confidence low."
  },
  {
   "i": 111,
@@ -1090,16 +1116,18 @@
   "method": "adjudicated:reader",
   "evidence": "«И@1584.77 он, у меня как бы… только, я не знаю, один, если считать.» (the 'only artist' reply, rendered as 'Yeah, yeah'). Then «А так вообще Богдан уникальный получился.»@1590.31, «Вот как он пищал, Настя…»@1593.21, «Наверное, ему там часа без пола, все в хуй.»@1595.83 ('an hour of anesthetic… all the bullshit'), and «Я это чётко запоминаю.»@1601.34–1607.26 / targeted «Навіть чітко це згадуємо зараз»@1605.7–1607.88 ('Totally unforgettable').",
   "note": "The matcher began at the second sentence (1590.31). The 'only one, if you count' answer runs straight into «а так вообще Богдан…» in one targeted segment, so it is the same speaker, Levin. Medium because 1584.77 could still be Ian's question.",
-  "adjudication": "Matcher anchors on «А так вообще Богдан уникальный получился»@1590.31, which is the line's second sentence ('And you know, what made Bohdan really stand out'). The line opens 'Yeah, yeah', Levin's answer to Ian's 'only artist' question. That answer is «И@1584.77 он, у меня как бы… только, я не знаю, один, если считать». It is first-person answer content, not a question. The targeted pass hears it in one breath with the next sentence: «…тільки один, якщо вважати, а так взагалі Богдан унікальний…»@1585.0. In the vocals stem the voice from 1585.4 to 1588.4 sits at about 100–110 Hz, the same as at 1591.0 (about 105 Hz), so it is one speaker. 1584.77 also fits the order (114 at 1581.2, 116 at 1610.0). End: «Я это чётко запоминаю»@1601.34–1607.26 ('Totally unforgettable')."
+  "adjudication": "Matcher anchors on «А так вообще Богдан уникальный получился»@1590.31, which is the line's second sentence ('And you know, what made Bohdan really stand out'). The line opens 'Yeah, yeah', Levin's answer to Ian's 'only artist' question. That answer is «И@1584.77 он, у меня как бы… только, я не знаю, один, если считать». It is first-person answer content, not a question. The targeted pass hears it in one breath with the next sentence: «…тільки один, якщо вважати, а так взагалі Богдан унікальний…»@1585.0. In the vocals stem the voice from 1585.4 to 1588.4 sits at about 100–110 Hz, the same as at 1591.0 (about 105 Hz), so it is one speaker. 1584.77 also fits the order (114 at 1581.2, 116 at 1610.0). End: «Я это чётко запоминаю»@1601.34–1607.26 ('Totally unforgettable').",
+  "skeptic": "upheld: EXISTS and MEANS, with strong lexical support. t_original «Богдан@1590.86 унікальний@1591.20» / p3 «А так вообще Богдан уникальный»@1590.31 = 'what made Bohdan really stand out'. «Ось як він піщав на сеансах»@1593.14 / «пищал»@1593.95 = 'how he squealed during the sessions'. «годину@1596.30» / «часа@1596.53 … все в хуй@1597.87» = 'a full hour… all the bullshit'. «Навіть чітко це згадуємо»@1605.70 / «чётко запоминаю@1606.56» = 'Totally unforgettable'. STARTS: the opening «І він… У мене навколо нього, можливо, тільки один, якщо вважати»@1585.00 (p3 «И@1584.77») is Levin's answer to 114 ('only artist?'), run on in one breath with «а так взагалі Богдан»@1590.22. The edited transcript renders it as 'Yeah, yeah', so 1584.77 is the line's beginning. ORDER: 1581.2 ≤ 1584.77 ≤ 1609.98."
  },
  {
   "i": 116,
   "start": 1609.98,
   "end": 1611.16,
-  "conf": "medium",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic refuted",
   "evidence": "pass1 «Туре кольцо.»@1609.98–1611.16 [≈ «(ну) реально больно»]. It sits exactly between Levin's «запоминаю»@1606.56 and Levin's answer «Ну да…»@1611.64.",
-  "note": "The matcher had this interpolated at 1607.26. The sound match is loose, but the position is tight."
+  "note": "The matcher had this interpolated at 1607.26. The sound match is loose, but the position is tight.",
+  "skeptic": "refuted: EXISTS: whisper_pass1 «Туре@1609.98 кольцо.@1610.78» is in whisper.json. MEANS: 'ring'-type nonsense shares no word, name or number with «реально больно» / 'for real, it hurts'. The link rests on a loose rhyme. The slot is structurally plausible: it falls between Levin's «згадуємо зараз»@1606.64–1607.88 and «Ну@1611.64 да, и полка[иголкой] житти[тыкают]» (117, 'getting jabbed with a needle'). But the recognised speech does not show this line. Kept in order at 1609.98, confidence low."
  },
  {
   "i": 117,
@@ -1118,7 +1146,8 @@
   "method": "adjudicated:reader",
   "evidence": "«Хороший,@1644.57 ой, ты маленький,@1645.41 ой, иди сюда,@1647.85 ой, ты хороший,@1649.51 ай, ты, кис-кис-кис-кис@1650.83–1652.19» = 'oh you're so nice, oh you're so small, oh come here… kitty-kitty-kitty'. Kostya's voice (~150 Hz) starts in the vocals stem at 1636.5 after near-silence from 1620 to 1636.",
   "note": "The matcher started at 'oh you're so nice', mid-line. The opening 'Kitty-kitty, come here, come, little one! Come here,' was not recognised and sits in 1636.5–1644.5.",
-  "adjudication": "Matcher's text is right but starts mid-line. «Хороший,@1644.57 ой, ты маленький, ой, иди сюда… кис-кис-кис-кис@1651.97» is 'oh you're so nice, oh you're so small, oh come here… kitty-kitty-kitty'. The opening 'Kitty-kitty, come here, come, little one! Come here' must come before it. The vocals stem is near-silent from 1623 to 1637.4 (about -55 to -67 dB). Speech starts at 1637.6 and runs in bursts to 1643.4, at the same high cat-calling pitch (about 310–380 Hz at 1638.0, 1640.4 and 1641.2) as «Хороший» at 1644.0 (about 311–334 Hz). Reader's 1636.5 is only a faint bump; the real onset is 1637.6, so I start there. The order fits (117 at 1611.6, 119 at 1663.9), and cue 33 (Kostya beckoning a cat) is live."
+  "adjudication": "Matcher's text is right but starts mid-line. «Хороший,@1644.57 ой, ты маленький, ой, иди сюда… кис-кис-кис-кис@1651.97» is 'oh you're so nice, oh you're so small, oh come here… kitty-kitty-kitty'. The opening 'Kitty-kitty, come here, come, little one! Come here' must come before it. The vocals stem is near-silent from 1623 to 1637.4 (about -55 to -67 dB). Speech starts at 1637.6 and runs in bursts to 1643.4, at the same high cat-calling pitch (about 310–380 Hz at 1638.0, 1640.4 and 1641.2) as «Хороший» at 1644.0 (about 311–334 Hz). Reader's 1636.5 is only a faint bump; the real onset is 1637.6, so I start there. The order fits (117 at 1611.6, 119 at 1663.9), and cue 33 (Kostya beckoning a cat) is live.",
+  "skeptic": "upheld: EXISTS and MEANS: p3_vocals «Хороший,@1644.57 ой, ты маленький,@1645.55 ой, иди@1647.85 сюда, … кис@1650.83-кис-кис-кис@1651.97» = 'oh you're so nice, oh you're so small, oh come here… kitty-kitty-kitty'. This is a clear match to the second half of the line. STARTS: nothing in whisper.json covers the opening 'Kitty-kitty, come here, come, little one!'. There are no segments between 1614.62 and 1644.57, so the start is acoustic, not recognised. A light RMS check of the mix agrees: about -54 to -57 dB through 1637.5, then a rise to -47.7 dB at 1637.75 and -40 dB at 1638.75. That fits the claimed 1637.6 and the 7 s of extra text before 1644.57. ORDER: 1611.64 ≤ 1637.6 ≤ 1663.9."
  },
  {
   "i": 119,
@@ -1168,7 +1197,8 @@
   "conf": "medium",
   "method": "reader",
   "evidence": "Trial VAD pass (scratchpad whisper_trial.json): «Я, конечно, чувствую, что я перетаскован на своей локации.»@1742.4–1746.5 [≈ «Я столько стульев перетаскал на своей локации»] = 'I hauled so many chairs at my station'. An adult voice (129–184 Hz) continues 1747.5–1754.5 and 1756–1756.5 for '(laughs) Go ahead, see what you can make of these'.",
-  "note": "This speech is not in whisper.json; it comes from the session's trial VAD run. That run has only segment times (no word times), and its starts can run ~1.5 s early (its «Где вы, главный, пап?»@1779.1 vs pass1 1780.7), so medium."
+  "note": "This speech is not in whisper.json; it comes from the session's trial VAD run. That run has only segment times (no word times), and its starts can run ~1.5 s early (its «Где вы, главный, пап?»@1779.1 vs pass1 1780.7), so medium.",
+  "skeptic": "upheld: EXISTS: trial_vad «Я, конечно, чувствую, что я перетаскован на своей локации.» 1742.40–1746.50 is in whisper.json, with segment times only and no word timings. MEANS: «перетаскован[перетаскал] на своей локации» carries the specific 'hauled … at my station', which is more than one common word. STARTS: the segment start 1742.4 is the opening clause. The tail '(laughs) Go ahead…' has no recognised speech, so the end 1756.6 is acoustic. In the mix a loud burst comes at 1756.0 (-26 dB), just before 125. ORDER: 1707.5 ≤ 1742.4 ≤ 1757.0. Without word timings, medium is right."
  },
  {
   "i": 125,
@@ -1178,7 +1208,8 @@
   "method": "adjudicated:reader",
   "evidence": "Child voice («А вы ему как-то тут походите [положите]?»@1760.78–1762.82) ≈ 'and you stack this here'. Also «Эй, эй!»@1763.04, «Украина главный, пап!»@1780.7 ('Dad! The main flag of Ukraine!') and «Украина главный!»@1785.08–1786.28. The child voice runs ~1757.0 to 1786.9.",
   "note": "The matcher started at 'Dad! The main flag' (1780.7), about 20 s into the turn. 'I'll take this to the car' comes just before «а вы… тут положите», starting at the child voice at ~1757.",
-  "adjudication": "Matcher's «Украина главный, пап!»@1780.7 is 'Dad! The main flag of Ukraine!', the line's third sentence, about 20 s in. Earlier speech matches the opening structure: «А вы ему как-то тут походите?»@1760.78 = 'and you … here', likely a mishearing of 'положите', for 'and you stack this here'. The vocals pitch there is child-range (about 300 Hz at 1761.0–1762.0), like «Украина главный, пап!» (about 290–320 Hz at 1781.0–1781.5), so it is the same child, Hek. 'I'll take this to the car' comes first. After a dip at 1755.0–1755.5 (about -50 dB), the child pitch begins at 1757.0 (about 348 Hz). It ends at «Украина главный!»@1785.08–1786.28, just before Dima's «Сейчас будем выходить»@1787.08. The order fits: 124 at 1742.4 («Я… перетаскован на своей локации» = 'hauled so many chairs at my station') ≤ 1757 ≤ 126 at 1787.08."
+  "adjudication": "Matcher's «Украина главный, пап!»@1780.7 is 'Dad! The main flag of Ukraine!', the line's third sentence, about 20 s in. Earlier speech matches the opening structure: «А вы ему как-то тут походите?»@1760.78 = 'and you … here', likely a mishearing of 'положите', for 'and you stack this here'. The vocals pitch there is child-range (about 300 Hz at 1761.0–1762.0), like «Украина главный, пап!» (about 290–320 Hz at 1781.0–1781.5), so it is the same child, Hek. 'I'll take this to the car' comes first. After a dip at 1755.0–1755.5 (about -50 dB), the child pitch begins at 1757.0 (about 348 Hz). It ends at «Украина главный!»@1785.08–1786.28, just before Dima's «Сейчас будем выходить»@1787.08. The order fits: 124 at 1742.4 («Я… перетаскован на своей локации» = 'hauled so many chairs at my station') ≤ 1757 ≤ 126 at 1787.08.",
+  "skeptic": "upheld: EXISTS and MEANS: whisper_pass1 «Украина@1780.70 главный, пап!@1781.90» = 'Dad! The main flag of Ukraine!' and «Украина@1785.08 главный!@1785.68» = the closing '…main flag of Ukraine!'. Both are strong. «А@1760.78 вы ему как-то тут походите[положите]?» fits 'and you stack this here' in structure. STARTS: the opening 'I'll take this to the car' has no recognised speech, so the start comes before 1760.78 and is acoustic. The mix shows activity at 1757.0–1757.25 (-30 to -33 dB) and again at 1759.0 (-28 dB), so 1757.0 is plausible but estimated. End: «главный!»@1785.68 / seg end 1786.28, before 126 «Сейчас@1787.08 будем выходить, ты мне покажешь». ORDER: 1742.4 ≤ 1757.0 ≤ 1787.08."
  },
  {
   "i": 126,
@@ -1260,7 +1291,8 @@
   "method": "adjudicated:reader",
   "evidence": "t_vocals «Просто прийняти цю папу…»@2204.56–2206.46, i.e. «прошу прийняти@2204.96 (p .94) цей прапор». A prompted pass gives «Від імені@2202.06 командування@2202.40 Третьої окремої бригади прошу@2204.52 прийняти@2205.02 цей прапор@2205.90» (prompt-assisted). The vocal stem rises from silence (−77 dB) to speech at 2201.9; the voice has a male pitch of about 200 Hz",
   "note": "The matcher's 2141 was interpolated and is about 60 s early. «Dear family…» is not heard separately. If it was said before the 2199–2201.8 silence, the start would be about 2196.",
-  "adjudication": "The matcher's 2141 is interpolated. Its recognition text is the priest's «можете вийти і сказати… слова подяки», which says nothing about a flag, so it fails on meaning. The reader's claim rests on an unprompted t_vocals segment in whisper.json: «Просто@2204.56 прийняти@2204.96 (p .94) цю@2205.62 папу@2205.9». That is «прошу прийняти цей прапор», 'I ask you to accept this flag'. On the vocal stem, a near-silent gap at 2198.5–2201.5 (−86 dB at 2201.0) ends with speech at 2202.0 (−39.5 dB), voiced at about 180–216 Hz, the commander's range. The speech ends at 2206.5. The burst at 2196–2198 is at 320–364 Hz, so it is not the commander's «Dear family». My unprompted re-decodes of this window returned only «Дякую за перегляд!», so I am keeping medium rather than high. The start comes after 133 (2141) and before 135, inside the Hena-funeral layer (cue 46, to 2268)."
+  "adjudication": "The matcher's 2141 is interpolated. Its recognition text is the priest's «можете вийти і сказати… слова подяки», which says nothing about a flag, so it fails on meaning. The reader's claim rests on an unprompted t_vocals segment in whisper.json: «Просто@2204.56 прийняти@2204.96 (p .94) цю@2205.62 папу@2205.9». That is «прошу прийняти цей прапор», 'I ask you to accept this flag'. On the vocal stem, a near-silent gap at 2198.5–2201.5 (−86 dB at 2201.0) ends with speech at 2202.0 (−39.5 dB), voiced at about 180–216 Hz, the commander's range. The speech ends at 2206.5. The burst at 2196–2198 is at 320–364 Hz, so it is not the commander's «Dear family». My unprompted re-decodes of this window returned only «Дякую за перегляд!», so I am keeping medium rather than high. The start comes after 133 (2141) and before 135, inside the Hena-funeral layer (cue 46, to 2268).",
+  "skeptic": "upheld: EXISTS and MEANS: t_vocals (unprompted) «Просто@2204.56 прийняти@2204.96 цю@2205.62 папу[прапор]…@2205.90» = «прошу прийняти цей прапор», 'I ask you to accept this flag'. This is the line's final clause. The prompted «Від імені командування…» cited is NOT in whisper.json and counts for nothing. STARTS: the opening 'Dear family… On behalf of the command of the Third Assault Brigade' is not recognised. whisper_pass1 has only a hallucinated «Sărbătoare!»@2201.48, which at most marks voice onset. In the mix the level rises from about -37/-38 dB to -34 dB at 2201.75 and -32 dB at 2202.0. That fits a start near 2201.9, but the start is an estimate and could be up to about 0.5 s earlier. ORDER: 2141.6 ≤ 2201.9 ≤ 2212.2."
  },
  {
   "i": 135,
@@ -1322,7 +1354,8 @@
   "method": "adjudicated:reader",
   "evidence": "t_vad «Остались@2483.76 только@2485.6 фотографии@2485.86 сообщения@2490.2». Targeted vocal pass «…графы@2487.68, да, сообщения@2490.44 все@2491.08 сбрасываются@2491.30», which reads as «все фотографии, сообщения — всё стёрлось». The stem rises from silence at 2483.1",
   "note": "The matcher's 2259.46 was wrong. «I mean» is probably the unrecognised 0.6 s before «Остались».",
-  "adjudication": "The matcher's 2259.46 is backed by the priest's «ім'я прощання, слова подяки…», which is the wrong speech and the wrong scene. The reader's t_vad «Остались@2483.76 только@2485.6 фотографии@2485.86 сообщения@2490.2» is confirmed by my unprompted vocal-stem decode: «Ну,@2483.36 то есть все, что осталось@2484.74, только@2485.64 … фотография@2487.02, да, сообщение@2490.42, все это просто@2491.44». «Ну, то есть» is the line's 'I mean', 'все, что осталось' is 'that's all that's left', and 'фотографии, сообщения' is 'the photos, the messages'. The vocal stem goes from silence (−82 dB at 2482.75) to speech at 2483.0. Speaker and topic fit cue 50 «Empty» (Katya shows Hena's phone, everything erased), and the time is in order after 138/139 and before 143."
+  "adjudication": "The matcher's 2259.46 is backed by the priest's «ім'я прощання, слова подяки…», which is the wrong speech and the wrong scene. The reader's t_vad «Остались@2483.76 только@2485.6 фотографии@2485.86 сообщения@2490.2» is confirmed by my unprompted vocal-stem decode: «Ну,@2483.36 то есть все, что осталось@2484.74, только@2485.64 … фотография@2487.02, да, сообщение@2490.42, все это просто@2491.44». «Ну, то есть» is the line's 'I mean', 'все, что осталось' is 'that's all that's left', and 'фотографии, сообщения' is 'the photos, the messages'. The vocal stem goes from silence (−82 dB at 2482.75) to speech at 2483.0. Speaker and topic fit cue 50 «Empty» (Katya shows Hena's phone, everything erased), and the time is in order after 138/139 and before 143.",
+  "skeptic": "upheld: EXISTS: t_vad «Остались@2483.76 только@2485.60 фотографии,@2485.86 сообщения.@2490.20» is in whisper.json. MEANS: four content words match 'all that's left… just… the photos, the messages'. The reviewer's other quotes are not in whisper.json and are not counted: «Ну, то есть все, что осталось»@2484.74, «графы@2487.68 … сбрасываются@2491.30». STARTS: the first saved word is «Остались»@2483.76 ('that's all that's left'). The unrecognised 'I mean' plausibly fills the 0.66 s before it, so 2483.1 stands. ORDER: 2417.4 ≤ 2483.1 ≤ 2494.3."
  },
  {
   "i": 141,
@@ -1350,27 +1383,30 @@
   "method": "adjudicated:reader",
   "evidence": "t_vad «на@2521.63 айфоне@2522.51 (p .89) просто@2523.39 есть@2523.65». A male voice (about 120 Hz) runs to 2524.0",
   "note": "The matcher's 2337 was interpolated.",
-  "adjudication": "The matcher's 2337.39 is interpolated, and its recognition text «Одно, наверное, здесь было тоже такое» is Katya's line 146. It would also put 143 before 140 (2483), breaking order. The reader cites t_vad in whisper.json: «на@2521.63 айфоне@2522.51 (p .89) просто@2523.39 есть@2523.65», 'on the iPhone there's just…', which is 'iPhones have this thing…'. A male voice (123–130 Hz) is on the stem at 2523.0–2523.75. The exchange that follows is independently confirmed by my decodes, «Резервная@2524.66 копия@2526.06» and then «есть@2527.40 настройка@2527.92», so the setup line has to sit just before 2524.6. «на» has p .02, and «айфоне» starts at 2522.5, so I keep the reader's 2522.0."
+  "adjudication": "The matcher's 2337.39 is interpolated, and its recognition text «Одно, наверное, здесь было тоже такое» is Katya's line 146. It would also put 143 before 140 (2483), breaking order. The reader cites t_vad in whisper.json: «на@2521.63 айфоне@2522.51 (p .89) просто@2523.39 есть@2523.65», 'on the iPhone there's just…', which is 'iPhones have this thing…'. A male voice (123–130 Hz) is on the stem at 2523.0–2523.75. The exchange that follows is independently confirmed by my decodes, «Резервная@2524.66 копия@2526.06» and then «есть@2527.40 настройка@2527.92», so the setup line has to sit just before 2524.6. «на» has p .02, and «айфоне» starts at 2522.5, so I keep the reader's 2522.0.",
+  "skeptic": "upheld: EXISTS and MEANS: t_vad «на@2521.63 айфоне@2522.51 просто@2523.39 есть@2523.65» = 'on the iPhone there's just…', i.e. 'iPhones have this thing…'. It is followed in whisper.json by t_vad «резервная@2525.19 копия@2526.07» (144) and t_vocals «Есть@2527.14 настройка@2527.78 типа стирать или не стирать» (145), which confirms the exchange. STARTS: 2522.0 sits between the weak «на»@2521.63 and «айфоне»@2522.51, so it is the line's beginning to within 0.5 s. End: «есть»@2523.65, seg end 2523.97. ORDER: 2494.3 ≤ 2522.0 ≤ next."
  },
  {
   "i": 144,
-  "start": 2524.6,
+  "start": 2525.19,
   "end": 2526.3,
   "conf": "high",
-  "method": "adjudicated:reader",
+  "method": "adjudicated:reader, skeptic adjusted",
   "evidence": "t_vad «резервная@2525.19 копия@2526.07». A female voice (200–230 Hz) starts at 2524.2, as Ian's male voice stops",
   "note": "The start falls between the female-voice onset (2524.2) and Whisper's word time (2525.19).",
-  "adjudication": "The matcher's 2482.1 is interpolated on Katya's later «Я его когда начала включать…», which is the wrong line, and the time comes before 143, breaking order. The reader's t_vad «резервная@2525.19 копия@2526.07» ('a backup') is reproduced by my unprompted decode of the mix: «Резервная@2524.66 копия.@2526.06». On the stem a female voice (195–229 Hz) runs from 2524.0 to 2526.25, between Ian's male stretches at 2523.0–2523.75 and 2526.75–2527.75. The reader's 2524.6 matches the first word."
+  "adjudication": "The matcher's 2482.1 is interpolated on Katya's later «Я его когда начала включать…», which is the wrong line, and the time comes before 143, breaking order. The reader's t_vad «резервная@2525.19 копия@2526.07» ('a backup') is reproduced by my unprompted decode of the mix: «Резервная@2524.66 копия.@2526.06». On the stem a female voice (195–229 Hz) runs from 2524.0 to 2526.25, between Ian's male stretches at 2523.0–2523.75 and 2526.75–2527.75. The reader's 2524.6 matches the first word.",
+  "skeptic": "adjusted: EXISTS and MEANS: t_vad «резервная@2525.19 копия@2526.07» = 'A backup?', an exact match. STARTS: the claimed 2524.6 rests on the reviewer's own decode «Резервная@2524.66», which is NOT in whisper.json and so cannot be reproduced from saved recognition. The saved first word is at 2525.19, so the start moves there. End 2526.3 is consistent with «копия»@2526.07 (seg end 2526.51). ORDER: after 143 (2522.0, «есть»@2523.65) and before 145 (claimed 2526.4; its recognised «Есть»@2527.14)."
  },
  {
   "i": 145,
-  "start": 2526.4,
-  "end": 2531.3,
+  "start": 2527.14,
+  "end": 2531.2,
   "conf": "high",
-  "method": "adjudicated:reader",
+  "method": "adjudicated:reader, skeptic adjusted",
   "evidence": "t_vad «есть@2526.51 настройка@2527.01 стирать@2528.45 или не стирать@2529.27 если это неправильно@2530.03–2531.17». t_vocals «Есть настройка типа стирать или не стирать, если неправильно» 2527.14–2531.16. t_plain «там есть@2526.48 настройка…». Male voice at 2527.4–2531.4",
   "note": "The matcher put this at 2532.2, but that is Katya's reply (146). The real line starts at 2526.4.",
-  "adjudication": "The matcher's 2532.2 is anchored on «Одно/А, наверное, здесь было тоже такое, мне кажется», which is Katya's reply 'maybe that's what happened here too' (item 146), so it is the wrong line. The reader's line is confirmed by whisper.json t_vocals «Есть@2527.14 настройка@2527.78 типа стирать@2528.66 или не стирать, если неправильно@2530.32». My independent decode agrees: «есть@2527.40 настройка@2527.92 типа стирать@2528.70 или не стирать если что-то неправильное@2530.66», ending at 2531.38. That is 'there's a setting, like, to wipe it or not if… wrong'. A male voice starts at 2526.5–2526.75 (−32.8 dB, 152 Hz), right after Katya's «копия»@2526.06. That is the unrecognised 'No, I mean', so the start is 2526.4 and comes before 146 at 2531.7."
+  "adjudication": "The matcher's 2532.2 is anchored on «Одно/А, наверное, здесь было тоже такое, мне кажется», which is Katya's reply 'maybe that's what happened here too' (item 146), so it is the wrong line. The reader's line is confirmed by whisper.json t_vocals «Есть@2527.14 настройка@2527.78 типа стирать@2528.66 или не стирать, если неправильно@2530.32». My independent decode agrees: «есть@2527.40 настройка@2527.92 типа стирать@2528.70 или не стирать если что-то неправильное@2530.66», ending at 2531.38. That is 'there's a setting, like, to wipe it or not if… wrong'. A male voice starts at 2526.5–2526.75 (−32.8 dB, 152 Hz), right after Katya's «копия»@2526.06. That is the unrecognised 'No, I mean', so the start is 2526.4 and comes before 146 at 2531.7.",
+  "skeptic": "adjusted: The match holds: t_vocals has «Есть@2527.14 настройка@2527.78 типа@2528.42 стирать@2528.66 или@2529.32 не@2529.42 стирать,@2529.6 если@2530.08 неправильно@2530.32», and t_vad has «стирать@2528.45 или не стирать … если@2530.03 это неправильно@2530.51» (segment ends 2531.17). That is 'a setting, like, to wipe it or not if wrong'. The start rests on quotes that are not in whisper.json. There is no t_plain «там есть@2526.48», and there is no t_vad «есть@2526.51»: t_vad at that time is «резервная@2525.19 копия@2526.07» (segment ends 2526.51), which is item 144 'A backup?'. The earliest recognised word of this line is «Есть@2527.14», so the start moves to 2527.14. The new start is in order, after 144 (2524.6) and before 146 (2531.7, «А@2531.72 наверное…»)."
  },
  {
   "i": 146,
@@ -1385,10 +1421,11 @@
   "i": 147,
   "start": 2537.6,
   "end": 2538.4,
-  "conf": "high",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic refuted",
   "evidence": "t_plain «А может, у…»@2537.72–2538.42, read as «А может, удалённо?». t_vocals hears «Потому что…»@2537.68. A male voice (about 105–115 Hz) at 2537.4–2538.2 overlaps the end of Katya's line",
-  "note": "A short interjection, cut off by Katya's «Нет»."
+  "note": "A short interjection, cut off by Katya's «Нет».",
+  "skeptic": "refuted: Only part of the line is recognised, and the passes disagree. t_plain has «А@2537.72 может,@2537.8 у...@2538.14». The word that carries the meaning, 'удалённо' (remotely), is the reader's completion and is never recognised. At the same moment t_vocals hears «Потому@2537.68 что...@2537.82», and t_vad hears Katya's tail «не@2537.13 куда@2537.27 -то@2537.49». «А может» (or maybe) is two common words. It does not establish 'Could it have been wiped remotely?'. The position fits a question that Katya answers with «Нет,@2538.12» (item 148). It is unsupported as recognised speech, so the claimed start is kept because it is in order (2531.7 ≤ 2537.6 ≤ 2538.1)."
  },
  {
   "i": 148,
@@ -1452,7 +1489,8 @@
   "method": "adjudicated:reader",
   "evidence": "«С одной стороны, у меня из британского [с Бердянском] сказано [связано]»@2551.64–2554.26, «каждая улочка, это вот все сгибы [с Геной], сгибы»@2556.4–2558.52, «Это наша жизнь»@2559.59–2559.69",
   "note": "The matcher put this item at 2559.59–2578.27, but that ASR is item 156's content. The true start (2551.64) is earlier than the interpolated neighbour 153 (2556.86). Items 150–153 are the kids' Transformers game, unrecognised background that overlaps this line, and child-pitched bursts sit at about 2549.0, 2552.5, 2555.8 and 2559.0. Those items need to sit at or before 2551.64, or merge will pull this start up.",
-  "adjudication": "The line opens at «С одной стороны, у меня с британцами [с Бердянском] сказано [связано]»@2551.64; the other passes put it at 2551.22, 2551.44 and 2551.48. The rest follows in order: «каждая улочка, это вот все с Геном, с Геном, с Геном» (every little street… it's all Hena) and then «это наша жизнь»@2559.48–2559.72 (it's our life). This is the opening half of the pair that item 161 closes with «с другой стороны». The matcher's 2559.59 lands only on the last phrase, «Это наша жизнь», and the text it matched («чувства, эмоции, воспоминания, огород») belongs to item 156, so its claim fails on meaning. Neighbour 153 is an interpolated kids' line with no evidence of its own, so it does not block this start."
+  "adjudication": "The line opens at «С одной стороны, у меня с британцами [с Бердянском] сказано [связано]»@2551.64; the other passes put it at 2551.22, 2551.44 and 2551.48. The rest follows in order: «каждая улочка, это вот все с Геном, с Геном, с Геном» (every little street… it's all Hena) and then «это наша жизнь»@2559.48–2559.72 (it's our life). This is the opening half of the pair that item 161 closes with «с другой стороны». The matcher's 2559.59 lands only on the last phrase, «Это наша жизнь», and the text it matched («чувства, эмоции, воспоминания, огород») belongs to item 156, so its claim fails on meaning. Neighbour 153 is an interpolated kids' line with no evidence of its own, so it does not block this start.",
+  "skeptic": "upheld: EXISTS and MEANS both hold. t_plain has «С@2551.22 одной@2551.74 стороны,@2552.26 у меня с британцами [с Бердянском] сказано [связано]@2554.14». t_vad has «С@2551.44 одной@2551.84 стороны … каждая@2556.4 улочка,@2556.84 это вот все с Геном,@2558.1 с Геном, с Геном,@2559.14 это наша жизнь,@2559.72». whisper_pass1 has «каждая@2556.4 улочка … сгибы@2558.52». Together that is 'with Berdiansk… every little street… it's all Hena, it's our life'. STARTS: «С» is the first word of a segment in both passes (2551.22 and 2551.44, both likely snapped) and «одной» follows at 2551.74–2551.84, so 2551.64 is within about 0.3 s of the line's onset. No earlier speech belongs to this line. The end follows «жизнь,@2559.72», and the next words, «это@2560.28 наши чувства», open item 156. ORDER: 2549.95 ≤ 2551.64 ≤ 2559.9."
  },
  {
   "i": 155,
@@ -1471,7 +1509,8 @@
   "method": "adjudicated:reader",
   "evidence": "«это наши чувства, это наши эмоции, это наши воспоминания»@2560.31–2563.29, «Это огород, который Гена плакал [посадил] на сей день [Платону]»@2564.55–2567.43, «Я так думаю, у нас туда может быть что-то [не пустят]»@2567.7–2569.36, «Но это часть нашей жизни»@2575.59–2577.63",
   "note": "The matcher started this at 2578.27, after the speech had ended, and gave its ASR to 154. The line actually runs from «чувства» at 2560.31.",
-  "adjudication": "The line runs from «это наши чувства, это наши эмоции, это наши воспоминания»@2560.31 through «Это огород, который Гена плакал [посадил]»@2564.55 and «я так думаю, он нас туда просто не отпустит»@2567.7 (t_vad) to «Но это часть нашей жизни»@2575.59–2577.63, which is exactly the English. The matcher's 2578.27 is the end of «жизни», after the line is over, and the next words, «Я хочу, чтобы ребенок это помнил»@2578.41, open item 159. It fits playback order: after 155 (2559.9) and before 157 (2569.4)."
+  "adjudication": "The line runs from «это наши чувства, это наши эмоции, это наши воспоминания»@2560.31 through «Это огород, который Гена плакал [посадил]»@2564.55 and «я так думаю, он нас туда просто не отпустит»@2567.7 (t_vad) to «Но это часть нашей жизни»@2575.59–2577.63, which is exactly the English. The matcher's 2578.27 is the end of «жизни», after the line is over, and the next words, «Я хочу, чтобы ребенок это помнил»@2578.41, open item 159. It fits playback order: after 155 (2559.9) and before 157 (2569.4).",
+  "skeptic": "upheld: p3_vocals has «это@2560.31 наши@2560.95 чувства,@2561.21 это наши эмоции,@2562.19 это наши воспоминания@2563.29», and t_vad has «это@2560.28 наши чувства…». That is followed by «Это@2564.55 огород,@2565.03 который Гена@2566.31 плакал [посадил]…@2567.43» and t_vad «я так думаю,@2568.04 он нас туда просто не отпустит@2569.08» ('I don't think they'll let us back there'). It ends with «Но это@2576.02 часть нашей жизни@2577.64» (t_vocals and whisper_pass1). This matches the English sentence by sentence. The start is the first word of the line; «жизнь,@2559.72» before it belongs to 154. The end, 2577.9, comes before «я@2578.33 хочу», which opens 159. ORDER: 2559.9 ≤ 2560.31 ≤ 2569.36."
  },
  {
   "i": 157,
@@ -1499,7 +1538,8 @@
   "method": "adjudicated:reader",
   "evidence": "«Я хочу, чтобы ребенок это помнил»@2578.41, «И как Гена хотел, [в Бердянск]…»@2580.44, «То есть и Платоша»@2585.61, «Если мы вернемся сначала в Нурденск [Бердянск], то что у нас будет?»@2589.79, «Может так и будет, но что-то типа летом там, с вами здесь»@2594.38–2597.3",
   "note": "The matcher's proposal (2582.63) was about 4 s late. The line starts at «Я хочу».",
-  "adjudication": "'…and I want my child to remember it' is «Я хочу, чтобы ребенок это помнил»@2578.41 (2578.33 in t_vad). It is followed by «И как Гена хотел…»@2580.44, «То есть и Платоша»@2585.61, «мы вернемся сначала в [Бердянск]»@2589.79 and «летом там, зимой здесь»@2596.3–2597.25 (summers there, winters here). The matcher's 2582.63 is the end of «Не как Гена хотел в Фордянске», so it drops the first two sentences of the line. Order holds: after 158 (2574.9) and before 160 (2600.0)."
+  "adjudication": "'…and I want my child to remember it' is «Я хочу, чтобы ребенок это помнил»@2578.41 (2578.33 in t_vad). It is followed by «И как Гена хотел…»@2580.44, «То есть и Платоша»@2585.61, «мы вернемся сначала в [Бердянск]»@2589.79 and «летом там, зимой здесь»@2596.3–2597.25 (summers there, winters here). The matcher's 2582.63 is the end of «Не как Гена хотел в Фордянске», so it drops the first two sentences of the line. Order holds: after 158 (2574.9) and before 160 (2600.0).",
+  "skeptic": "upheld: t_vocals has «я@2578.34 хочу,@2578.54 чтобы ребенок@2579.1 это помнил@2579.76», and t_vad has «я@2578.33». The line then runs through «И@2580.4 как Инна [Гена] хотела в Курдянск [Бердянск]» (t_plain) and «То есть и Платоша@2587.07» (p3_vocals). Next is «мы вернемся@2591.32 сначала в Курдянск@2592.36» (t_vocals). It closes with t_vad «типа летом@2596.29 там,@2596.77 зимой@2597.01 здесь@2597.25» ('summers there, winters here'). The meaning matches. The recognised onset is 2578.33–2578.34, only 0.07 s before the claim, which is within tolerance. ORDER: 2574.94 ≤ 2578.41 ≤ 2600.42."
  },
  {
   "i": 160,
@@ -1539,13 +1579,14 @@
  },
  {
   "i": 164,
-  "start": 2623.4,
+  "start": 2622.5,
   "end": 2646.15,
   "conf": "high",
-  "method": "adjudicated:reader",
+  "method": "adjudicated:reader, skeptic adjusted",
   "evidence": "«В общем, громадные часы, и вот как стрелки, и Гена вот так вот уперся, … толкает в другую сторону, в обратную»@2621.77–2632.15, «Опять рассказывай [рассказываю], у меня опять мурашки пошли»@2633.47–2635.19, «после похорон вечером я девочкам рассказала этот сон»@2635.14–2641.76, «А на следующий день»@2644.89–2646.15",
   "note": "The matcher started this at 2632.63, but the sentence it describes begins at 2621.77. Female pitch only appears from about 2622.9, so «В общем» may be up to about 1 s later than whisper's word time. 'And the next day...' is «А на следующий день»@2644.89.",
-  "adjudication": "The reader identified the right speech, «В общем, громадные часы… Гена вот так вот уперся… толкает в другую сторону, в обратную», followed by «у меня опять мурашки пошли»@2634.6, «После похорон вечером я девочкам рассказала этот сон»@2638.66 and «А на следующий день»@2644.89–2646.15. The targeted pass separates the two clock sentences: «Громадные вот такие часы»@2616.26 is item 162, Ian's «[Платоша]… Руль наоборот у тебя весь»@2619.58–2621.6 is item 163, and then the resumption «в общем, громадные часы» is item 164. The matcher's 2632.63 is the end of the clock sentence, which is the line's own opening, so it fails. I refined the start to 2623.4 because fresh decodes put the first word later: «В@2623.56 общем@2624.04» in the mix, «В@2623.98» and «общем@2623.40» in the vocal stem, with «громадные» at 2624.6 in every pass. Pitch agrees: about 160 Hz (Ian) until 2622.8, female 210–246 Hz from 2623.4. This fits the reader's own caveat."
+  "adjudication": "The reader identified the right speech, «В общем, громадные часы… Гена вот так вот уперся… толкает в другую сторону, в обратную», followed by «у меня опять мурашки пошли»@2634.6, «После похорон вечером я девочкам рассказала этот сон»@2638.66 and «А на следующий день»@2644.89–2646.15. The targeted pass separates the two clock sentences: «Громадные вот такие часы»@2616.26 is item 162, Ian's «[Платоша]… Руль наоборот у тебя весь»@2619.58–2621.6 is item 163, and then the resumption «в общем, громадные часы» is item 164. The matcher's 2632.63 is the end of the clock sentence, which is the line's own opening, so it fails. I refined the start to 2623.4 because fresh decodes put the first word later: «В@2623.56 общем@2624.04» in the mix, «В@2623.98» and «общем@2623.40» in the vocal stem, with «громадные» at 2624.6 in every pass. Pitch agrees: about 160 Hz (Ian) until 2622.8, female 210–246 Hz from 2623.4. This fits the reader's own caveat.",
+  "skeptic": "adjusted: The match is correct: t_vocals has «В@2621.8 общем,@2622.52 громадные@2624.64 часы,@2625.86 и вот как стрелки,@2626.9 и Гена@2628.14 вот так вот уперся,@2628.94 … толкает@2630.54 в другую сторону, в обратную@2632.16». t_plain has «у меня опять мурашки@2634.76 пошли@2635.2», then «После@2638.66 похорон вечером я девочкам рассказала этот сон@2641.76», then «А@2644.82 на следующий день,@2646.18». The claimed 2623.4 falls in the gap after «общем», which ends at 2623.24 (t_vocals; 2623.18 in t_plain), and before «громадные@2624.62», so it misses the line's first words 'So,' = «В общем». «В@2621.8» sits on a segment start and is likely snapped early, so the start goes to «общем@2622.52». ORDER: 163 is at 2620.64 and 165 is at 2645.25, so 2622.5 is in order. The end, «день,@2646.18», is fine before 167's «получается@2646.52»."
  },
  {
   "i": 165,
@@ -1578,10 +1619,11 @@
   "i": 168,
   "start": 2671.25,
   "end": 2672.6,
-  "conf": "medium",
-  "method": "reader",
+  "conf": "low",
+  "method": "reader, skeptic refuted",
   "evidence": "A loud child voice (−20 dB, 400–485 Hz) at 2671.25–2672.5, which whisper garbled as «часы»@2671.82. Katya answers immediately with «не перебивали [не перебивай]»@2672.66.",
-  "note": "Not recognised as words, but it falls exactly where order and Katya's 'Don't interrupt' put it."
+  "note": "Not recognised as words, but it falls exactly where order and Katya's 'Don't interrupt' put it.",
+  "skeptic": "refuted: The cited evidence is Katya's speech, not a child's. «часы»@2671.82 appears in all three passes inside Katya's sentence: t_vad «перед@2670.54 похоронами@2671.12 часы,@2671.9 не@2672.54 перебивай@2672.76», t_vocals «поклонами@2671.2 часы,@2671.86 не@2672.56 перебивай». The only recognised speech that means this line is t_vocals «Он@2675.0 не@2675.06 выключается@2675.36–2677.1» ('it won't turn off'). That comes after 169's start (2672.66), so it cannot set this start without breaking order. The child voice at 2671.25 is acoustic only and has no support in whisper.json. The start is kept at 2671.25, which is in order (2646.53 ≤ 2671.25 ≤ 2672.66). Note that the child is audibly saying the line at 2675.0–2677.1, possibly as a repeat after 'don't interrupt'."
  },
  {
   "i": 169,
@@ -1591,6 +1633,7 @@
   "method": "adjudicated:reader",
   "evidence": "«не перебивали [не перебивай]»@2672.66, «Перед похоронами они вообще остановились»@2677.1, «А вот это получается, как на следующий день они пошли в обратную сторону»@2679.4, «Потом они иногда останавливались / Шли вперед, потом шли назад / Иногда очень быстро, иногда чуть-чуть»@2682.72–2689.78, «А потом я просто начала задавать вопросы Сонечку [Солнышко]»@2691.32, «ну, ты меня слышишь?»@2695.52, «Стрелка стоит, раз, назад сдвинулась»@2699.56–2701.14",
   "note": "The matcher started this at 2679.32. 'Don't interrupt' is whisper's «не перебивали»@2672.66, heard right after Platon's shout. The line ends with 'moved back' (about 2701.1–2701.98), at the end of the audio.",
-  "adjudication": "'Don't interrupt' is «не перебивай»: t_vad has it at 2672.54, t_vocals at 2672.56 and p3 at 2672.66 (as «не перебивали»). 'Before the funeral it had stopped completely' is «Перед похоронами они вообще остановились»@2677.1, followed by «А вот это получается, как на следующий день они пошли в обратную сторону»@2679.4. The line closes with «Шли вперед, потом шли назад», «начала задавать вопросы Сонечку [Солнышку]», «ты меня слышишь?» and «Стрелка стоит, раз, назад сдвинулась»@2699.56–2701.14. The matcher's 2679.32 skips the first two sentences. On order: the vocal stem has a loud child-pitched burst (f0 400–500 Hz) at 2671.4–2672.4, then child-pitched «Он не выключается»@2675.0 for Platon's item 168. Platon therefore starts before Katya's «не перебивай», so this start is after 168 (2671.3)."
+  "adjudication": "'Don't interrupt' is «не перебивай»: t_vad has it at 2672.54, t_vocals at 2672.56 and p3 at 2672.66 (as «не перебивали»). 'Before the funeral it had stopped completely' is «Перед похоронами они вообще остановились»@2677.1, followed by «А вот это получается, как на следующий день они пошли в обратную сторону»@2679.4. The line closes with «Шли вперед, потом шли назад», «начала задавать вопросы Сонечку [Солнышку]», «ты меня слышишь?» and «Стрелка стоит, раз, назад сдвинулась»@2699.56–2701.14. The matcher's 2679.32 skips the first two sentences. On order: the vocal stem has a loud child-pitched burst (f0 400–500 Hz) at 2671.4–2672.4, then child-pitched «Он не выключается»@2675.0 for Platon's item 168. Platon therefore starts before Katya's «не перебивай», so this start is after 168 (2671.3).",
+  "skeptic": "upheld: The line opens with «не перебивай», found as t_vad «не@2672.54 перебивай@2672.76», t_vocals «не@2672.56 перебивай», and p3 «не@2672.66 перебивали». The rest follows in order. 'Before the funeral, it had stopped completely' is t_vad «перед@2676.76 похоронами@2677.52 они вообще остановились@2678.64». 'The next day, it started going backwards' is «на следующий день@2681.24 они пошли в обратную сторону@2682.42». Next comes t_vocals «Потом@2682.84 они иногда останавливаются / Шли вперед,@2685.22 потом шли назад@2686.88 / Иногда очень быстро, иногда чуть-чуть@2689.8». Then «а потом я просто начала задавать вопросы@2693.63» (t_vad), «Сонечку [Солнышко]@2694.85» (p3) and «ты меня слышишь@2698.1» (whisper_pass1). It closes with t_vocals «Стрелка@2699.62 стоит, раз, назад сдвинулась@2701.12», whose segment ends at 2701.94. The meaning matches throughout. The onset is within 0.1 s of the claim. Order holds after 168 (2671.25). The child's «Он не выключается@2675.0» overlaps but does not belong to this line."
  }
 ]

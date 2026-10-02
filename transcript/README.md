@@ -11,9 +11,14 @@ the material and tooling that produced the timing embedded in that page.
 | `source.txt` | the edited transcript exactly as supplied — **the source of truth for the words** |
 | `parse.py` | `source.txt` → `turns.json`; refuses to write unless the text reassembles character for character |
 | `turns.json` | ordered items: speech turns (speaker, text) and stage directions |
-| `whisper.json` | Whisper large-v3 over the mp3: Russian/Ukrainian segments with word timestamps |
+| `whisper.json` | pooled Whisper large-v3 recognition of the whole piece, word timestamps, `pass` per segment |
+| `merge_asr.py` | pools recognition passes into `whisper.json`, dropping hallucinations and duplicate hearings |
 | `align.py` | first-pass timing by cross-lingual matching → `timing_auto.json` |
-| `timing.json` | **final timing**, reviewed — one entry per item, with confidence and evidence |
+| `review/` | the review outcomes: readers + adjudicators, the gap round, the skeptic pass |
+| `verified_overrides.json` | results of unprompted re-decodes; applied last, so a re-merge can't undo them |
+| `merge_review.py` | matcher + review + overrides → `timing.json`, enforcing playback order |
+| `audit_evidence.py` | checks every confident timing against saved recognition |
+| `timing.json` | **final timing** — per line: start, end, confidence, method, evidence, notes |
 | `build.py` | `turns.json` + `timing.json` → the `TURNS` array inside `transcript.html` |
 
 ## To change the words
@@ -37,32 +42,61 @@ The transcript arrived with no timecodes, but — unlike the one embedded in the
 main wall — **in playback order**. That makes alignment a monotone matching
 problem rather than a guess inside a cue window.
 
-1. **Recognise the audio.** Whisper large-v3 (faster-whisper, int8, CPU) over
-   the full 45:04, transcribe mode, per-segment language detection (the piece
-   moves between Russian and Ukrainian), word timestamps, no VAD (quiet layered
-   voices matter more than the occasional hallucination, which is filtered).
-2. **Match automatically** (`align.py`). LaBSE embeds the English turns and
-   windows of 1–6 Whisper segments into one cross-lingual space; a dynamic
-   program assigns each turn a start segment, never moving backwards, maximising
-   total similarity.
-3. **Read it independently.** Agents read Whisper's original-language text
-   against the English, one stretch of the piece each, and timed every line
-   from the word timestamps, quoting the speech they matched.
-4. **Adjudicate disagreements.** Where the two methods differed by more than a
-   few seconds, a separate reviewer tried to refute both claims against the
-   recognised speech and kept whichever survived.
-5. **Check the whole.** Playback order enforced; the final timeline read once
-   more end to end for anything implausible.
+1. **Recognise the audio** (`whisper.json`). Whisper large-v3 (faster-whisper,
+   int8, CPU). One pass on the plain mix heard only ~15 of 45 minutes: on music
+   beds Whisper emits training-data subtitle credits («Субтитры сделал
+   DimaTorzok») instead of decoding. So several passes that fail differently
+   are pooled: the plain mix; **Demucs-isolated vocals**; VAD-gated and
+   short-window focused decodes over the weak stretches; and unprompted
+   re-decodes made during verification. `merge_asr.py` drops hallucinations
+   and folds duplicate hearings. 483 segments, ~29 minutes of speech.
+2. **Match automatically** (`align.py` → `timing_auto.json`). LaBSE embeds the
+   English turns and windows of 1–6 Whisper segments into one cross-lingual
+   space; a dynamic program assigns each turn a start, never moving backwards.
+   It anchored 88 of 159 turns, but tends to latch onto the *middle* of a long
+   turn — its best-matching window — rather than its start.
+3. **Read it.** Eight reviewers read Whisper's Russian/Ukrainian against the
+   English, one stretch each, timing every line from word timestamps and
+   quoting the speech matched. Where reader and matcher disagreed, an
+   adjudicator tried to refute both (36 disputes, settled on quoted evidence).
+4. **Second round on the gaps.** Lines still unmatched were re-examined with the
+   focused recognition. No new speech matches; sung and chanted passages were
+   placed by sound instead (energy and pitch onsets in the vocal stem).
+5. **Verify.** Some reviewers had used *prompted* decodes, which can echo their
+   prompt. Every confident claim was audited (`audit_evidence.py`) and every
+   claim not found in saved recognition was re-decoded unprompted in the
+   reviewer's stated window; failures were lowered
+   (`verified_overrides.json`). Finally 41 single-source claims went to
+   skeptics: 26 upheld, 7 adjusted, 8 refuted.
 
-Results are summarised in the commit that introduced the page.
+Result: of 159 turns, **83 high, 15 medium** — every one reproducible from
+saved unprompted recognition — and **61 low**. A low line is still pinned
+between confident neighbours: median bracket 9 s, 43 of 61 within 30 s. The 18
+in wider brackets are nearly all sung or liturgical (the Easter troparion,
+"Lord, have mercy", the commander's flag order under the anthem, Sasha's
+lullaby) and were placed by sound.
+
+To rebuild from the saved data:
+
+```
+python3 transcript/merge_review.py transcript/review/round1.json \
+        transcript/review/round2_gaps.json transcript/review/skeptic.json   # → timing.json
+python3 transcript/audit_evidence.py                                         # confident ⇒ reproducible
+python3 transcript/build.py                                                  # → transcript.html
+```
+
+`timing.json` carries, per line, the method that decided it, the recognised
+speech it rests on, and any adjudication, skeptic or verification note — so a
+doubtful line can be judged without re-running anything.
 
 ## Limits
 
-- The audio is layered — several recordings at once — so Whisper misses quiet
-  voices and sometimes merges speakers. Lines with no recognisable speech are
-  marked `low` in `timing.json` and placed by text length between confident
-  neighbours. They keep their order; their exact second is an estimate.
-- Starts are accurate to about a second where confident. Within a long turn the
-  page scrolls linearly through the text; that is a reading aid, not word sync.
+- The audio is layered. Children's voices under adult speech (Hek, Frania,
+  Platon), the factory meeting, and anything sung are largely unrecognisable;
+  those lines are `low`. They keep their order; their exact second is an
+  estimate.
+- Starts are good to about a second where confident. Within a long turn the
+  page scrolls linearly through the text — a reading aid, not word sync. The
+  prayer is the exception: timed line by line from the recitation.
 - If the room's sound chain adds latency (Bluetooth, some AV processors), set
   the **Sync offset** slider on the page rather than editing timings.

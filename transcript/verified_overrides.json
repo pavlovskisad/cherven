@@ -34,6 +34,17 @@
   "note": "reproduced unprompted word for word: «Наверное, для безопасности, эволюционно так сложилось.»@691.78 (original 655–703 s)"
  },
  {
+  "i": 59,
+  "conf": "high",
+  "note": "reproduced unprompted: «Вот так вот, потому что сапёром был, и они работали…»@830.12 (original 826–852 s); the saved passes only caught the line from its fourth sentence"
+ },
+ {
+  "i": 84,
+  "start": 1238.62,
+  "conf": "medium",
+  "note": "reproduced unprompted: «Це кінець зими.»@1238.62 (original 1236–1244 s), «…кінець зима»(vocals 1236–1244 s)"
+ },
+ {
   "i": 136,
   "conf": "high",
   "note": "reproduced unprompted: «Типа все так радовались, ну как радовались…»@2284.58 (vocals 2280–2296 s, ru, normalised); the word «Мариуполь» itself only appeared in a prompted run"

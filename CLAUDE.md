@@ -357,6 +357,13 @@ second may not be. Set it in the room against the actual throw.
 4. Consider whether the panel should be removable from the production build, or
    just left behind the `C` key. Leaving it is probably right — a gallery
    technician will need it.
+5. **Listen through `/transcript` once** with `timing.json` open, at the
+   low-confidence lines especially (children, the factory meeting, the Easter
+   and funeral liturgy, the lullaby). A human ear settles in seconds what
+   recognition could not; nudge `start` in `timing.json` and rebuild.
+6. Possible typos in `transcript/source.txt`, left verbatim because the words
+   are the artist's: "Fleet5" (the wall's older text has "Fleet51"), "Hektor"
+   (elsewhere "Hek"), "Captain Buger". Confirm, then edit and rebuild.
 
 ## 10. Things not to do
 
@@ -379,6 +386,8 @@ is a separate text from the one embedded in the wall: edited by the artist,
 paraphrased in places, some phrases absent, and — crucially — **in playback
 order**. `transcript/source.txt` holds it exactly as supplied and is the source
 of truth for the words. 159 speech turns, 11 stage directions, 38 speakers.
+Timing: **83 high, 15 medium, 61 low**; the low lines sit in a median 9 s
+bracket between confident neighbours, the widest being sung or liturgical.
 
 ### Display
 
@@ -413,9 +422,11 @@ Three things about the method are not obvious and cost time to learn:
    fail differently: the plain mix, **Demucs-isolated vocals**, VAD-gated and
    short-window focused decodes. Each hears lines the others miss.
 2. **Prompted decodes are not evidence.** A decode given the expected words as
-   `initial_prompt` can echo them. Several first-round matches rested on
-   prompted output; each was re-decoded unprompted and six failed — they are
-   now low, recorded in `transcript/verified_overrides.json`.
+   `initial_prompt` can echo them. Some reviewers used them. Every confident
+   claim is therefore audited against saved recognition, and each one not
+   found there was re-decoded unprompted *in the reviewer's own window* —
+   Whisper is window-sensitive, so a different window failing proves nothing.
+   Outcomes are in `transcript/verified_overrides.json`, applied last.
 3. **Memory.** Shell-launched processes share a ~8 GB cgroup cap; two
    concurrent large-v3 decodes (4 GB each) get OOM-killed. Run decodes one at a
    time, one process per job (CTranslate2 keeps what it allocates).

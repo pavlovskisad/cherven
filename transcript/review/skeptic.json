@@ -1,0 +1,350 @@
+[
+ {
+  "group": 0,
+  "verdicts": [
+   {
+    "i": 7,
+    "verdict": "upheld",
+    "start": 125.9,
+    "end": 133.85,
+    "confidence": "high",
+    "reason": "The cited pass1 «Ви піднятий волоско тильної поверхні стопи»@124.44 is NOT in whisper.json. Only p3_vocals supports the line: «поднятый@126.09 волос@127.11 поддельный@128.39 … поверхность@132.13 стопы.@133.49» (segment end 133.85), plus v_original «Принятый.@125.66». 'Raised flap … surface of the foot' matches the line. The segment's leading «И@119.08» is a stretched word 7 s before the next one, not a real onset, so 125.9 (between «Принятый»@125.66 and «поднятый»@126.09) is the right start. It is in order: after 116.0, before 134.3."
+   },
+   {
+    "i": 12,
+    "verdict": "upheld",
+    "start": 180.5,
+    "end": 224.22,
+    "confidence": "high",
+    "reason": "Saved p3_vocals has «Поля?@180.50», then «Да,@180.82 дело@181.84 в том, что тот парень,@183.08 который...@184.46» = 'Fields? Yeah, the thing is, the guy who…'. Later «Искал выехать@211.48 … куда проехал, а назад не проехал … там было на базе» ends at 224.22 = 'trying to find a way out … passed that way, but on the way back didn't make it'. The re-run quote «Я еще его грузил»@189.70 is not in whisper.json, but the start and end don't depend on it. It is in order: after 159.78, before 229.2."
+   },
+   {
+    "i": 17,
+    "verdict": "adjusted",
+    "start": 283.24,
+    "end": 293.38,
+    "confidence": "medium",
+    "reason": "The words exist in whisper_pass1: «И@283.24 что,@283.90 второй@284.64 маск?@284.90» «Да.@285.26» «Да, как надо.@285.48» «Нужно рассказать.@290.44» «Гармонизм.@292.42» (to 293.38), then Hek's «Хочу@293.44 … в огонь». The meaning rests on only two words: «второй» = 'the second one' and «Гармонизм» as a mishearing of 'гармонист' (accordion player). Nothing recognised means 'died instantly' or 'everyone knew him'. The start is in order (after 278.58, before 293.44) and sits in Nikolaich's cue, but it is thin evidence for high. If «И что» is Ian's question, the line may begin at «второй@284.64». Downgraded to medium."
+   },
+   {
+    "i": 20,
+    "verdict": "upheld",
+    "start": 312.52,
+    "end": 339.9,
+    "confidence": "high",
+    "reason": "whisper_pass1 has «Просто@312.52 жесть.@313.04» = 'Just brutal', then «И вот, типа, отделение,@314.22 в котором он был…», «…Ореховы» from 316.34 (Orikhiv), «от позиции километров 15, и в штабе сидели в подвале»@322.46, «и туда прилетела, блядь, мина»@325.56, «500, типа, кг заряда, ну, если в Шахиде»@328.78, «и там только два человека выжило»@336.10. p3_vocals has «И@339.06 мы с одним из типов@339.70», with the next word «в@340.16». The start is the line's first words and is in order: 312.52 ≥ 312.2 and ≤ 339.05."
+   },
+   {
+    "i": 28,
+    "verdict": "refuted",
+    "start": 381.84,
+    "end": 382.74,
+    "confidence": "low",
+    "reason": "The only cited speech is whisper_pass1 «Китка@381.84 на@382.44 поле.@382.44». It does not mean 'About the katsaps!': nothing in it says кацап, and the 'mishearing' reading is an unverified guess. Context makes the slot plausible: Serhii's «Это основная у нас психика»@384.04 answers right after it. The start 381.84 is in order (≥380.0, ≤384.04), so it is kept as a low-confidence placement."
+   },
+   {
+    "i": 40,
+    "verdict": "upheld",
+    "start": 506.62,
+    "end": 538.84,
+    "confidence": "high",
+    "reason": "whisper_pass1 has «Тут@506.62 в сапарі написано,@507.48 форма@508.08 100.@509.74» = 'written here … Form 100', then «Травму@510.40 отримували під час виконання бойового … 4-го@512.80» = 'injury received on active duty … on the 4th', «…обстрілу» to 515.94, «Перша допомога на етапах … з 5-го по 9-й»@515.94, «До Московської ЦРЛ»@519.28 (Novomoskovsk CRH), «Відходили, операції будуть»@536.12 and p3 «…операций будут. Здесь у нас три поражения»@536.08–538.84. The segment before it («два мікрофони»@505.58) belongs to the previous story. It is in order: after 480.7, before 539.0."
+   },
+   {
+    "i": 42,
+    "verdict": "upheld",
+    "start": 541.98,
+    "end": 547.62,
+    "confidence": "medium",
+    "reason": "whisper_pass1 has «Зараз,@541.98 як?@542.92» = 'And now, how [is it]?', which fits the opening 'And now, function-wise—is everything working?'. Then «Зараз@546.04 я їх поконую.@547.22» runs to 547.62, which may be the reply or the [indistinct] tail. The match is a short common phrase, so medium is right. The start is the first recognised Ukrainian words after «Коли?»@540.48. It is in order: after 539.0, at or before 547.62."
+   },
+   {
+    "i": 52,
+    "verdict": "upheld",
+    "start": 745.72,
+    "end": 793.25,
+    "confidence": "high",
+    "reason": "p3_vocals has «Ну@745.72 да, да.@746.14» (= 'Ah.'). It comes right after line 51's «А, ниже ключи(цы)@741.20» / «Нет, у меня есть сюда…@743.42». Then «Я@746.70 не знаю,@748.26 … есть варианты,@750.82 при которых выживают,@751.94 и можно выжить,@753.62 но это...@754.30» = 'I don't know… there are cases where people survive, it's possible, but…'. The closing part is «И@782.97 на ПКГ@784.17 оказался … сосудистый хирург,@787.97 … неплохой еще один хирург, и они вместе спасли жизнь.@793.25». Nothing is recognised in 755–783, which is consistent with the '[indistinct]…' middle. It is in order: after 741.2, at or before 793.25."
+   },
+   {
+    "i": 59,
+    "verdict": "adjusted",
+    "start": 830.12,
+    "end": 871.32,
+    "confidence": "low",
+    "reason": "The start's evidence, «Вот так вот@830.12 … сапёром был@833.28 … и они работали@835.20 … разминировать@841.58 …», comes from a targeted re-run that is NOT in whisper.json. Saved recognition has nothing between p3 «…активная боевая работа, то...»@810.37–815.60 and whisper_pass1 «зачищают@849.52 и дальше техника.@850.86». That is the line's 'sweeping—and then the tech would roll in', several sentences in. The rest of the line is supported: «доделывали@852.90 работу и прилет.@856.52», «скорее всего, какой-то танчик где-то стоял@860.18», «ни звука,@862.20 … не присесть.@864.24», «И вот муж,@867.14 он … с этим парнем.@868.60», «У него того контузия@870.74 рядом.@871.32». So the line is placed correctly, but its start is not reproducible from saved recognition. 830.12 is kept as an estimate (about 35 words of English precede 'sweeping', roughly 14–19 s before 849.52) and confidence drops to low. It is in order: after 810.37, before 869.77."
+   },
+   {
+    "i": 64,
+    "verdict": "upheld",
+    "start": 917,
+    "end": 918.4,
+    "confidence": "high",
+    "reason": "whisper_pass1 has «ДОМОЛИТВИ@917.00» (917.00–918.40) = «До молитви!» = 'To prayer.'. It is in order: after 898.4, before the prayer's «Украина!@921.53»."
+   },
+   {
+    "i": 65,
+    "verdict": "upheld",
+    "start": 921.53,
+    "end": 1070.64,
+    "confidence": "high",
+    "reason": "p3_vocals has «Украина!»@921.53 and again @922.59, «Святая Матерь Героев»@923.55, «Дойди до сердца моего»@926.27, «…ветра в Кавказске»@929.19, «Шумом Карпатских ручеев»@933.21 and «Боев славного … Батька Хмеля»@936.69. whisper_pass1 has «Тріумфом і гуком гармат революції»@941.68 and «Радісним гомоном Софіївських дзвонів»@945.90. Further on: «Чтоб вера моя была гранитом»@981.55, the long pass1 segment «За твою славу … величну смерть героїв … тисяч інших незнаних нами»@994.26–1020.56, «Що їх кості порозкидані»@1022.68, «Скріпи мій дух»@1040.78, «Відвічна Україна»@1064.86 and «Свята, могутня, соборна»@1067.34–1070.64. This is the prayer from its first word to its last. It is in order: after 917.0, before «Слава Україні»@1071.34 (next line 1071.28)."
+   }
+  ]
+ },
+ {
+  "group": 1,
+  "verdicts": [
+   {
+    "i": 75,
+    "verdict": "upheld",
+    "start": 1080.06,
+    "end": 1080.84,
+    "confidence": "high",
+    "reason": "The words are in whisper.json: pass1 segment @1079.28 «Україна»1079.28–1080.06 «понад»1080.06–1080.42 «усе!»1080.42–1080.84. «понад усе» means 'above all'. It is the third of three pass1 «Україна понад усе!» segments (@1075.32, @1077.52, @1079.28), and that fits a third call-and-reply. The start comes after 74 (1079.28) and before 76 (1084.27)."
+   },
+   {
+    "i": 76,
+    "verdict": "adjusted",
+    "start": 1084.27,
+    "end": 1157.97,
+    "confidence": "low",
+    "reason": "whisper.json has no segment at all between 1080.84 and 1106.02. The opening quotes (targeted «Але я хотів би пояснити про останній день»@1084.27, «скоріше за все»@1098.06) are not in it, and neither is anything with «останн…» or «скоріше» near here. The body is supported: pass1 «Склад, який вийшов на цю задачу, це були суто добровольці»@1106.02 ('the unit that went on this mission… volunteers'), «Костя отримав поранення…з 15»@1124.52, p3 «И я скажу, что если бы не действия Кости»@1137.43, and p3 «…всем тем, кто из этого вышел» ending @1157.97. 1106.02 is the second sentence of the line, so the line does begin earlier, inside the recognition gap. I kept 1084.27 because it is in order (after 1080.06, before 1157.97), but its saved recognition cannot be reproduced, so confidence drops to low. The end of 1157.97 is supported."
+   },
+   {
+    "i": 78,
+    "verdict": "upheld",
+    "start": 1158.2,
+    "end": 1188.32,
+    "confidence": "high",
+    "reason": "The words are in whisper.json: p3 «Сыною»1158.14 «кости»1159.3, and pass1 «Синою»1158.9 «Кості» «звідти вийшло 17 людей»1160.5–1162.74. That is 'Ціною Кості… 17 людей', which means 'Through Kostya's sacrifice, seventeen people made it out'. After it: «На жаль, ми страдали свого побратима»1164.04, «врятували 17 життів», pass1 «Я пишаюсь, що знав його як воїна»@1172.96, and «Брат, вже воїнам жити вічно»1185.82–1188.32. The claimed 1158.2 is within 0.06 s of the first word (1158.14). It is in order after 77 (1157.97) and before 79 (1200.71)."
+   },
+   {
+    "i": 80,
+    "verdict": "refuted",
+    "start": 1212.92,
+    "end": 1219.64,
+    "confidence": "low",
+    "reason": "The recognised words are pass1 «Мама,»1212.92 «ты»1213.12 «нахами»1213.38 «не»1214.02 «хами?»1214.28–1214.7, repeated @1217.94–1219.64. They share no word with 'Dad… stone factory': it is «Мама», not «Папа», and nothing resembling «каменоломн…» appears. Reading «нахами не хами» as «на каменоломне» is a phonetic guess. The only support is that the phrase is repeated, and that is not enough. I kept the start at 1212.92, which is in order between 79 (1200.71) and 81 (1219.96)."
+   },
+   {
+    "i": 81,
+    "verdict": "refuted",
+    "start": 1219.96,
+    "end": 1225.58,
+    "confidence": "low",
+    "reason": "The recognised words are pass1 «Сейчас»1219.96 «ты у нас поводку»1220.36–1221.3, then a question-and-answer exchange: «Ты хочешь прощать?»@1221.52, «Да»@1223.52, «Ты хочешь прощать?»@1224.0, «Да»@1225.28. Nothing in it means 'come forward'; «поводку» → «подходите» is a guess. The shared farewell word «прощать» comes inside a question-and-answer exchange that the English line does not have. One common thematic word is not enough. I kept the start at 1219.96, which is in order between 80 (1212.92) and 82 (1225.6)."
+   },
+   {
+    "i": 84,
+    "verdict": "refuted",
+    "start": 1239.54,
+    "end": 1240.6,
+    "confidence": "low",
+    "reason": "The quote «Это кино из зимы»@1239.54 is not in whisper.json. No segment contains «зимы» or «кино». The neighbours are p3 «Это как раз мы стояли… наши стояли.», which ends @1239.53, and pass1 «Ми»1240.05 «ще простояли два тижні…». The support came only from an unsaved targeted run. I kept the start at 1239.54, which is in order between 83 (1234.12) and 85 (1240.6)."
+   },
+   {
+    "i": 87,
+    "verdict": "upheld",
+    "start": 1267.7,
+    "end": 1271.3,
+    "confidence": "high",
+    "reason": "The words are in whisper.json, p3 segment @1263.92: «около»1267.32–1267.78 «шесть»1267.78–1268.94 «поломанных,»1270.45–1271.27. «поломанных» is close to «полонених/полонённых», meaning prisoners. The count sequence that follows also matches the source exactly: «пять»1273.02 «разбитых» (89, five killed), «уранами»1277.32 (≈ раненых, thirty wounded) and pass1 «60 контузій, 150»@1282.52 (line 91, 'sixty concussed, out of 150'). The start is within 0.08 s of «шесть» and in order after 86 (1265.1) and before 88 (1271.0)."
+   },
+   {
+    "i": 89,
+    "verdict": "upheld",
+    "start": 1273.02,
+    "end": 1278.72,
+    "confidence": "high",
+    "reason": "The words are in whisper.json: p3 «пять»1273.02–1273.84 «разбитых,»1273.84–1274.8 (≈ «пять убитых», five killed) and pass1 «Крутися»1276.42 «там» «уранами.»1277.32–1278.72 (≈ «тридцать раненых», thirty wounded). Next comes pass1 «60 контузій, 150»@1282.52, which is line 91, so the six/five/thirty/sixty sequence lines up. The start is in order after 88 (1271.0) and before 90 (1279.2)."
+   },
+   {
+    "i": 97,
+    "verdict": "refuted",
+    "start": 1344.24,
+    "end": 1346.2,
+    "confidence": "low",
+    "reason": "The recognised words are pass1 «А»1344.24 «в тебе,»1344.64–1344.94 «в керівниці,»1345.0–1345.82 «вона права.»1345.92–1346.34, meaning 'and with you, in the manager, she is right'. Nothing in it refers to eyesight or swearing. Only «А в тебе» ('and you…') corresponds. The slot is plausible: after Liokha's «А я по закулярі не бачу» (which ends @1342.98) and before «Це мені треба вже закуляри»@1347.18. But that is position, not meaning. I kept the start at 1344.24, which is in order between 96 (1321.2) and 98 (1347.18)."
+   },
+   {
+    "i": 98,
+    "verdict": "upheld",
+    "start": 1347.18,
+    "end": 1358.92,
+    "confidence": "high",
+    "reason": "The words are in whisper.json, pass1 segment @1344.24: «Це»1347.18 «мені треба вже закуляри»1347.58–1349.16 «на лозу зняти»…1350.48, which means 'I need glasses for that'. Then pass1 «Я стріляю, не погано, але я не бачу цих цих цих»1352.68–1355.6 ('I shoot okay but can't make out…') and «А там же треба поправитися»1357.16–1358.92 ('you need adjustments'). The start is the first word of the glasses clause, after a gap from «права.» (which ends 1346.34). It is in order after 97 (1344.24) and before 99 (1358.45)."
+   },
+   {
+    "i": 100,
+    "verdict": "upheld",
+    "start": 1361.38,
+    "end": 1368.78,
+    "confidence": "high",
+    "reason": "The words are in whisper.json: pass1 «Так»1361.38–1362.68 «марксменам»1362.68–1363.62 «підхиляється кола»…1364.56. «марксменам» is a distinctive match for 'go as a marksman'. Then pass1 «Чисто»1365.02 «блять.»1365.94–1366.24 ('just straight up, fuck it') and «Тут такий хуяй, а хуячий.»1366.38–1368.78. The start is in order after 99 (1358.45) and before 101 (1370.9)."
+   }
+  ]
+ },
+ {
+  "group": 2,
+  "verdicts": [
+   {
+    "i": 109,
+    "verdict": "upheld",
+    "start": 1550.88,
+    "end": 1554.7,
+    "confidence": "medium",
+    "reason": "EXISTS: p3_vocals «Ах...»@1550.88, «Ты@1552.88 шёл,@1553.44» «а@1553.86 я@1554.02 вообще@1554.12 в@1554.40 холм@1554.48» are in whisper.json. MEANS: «Ты шёл[шо], а я вообще в холм[не знал]» works as a garble of «Ты шо! А я вообще не знал». The decisive word «не знал» is heard as «в холм», so the meaning is loose and medium is the most it deserves. Ian's own follow-up «Да, да, я не задувался…»@1556.98 (line 111) confirms Ian is talking here. STARTS: the 'No way' exclamation could start at «Ах»@1550.88 or at «Ты»@1552.88. Keeping 1550.88 is defensible. ORDER: it sits after 108 (1531.0) and after Ruslan's «Миняке»@1549.12. Note that line 110's claim takes «а я вообще»@1553.86 out of the middle of this line. See 110."
+   },
+   {
+    "i": 110,
+    "verdict": "adjusted",
+    "start": 1554.82,
+    "end": 1556.46,
+    "confidence": "low",
+    "reason": "The claimed start 1553.86 is «а@1553.86 я@1554.02 вообще@1554.12 в холм@1554.48». Line 109's evidence reads those same words as Ian's «а я вообще не знал» ('I had no idea'), and Ruslan cannot start in the middle of Ian's sentence. What remains for Ruslan is «понятно,@1554.82 да.@1555.12 Ну,@1555.50 даже@1555.92 в Миняке.@1556.18». Only «даже» ('even'), «Миняке» as a guess at «меняют» ('change') and the tag «да» support the line, and their order does not match the English. So the speech exists and the slot is right between 109 and 111 «Да,@1556.98», but the meaning is weak. Start moved to «понятно»@1554.82, confidence low."
+   },
+   {
+    "i": 115,
+    "verdict": "upheld",
+    "start": 1584.77,
+    "end": 1607.26,
+    "confidence": "medium",
+    "reason": "EXISTS and MEANS, with strong lexical support. t_original «Богдан@1590.86 унікальний@1591.20» / p3 «А так вообще Богдан уникальный»@1590.31 = 'what made Bohdan really stand out'. «Ось як він піщав на сеансах»@1593.14 / «пищал»@1593.95 = 'how he squealed during the sessions'. «годину@1596.30» / «часа@1596.53 … все в хуй@1597.87» = 'a full hour… all the bullshit'. «Навіть чітко це згадуємо»@1605.70 / «чётко запоминаю@1606.56» = 'Totally unforgettable'. STARTS: the opening «І він… У мене навколо нього, можливо, тільки один, якщо вважати»@1585.00 (p3 «И@1584.77») is Levin's answer to 114 ('only artist?'), run on in one breath with «а так взагалі Богдан»@1590.22. The edited transcript renders it as 'Yeah, yeah', so 1584.77 is the line's beginning. ORDER: 1581.2 ≤ 1584.77 ≤ 1609.98."
+   },
+   {
+    "i": 116,
+    "verdict": "refuted",
+    "start": 1609.98,
+    "end": 1611.16,
+    "confidence": "low",
+    "reason": "EXISTS: whisper_pass1 «Туре@1609.98 кольцо.@1610.78» is in whisper.json. MEANS: 'ring'-type nonsense shares no word, name or number with «реально больно» / 'for real, it hurts'. The link rests on a loose rhyme. The slot is structurally plausible: it falls between Levin's «згадуємо зараз»@1606.64–1607.88 and «Ну@1611.64 да, и полка[иголкой] житти[тыкают]» (117, 'getting jabbed with a needle'). But the recognised speech does not show this line. Kept in order at 1609.98, confidence low."
+   },
+   {
+    "i": 118,
+    "verdict": "upheld",
+    "start": 1637.6,
+    "end": 1652.19,
+    "confidence": "medium",
+    "reason": "EXISTS and MEANS: p3_vocals «Хороший,@1644.57 ой, ты маленький,@1645.55 ой, иди@1647.85 сюда, … кис@1650.83-кис-кис-кис@1651.97» = 'oh you're so nice, oh you're so small, oh come here… kitty-kitty-kitty'. This is a clear match to the second half of the line. STARTS: nothing in whisper.json covers the opening 'Kitty-kitty, come here, come, little one!'. There are no segments between 1614.62 and 1644.57, so the start is acoustic, not recognised. A light RMS check of the mix agrees: about -54 to -57 dB through 1637.5, then a rise to -47.7 dB at 1637.75 and -40 dB at 1638.75. That fits the claimed 1637.6 and the 7 s of extra text before 1644.57. ORDER: 1611.64 ≤ 1637.6 ≤ 1663.9."
+   },
+   {
+    "i": 124,
+    "verdict": "upheld",
+    "start": 1742.4,
+    "end": 1756.6,
+    "confidence": "medium",
+    "reason": "EXISTS: trial_vad «Я, конечно, чувствую, что я перетаскован на своей локации.» 1742.40–1746.50 is in whisper.json, with segment times only and no word timings. MEANS: «перетаскован[перетаскал] на своей локации» carries the specific 'hauled … at my station', which is more than one common word. STARTS: the segment start 1742.4 is the opening clause. The tail '(laughs) Go ahead…' has no recognised speech, so the end 1756.6 is acoustic. In the mix a loud burst comes at 1756.0 (-26 dB), just before 125. ORDER: 1707.5 ≤ 1742.4 ≤ 1757.0. Without word timings, medium is right."
+   },
+   {
+    "i": 125,
+    "verdict": "upheld",
+    "start": 1757,
+    "end": 1786.28,
+    "confidence": "medium",
+    "reason": "EXISTS and MEANS: whisper_pass1 «Украина@1780.70 главный, пап!@1781.90» = 'Dad! The main flag of Ukraine!' and «Украина@1785.08 главный!@1785.68» = the closing '…main flag of Ukraine!'. Both are strong. «А@1760.78 вы ему как-то тут походите[положите]?» fits 'and you stack this here' in structure. STARTS: the opening 'I'll take this to the car' has no recognised speech, so the start comes before 1760.78 and is acoustic. The mix shows activity at 1757.0–1757.25 (-30 to -33 dB) and again at 1759.0 (-28 dB), so 1757.0 is plausible but estimated. End: «главный!»@1785.68 / seg end 1786.28, before 126 «Сейчас@1787.08 будем выходить, ты мне покажешь». ORDER: 1742.4 ≤ 1757.0 ≤ 1787.08."
+   },
+   {
+    "i": 134,
+    "verdict": "upheld",
+    "start": 2201.9,
+    "end": 2206.5,
+    "confidence": "medium",
+    "reason": "EXISTS and MEANS: t_vocals (unprompted) «Просто@2204.56 прийняти@2204.96 цю@2205.62 папу[прапор]…@2205.90» = «прошу прийняти цей прапор», 'I ask you to accept this flag'. This is the line's final clause. The prompted «Від імені командування…» cited is NOT in whisper.json and counts for nothing. STARTS: the opening 'Dear family… On behalf of the command of the Third Assault Brigade' is not recognised. whisper_pass1 has only a hallucinated «Sărbătoare!»@2201.48, which at most marks voice onset. In the mix the level rises from about -37/-38 dB to -34 dB at 2201.75 and -32 dB at 2202.0. That fits a start near 2201.9, but the start is an estimate and could be up to about 0.5 s earlier. ORDER: 2141.6 ≤ 2201.9 ≤ 2212.2."
+   },
+   {
+    "i": 140,
+    "verdict": "upheld",
+    "start": 2483.1,
+    "end": 2492.2,
+    "confidence": "high",
+    "reason": "EXISTS: t_vad «Остались@2483.76 только@2485.60 фотографии,@2485.86 сообщения.@2490.20» is in whisper.json. MEANS: four content words match 'all that's left… just… the photos, the messages'. The reviewer's other quotes are not in whisper.json and are not counted: «Ну, то есть все, что осталось»@2484.74, «графы@2487.68 … сбрасываются@2491.30». STARTS: the first saved word is «Остались»@2483.76 ('that's all that's left'). The unrecognised 'I mean' plausibly fills the 0.66 s before it, so 2483.1 stands. ORDER: 2417.4 ≤ 2483.1 ≤ 2494.3."
+   },
+   {
+    "i": 143,
+    "verdict": "upheld",
+    "start": 2522,
+    "end": 2524.1,
+    "confidence": "high",
+    "reason": "EXISTS and MEANS: t_vad «на@2521.63 айфоне@2522.51 просто@2523.39 есть@2523.65» = 'on the iPhone there's just…', i.e. 'iPhones have this thing…'. It is followed in whisper.json by t_vad «резервная@2525.19 копия@2526.07» (144) and t_vocals «Есть@2527.14 настройка@2527.78 типа стирать или не стирать» (145), which confirms the exchange. STARTS: 2522.0 sits between the weak «на»@2521.63 and «айфоне»@2522.51, so it is the line's beginning to within 0.5 s. End: «есть»@2523.65, seg end 2523.97. ORDER: 2494.3 ≤ 2522.0 ≤ next."
+   },
+   {
+    "i": 144,
+    "verdict": "adjusted",
+    "start": 2525.19,
+    "end": 2526.3,
+    "confidence": "high",
+    "reason": "EXISTS and MEANS: t_vad «резервная@2525.19 копия@2526.07» = 'A backup?', an exact match. STARTS: the claimed 2524.6 rests on the reviewer's own decode «Резервная@2524.66», which is NOT in whisper.json and so cannot be reproduced from saved recognition. The saved first word is at 2525.19, so the start moves there. End 2526.3 is consistent with «копия»@2526.07 (seg end 2526.51). ORDER: after 143 (2522.0, «есть»@2523.65) and before 145 (claimed 2526.4; its recognised «Есть»@2527.14)."
+   }
+  ]
+ },
+ {
+  "group": 3,
+  "verdicts": [
+   {
+    "i": 145,
+    "verdict": "adjusted",
+    "start": 2527.14,
+    "end": 2531.2,
+    "confidence": "high",
+    "reason": "The match holds: t_vocals has «Есть@2527.14 настройка@2527.78 типа@2528.42 стирать@2528.66 или@2529.32 не@2529.42 стирать,@2529.6 если@2530.08 неправильно@2530.32», and t_vad has «стирать@2528.45 или не стирать … если@2530.03 это неправильно@2530.51» (segment ends 2531.17). That is 'a setting, like, to wipe it or not if wrong'. The start rests on quotes that are not in whisper.json. There is no t_plain «там есть@2526.48», and there is no t_vad «есть@2526.51»: t_vad at that time is «резервная@2525.19 копия@2526.07» (segment ends 2526.51), which is item 144 'A backup?'. The earliest recognised word of this line is «Есть@2527.14», so the start moves to 2527.14. The new start is in order, after 144 (2524.6) and before 146 (2531.7, «А@2531.72 наверное…»)."
+   },
+   {
+    "i": 147,
+    "verdict": "refuted",
+    "start": 2537.6,
+    "end": 2538.4,
+    "confidence": "low",
+    "reason": "Only part of the line is recognised, and the passes disagree. t_plain has «А@2537.72 может,@2537.8 у...@2538.14». The word that carries the meaning, 'удалённо' (remotely), is the reader's completion and is never recognised. At the same moment t_vocals hears «Потому@2537.68 что...@2537.82», and t_vad hears Katya's tail «не@2537.13 куда@2537.27 -то@2537.49». «А может» (or maybe) is two common words. It does not establish 'Could it have been wiped remotely?'. The position fits a question that Katya answers with «Нет,@2538.12» (item 148). It is unsupported as recognised speech, so the claimed start is kept because it is in order (2531.7 ≤ 2537.6 ≤ 2538.1)."
+   },
+   {
+    "i": 154,
+    "verdict": "upheld",
+    "start": 2551.64,
+    "end": 2560,
+    "confidence": "high",
+    "reason": "EXISTS and MEANS both hold. t_plain has «С@2551.22 одной@2551.74 стороны,@2552.26 у меня с британцами [с Бердянском] сказано [связано]@2554.14». t_vad has «С@2551.44 одной@2551.84 стороны … каждая@2556.4 улочка,@2556.84 это вот все с Геном,@2558.1 с Геном, с Геном,@2559.14 это наша жизнь,@2559.72». whisper_pass1 has «каждая@2556.4 улочка … сгибы@2558.52». Together that is 'with Berdiansk… every little street… it's all Hena, it's our life'. STARTS: «С» is the first word of a segment in both passes (2551.22 and 2551.44, both likely snapped) and «одной» follows at 2551.74–2551.84, so 2551.64 is within about 0.3 s of the line's onset. No earlier speech belongs to this line. The end follows «жизнь,@2559.72», and the next words, «это@2560.28 наши чувства», open item 156. ORDER: 2549.95 ≤ 2551.64 ≤ 2559.9."
+   },
+   {
+    "i": 156,
+    "verdict": "upheld",
+    "start": 2560.31,
+    "end": 2577.9,
+    "confidence": "high",
+    "reason": "p3_vocals has «это@2560.31 наши@2560.95 чувства,@2561.21 это наши эмоции,@2562.19 это наши воспоминания@2563.29», and t_vad has «это@2560.28 наши чувства…». That is followed by «Это@2564.55 огород,@2565.03 который Гена@2566.31 плакал [посадил]…@2567.43» and t_vad «я так думаю,@2568.04 он нас туда просто не отпустит@2569.08» ('I don't think they'll let us back there'). It ends with «Но это@2576.02 часть нашей жизни@2577.64» (t_vocals and whisper_pass1). This matches the English sentence by sentence. The start is the first word of the line; «жизнь,@2559.72» before it belongs to 154. The end, 2577.9, comes before «я@2578.33 хочу», which opens 159. ORDER: 2559.9 ≤ 2560.31 ≤ 2569.36."
+   },
+   {
+    "i": 159,
+    "verdict": "upheld",
+    "start": 2578.41,
+    "end": 2597.6,
+    "confidence": "high",
+    "reason": "t_vocals has «я@2578.34 хочу,@2578.54 чтобы ребенок@2579.1 это помнил@2579.76», and t_vad has «я@2578.33». The line then runs through «И@2580.4 как Инна [Гена] хотела в Курдянск [Бердянск]» (t_plain) and «То есть и Платоша@2587.07» (p3_vocals). Next is «мы вернемся@2591.32 сначала в Курдянск@2592.36» (t_vocals). It closes with t_vad «типа летом@2596.29 там,@2596.77 зимой@2597.01 здесь@2597.25» ('summers there, winters here'). The meaning matches. The recognised onset is 2578.33–2578.34, only 0.07 s before the claim, which is within tolerance. ORDER: 2574.94 ≤ 2578.41 ≤ 2600.42."
+   },
+   {
+    "i": 164,
+    "verdict": "adjusted",
+    "start": 2622.5,
+    "end": 2646.15,
+    "confidence": "high",
+    "reason": "The match is correct: t_vocals has «В@2621.8 общем,@2622.52 громадные@2624.64 часы,@2625.86 и вот как стрелки,@2626.9 и Гена@2628.14 вот так вот уперся,@2628.94 … толкает@2630.54 в другую сторону, в обратную@2632.16». t_plain has «у меня опять мурашки@2634.76 пошли@2635.2», then «После@2638.66 похорон вечером я девочкам рассказала этот сон@2641.76», then «А@2644.82 на следующий день,@2646.18». The claimed 2623.4 falls in the gap after «общем», which ends at 2623.24 (t_vocals; 2623.18 in t_plain), and before «громадные@2624.62», so it misses the line's first words 'So,' = «В общем». «В@2621.8» sits on a segment start and is likely snapped early, so the start goes to «общем@2622.52». ORDER: 163 is at 2620.64 and 165 is at 2645.25, so 2622.5 is in order. The end, «день,@2646.18», is fine before 167's «получается@2646.52»."
+   },
+   {
+    "i": 168,
+    "verdict": "refuted",
+    "start": 2671.25,
+    "end": 2672.6,
+    "confidence": "low",
+    "reason": "The cited evidence is Katya's speech, not a child's. «часы»@2671.82 appears in all three passes inside Katya's sentence: t_vad «перед@2670.54 похоронами@2671.12 часы,@2671.9 не@2672.54 перебивай@2672.76», t_vocals «поклонами@2671.2 часы,@2671.86 не@2672.56 перебивай». The only recognised speech that means this line is t_vocals «Он@2675.0 не@2675.06 выключается@2675.36–2677.1» ('it won't turn off'). That comes after 169's start (2672.66), so it cannot set this start without breaking order. The child voice at 2671.25 is acoustic only and has no support in whisper.json. The start is kept at 2671.25, which is in order (2646.53 ≤ 2671.25 ≤ 2672.66). Note that the child is audibly saying the line at 2675.0–2677.1, possibly as a repeat after 'don't interrupt'."
+   },
+   {
+    "i": 169,
+    "verdict": "upheld",
+    "start": 2672.66,
+    "end": 2701.98,
+    "confidence": "high",
+    "reason": "The line opens with «не перебивай», found as t_vad «не@2672.54 перебивай@2672.76», t_vocals «не@2672.56 перебивай», and p3 «не@2672.66 перебивали». The rest follows in order. 'Before the funeral, it had stopped completely' is t_vad «перед@2676.76 похоронами@2677.52 они вообще остановились@2678.64». 'The next day, it started going backwards' is «на следующий день@2681.24 они пошли в обратную сторону@2682.42». Next comes t_vocals «Потом@2682.84 они иногда останавливаются / Шли вперед,@2685.22 потом шли назад@2686.88 / Иногда очень быстро, иногда чуть-чуть@2689.8». Then «а потом я просто начала задавать вопросы@2693.63» (t_vad), «Сонечку [Солнышко]@2694.85» (p3) and «ты меня слышишь@2698.1» (whisper_pass1). It closes with t_vocals «Стрелка@2699.62 стоит, раз, назад сдвинулась@2701.12», whose segment ends at 2701.94. The meaning matches throughout. The onset is within 0.1 s of the claim. Order holds after 168 (2671.25). The child's «Он не выключается@2675.0» overlaps but does not belong to this line."
+   }
+  ]
+ }
+]

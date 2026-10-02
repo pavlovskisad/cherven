@@ -29,6 +29,15 @@ def main(paths):
 
     for p in paths:
         for st in json.loads(Path(p).read_text(encoding="utf-8")):
+            if st and "group" in st and "items" not in st:
+                # final skeptic pass: upheld / adjusted / refuted, one verdict per claim
+                for v in st.get("verdicts") or []:
+                    row = final[v["i"]]
+                    row["skeptic"] = f"{v['verdict']}: {v['reason']}"
+                    if v["verdict"] in ("adjusted", "refuted"):
+                        row.update({"start": v["start"], "end": v["end"], "conf": v["confidence"]})
+                        row["method"] = row.get("method", "") + f", skeptic {v['verdict']}"
+                continue
             if st and "group" in st:
                 # second round: gap readers, with a skeptic's verdict on each promotion
                 verdict = {v["i"]: v for v in (st.get("verdicts") or [])}
