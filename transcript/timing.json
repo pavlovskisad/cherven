@@ -1,0 +1,1596 @@
+[
+ {
+  "i": 0,
+  "start": 3.5,
+  "end": 4.9,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Поехали.»@3.5 (pass1). A re-run on the vocals stem gives the same word @3.52.",
+  "note": "Matcher was correct."
+ },
+ {
+  "i": 1,
+  "start": 15.6,
+  "end": 16.9,
+  "conf": "medium",
+  "method": "adjudicated:reader",
+  "evidence": "Unprompted re-runs (no VAD) recognise «Домой.» in a short vocal burst at 15.6–16.2 (Whisper timestamps @14.0–14.84 are pulled toward the window start). With a prompt it reads «Домой, Гек.» (Домой@15.02, Гек@16.22). A second small burst at 16.7 fits «Гек».",
+  "note": "The matcher's 3.5 reused Andriy's «Поехали». This is the first of three «Домой» calls from the Boulders cue (8–176), so it falls inside that cue.",
+  "adjudication": "The matcher's «Поехали.»@3.5 means 'Let's go'. That is Andriy's line (item 0), not 'Home, Hek', so it fails on meaning. The reader's claim held up. An unprompted verify re-decode (no prompt, original audio) gives «Домой.»@14.84 (p=0.77). The vocals stem has a clear burst at 15.6–16.2 (−37 dB against a −70 dB floor) and a second small burst at 16.7–16.8, which fits «Домой… Гек». The time is in order (after item 0 at 3.5, before item 3) and inside the Boulders cue (8–176, Hek and Frania at home).",
+  "verification": "reproduced unprompted: «Домой.»@14.84 (original audio, 7.6–27.6 s)"
+ },
+ {
+  "i": 2,
+  "start": 16.9,
+  "end": 92.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No speech to match. Starts at the end of item 1 (16.9) and ends where item 3 starts.",
+  "note": "16.9–92 is ukulele/'calm music' with some faint vocal activity. Whisper only hallucinates there («Субтитры…», «Дякую»)."
+ },
+ {
+  "i": 3,
+  "start": 92.0,
+  "end": 108.0,
+  "conf": "low",
+  "method": "adjudicated:reader",
+  "evidence": "Several unprompted windows on the vocals stem: «люди будут плакать»@100.78–101.58, «Люди плакали»@101.0–101.44, «Плакать по-другому…»@102.0, matching 'we won't cry'. The speech then runs to ~108 («…уровни для творчества»@108.04), which fits '…cheerful and life-loving'. «Вода, я имею в виду, на недавнем моменте…»@96.0 is possibly «видео…» ('videos from his life').",
+  "note": "The matcher interpolated this across 4.9–106.9. Only the tail is recognised (~96–108). The opening clause ('our dinner will be unconventional…') is placed a few seconds earlier, so the start is uncertain by about ±4 s.",
+  "adjudication": "The matcher spread the line over 4.9–106.9 and matched Serhii's and the sister's words («пластика… ступы», «как он рос»), so no part of its match means this line. I ran my own unprompted check on the vocals stem (97–106, no prompt), which gives «если люди будут плакать, то будет много…»: люди@100.62, будут@101.40, плакать@101.60. That confirms the reader's «люди будут плакать»@100.78 and matches 'we won't cry'. The longer 84–104 verify windows only hallucinated («Дякую за перегляд!»), so the opening clause ('our dinner will be unconventional… videos') is still unrecognised. The start of 92 is an estimate for that opener, about 8 s before 'cry', and is roughly ±4 s. The line is in order before Frania's 'Home!' (107.5) and Serhii's «Так, сейчас»@109.44, and it falls inside cue 3 (memorial luncheon, 2–279).",
+  "verification": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ },
+ {
+  "i": 4,
+  "start": 107.5,
+  "end": 108.9,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "«Домой.»@107.4/107.5 in two unprompted vocals windows (93–109 and 104–110). Vocal bursts at 107.6 and 108.3–108.8.",
+  "note": "Overlaps the end of the mother's line. The matcher's interpolated 106.87 was close by chance.",
+  "verification": "reproduced unprompted in the reviewer's window: «Домой.»@107.48 (vocals 104–110 s)"
+ },
+ {
+  "i": 5,
+  "start": 109.7,
+  "end": 115.76,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Так,@109.44 сейчас.@111.34» (pass1); «пластика@111.88 пластика дефектом идеальные(=медиальной) поверхность ступы@114.98» (p3_vocals, ends 115.76).",
+  "note": "The vocals stem is silent from 109.0 to 109.7 and the voice comes in at 109.8, so the start is moved from 109.44 to 109.7."
+ },
+ {
+  "i": 6,
+  "start": 116.0,
+  "end": 119.7,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Original audio, gain-normalised: «Вы знаете, мы … знаем, что…»@116.02–117.78 (large-v3). The medium model gives «…мы знаем, мы…»@116.48–118.64. This matches 'We all know what he was like'. The vocals stem goes silent at 120.",
+  "note": "The matcher interpolated it to 115.76–128.44. The voice comes between Serhii's 'ступы' and his flap line. The '…cheer us up' tail was not recognised.",
+  "verification": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ },
+ {
+  "i": 7,
+  "start": 125.9,
+  "end": 133.85,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«поднятый@126.09 волос(=лоскут) поддельный(=с тыльной) поверхность стопы@133.49» (p3_vocals). pass1 has «Ви піднятий волоско тильної поверхні стопи»@124.44–133.84.",
+  "note": "The vocals stem is silent from 120 to 124.5 and the voice starts about 125.9. The p3 «И»@119.08 is an artifact."
+ },
+ {
+  "i": 8,
+  "start": 134.3,
+  "end": 135.3,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No «Домой» found. Placed in the only gap between Serhii's «стопы»@133.49 (ends 133.85) and «А может…»@136.61. Re-runs over 129–137 return only Serhii.",
+  "note": "Frania's child voice is probably buried under Serhii's recording."
+ },
+ {
+  "i": 9,
+  "start": 136.61,
+  "end": 138.64,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«А@136.61 может у вас есть копия?@137.74» (p3_vocals). The medium model re-run gives the same.",
+  "note": "Matcher was correct. The trailing «Звук.»@141.23 is not part of this line."
+ },
+ {
+  "i": 10,
+  "start": 143.76,
+  "end": 150.9,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Когда@143.76 он был еще дитиной, как он рос, как ему женил(=возмужал). И все эти этапы мы будем смотреть, вспоминать его.@150.66» (pass1).",
+  "note": "The English starts at '…when', which is «Когда»@143.76. The same pass1 segment opens with «На фотографии не может тянуть»@141.74, which may be the sister and simply untranslated. If so, 141.74 is an acceptable earlier start. The 'And as we look at him…' tail was not recognised."
+ },
+ {
+  "i": 11,
+  "start": 159.78,
+  "end": 167.82,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну,@159.78 я уже допишу(дельтешу)» then «Так,@162.24 поднятый лоскут, тыльные поверхности.@163.5» «Стоп.»@164.16 «Так/Дальше.»@167.5–167.82 (a re-run gives «Дальше.»@167.66 = 'next…').",
+  "note": "Matcher was correct."
+ },
+ {
+  "i": 12,
+  "start": 180.5,
+  "end": 224.22,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Поля?»@180.5, then «Да,@180.82 дело в том, что тот парень, который…» (p3). A re-run gives «Я еще его грузил»@189.70 (medium model: «…грузи его на нашу»@191.36) = 'I helped load him'. Then «Искал выехать@211.48 … куда проехал, а назад не проехал@219.0 … там было на базе@223.92».",
+  "note": "The matcher had interpolated 167.82. The closing 'blast… eight kilometers' sentence was not recognised and may run a few seconds past 224."
+ },
+ {
+  "i": 13,
+  "start": 229.2,
+  "end": 233.0,
+  "conf": "low",
+  "method": "adjudicated:reader",
+  "evidence": "«Гемостаз.»@229.26/229.28/229.32 in three overlapping vocals windows (216–232, 228–244, 226–236), only with a context prompt. The control window did not produce it. Followed by «Да-да…»@229.8.",
+  "note": "«Гемостаз» (haemostasis) is what the English renders as 'Homeostasis'. The word appeared only with a prompt, but its position stayed stable across windows. A p3 «Так.»@224.88 may be Serhii just before it. The end is estimated.",
+  "adjudication": "The matcher's 176 is interpolated and rests on item 11's words («Ну, я уже дельтешу… поднятый лоскут»). It also falls before Nikolaich's item 12 «Поля?»@180.5, so it breaks playback order. The reader's «Гемостаз»@229.26 came only with a prompt, and the longer unprompted windows (verify 221–241, mine 224–236 and 227–232) only hallucinate («Редактор субтитров…», «Субтитры…»). Three short unprompted vocals windows, however, each recover the same word and the same follow-up: «Мастас, иди сюда»@228.5, «Ямастас Китаде»@228.8 and «Ямастас, да, да»@229.0 (да@229.74). That is '(Ге)мостаз… да-да', which agrees with the reader's «Гемостаз»@229.26 and «Да-да»@229.8. The time is in order (after item 12, which ends around 224, and before Sania at about 259) and inside cue 4 (Serhii, 109–293). The end is an estimate.",
+  "verification": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ },
+ {
+  "i": 14,
+  "start": 233.0,
+  "end": 244.0,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Still nothing in the pooled recognition. No segment of any pass falls between p3 «Так.»@224.88–225.62 and pass1 «Другой организация…»@261.74. The raw pass1 file only has the hallucination «Субтитры сделал DimaTorzok»@242.54–249.14 there, which the merge dropped. whisper.json has no focused (t_*) segments in 160–300; the 160–300 targeted jobs in jobs.txt left no output. Round 1's prompted «ногу»@238.02 is one word, probably prompt echo, and is not in the pooled files, so it does not count as a match."
+ },
+ {
+  "i": 15,
+  "start": 258.0,
+  "end": 262.0,
+  "conf": "medium",
+  "method": "adjudicated:reader",
+  "evidence": "«Настоящий, не подлива вот эта хуйня.»@260.0–261.68 (window 230–262). «настоящий@258.99 не@260.39 подлил@260.47» (window 240–270). «Настоящий неподлив.»@259.48–260.86 (window 258–268). «Настоящая неподлива, вот эта хуйня»@260.0–261.18 (window 260–272).",
+  "note": "Matches 'real…, none of that watered-down stuff' and cue 8 ('not some gravy', 255–281). «настоящий» lands at about 259.0–259.5. The 'film about Kyiv' opener is placed about 2 s before it. The matcher's interpolated 179.43 was far off.",
+  "adjudication": "The matcher's 179.43 is interpolated and its text «Стоп. Так.» has nothing to do with the line. It also falls before item 12 (180.5). I re-checked the reader's claim with no prompt, and the short windows reproduce it: vocals 257–263 «Настоящий@259.36 не@260.40 подлива@260.46», vocals 258.5–262.5 «Настоящий неподлив»@259.52, and mix 257–263 «Настоящий не подлива»@259.28. This means 'real…, none of that watered-down (gravy) stuff', and it falls inside cue 8 ('Film ne podliva', 255–281). The longer 249–269 verify windows only hallucinated. The opener 'A film about Kyiv' was not recognised, so I set the start about 1.3 s before «Настоящий»@259.3 rather than the reader's 257. The end comes after «вот эта хуйня» and before the next speaker's «Другой организации»@260.98–262.",
+  "verification": "reproduced unprompted: «Настоящий неподлив.»@259.52 (vocals 257–263 s), «Настоящий не подлива»@259.32 (original 257–263 s)"
+ },
+ {
+  "i": 16,
+  "start": 278.58,
+  "end": 279.3,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "No pooled segment in 262–283.24 means 'thank you'. The ones present are «Другой организация, в основном, как заказчик»@261.74, «Что это такое?»@264.72, «Это не будет с перевышением»@266.59 and @268.8, «Какой у вас … рост»@271.64 (exam chatter) and «Вот это какой-то там…»@273.66. None fits. whisper.json has no focused segments for this window. The only hint is round 1's prompted Ukrainian run, «дякую.»@278.58. It means the whole line, but it is not in the pooled data and could be prompt echo."
+ },
+ {
+  "i": 17,
+  "start": 283.24,
+  "end": 293.38,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«И что,@283.9 второй@284.64 маск(=наповал?)?» «Да.»@285.26 «Да, как надо.»@285.48 … «Нужно рассказать.»@290.44 «Гармонизм(=гармонист).»@292.42–293.38 (pass1).",
+  "note": "'the second one' and 'accordion player' bracket the line. The opening «И что» may be a prompt from Ian, so the start could be as late as 284.64. 'Everyone knew him' probably overlaps Hek's start. The matcher had interpolated 182.48.",
+  "adjudication": "The matcher cites the same words («И что, второй маск? … Гармонизм») but gave an interpolated start of 182.48, about 100 s before them. That start contradicts its own evidence and playback order. The reader anchors on the pooled pass1 words «И@283.24 что,@283.9 второй@284.64 маск?» «Да.»@285.26 «Да, как надо.»@285.48 «Нужно рассказать.»@290.44 «Гармонизм.»@292.42–293.38. 'второй' is 'the second one', and 'Гармонизм' is a mishearing of 'гармонист', the accordion player. The span is in order: after item 16 and right before Hek's «Хочу… прямо в огонь»@293.44. It is inside cue 7 (Nikolaich, 178–296). The vocals stem rises properly only around 284.3, so if «И что» is Ian's question, the start may be up to about 1 s later."
+ },
+ {
+  "i": 18,
+  "start": 293.44,
+  "end": 312.18,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Хочу@293.44 бросаться(достаться) прямо в огонь, как пожар(ный)» … «Стать смелым, бросаться в огонь»@296.3 … «Приехать на (с)танцию, тушить пожар»@300.5 … «И еще тушить пожар с лестницы.@311.38» ends 312.18.",
+  "note": "Matcher was correct."
+ },
+ {
+  "i": 19,
+  "start": 312.2,
+  "end": 313.5,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Placed between the end of Hek's speech (312.18) and Chapa's «Просто жесть»@312.52, overlapping Chapa.",
+  "note": "The matcher had matched «Просто жесть», which is Chapa's line."
+ },
+ {
+  "i": 20,
+  "start": 312.52,
+  "end": 339.9,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«Просто@312.52 жесть.» «И вот, типа, отделение…»@313.52 «…Ореховы/Орехово»@317.56 «километров 15»@322.96 «в штабе сидели в подвале»@324.52 «прилетела, блядь, мина»@325.8 «500, типа, кг заряда… в Шахиде… 50»@328.78–332.5 «Все типов, только два человека выжило»@336.1–338.54 «И мы с одним из типов»@339.02–339.72.",
+  "note": "The English ends 'And we, with one of the guys…' = «И мы с одним из типов»@339.02–339.9. The next Chapa line ('…at the very beginning…') therefore begins at «в начале»@340.16, not at the neighbour's 339.06.",
+  "adjudication": "Both methods point at the same Chapa speech. The matcher began mid-line at «от позиции километров 15»@322.46, while the English opens with 'Just brutal' = «Просто@312.52 жесть.@313.04». Then come «И вот, типа, отделение»@313.52, «Ореховы/Орехово»@316.9 (Orikhiv), «километров 15»@322.96, «в штабе сидели в подвале», «прилетела, блядь, мина»@325.56, «500, типа, кг… в Шахиде… 50»@328.78–333.7 and «только два человека выжило»@336.1–338.54. The line ends with «И@339.06 мы с одним из типов@339.7» = 'And we, with one of the guys…', just before «в@340.16 начале». The span starts at Chapa's cue 10 (312–480), after Hek's speech ends at 312.18, so it is in order."
+ },
+ {
+  "i": 21,
+  "start": 339.05,
+  "end": 341.5,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No speech found. Re-runs of 330–346 and 333.6–336.1 return only Chapa. Placed after Chapa's «И мы с одним из типов»@339.02 and at the neighbour bound of 339.06.",
+  "note": "Mrs. Anya is probably faint, under Chapa. Her playground cue 21 starts at 284. The matcher had matched Chapa's «и туда прилетела… мина»."
+ },
+ {
+  "i": 22,
+  "start": 340.16,
+  "end": 354.76,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«в начале этого волонтерки занимались»@340.16; «И он такой, ну что ты не порешил? Типа погонишь?»@344.78; «Я такой, да пока нет»@347.52; «Я говорю, да уже решились. И вот пошел…»@349.52; «Просто вчера погиб»@352.22; «Подзывал их» (= под завалами)@354.22–354.76",
+  "note": "Start moved from 339.06 to 340.16. The words «И мы с одним из типов»@339.06–340.16 are the end of item 20 (\"And we, with one of the guys…\"), and this line picks up at «в начале этого». Anya's interjection (item 21) was not recognised."
+ },
+ {
+  "i": 23,
+  "start": 354.76,
+  "end": 358.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Nothing recognised between «Это просто.»@355.64 and «После кативни…»@362.68. Placed after Chapa's last word, «Подзывал их»@354.76.",
+  "note": "Stage direction. It ends where item 24 is estimated to begin."
+ },
+ {
+  "i": 24,
+  "start": 358.0,
+  "end": 362.6,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Placed between Chapa's end (354.76) and Serhii's question «После кативни в плане после полона?»@362.68, sized by text length.",
+  "note": "The matcher's proposal (362.68–369.36) used Serhii's question and the patient's answer, which are items 25 and 26. It is possible that the opening «После кативни»@362.68 is actually the patient's \"After the torture...\" and Serhii's line starts at «в плане»@363.74. In that case this item ends around 363.7."
+ },
+ {
+  "i": 25,
+  "start": 362.68,
+  "end": 364.62,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«После кативни в плане после полона?»@362.68–364.62",
+  "note": "The matcher had this right."
+ },
+ {
+  "i": 26,
+  "start": 365.14,
+  "end": 375.2,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«В полоне.»@365.14 (p3 365.25); «Уже в яму закинули. Уже вкинули в яму.»@366.4–369.36; «После рейтинга (пыток). Что кроме пыталась»@369.42–371.0; «Хотела, чтобы я показал славу России.»@372.26–375.2",
+  "note": "The end is set at «России»@375.2. The «Нихуя»@375.42–375.76 that follows is not in the English."
+ },
+ {
+  "i": 27,
+  "start": 380.0,
+  "end": 381.8,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Must fall between the end of item 26 (375.2) and «Китка на поле»@381.84 (item 28). The overlapping p3 «Ну, … не так, не в яму»@379.29–381.97 and pass1 «Целый день после этого слушать и тревожиться»@376.46–378.72 both fail to match the meaning.",
+  "note": "Serhii's question was not recognised. It is placed just before the reply."
+ },
+ {
+  "i": 28,
+  "start": 381.84,
+  "end": 382.74,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "«Китка на поле»@381.84–382.74, probably a mishearing of «На кацапов!». It falls right before Serhii's reply «Это основная у нас…»@384.04.",
+  "note": "Supported by position and rough sound. The matcher's interpolated time happened to land on this."
+ },
+ {
+  "i": 29,
+  "start": 384.04,
+  "end": 386.08,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Это основная у нас психика (жалоба)»@384.04–386.08",
+  "note": "The matcher had this right."
+ },
+ {
+  "i": 30,
+  "start": 386.1,
+  "end": 397.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Must start between item 29 (384.04) and item 31 (391.46), inside cue 12 Disneyland (378–417). The speech recognised here, p3 «До Молкоходюк… отцовская школа начинает давать уже…»@385.93–391.03, reads as the hospital exam and not as the Disneyland speech.",
+  "note": "Overlaps items 31 and 32 (separate layered recordings). The length is estimated at about 11 s for roughly 37 words."
+ },
+ {
+  "i": 31,
+  "start": 391.46,
+  "end": 393.5,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Тянет, болит, печет. Что делает?»@391.46–393.5",
+  "note": "End extended from 391.87 to cover «Что делает?» (= \"What's the sensation?\")."
+ },
+ {
+  "i": 32,
+  "start": 394.38,
+  "end": 395.32,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Попаривает (побаливает) слегка»@394.38–395.32",
+  "note": "The matcher had this right."
+ },
+ {
+  "i": 33,
+  "start": 395.32,
+  "end": 401.37,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Not found. The only speech in 395.32–416.37 is «И как@397.06 сюда вот это шоу(шов?), перед этим, это регистрироваться@399.68, для шоу бывает?@401.13» (pass1 and p3 agree). It does not mean 'we'll sing Oy tam na tovchku' and reads as the hospital exam, not the factory meeting. No focused segments exist for 370–420."
+ },
+ {
+  "i": 34,
+  "start": 401.37,
+  "end": 407.82,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Not found. Nothing is recognised by any pass between «…для шоу бывает?»@401.33 and «Кроме этого что-нибудь»@416.37 except the hallucination «Субтитры сделал DimaTorzok»@412.94–418.0 (raw pass1, dropped). No word for 'distillery', 'stay' or laughter."
+ },
+ {
+  "i": 35,
+  "start": 407.82,
+  "end": 416.37,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Not found. No 'Disneyland', 'Діснейленд' or 'прошу/благаю' anywhere in 401.4–416.37. The next recognised speech is Serhii's «Кроме@416.37 этого что-нибудь» (item 36)."
+ },
+ {
+  "i": 36,
+  "start": 416.37,
+  "end": 418.9,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Кроме этого что-нибудь»@416.37–417.93",
+  "note": "\"Just this, yeah?\" was not recognised. The end is extended about 1 s beyond the last recognised word."
+ },
+ {
+  "i": 37,
+  "start": 418.9,
+  "end": 453.22,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognition at all from 417.93 to 453.22.",
+  "note": "Stage direction filling the gap up to Serhii's next recognised speech."
+ },
+ {
+  "i": 38,
+  "start": 453.22,
+  "end": 459.18,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "«Там купа ягод (судин), там купа оцелей (артерій), …, нервы»@453.22–457.62; «Я думаю, можно роботизировать (попробовать)»@457.86–459.18",
+  "note": "The opening \"I'm guessing it went pretty deep?\" was not recognised separately. It may sit just before 453.22, or it may be the «Я думаю»@457.86 reordered by the translator. The end is cut to 459.18. The matcher's end (467.12) took in a woman's speech («Я боялась…», «Да, еще не было») that belongs to the Anya recording and is not in the English."
+ },
+ {
+  "i": 39,
+  "start": 480.7,
+  "end": 506.1,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«90 километров из-за этого Львова»@481.25–483.57; «тут великий будинок, там бабуся говорить, але її сестра…»@489.28; «Закінчила магістратуру»@496.34; «Я говорю, як (так)?»@501.3; «Ми приїхали, ми всі приїхали туди»@502.3; «І були там два мікрофони (місяці)»@504.76–506.1",
+  "note": "The recogniser gave the word «90» zero duration at 481.25, after a looped hallucination of «Это его дом», so the real onset ('about ninety') is about 0.5 s earlier. The end is extended from the matcher's 493.16 to 506.1, which covers the master's degree, the taxi trip and the two-month stay."
+ },
+ {
+  "i": 40,
+  "start": 506.62,
+  "end": 538.84,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«Тут в сапарі (все правильно) написано, форма 100»@506.62–509.86; «Травму отримували під час виконання бойового… 4-го»@510.4; «мінометного обстрілу»@515.44; «Перша допомога на етапах… з 5-го по 9-й»@515.94; «Новомосковської ЦРЛ»@519.28; «Далі, на праці»@525.16; «За життєвим історією»@534.2; «операції будуть? … крім поранення (три поражения)»@536.08–538.84",
+  "note": "The matcher started this at 515.94 and missed the opening \"…correct? Form 100\" at 506.62. «И все. Все правильно.»@528.9–532.06 is also inside this line.",
+  "adjudication": "The line opens with \"everything written here is correct? Form 100\", and the recognition has «Тут в сапарі написано, форма 100.» from 506.62 to 509.86 (\"here in the [record] it is written, form 100\"). Next comes «Травму отримували під час виконання бойового … 4-го»@510.4 (injury received on active duty on the 4th), then «обстрілу»@515.44 (shelling). The matcher started at «Перша допомога на етапах … з 5-го по 9-й»@515.94, which is the line's fourth sentence, so it skipped the first ~9s. The order fits: the segments just before are Mrs. Anya's item 39 («Закінчила магістратуру»@496.34, «Ми приїхали … туди»@502.3, ending 506.1), and 506.62 comes before item 41 at ~539. The speaker also fits: this is the doctor reading a soldier's Form 100 at the hospital. The tail fits the reader's end: «За життєвим історією»@534.2 (\"serious illnesses before this\") and «операції будуть … три поражения»@536.08–538.84 (\"any surgeries, apart from the injury\"). The reader's quote adds a bracketed «(все правильно)» that is not in the 506.62 segment, but the start does not depend on it."
+ },
+ {
+  "i": 41,
+  "start": 539.0,
+  "end": 540.4,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Placed between the end of Serhii's form reading (538.84) and «Зараз, як?»@541.98 (item 42).",
+  "note": "Order only requires this to come after 506.62, so it could also fall in the 532.06–534.2 gap inside item 40. No «Дякую» appears anywhere in the recognition."
+ },
+ {
+  "i": 42,
+  "start": 541.98,
+  "end": 547.62,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "«Зараз, як?»@541.98–542.96 (= «А зараз по функції — як?»); «Зараз я їх поконую»@546.04–547.62",
+  "note": "The later questions about movement and sensation were not recognised. «Зараз я їх поконую» may be the patient's reply, which the English marks [indistinct]. «Коли?»@540.48 does not fit."
+ },
+ {
+  "i": 43,
+  "start": 547.62,
+  "end": 550.6,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Not found. No pooled segment falls between «Зараз я їх поконую»@546.04–547.62 and «Я писал буквально…»@568.84. The only output in the gap is the p3 hallucination «Субтитры сделал DimaTorzok»@550.64–554.6, which was dropped. Nothing like 'барьеры/бар'єри … между нами'. No focused segments exist for 520–570."
+ },
+ {
+  "i": 44,
+  "start": 568.84,
+  "end": 589.06,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Я писал буквально по всей Ленинграду.»@568.84 «И тема нашествия.»@571.42 «Там, там, там, там…»@572.94 «А это уже в первом разу»@581.70 (≈ 'в сорок первом году' = 1941) «А здесь, а здесь…»@585.76–589.06",
+  "note": "Line 2 (tam-tam…) begins at the sung «Там, там…»@572.94. «в первом разу»@581.7 is likely a mishearing of 'в сорок первом году' (He wrote it in 1941); the end is extended past the matcher's 581.52 to cover «А здесь» = 'And here…'.",
+  "line_starts": [
+   568.84,
+   572.94
+  ]
+ },
+ {
+  "i": 45,
+  "start": 607.82,
+  "end": 616.46,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Вірусний@607.82 гепатит@608.62 туберкульоз… цукровий діабет@610.64… гіпертонічна хвороба@612.78, дорозкова (виразкова) хвороба@613.8… післяшки@615.96»",
+  "note": "Matcher's start is right. Its end of 626.16 came from a stretched p3 segment; the questionnaire ends at about 616.4, where Zenon's layer comes in."
+ },
+ {
+  "i": 46,
+  "start": 616.46,
+  "end": 645.89,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«что@616.46 начнут@617.88 отмирать@618.92 ткани…» … «рано затампановывают@633.87 специальными марловыми повязками@636.75» «по чуть-чуть начинают снимать турникет@641.91» «Если нет кровотечи, то можно его вообще сделать@645.73»",
+  "note": "«что»@616.46 sits on a segment boundary, so the onset could be up to about 1 s later («начнут»@617.88). Ends at «сделать» 645.89, not at the matcher's 655.8, which took in Serhii's skin question."
+ },
+ {
+  "i": 47,
+  "start": 652.18,
+  "end": 657.34,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«По@652.18 шкірі є якісь (лущення), (потертості) і стрії@654.76, що не має» «Висякайте@656.74» (= висипання, rashes)",
+  "note": "«Висякайте» is a mishearing of 'висипання?' (Rashes?), so the end runs to 657.34."
+ },
+ {
+  "i": 48,
+  "start": 691.78,
+  "end": 697.4,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "Targeted re-recognition (orig): «Наверное@691.78, для безопасности@693.28, эволюционно@694.24 так сложилось@696.60» (691.78–697.40); vocals track: «наверное@690.50 для безопасности@693.30 … эволюционно так сложилось@696.58»",
+  "note": "The matcher had interpolated this one (657–702) and found nothing. Targeted Whisper on 655–703 found the exact line. The onset is between 690.5 (vocals) and 691.8 (original); pooled ASR had only the hallucination «Смотрите продолжение…»@697 here.",
+  "adjudication": "Matcher was interpolated (657.34) and its asr text is Katya's and Serhii's later lines, so it has no evidence. I re-ran Whisper on 655–703 (original audio) and it reproduced the reader's line exactly: «Наверное,@691.78 для безопасности,@693.28 эволюционно@694.24 так сложилось@696.60» = 'Probably for safety… evolutionarily it's just how it developed'. A run on 688–712 agrees («ну,@691.28 наверное,@692.48 для безопасности@693.30 … эволюционно так сложилось@696.60»). The time fits order: after item 47 (652.18) and before Katya's reply at 697.88. It sits just before cue 28 (Artery, Serhii and Katya) is listed to start at 717, but Katya's reply below is also recognised before 717, so the conversation is audible earlier than the cue sheet says.",
+  "verification": "reproduced unprompted word for word: «Наверное, для безопасности, эволюционно так сложилось.»@691.78 (original 655–703 s)"
+ },
+ {
+  "i": 49,
+  "start": 697.88,
+  "end": 708.2,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "Targeted: «И@697.88 я просто@698.48, ну, ранение@699.20…» (vocals «что я@697.70 просто@698.34»); pooled «Ранение у мужа@701.88… смерть мгновенная@705.32, то есть я так понимаю волосы(=аорта)@707.76 были@708.2»",
+  "note": "Starts at «И я просто» ('No, I just…'), about 4 s before the matcher's 701.88, which began at «Ранение у мужа». «волосы» is a mishearing of 'аорта'.",
+  "adjudication": "Both methods point at the same speech, but the matcher starts at «Ранение у мужа»@701.88 and skips the opening 'No, I just…'. My re-runs on 655–703 and 688–712, on both tracks, give «И@697.88 я просто,@698.48 ну, ранение@699.20 у мужа@702.56 было сюда, ну, смерть мгновенная@705.32 … я так понимаю, волосы(=аорта)@707.8», which is the full line: 'No, I just… my husband was wounded. Instant death. As I understand it, the aorta…'. The pooled «Смотрите продолжение…»@697.04 is a hallucination over this speech. The time fits order: after item 48 (691.78) and before Serhii's «Очень быстрое снижение»@708.1."
+ },
+ {
+  "i": 50,
+  "start": 708.1,
+  "end": 740.72,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Очень@708.1 быстрое снижение… объема циркулирующей крови@716.28» «можно что-то сделать, но это нужно действовать очень быстро и очень точно@728.42» «зафиксировать какой-то кубикет (турникет)@732.88, чтобы не пережать… руку@737.14… пережать@739.8»",
+  "note": "Matcher is correct. The end is trimmed to the last word of this turn, «пережать»@739.8."
+ },
+ {
+  "i": 51,
+  "start": 741.2,
+  "end": 745.6,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "«А,@741.2 ниже@742.68 ключи(цы)@742.98» «Нет,@743.42 у меня есть сюда@744.76 …»@745.26",
+  "note": "'Below the collarbone… somewhere here' clearly matches. The ASR order (ниже ключицы, then Нет) differs from the English, and the opening «А» could be Serhii's, so the onset may be as late as 742.7."
+ },
+ {
+  "i": 52,
+  "start": 745.72,
+  "end": 793.25,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«Ну да, да@745.72» (Ah.) «Я@746.7 не знаю… есть варианты, при которых выживают, и можно выжить, но это…@754.3» … gap 755–783 unrecognised … «И на ПКГ@784.17 оказался… сосудистый хирург@787.97… неплохой еще один хирург, и они вместе спасли жизнь@793.25»",
+  "note": "The matcher started this turn at 782.97, the field-hospital half, which is wrong: the turn opens with «Я не знаю… есть варианты, при которых выживают» at 746.7. The middle ('[indistinct]… packed the wound, clamped it') was not recognised.",
+  "adjudication": "The matcher's 782.97 («И на ПКГ оказался… сосудистый хирург») is only the second half of the turn. Pooled p3 has the opening right after Katya's collarbone line: «Ну да, да@745.72» (the 'Ah.' acknowledgement) and then «Я@746.7 не знаю… есть варианты, при которых выживают, и можно выжить, но это…@754.3» = 'I don't know, there are cases where people survive, it's possible, but…'. The turn closes with «и они вместе спасли жизнь@793.25». A re-run on 738–790 confirms «я не знаю… есть варианты при которых выживают». The time fits order: after item 51 (741.2) and ending where Katya's «Это просто стечение»@793.25 begins. If «Ну да, да» is really Katya's, the first word is «Я»@746.7, about 1 s later."
+ },
+ {
+  "i": 53,
+  "start": 793.25,
+  "end": 794.83,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Это@793.25 просто стечение такое было@794.75»",
+  "note": "Matcher correct."
+ },
+ {
+  "i": 54,
+  "start": 794.85,
+  "end": 800.0,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "p3 «Стечение@794.85, да, да, да, очень удачное@795.77. А в основном, конечно, это практически минута@798.47 и все@799.91»; pass1/targeted «Да@794.6/795.0, да, да, очень удачно»",
+  "note": "Matcher correct; the start is refined to the word."
+ },
+ {
+  "i": 55,
+  "start": 800.1,
+  "end": 800.55,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No separate recognition. Placed between Serhii's «…минута и все»@799.91 and «Ну, то есть@800.55 есть секунд 10». Targeted re-runs on 795–803 (original and vocals) heard only Serhii.",
+  "note": "Probably a quiet echo, 'И всё, да?'. The 1.3 s gap inside «минута@798.47 и@799.79 все» may hide it, so it is possibly about 0.5 s earlier."
+ },
+ {
+  "i": 56,
+  "start": 800.55,
+  "end": 808.33,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну,@800.55 то есть, есть секунд 10@802.37, чтобы что-то сделать@804.15. А при боевых действиях@805.41, ну, это часто нереально@807.73»",
+  "note": "Matcher correct."
+ },
+ {
+  "i": 57,
+  "start": 808.46,
+  "end": 809.76,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну на выезде@808.72, там, да@809.52»",
+  "note": "'He was out on a mission' = «на выезде». The matcher's end of 815.6 took in Serhii's next line."
+ },
+ {
+  "i": 58,
+  "start": 810.37,
+  "end": 815.6,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну,@810.37 то есть, если идет активная боевая работа@812.72, то…@814.72»",
+  "note": "Matcher correct."
+ },
+ {
+  "i": 59,
+  "start": 830.12,
+  "end": 871.32,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "Targeted (orig 826–852): «Вот так вот@830.12, потому что сапёром был@833.28, и они работали@835.20, вот, и уже доделали практически работу@840.02, им надо было разминировать@841.58, чтобы техника пошла@843.86 потом, вот, шли первые@844.98… потом они зачищают@849.26, и дальше техника@850.86»; pooled «доделывали работу и прилет@856.52. Скорее всего, какой-то танчик где-то стоял@860.23… ни звука… не присесть@864.33» «И вот муж@867.14, он (был) с этим парнем@868.6» «У него того контузия@870.74 рядом@871.32»",
+  "note": "The matcher started at 849.52 («зачищают и дальше техника»), which is mid-turn. Targeted re-recognition found the opening, 'My husband was a sapper' = «сапёром был», at about 832, after a «Вот так вот» lead-in at 830.1. The closing concussion clause (pass1, 869.84) overlaps Serhii's next line.",
+  "adjudication": "The matcher's 849.52 «зачищают и дальше техника» is the fourth sentence of the turn ('sweeping, and then the tech would roll in'), so it starts mid-turn. My re-run on 826–852 (original audio) reproduced the reader's text: «Вот@830.12 так вот, потому что сапёром@833.28 был, и они работали@835.20 … уже доделали практически работу@840.02, им надо было разминировать@841.58, чтобы техника пошла@843.86 потом… шли первые… зачищают@849.26, и дальше техника@850.86» = 'My husband was a sapper. They were working, almost done… had to clear the mines so the vehicles could get through. Infantry went first…'. A second run reads «Он@831.50 уже сапёром был», and vocal energy rises at about 830.5–831. The line continues through pooled «прилет@856.52… танчик… не присесть@864.33… с этим парнем… контузия@870.74 рядом@871.32». The time fits between item 58 (810.37) and item 60 (869.77)."
+ },
+ {
+  "i": 60,
+  "start": 869.77,
+  "end": 877.85,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну,@869.77 видимо@870.37, он был не в состоянии оказывать помощь@875.15. Ну, скорее всего, и рядом никого не осталось@877.85»",
+  "note": "Matcher correct. It overlaps the end of Katya's turn: pass1 heard «контузия» in the same span."
+ },
+ {
+  "i": 61,
+  "start": 877.5,
+  "end": 880.4,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "pass1 «…то есть@877.5, (в)стал(=два)@878.08 и…@878.38»; p3 «(у)пал(=Папа)@878.31 и все@878.77, то есть стал гением@880.35»; targeted «То есть бак, и всё. То есть стал гением»@878.0–880.26",
+  "note": "'stood up and… collapsed' ≈ «встал и… упал и всё». Pass1 also hears Katya («Ну, контузия осталась») from 875.7, under Serhii's «Ну, скорее всего», so the onset may be up to 1.8 s earlier."
+ },
+ {
+  "i": 62,
+  "start": 881.6,
+  "end": 882.3,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "No 'Капец/Блин/Жесть/Жах' in 880.4–898.4. Pooled recognition stops at Katya's «то есть@879.51 стал@879.85 гением@880.35–881.59» (p3) and resumes at «Пятая(=Проклятая)@898.44 война». The vocals stem is near-silent from 881.6 to 898, apart from brief bursts. Round 1's targeted «Гениал!»@880.5 has no meaning link to 'Damn'."
+ },
+ {
+  "i": 63,
+  "start": 898.4,
+  "end": 899.74,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Пятая(=Проклятая)@898.44 война@899.0 просто@899.48»; targeted orig «Пятая@898.36 война»",
+  "note": "Matcher correct; «Пятая» is a mishearing of 'Проклятая'."
+ },
+ {
+  "i": 64,
+  "start": 917.0,
+  "end": 918.4,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «ДОМОЛИТВИ»@917.00–918.40 (= «До молитви!»)",
+  "note": "The matcher had interpolated this one (899.74–985.61). The command is recognised directly at 917.0, consistent with cue 30 (Molytva) starting at about 916."
+ },
+ {
+  "i": 65,
+  "start": 921.53,
+  "end": 1070.64,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«Украина!@921.53 … Святая Матерь Героев@923.55, Дойди до сердца моего@926.27» «Прыли бурые ветра в Кавказске@929.19» «Шумом Карпатских@933.21» «Боев славного… Батька Хмеля@936.69» «Тріумфом і гуком гармат революції@941.68» «Радісним гомоном Софіївських дзвонів@945.9» «Нехай душа моя@950.49» «славою@954.67» «Бо ты, Пресвята@958.31» «бо ты все счастье@962.41» «За згодами мій пряскі… кайдані@967.82» «шибануть у понуре ранки@970.53» «Принеси мне зойки катованных@973.97» «Чтоб вера моя была гранитом@981.55» «Чтоб взросла…@985.61» «Чтоб смело шёл я в бой@988.81» «Так, как шли герои@992.21» «За твою славу@996.29» «Чтоб помстить гоньбу неволе@1000.83» «гум катів твоїх@1006.92» «невинну кров@1009.16» «величну смерть героїв@1013.78» «і тисяч інших незнаних нами@1018.72» «Що їх кості порозкидані@1022.68» «Спали вогнем@1027.96» «Страху нехай не знаю я@1034.11» «Скріпи мій дух@1040.78» «Загортуй волю@1042.8» «У серці замешкай моєму@1044.46» «Зрости… мене@1048.18 до ясних чинів» «У тих чинах@1050.86» «Солодку смерть@1055.06» «І розплинуся@1058.68» «Та вічно житиму@1061.68» «Відвічна Україна@1064.86» «Свята, могутня, соборна@1067.34–1070.64»",
+  "note": "The matcher started at 985.61 (mid-prayer); the recitation actually begins at 921.53. Every line was recognised. Line 11 follows pass1 (967.82) over p3 (965.77): p3 places «скрипом» 2.7 s before «шибениць», which is implausible, while pass1 fits the vocal-energy phrasing. Line 18 follows p3 (996.29), where both passes agree on «славу»@996.97. Line 30's «Зрости»@1046.2 sits on a segment boundary, and p3 shows a probable echo of line 29 there, so it was set to 1047.5, just before «мене»@1048.18. Line 23 has a duplicate recognition at 1020.56 (a window-start artifact), so it may be up to about 1.5 s later.",
+  "line_starts": [
+   921.53,
+   929.19,
+   933.21,
+   936.69,
+   941.68,
+   945.9,
+   950.49,
+   954.7,
+   958.31,
+   962.41,
+   967.82,
+   970.2,
+   973.97,
+   981.55,
+   985.61,
+   988.81,
+   992.21,
+   996.29,
+   1000.83,
+   1006.92,
+   1009.16,
+   1013.78,
+   1018.72,
+   1022.68,
+   1027.96,
+   1034.11,
+   1040.78,
+   1042.8,
+   1044.46,
+   1047.5,
+   1050.9,
+   1055.06,
+   1058.7,
+   1061.7,
+   1064.86
+  ],
+  "adjudication": "The matcher's 985.61 «Чтоб взросла…» is line 15 of a 34-line prayer. The pooled ASR has the opening clearly: «Украина!@921.53 … Святая Матерь Героев@923.55, Дойди до сердца моего@926.27» = 'Ukraine, holy mother of heroes, come into my heart'. It then has every following line in order: «Шумом Карпатских@933.21», «Батька Хмеля@938.19», «Софіївських дзвонів@947.04» … through «Відвічна Україна@1064.86» and «Свята, могутня, соборна@1067.34–1070.64». The time fits order: right after 'To prayer' («ДОМОЛИТВИ»@917.0) and before «Слава Україні»@1071.28. It also fits cue 30, Molytva (916–1082)."
+ },
+ {
+  "i": 66,
+  "start": 1071.28,
+  "end": 1072.42,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «Слава»@1071.28 «Україні»@1071.78–1072.42",
+  "note": "Matcher gave 66 and 67 the same span. Split here at the word boundary."
+ },
+ {
+  "i": 67,
+  "start": 1072.42,
+  "end": 1073.52,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «героям»@1072.42 «слава»@1072.98–1073.52",
+  "note": "Choir response, given its own time."
+ },
+ {
+  "i": 68,
+  "start": 1073.53,
+  "end": 1074.55,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "p3 «Слава»@1073.53 «нации»@1074.03–1074.55"
+ },
+ {
+  "i": 69,
+  "start": 1074.57,
+  "end": 1075.59,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "p3 «смерть»@1074.57 «врагам»@1075.01–1075.59"
+ },
+ {
+  "i": 70,
+  "start": 1075.6,
+  "end": 1076.4,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «Україна»@1075.32–1076.46 (1st repetition). Vocal energy has a gap at ~1075.75, after «врагам» ends at 1075.59.",
+  "note": "The pass1 word start of 1075.32 overlaps the end of «врагам». Moved it to 1075.6, where the previous phrase ends."
+ },
+ {
+  "i": 71,
+  "start": 1076.46,
+  "end": 1077.38,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «понад»@1076.46 «усе!»@1076.8–1077.38"
+ },
+ {
+  "i": 72,
+  "start": 1077.52,
+  "end": 1078.3,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «Україна»@1077.52–1078.3 (2nd repetition)",
+  "note": "Matcher put all three repetitions at 1075.32. Each now has its own word time."
+ },
+ {
+  "i": 73,
+  "start": 1078.3,
+  "end": 1079.1,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «понад»@1078.3 «усе!»@1078.62–1079.1"
+ },
+ {
+  "i": 74,
+  "start": 1079.28,
+  "end": 1080.06,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «Україна»@1079.28–1080.06 (3rd repetition)"
+ },
+ {
+  "i": 75,
+  "start": 1080.06,
+  "end": 1080.84,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "pass1 «понад»@1080.06 «усе!»@1080.42–1080.84",
+  "adjudication": "Items 70-75 are three Soldier/Choir pairs, and pass1 has three separate «Україна понад усе!» segments: «Україна»@1075.32, «Україна»@1077.52 and «Україна»@1079.28. Item 75 is the third Choir reply, which is «понад»@1080.06 «усе!»@1080.42-1080.84. The matcher's 1075.3 is the first «Україна», so it is the Soldier's first call, not this line. 1080.06 fits the order after 74 (1079.3) and before 76 (1084.3)."
+ },
+ {
+  "i": 76,
+  "start": 1084.27,
+  "end": 1157.97,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "Targeted large-v3 run on the original audio, 1084–1117: «Але я хотів би пояснити про останній день»@1084.27–1086.67 = 'But I want to talk about the last day'; «…і, скоріше за все»@1098.06–1099.76 «…вона не дуже»@1102.0–1103.14 = 'most likely it will not end well'; then pass1 «Склад, який вийшов на цю задачу… добровольці»@1106.02; «Костя отримав поранення»@1129.32; p3 «И я скажу, что если бы не действия Кости»@1137.43; last words «всем тем, кто из этого вышел»@1156.06–1157.97",
+  "note": "Matcher started at 1117.04, the second sentence. It missed the opening and the volunteer sentence at 1106. The opening, 1084–1103, was not in either stored pass and was recovered by targeted recognition. Its middle part is the '[Indistinct]' stretch.",
+  "adjudication": "The matcher's 1117.04 «Це були люди найбоєздатніші» falls inside the line. The volunteers sentence comes before it: pass1 «Склад, який вийшов на цю задачу, це були суто добровольці»@1106.02. I re-ran large-v3 on 1082-1106 in three modes (original with VAD, vocals, original forced to Ukrainian), and all three confirm the reader's opening. «Але я тут розповів про останній день»@1084.04-1084.39 = 'But I want to talk about the last day'. «...і, скоріше за все ... вона не дуже»@1098.1-1103.2 = 'most likely it will not end well'. The line ends at «всем тем, кто из этого вышел»@1156.06-1157.97. This fits cue 32 (Commander's speech, which starts at 1081) and the order after 75 (1080.06)."
+ },
+ {
+  "i": 77,
+  "start": 1157.97,
+  "end": 1160.5,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognition of Kostya, including a search for 'тигр' across all passes and a targeted run on 1155–1160. Placed between the end of 76, «вышел»@1157.97, and the start of 78, «Ценой Кости»@~1158.2.",
+  "note": "This is Kostya's Instagram clip (cue 33) under the commander's speech. It probably overlaps the start of 78. Time is estimated from playback order only."
+ },
+ {
+  "i": 78,
+  "start": 1158.2,
+  "end": 1188.32,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "Targeted run on the original audio: «Ценой Кости отсюда вышло 17 людей»@1158.66. p3 «Сыною кости»@1158.14. Vocal energy starts at 1158.25. Then «На жаль, ми страдали свого побратима»@1164.04, «Я пишаюсь, що знав його як воїна»@1172.96, and pass1 «Брат, вже воїнам жити вічно»@1185.82–1188.32.",
+  "note": "Matcher's 1172.02 start was wrong: that is mid-sentence, after the 'seventeen lives' part. The line starts at «Ценой Кости».",
+  "adjudication": "'Through Kostya's sacrifice, seventeen people made it out' = «Синою Кості звідти вийшло 17 людей» (pass1 «Синою»@1158.9, p3 «Сыною»@1158.14). My targeted re-run gives «Ціною кості звідти вийшло 17 людей»@1158.62. The matcher's 1172.02 is the end of that pass1 segment, after «17 життів завдяки Кості», so it misses the opening. The line runs through «Я пишаюсь, що знав його як воїна»@1172.96 to «Брат, вже воїнам жити вічно»@1185.82-1188.32. 1158.2 lies between the p3 and targeted first-word times and fits the order after 77 (1158.0) and before 79 (1200.7)."
+ },
+ {
+  "i": 79,
+  "start": 1200.71,
+  "end": 1212.8,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "Targeted run with VAD: «…что мы сейчас прощаем»@1200.71–1203.57. pass1 «Прощайте, прощайте»@1205.6–1207.08. Targeted run on the original audio: «Дети, родители, родители, и в самом остальном…»@1207.21–1212.99. pass1 «Самую останнюю черву»@1211.16–1212.78 = 'last to go…'",
+  "note": "Refined from the matcher's 1202.08. The opening words start at 1200.71, which matches the vocal energy onset at ~1200.7."
+ },
+ {
+  "i": 80,
+  "start": 1212.92,
+  "end": 1219.64,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "pass1 «Мама, ты нахами не хами?»@1212.92–1214.7, repeated @1217.94–1219.64. Likely a mishearing of «Папа, ты на каменоломне! На каменоломне!»",
+  "note": "The repetition matches the English 'At the stone factory! At the stone factory!'. The first instance has low word probabilities, around 0.27, and overlaps the end of the hostess's line."
+ },
+ {
+  "i": 81,
+  "start": 1219.96,
+  "end": 1225.58,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "pass1 «Сейчас ты у нас поводку»@1219.96–1221.3 (≈ «Сейчас, подходите…»), «Ты хочешь прощать?»@1221.52, «Да»@1223.52, «Ты хочешь прощать?»@1224.0, «Да»@1225.28–1225.58",
+  "note": "'прощать' is probably «прощаться», the goodbyes. The repeated question-and-'yes' pattern may include a second voice. End is uncertain within ~2 s."
+ },
+ {
+  "i": 82,
+  "start": 1225.6,
+  "end": 1234.1,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognition of the child's voice. Targeted runs on 1212–1234.5, with and without VAD, returned only hallucinated 'Субтитры…' text. Placed between the last «Да»@1225.58 and the start of 83, «Это как раз»@1234.12.",
+  "note": "About 29 words of child speech, so roughly 10–12 s. It may overrun into Liokha's start at 1234. Vocal-energy bursts at 1227.5, 1229.5–1232 and 1233.5 fit intermittent child speech."
+ },
+ {
+  "i": 83,
+  "start": 1234.12,
+  "end": 1239.53,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "Targeted run: «Это как раз мы стояли, наши 135-й и наши стояли»@1234.12–1239.52. p3 has the same words @1234.23. Large model has «Це якраз»@1233.64.",
+  "note": "Matcher was right. Refined slightly."
+ },
+ {
+  "i": 84,
+  "start": 1239.54,
+  "end": 1240.6,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "Targeted run, both vocals and original: «Это кино из зимы»@1239.54–1240.6 (= «Это конец зимы?»): «Это»@1239.54 «кино»@1239.74 «из»@1240.22 «зимы»@1240.38",
+  "note": "Matcher had nothing and interpolated. This was found with a targeted pass."
+ },
+ {
+  "i": 85,
+  "start": 1240.6,
+  "end": 1265.1,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "pass1 «Ми ще простояли два тижні 100 чоловік і п'ять днів стояли 50 чоловік»@1240.58–1249.64, «Останнє це біля літака, може чути»@1249.64, «Там були гаражі, це наші стояли гаражі»@1253.34, «В ітогі, в нас стояли три тижні»@1258.44–1263.74, p3 «Их оттуда»@1263.92–1265.16 = 'and they…'",
+  "note": "The word «Ми»@1240.05 overlaps Ian's «зимы», so start is set at the segment start, 1240.58. End includes the trailing 'and they…'."
+ },
+ {
+  "i": 86,
+  "start": 1265.1,
+  "end": 1267.1,
+  "conf": "low",
+  "method": "adjudicated:reader",
+  "evidence": "No recognition of Kostya. Placed between 85's last words, «Их оттуда»@~1265.1, and 87's «шесть»@~1267.7. Targeted vocals pass has a word gap «ну»@1265.12 → «я»@1267.10.",
+  "note": "Matcher's 1240.58 was only Liokha's segment, so it was wrong. This is Kostya's Instagram line over Liokha. Time is estimated from playback order.",
+  "adjudication": "The matcher's evidence fails on meaning. «Ми ще простояли два тижні 100 чоловік ... 50 чоловік» is Liokha describing the holding of the line (item 85), not Kostya's 'Let's go, guys, keep working!'. My re-runs on 1238-1272 (vocals and original with VAD) find no Kostya speech either. They do confirm the boundaries the reader used. Item 85 ends at «їх відтоді стріляли»@1263.83-1265.19 (p3 «Их оттуда»@1263.92-1265.16), and item 87 begins at «Шість полонених»@1268.24 (vocals run @1269.56). Kostya's Instagram line (cue 33, 1081-1809) is plausible here. It is kept in transcript order inside the 1265.2-1268.2 gap and stays low because it is estimated from order, not recognised."
+ },
+ {
+  "i": 87,
+  "start": 1267.7,
+  "end": 1271.3,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "p3 «шесть»@1267.78, «поломанных»@1270.45–1271.27. Targeted run on the original audio: «шести»@1267.64. Targeted vocals: «6»@1268.32 «поломанных»@1269.5. Large model: «Шість поломаних»@1269.54. «поломанных» ≈ «пол[он]енных» = 'taken prisoner'.",
+  "note": "Passes disagree by up to ~1.8 s, but two of them agree on ~1267.7. The after-neighbour, item 88 at an interpolated 1256.23, is wrong. Item 88 (Hek, 'Look, Dad, stop right there!') must fall between ~1271.3 and «пять»@~1273.0, the 'five killed' of item 89."
+ },
+ {
+  "i": 88,
+  "start": 1271.0,
+  "end": 1273.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No child speech recognised. Placed between item 87 «около шесть поломанных»@1267.32–1270.45 (= 'six taken prisoner') and item 89 «пять»@1273.02. The vocal stem has brief high-pitched voicing at about 1272.4–1273.4.",
+  "note": "Hek is a separate layer (cue 35, Paskotynka walk) under Liokha (cue 34), so this line may overlap Liokha. The neighbour 87 timing of 1249.64 is interpolated; its real speech is about 1267.3."
+ },
+ {
+  "i": 89,
+  "start": 1273.02,
+  "end": 1278.72,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«пять»@1273.02 «разбитых»@1273.84 (= five killed); «Крутися там уранами»@1276.42–1278.72 (likely a mishearing of «тридцать раненых»).",
+  "note": "The matcher started at the segment start, 1263.92. «Их оттуда стояло… около шесть поломанных»@1263.92–1270.45 is the tail of 85 plus item 87 ('six taken prisoner').",
+  "adjudication": "The matcher's start, 1263.92, is the segment onset «Их оттуда стояло около шесть поломанных», which is the tail of 85 ('and they…'). Pass1 hears the same audio as «Тільки туди стріляли»@1263.9. «шесть поломанных»≈«шесть пленных» is item 87, 'Six taken prisoner'. The meaning of 89 starts at «пять»@1273.02 «разбитых»@1273.84, a garble of «пять убитых» (= five killed). «Крутися там уранами»@1276.42–1278.72 plausibly garbles «тридцать раненых» (= thirty wounded). This leaves room for Hek's 88 at about 1271 and fits before 91's «60 контузій»@1282.52. Liokha is in cue 34 (1231–1383)."
+ },
+ {
+  "i": 90,
+  "start": 1279.2,
+  "end": 1282.4,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognition of «Смотри, папа, крестик». Placed between 89's last word «уранами»@1278.72 and 91 «60»@1282.52. High-pitched voicing in the vocal stem at about 1280.2–1281.5.",
+  "note": "Child layer under Liokha. Time comes from order only."
+ },
+ {
+  "i": 91,
+  "start": 1282.52,
+  "end": 1290.18,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«60»@1282.52 «контузій,»@1283.14 «150.»@1283.86; «Це такі контузії, я не знаю, може люди не знають, це сотрясення мозу.»@1285.74–1289.84",
+  "note": "The vocals pass also has an isolated «150»@1280.5. If Liokha said that first, the line starts about 2 s earlier."
+ },
+ {
+  "i": 92,
+  "start": 1290.3,
+  "end": 1292.6,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Placed in the gap between 91's last word «мозу»@1289.84 and 93 «10 процентов»@1292.22.",
+  "note": "Child layer. May overlap the start of 93."
+ },
+ {
+  "i": 93,
+  "start": 1292.22,
+  "end": 1318.4,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«10 процентов трещина и череп»@1292.22 (pass1 «10%»@1292.8); «…а це вже піздець»@1302.0; «Давление под 200, головные боли»@1302.66; «То есть такая перспектива»@1310.6; «Я уже думал, что за основной признак [в снайпера] я хочу быть»@1314.7–1318.12",
+  "note": "The matcher's end of 1321.27 included Ian's line 94. Liokha's last word is at about 1318.1."
+ },
+ {
+  "i": 94,
+  "start": 1317.73,
+  "end": 1321.1,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«А ты можешь так делать?» with «А»@1317.73 «ты»@1318.05 «можешь»@1318.31 «так»@1319.95 «делать»@1321.07",
+  "note": "Matches the matcher's proposal. Overlaps Liokha's last word «быть»@1318.12. Liokha's reply «Ну я же инструктор, я знаю всех» follows at once, which supports the attribution."
+ },
+ {
+  "i": 95,
+  "start": 1320.0,
+  "end": 1321.6,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognition of «Ооо, полиция». Bounded by 94 «А»@1317.73 and 96 «Ну»@1321.2. The siren is evidenced in the mix: a steady ~389 Hz wail is first prominent around 1309 and holds strongly from 1317 to 1326, then falls and rises (1327–1333). High-pitched voicing in the vocal stem at 1320.4–1321.3.",
+  "note": "The rising pitch sweep at 1331–1333 (286→485 Hz) is the siren's wail cycle, not Frania. Her actual exclamation could be anywhere after siren onset (about 1309); order puts it here."
+ },
+ {
+  "i": 96,
+  "start": 1321.2,
+  "end": 1343.0,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну я же инсульт [инструктор], я знаю всех.»@1321.2; «Я знаю другого…»@1324.06; «А я уже думаю…»@1327.18; «Я не можу пішти… Я ж не бачу там же. Прицільні треба доставляти. А я по закулярі не бачу.»@1333.9–1342.66",
+  "note": "The matcher's end of 1350.48 swallowed Ian's 97 and the start of 98."
+ },
+ {
+  "i": 97,
+  "start": 1344.24,
+  "end": 1346.2,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "«А в тебе, в керівниці, вона права.»@1344.24–1346.14. This is a garbled question about the eyesight, between Liokha's «…не бачу»@1342.66 and his reply «Це мені треба вже закуляри…»@1347.18.",
+  "note": "The matcher interpolated 1350.48 inside 98. Attribution to Ian rests on the question/answer structure; the transcription is noisy."
+ },
+ {
+  "i": 98,
+  "start": 1347.18,
+  "end": 1358.92,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«Це мені треба вже закуляри на лозу зняти»@1347.18–1349.88 (= gotta wear glasses for that); «Я стріляю, не погано, але я не бачу цих цих цих»@1352.68 (vocals «Ты стреляешь неплохо»@1351.63); «А там же треба поправитися»@1357.16–1358.92",
+  "note": "The matcher started at 1351.63 and missed the glasses phrase. The vocals pass also has Hek «Папа, я хочу посмотреть что под камнем»@1347.59, a child line not in the English, overlapping here.",
+  "adjudication": "Item 96's glasses clause is already covered by «А я по закулярі не бачу»@1341.3–1342.66 ('can't do it without glasses'). The second glasses mention, «Це мені треба вже закуляри…»@1347.18, is 98's opening, 'I gotta wear glasses for that stuff'. The rest follows: «Я стріляю, не погано, але я не бачу цих цих цих»@1352.68 (= I shoot okay but can't make out…) and «А там же треба поправитися»@1357.16 (= you need adjustments). The matcher began mid-line at vocals «Ты стреляешь неплохо»@1351.63 and dropped the first clause. 1347.18 falls between 97 (about 1344.2) and Hek's 99 «Папа, подними камень»@1358.45."
+ },
+ {
+  "i": 99,
+  "start": 1358.45,
+  "end": 1370.5,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Папа, подними камень»@1358.45; «Это земля»@1361.4; «Это земля, песок и ветки»@1365.4, with «ветки»@1369.88",
+  "note": "Matches the proposal. The child layer overlaps Liokha's line 100."
+ },
+ {
+  "i": 100,
+  "start": 1361.38,
+  "end": 1368.78,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Так марксменам підхиляється кола.»@1361.38–1364.56 (= so as a marksman…); «Чисто блять.»@1365.02; «Тут такий хуяй…»@1366.38–1368.78 (= just straight up, fuck it)",
+  "note": "The matcher interpolated 1368.78. The words are recognised, overlapping Hek's 99 (a different recording)."
+ },
+ {
+  "i": 101,
+  "start": 1370.9,
+  "end": 1372.1,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«А что это такое?»@1370.88 (vocals) / «А що це?»@1371.12–1372.02 (pass1)",
+  "note": "Matches the proposal."
+ },
+ {
+  "i": 102,
+  "start": 1373.28,
+  "end": 1381.82,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну, есть два снайпера, которые заседают.»@1373.28; «Два, три, п'ять.»@1376.54; «А марксмены для группы?»@1379.84–1381.82 (targeted: «А в Марксмені є група»@1380.0)",
+  "note": "Matches the proposal. Liokha's cue ends at about 1383."
+ },
+ {
+  "i": 103,
+  "start": 1381.82,
+  "end": 1426.5,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Stage direction, still not recognised. It starts at 102's last word, «група»@1381.22–1381.8. The focused decodes over 1380–1620 (t_original, t_vocals, t_vad) return nothing in 1382–1425. The only nearby output is Romanian «Nu uitați să vă abonați la canal!»@1433.84, a hallucination. The vocal stem is quiet over 1383–1424 (about −50 to −58 dB) with voicing at 140–170 Hz, consistent with distant chant. The direction ends where the Easter singing begins."
+ },
+ {
+  "i": 104,
+  "start": 1426.5,
+  "end": 1459.2,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Still no recognition. The added focused passes give only hallucinations: t_original «Nu uitați să vă abonați la canal!»@1433.84 and «Să vă mulțumim pentru vizionare!»@1454.18; t_vocals «Звучить музика»@1421.32/1448.16. Placed by sound. Cue 38 (Easter) starts at 1425. After a transient at 1425.0–1425.5, sustained singing in the vocal stem starts at 1426.5–1426.75 (−41 dB, F0 150–220 Hz). The closing «Христос воскресе!» is placed at the loud voiced burst at 1457.5–1458.5 (F0 about 400 Hz, a raised call)."
+ },
+ {
+  "i": 105,
+  "start": 1459.2,
+  "end": 1466.6,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Still no recognition. The added passes give only «Să vă mulțumim pentru vizionare!» (words at 1455.82–1463.18), a hallucination. Loud broadband bursts at 1459.25–1459.5 (−27.5 dB), 1461.75–1462.25 (unvoiced, crowd-like), 1464.5–1464.75 and 1466.0–1466.5 (−29 dB) fit a threefold call and response. The line spans them."
+ },
+ {
+  "i": 106,
+  "start": 1467.4,
+  "end": 1495.0,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Still no recognition. The added passes give only hallucinations: «Nu uitați să dați like…»@1490.58 and «Звучить музика»@1498.52. Steady sung pitch (about 254–262 Hz, held across 1467.25–1468.5) resumes right after the last crowd burst ends at 1466.6. The end is set at one troparion length (about 28 s, matching 104's ~30 s), before the louder singing from 1496."
+ },
+ {
+  "i": 107,
+  "start": 1495.0,
+  "end": 1531.0,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Stage direction. Loud singing continues 1496–1543.8 (vocal stem −31 to −42 dB, F0 about 200–260 Hz). Recognition here is only music hallucination: «Песня на романе»@1510.12, «Звучить музика»@1507.08. At 1530 the 320–1000 Hz and 1–4 kHz bands drop by about 8 dB, which marks a change in the singing. The direction runs until 108's estimated start."
+ },
+ {
+  "i": 108,
+  "start": 1531.0,
+  "end": 1549.5,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Only the tail is recognised, right after the chant cuts out at 1544.0: «Ты@1543.98 знаешь,@1545.38 что это?» (= 'And you know'), «Это был знак…»@1546.06, «когда@1548.2 я был в Миняке@1549.12» (≈ «когда меняют» = 'when they take off/change the old hoof'). The same voice (F0 110–170 Hz, about −50 dB) hears «меняют» as «Миняке» again in Ruslan's next line, «даже в Миняке»@1555.5 ('how they change them'), which supports the reading. The earlier part is masked by the chant. The start is back-computed by text length: the last ~22 of ~62 words take about 1544–1550.5, giving about 18–19 s for the whole line."
+ },
+ {
+  "i": 109,
+  "start": 1550.88,
+  "end": 1554.7,
+  "conf": "medium",
+  "method": "adjudicated:reader",
+  "evidence": "«Ах…»@1550.88; «Ты шёл, а я вообще в холм»@1552.88–1554.48. This plausibly garbles «Да ты что! А я вообще не знал» (= No way! I had no idea). It is the loud voiced burst at 1551–1553.",
+  "note": "The matcher's «Да, да, я не задувался, но прям…»@1556.98 (targeted vocals «Я не задувался ніколи»@1555.0–1559.0 = 'I never thought about it') is item 111, 'Never even thought about it'. «понятно, да. Ну, даже в Миняке [меняют]»@1554.82–1556.46 fits Ruslan's 110, 'You can't even imagine how they change them, right?'.",
+  "adjudication": "The matcher's «Да, да, я не задувался[задумывался], но прям...»@1556.98 means 'yeah, I didn't think about it'. That is Ian's later line 111, 'Never even thought about it', not 'No way! I had no idea'. Putting 109 there leaves no speech for 110 and 111 before Levin's «Это на Минке»@1562.25; only «Да.»@1559.18 remains. The reader's «Ах…»@1550.88, «Ты шёл[шо], а я вообще в холм[не знал]»@1552.88–1554.48 plausibly garbles «Ты шо! А я вообще не знал». It falls in a loud burst at about 1551.5–1553.75 (-33 to -38 dB against about -47 around it). It comes after Ruslan's 108 tail «когда я был в Миняке»@1548.2–1549.44 and before 110 and 111. The garble is loose, so confidence stays medium."
+ },
+ {
+  "i": 110,
+  "start": 1553.86,
+  "end": 1556.46,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "p3_vocals «а я@1553.86 вообще@1554.12 в холм, понятно,@1554.82 да.@1555.12» then «Ну,@1555.5 даже@1555.92 в Миняке.@1556.18» [≈ «ты вообще… даже… как меняют…, да?»]. 'вообще/даже' carry 'even', 'Миняке'≈'меняют' carries 'change', and the tag «да» carries 'right?'.",
+  "note": "The matcher's 1559.18 is interpolated and falls after Ian's reply. Who says what in 1552.9–1556.5 is uncertain. «Ты шёл»@1552.88 is a steady ~340 Hz sound, either a non-speech noise or an excited «Ты шо!» (Ian's 'No way!'). If it is Ian, 109 owns 1552.88–1555.34 and 110 is only «Ну, даже в Миняке»@1555.5. Either way the neighbour's 1556.98 for item 109 is wrong: that segment is item 111's «я не задумывался». Item 109 belongs at or before ~1552.9, so the order conflict with the neighbour is expected here."
+ },
+ {
+  "i": 111,
+  "start": 1556.98,
+  "end": 1559.18,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "p3_vocals «Да,@1556.98 да,@1557.52 я@1557.74 не@1557.84 задувался[задумывался],@1558.0 но@1558.72 прям...@1558.82». Targeted vocals pass: «Я не задувався ніколи.»@1555.0–1559.0 ('I never thought about it').",
+  "note": "Literal match for 'Never even thought about it'. The matcher gave this segment to item 109 ('No way! I had no idea'); it belongs here."
+ },
+ {
+  "i": 112,
+  "start": 1559.18,
+  "end": 1559.92,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Only «Да.»@1559.18–1559.92 lies between Ian's line (ends 1559.18) and Levin's «Это на Минке»@1562.25. The vocals stem is quiet from 1560 to 1562. «Да» alone is not a match, though it could be the start of «Давай покажу».",
+  "note": "Placed right after 111 and before Levin's scene."
+ },
+ {
+  "i": 113,
+  "start": 1562.25,
+  "end": 1575.5,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Это на Минке [≈ это мельница]»@1562.25, «Это Марина Примаченко.»@1563.69, «Марина Примаченко.»@1565.83, «Вот.»@1567.97, «И вот здесь»@1569.37–1570.84 ('and here, a trident…'). Levin's voice (~140–160 Hz) continues to ~1575.5 for the unrecognised 'trident drawn by a neural network'.",
+  "note": "The matcher started one segment late (1563.69). The windmill ('мельница') is the first words of the line."
+ },
+ {
+  "i": 114,
+  "start": 1581.2,
+  "end": 1584.7,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognised question. Bounds: Levin's 113 ends ~1575.5 and Levin's reply «И он, у меня… только… один, если считать»@1584.77. Pass1's version of the reply segment begins at 1581.18, which hints at speech onset there.",
+  "note": "The matcher's interpolated 1570.84 overlaps Levin's own line. Voiced frames at 1577.5–1581 are high (300–440 Hz) and probably not Ian."
+ },
+ {
+  "i": 115,
+  "start": 1584.77,
+  "end": 1607.26,
+  "conf": "medium",
+  "method": "adjudicated:reader",
+  "evidence": "«И@1584.77 он, у меня как бы… только, я не знаю, один, если считать.» (the 'only artist' reply, rendered as 'Yeah, yeah'). Then «А так вообще Богдан уникальный получился.»@1590.31, «Вот как он пищал, Настя…»@1593.21, «Наверное, ему там часа без пола, все в хуй.»@1595.83 ('an hour of anesthetic… all the bullshit'), and «Я это чётко запоминаю.»@1601.34–1607.26 / targeted «Навіть чітко це згадуємо зараз»@1605.7–1607.88 ('Totally unforgettable').",
+  "note": "The matcher began at the second sentence (1590.31). The 'only one, if you count' answer runs straight into «а так вообще Богдан…» in one targeted segment, so it is the same speaker, Levin. Medium because 1584.77 could still be Ian's question.",
+  "adjudication": "Matcher anchors on «А так вообще Богдан уникальный получился»@1590.31, which is the line's second sentence ('And you know, what made Bohdan really stand out'). The line opens 'Yeah, yeah', Levin's answer to Ian's 'only artist' question. That answer is «И@1584.77 он, у меня как бы… только, я не знаю, один, если считать». It is first-person answer content, not a question. The targeted pass hears it in one breath with the next sentence: «…тільки один, якщо вважати, а так взагалі Богдан унікальний…»@1585.0. In the vocals stem the voice from 1585.4 to 1588.4 sits at about 100–110 Hz, the same as at 1591.0 (about 105 Hz), so it is one speaker. 1584.77 also fits the order (114 at 1581.2, 116 at 1610.0). End: «Я это чётко запоминаю»@1601.34–1607.26 ('Totally unforgettable')."
+ },
+ {
+  "i": 116,
+  "start": 1609.98,
+  "end": 1611.16,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "pass1 «Туре кольцо.»@1609.98–1611.16 [≈ «(ну) реально больно»]. It sits exactly between Levin's «запоминаю»@1606.56 and Levin's answer «Ну да…»@1611.64.",
+  "note": "The matcher had this interpolated at 1607.26. The sound match is loose, but the position is tight."
+ },
+ {
+  "i": 117,
+  "start": 1611.64,
+  "end": 1614.62,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Ну@1611.64 да,@1612.44 и полка[иголкой]@1613.26 житти культуре.@1614.1»",
+  "note": "«и полка» is a mishearing of «иголкой» (needle). The matcher was right."
+ },
+ {
+  "i": 118,
+  "start": 1637.6,
+  "end": 1652.19,
+  "conf": "medium",
+  "method": "adjudicated:reader",
+  "evidence": "«Хороший,@1644.57 ой, ты маленький,@1645.41 ой, иди сюда,@1647.85 ой, ты хороший,@1649.51 ай, ты, кис-кис-кис-кис@1650.83–1652.19» = 'oh you're so nice, oh you're so small, oh come here… kitty-kitty-kitty'. Kostya's voice (~150 Hz) starts in the vocals stem at 1636.5 after near-silence from 1620 to 1636.",
+  "note": "The matcher started at 'oh you're so nice', mid-line. The opening 'Kitty-kitty, come here, come, little one! Come here,' was not recognised and sits in 1636.5–1644.5.",
+  "adjudication": "Matcher's text is right but starts mid-line. «Хороший,@1644.57 ой, ты маленький, ой, иди сюда… кис-кис-кис-кис@1651.97» is 'oh you're so nice, oh you're so small, oh come here… kitty-kitty-kitty'. The opening 'Kitty-kitty, come here, come, little one! Come here' must come before it. The vocals stem is near-silent from 1623 to 1637.4 (about -55 to -67 dB). Speech starts at 1637.6 and runs in bursts to 1643.4, at the same high cat-calling pitch (about 310–380 Hz at 1638.0, 1640.4 and 1641.2) as «Хороший» at 1644.0 (about 311–334 Hz). Reader's 1636.5 is only a faint bump; the real onset is 1637.6, so I start there. The order fits (117 at 1611.6, 119 at 1663.9), and cue 33 (Kostya beckoning a cat) is live."
+ },
+ {
+  "i": 119,
+  "start": 1663.9,
+  "end": 1688.96,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Добрел@1663.9 я вот сюда», «думал,@1666.18 что буду подниматься по вот этому склону,@1671.21 но нет.@1673.74», «А дорога ведется [влево]»@1674.84–1678.36, «Дальше посмотрим.»@1681.8, «А@1686.96 теперь мне туда.@1688.66»",
+  "note": "End extended from the matcher's 1683.24 to cover 'And now I go that way!' (А теперь мне туда)."
+ },
+ {
+  "i": 120,
+  "start": 1688.96,
+  "end": 1690.75,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Stage direction. It starts at Kostya's «туда.@1688.65–1688.99». Adult voicing at 1689.0–1690.5 (F0 110–190 Hz) and a brief high blip at 1689.5 come before the sustained child voice. Nothing is recognised here, and the t_vad decode of 1660–1880 has no segment after 1687.43."
+ },
+ {
+  "i": 121,
+  "start": 1690.75,
+  "end": 1693.3,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Still no recognition. The focused decodes over 1660–1880 return nothing between «А теперь мне туда»@1687.43 and the hallucination «Субтитры сделал DimaTorzok»@1721.22–1731.82. Child-voice burst in the vocal stem: F0 about 430–520 Hz from 1690.75 to 1693.25, loudest at 1691.0–1691.25 (−36 dB). It is the first child speech after Kostya, and it is the right length for «Дима, мы разбираем! Разбираем!»."
+ },
+ {
+  "i": 122,
+  "start": 1696.5,
+  "end": 1705.75,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Still no recognition, from any pass. Adult male bursts (F0 about 115–165 Hz) at 1696.5–1699.5, 1701–1703.5 and 1705–1705.75 sit between the two child bursts, which fits two short sentences, 'Got it, Hek.' and 'Frania, is this yours or what?'."
+ },
+ {
+  "i": 123,
+  "start": 1707.5,
+  "end": 1710.3,
+  "conf": "low",
+  "method": "gap-reader",
+  "evidence": "Still no recognition. Loud child-voice burst (F0 about 530–615 Hz, up to −31.6 dB) at 1707.5–1710.25, right after the adult bursts. Its length fits «Мы разбираем эти вещи»."
+ },
+ {
+  "i": 124,
+  "start": 1742.4,
+  "end": 1756.6,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "Trial VAD pass (scratchpad whisper_trial.json): «Я, конечно, чувствую, что я перетаскован на своей локации.»@1742.4–1746.5 [≈ «Я столько стульев перетаскал на своей локации»] = 'I hauled so many chairs at my station'. An adult voice (129–184 Hz) continues 1747.5–1754.5 and 1756–1756.5 for '(laughs) Go ahead, see what you can make of these'.",
+  "note": "This speech is not in whisper.json; it comes from the session's trial VAD run. That run has only segment times (no word times), and its starts can run ~1.5 s early (its «Где вы, главный, пап?»@1779.1 vs pass1 1780.7), so medium."
+ },
+ {
+  "i": 125,
+  "start": 1757.0,
+  "end": 1786.28,
+  "conf": "medium",
+  "method": "adjudicated:reader",
+  "evidence": "Child voice («А вы ему как-то тут походите [положите]?»@1760.78–1762.82) ≈ 'and you stack this here'. Also «Эй, эй!»@1763.04, «Украина главный, пап!»@1780.7 ('Dad! The main flag of Ukraine!') and «Украина главный!»@1785.08–1786.28. The child voice runs ~1757.0 to 1786.9.",
+  "note": "The matcher started at 'Dad! The main flag' (1780.7), about 20 s into the turn. 'I'll take this to the car' comes just before «а вы… тут положите», starting at the child voice at ~1757.",
+  "adjudication": "Matcher's «Украина главный, пап!»@1780.7 is 'Dad! The main flag of Ukraine!', the line's third sentence, about 20 s in. Earlier speech matches the opening structure: «А вы ему как-то тут походите?»@1760.78 = 'and you … here', likely a mishearing of 'положите', for 'and you stack this here'. The vocals pitch there is child-range (about 300 Hz at 1761.0–1762.0), like «Украина главный, пап!» (about 290–320 Hz at 1781.0–1781.5), so it is the same child, Hek. 'I'll take this to the car' comes first. After a dip at 1755.0–1755.5 (about -50 dB), the child pitch begins at 1757.0 (about 348 Hz). It ends at «Украина главный!»@1785.08–1786.28, just before Dima's «Сейчас будем выходить»@1787.08. The order fits: 124 at 1742.4 («Я… перетаскован на своей локации» = 'hauled so many chairs at my station') ≤ 1757 ≤ 126 at 1787.08."
+ },
+ {
+  "i": 126,
+  "start": 1787.08,
+  "end": 1789.14,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Сейчас@1787.08 будем@1787.6 выходить,@1788.12 ты мне покажешь.@1788.8» (adult, ~190 Hz)",
+  "note": "Exact match. The matcher was right."
+ },
+ {
+  "i": 127,
+  "start": 1789.5,
+  "end": 1793.3,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognition. Right after Dima, the vocals stem holds two back-to-back chanted phrases, each falling about a fourth onto a held note (235→175 Hz held, 1789.5–1791.6; 222→164 Hz held, 1791.6–1793.3). That fits a sung «Господи, помилуй» twice.",
+  "note": "The identification rests on the melodic shape only. Bounds: Dima ends 1789.14, and the anthem's loud ending starts ~1793.5."
+ },
+ {
+  "i": 128,
+  "start": 1793.3,
+  "end": 1961.0,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "Anthem: loud singing ends ~1800 (cue 44 ends 1804). Bugle: steady trumpet notes (290/347/457/470 Hz) from 1811.5 (t_original «Играет музыка.»@1810.56), recurring at 1823–1830, 1836–1844 and 1864–1886. Priest faintly: a quiet low male voice (~140–150 Hz) at 1804–1808 and 1904–1917.",
+  "note": "All three events this direction names show up in order in the audio. The end is set by the commander's voice."
+ },
+ {
+  "i": 129,
+  "start": 1961.0,
+  "end": 1974.5,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No matching recognition. A raised male voice (F0 165–192 Hz, the same range as the Commander's speech at 2078.88, ~186 Hz) sounds under the music at 1961–1974. Whisper produced only hallucinations there: «Субтитры сделал DimaTorzok»@1965.4, «Папа, подожди…»@1970.0 [?прапор… підняти], «За кадром, за кадром…»@1970.0 [?загиблим].",
+  "note": "Placed between the faint-priest stretch and the loud brass from 1981. The voice evidence is only suggestive."
+ },
+ {
+  "i": 130,
+  "start": 1974.5,
+  "end": 2028.0,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "p3_vocals «Звучит песня.»@1971.89–2014.96 (music). Loud brass and drums 1981–2027 (mix −27 to −33 dB), trumpet notes 340–457 Hz at 2019–2025 (same note set as the 1811 bugle) under hallucinated «Дякую за перегляд!»@2019.76, then a sudden drop at ~2028.",
+  "note": "Starts where the commander stops and ends when the brass cuts off."
+ },
+ {
+  "i": 131,
+  "start": 2028.0,
+  "end": 2078.88,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "After the brass stops at 2028: faint male voices (150–176 Hz) at 2028–2040, steady low vocal murmur to 2078, and faint Russian «Давайте поехали, тогда начнем информацию.»@2068.98–2070.84. That last line fits Ruslan starting the tattoo (cue 40) more than the funeral.",
+  "note": "Ends where the Commander's speech (item 132) begins at 2078.88."
+ },
+ {
+  "i": 132,
+  "start": 2078.88,
+  "end": 2141.0,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "p3_vocals «Дорогие@2078.88 герои Украины, Геннадий Аполлесов» … «Сегодня@2083.5 мы продолжаем…» … pass1 «Якщо Україна була, то є і буде»@2099.54 … «Маємо про це пам'ятати»@2113.04 … t_vocals «Маємо зробити все від нас залежне для [наближення] нашої [перемоги]»@2125.82–2130.76 … «Слава Україні!»@2138.16 (p3) / 2139.06 (t_vocals), ending ~2141.0",
+  "note": "The matcher had the right start. I extended the end from 2112.0 to the closing «Слава Україні!», which finishes about 2140.9."
+ },
+ {
+  "i": 133,
+  "start": 2141.6,
+  "end": 2142.9,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "Targeted mix pass «Глава Украины! Глава Украины!»: the second chant @2141.24–2142.32 is the crowd's reply, misheard as a repeat of the commander's line. On the vocal stem there is a two-beat shout at 2141.6–2142.8 (peak −18 dB, against about −35 dB for the commander), straight after «Україні»",
+  "note": "The matcher's 2138.16 «Слава Украине!» is the commander's own closing line, which belongs to 132. The crowd's «Героям слава!» follows it at 2141.6."
+ },
+ {
+  "i": 134,
+  "start": 2201.9,
+  "end": 2206.5,
+  "conf": "medium",
+  "method": "adjudicated:reader",
+  "evidence": "t_vocals «Просто прийняти цю папу…»@2204.56–2206.46, i.e. «прошу прийняти@2204.96 (p .94) цей прапор». A prompted pass gives «Від імені@2202.06 командування@2202.40 Третьої окремої бригади прошу@2204.52 прийняти@2205.02 цей прапор@2205.90» (prompt-assisted). The vocal stem rises from silence (−77 dB) to speech at 2201.9; the voice has a male pitch of about 200 Hz",
+  "note": "The matcher's 2141 was interpolated and is about 60 s early. «Dear family…» is not heard separately. If it was said before the 2199–2201.8 silence, the start would be about 2196.",
+  "adjudication": "The matcher's 2141 is interpolated. Its recognition text is the priest's «можете вийти і сказати… слова подяки», which says nothing about a flag, so it fails on meaning. The reader's claim rests on an unprompted t_vocals segment in whisper.json: «Просто@2204.56 прийняти@2204.96 (p .94) цю@2205.62 папу@2205.9». That is «прошу прийняти цей прапор», 'I ask you to accept this flag'. On the vocal stem, a near-silent gap at 2198.5–2201.5 (−86 dB at 2201.0) ends with speech at 2202.0 (−39.5 dB), voiced at about 180–216 Hz, the commander's range. The speech ends at 2206.5. The burst at 2196–2198 is at 320–364 Hz, so it is not the commander's «Dear family». My unprompted re-decodes of this window returned only «Дякую за перегляд!», so I am keeping medium rather than high. The start comes after 133 (2141) and before 135, inside the Hena-funeral layer (cue 46, to 2268)."
+ },
+ {
+  "i": 135,
+  "start": 2212.2,
+  "end": 2260.0,
+  "conf": "low",
+  "method": "adjudicated:reader",
+  "evidence": "Second half recognised: t_plain/t_vocals «[сину] своєї держави, сину своєї української родини»@2235.0–2237.5, «і кожен, хто сповнений великою любов'ю до великої постаті героїзму і честі»@2238.3–2249.1, «можете вийти і сказати слова прощання, слова подяки, слова вдячності, слова…»@2250.1–2258.0, and on the mix «…слова [любові]»@2259.2–2260.0. The first half was not recognised, but the same priest voice (about 130–175 Hz) runs continuously from 2212.2",
+  "note": "The matcher started this line at 2243.34, in the middle of it. I used the onset of the priest's voice after the flag handover. There is a pause at 2225.2–2227.0. If the first 15 s is untranslated preamble, «Today, we are gathered…» would start about 2227.",
+  "adjudication": "Both claims point at the same priest speech, but the matcher's 2243.34 is in the middle of the line. Its own recognition text, «що в великій постаті героїзму і честі можете вийти і сказати… слова подяки, слова вдячності», is the second half. Earlier words of the same line are already recognised before 2243: t_plain «своєї@2235.0 держави, сину, своєї країнської родини, і кожен@2238.86, хто вповнений великою любов'ю@2242.7». That is 'a son of his nation, a son of his family. And anyone who holds great love'. My long-context vocal decode independently gives «…великої любові@2242.70, до великої постаті героїзму… слова вдячності, слова…» running to 2259.1. So the line starts well before 2235. The 'Today, we are gathered… our comrade' part was never recognised, even with a prompt (Whisper returns «Звучить музика»). The vocal stem shows a gap at 2209.5–2211.5 and then continuous speech-band energy from 2212.0. That speech has voiced frames at 132–174 Hz, the same range as the priest at 2234–2249, and pauses at 2225.5–2226.9 and 2233.5. I accept the reader's onset of 2212.2 but rate it low: from the speaking rate, the line could equally start about 2220 or 2227 if 2212–2225 is untranslated preamble or chant."
+ },
+ {
+  "i": 136,
+  "start": 2284.7,
+  "end": 2292.9,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "Targeted vocal-stem pass (ru, unprompted): «Типа@2284.70 все так радовались@2285.50 (p 1.00), ну как радовались, то есть ещё не обстоятельство@2290.48, что он будет так холодно улыбан@2292.52». This reads as «…по стечению обстоятельств, что он не попал в Мариуполь». A prompted run fills in «попал в Мариуполь»@2291.84–2292.38",
+  "note": "None of the earlier passes found this line (the matcher said 2259.46, interpolated). After the funeral layer ends there is digital silence at 2267–2273; Ian's quiet line comes after it, at 2284.7.",
+  "adjudication": "The matcher's 2259.46 is interpolated, and its recognition text is the priest's «ім'я прощання, слова подяки…», which is the wrong speech. My own unprompted ru decode of the vocal stem (2280–2296, level-normalised) reproduces the reader's hearing: «Типа@2284.70 все так радовались@2285.50 (p 1.00), ну как радовались, то есть еще не обстоятельство@2290.48, что он будет на полной улыбке@2292.44». That is 'everyone was so relieved… [по стечению] обстоятельств, that he [didn't end up in Mariupol]'. The line's opening ellipsis fits «Типа все так радовались». The stem is digitally silent at 2266.5–2273 and very quiet speech rises at 2284.5 and stops at 2293.0, so the start is in order between 135 and 137. The orchestrator's earlier verify run decoded with auto language and no level normalisation, and returned only «Субтитры сделал DimaTorzok».",
+  "verification": "reproduced unprompted: «Типа все так радовались, ну как радовались…»@2284.58 (vocals 2280–2296 s, ru, normalised); the word «Мариуполь» itself only appeared in a prompted run"
+ },
+ {
+  "i": 137,
+  "start": 2355.0,
+  "end": 2412.6,
+  "conf": "low",
+  "method": "adjudicated:reader",
+  "evidence": "No words were recognised; every pass returns hallucinations such as «Дякую» or «Звучить музика». The vocal stem is silent at 2335–2354, then a voice starts at 2354.5–2356. There are sustained sung notes at 2356–2359 (about 250–300 Hz), 2361–2364 (about 315 Hz) and 2376–2379 (238 Hz held for 2.8 s). Cue 49, «Yak toy miud» (Sasha sings a lullaby), starts at about 2349",
+  "note": "This is the singing onset, not a match on the lyric. The matcher's 2259.46 was interpolated.",
+  "adjudication": "The matcher's 2259.46 is interpolated onto the priest's «слова подяки, слова вдячності», so it is wrong in meaning, and it falls 90 s before the lullaby cue begins. No pass recognised the lyric. Every decode, including mine, returns hallucinations such as «Дякую!»@2358.55. The acoustic evidence holds up, though. The vocal stem is near-silent (−75 to −105 dB) from 2337 to 2354. A voice rises at 2354.5, then holds pitches the way singing does: 262–271 Hz across 2356–2358.5, 314–320 Hz across 2362.5–2364 and 235–239 Hz across 2376–2378.5. Cue 49 «Yak toy miud» ('like that honey', Sasha sings a lullaby) starts at 2349, and the English line opens with that same 'Like that honey'. I accept the singing onset, which is in order between 136 (2284.7) and 138 (2414.2).",
+  "verification": "placed by sound, not words: the vocal stem rises from near-silence into held sung pitches at 2354.5 s, as cue 49 (the lullaby) begins; no lyric was recognised by any pass, so it is not 'confident' in the sense of recognised speech"
+ },
+ {
+  "i": 138,
+  "start": 2414.2,
+  "end": 2415.5,
+  "conf": "low",
+  "method": "adjudicated:reader",
+  "evidence": "Prompted vocal pass «Кто это стучит?» 2413.08–2415.42, with «это»@2414.36 (p .91) and «стучит»@2414.54 (p .54). On the stem, a loud child-pitched burst (390–420 Hz, −29 dB) at 2414.3–2414.8 is the strongest voice event in 2385–2460. Unprompted passes also detect speech there (t_plain hallucination 2411.64–2414.98, «Звучить музика»@2413.04)",
+  "note": "I matched this on the child's voice and a prompt-assisted hearing, so the wording is not confirmed.",
+  "adjudication": "The matcher's 2259.46 is interpolated onto the priest's speech, before cue 49 even starts, so it is refuted. The reader's wording «Кто это@2414.36 стучит@2414.54» comes only from a prompt-assisted pass. Unprompted decodes detect speech at exactly that point but no Russian words: «Nå er det styrtid» at 2413.78–2415.46 (er@2414.3, det@2414.44), t_plain «Nå er vi i bygget» (vi@2414.44), and my own «Субтитры подогнал»@2414.38. On the vocal stem, the loudest event in the window is a child-pitched burst at 2414.25–2414.75 (−33 dB, 391–405 Hz), trailing at 320–356 Hz to 2415.25. It sits between two of Sasha's sung phrases (229–291 Hz at 2408–2412 and 291–311 Hz from 2417.25). That fits a child (Frania) cutting into the lullaby, before 139 resumes. The timing is plausible, but the words are unconfirmed.",
+  "verification": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ },
+ {
+  "i": 139,
+  "start": 2417.4,
+  "end": 2438.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Nothing was recognised. Placed between 138 (2415.5) and 140 (2483.1), where the singing resumes: voiced at 2417.4–2418.4 (195–307 Hz), with sustained sung notes at 2428–2437",
+  "note": "I assumed this is the singer repeating the lullaby line once Frania's interruption is over. The exact moment is an estimate."
+ },
+ {
+  "i": 140,
+  "start": 2483.1,
+  "end": 2492.2,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "t_vad «Остались@2483.76 только@2485.6 фотографии@2485.86 сообщения@2490.2». Targeted vocal pass «…графы@2487.68, да, сообщения@2490.44 все@2491.08 сбрасываются@2491.30», which reads as «все фотографии, сообщения — всё стёрлось». The stem rises from silence at 2483.1",
+  "note": "The matcher's 2259.46 was wrong. «I mean» is probably the unrecognised 0.6 s before «Остались».",
+  "adjudication": "The matcher's 2259.46 is backed by the priest's «ім'я прощання, слова подяки…», which is the wrong speech and the wrong scene. The reader's t_vad «Остались@2483.76 только@2485.6 фотографии@2485.86 сообщения@2490.2» is confirmed by my unprompted vocal-stem decode: «Ну,@2483.36 то есть все, что осталось@2484.74, только@2485.64 … фотография@2487.02, да, сообщение@2490.42, все это просто@2491.44». «Ну, то есть» is the line's 'I mean', 'все, что осталось' is 'that's all that's left', and 'фотографии, сообщения' is 'the photos, the messages'. The vocal stem goes from silence (−82 dB at 2482.75) to speech at 2483.0. Speaker and topic fit cue 50 «Empty» (Katya shows Hena's phone, everything erased), and the time is in order after 138/139 and before 143."
+ },
+ {
+  "i": 141,
+  "start": 2492.2,
+  "end": 2494.3,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Stage direction. It starts where 140 ends and runs to the start of 142",
+  "note": "Adult talk that is not in the transcript continues underneath («Наверное, потому что там что-то есть»@2492.64, «…не помню»@2494.8)."
+ },
+ {
+  "i": 142,
+  "start": 2494.3,
+  "end": 2495.1,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Nothing was recognised, prompted or not. The bounds are 140's end (2492.2) and 143 (2522.0). I placed it at the first loud high-pitched burst after Katya's line (2494.3–2495.0, about 570–640 Hz, −34 dB), which is the likeliest child's shout",
+  "note": "The child's exclamation could be anywhere in 2492–2522. Another candidate is a child-pitched burst at 2502.7–2502.8."
+ },
+ {
+  "i": 143,
+  "start": 2522.0,
+  "end": 2524.1,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "t_vad «на@2521.63 айфоне@2522.51 (p .89) просто@2523.39 есть@2523.65». A male voice (about 120 Hz) runs to 2524.0",
+  "note": "The matcher's 2337 was interpolated.",
+  "adjudication": "The matcher's 2337.39 is interpolated, and its recognition text «Одно, наверное, здесь было тоже такое» is Katya's line 146. It would also put 143 before 140 (2483), breaking order. The reader cites t_vad in whisper.json: «на@2521.63 айфоне@2522.51 (p .89) просто@2523.39 есть@2523.65», 'on the iPhone there's just…', which is 'iPhones have this thing…'. A male voice (123–130 Hz) is on the stem at 2523.0–2523.75. The exchange that follows is independently confirmed by my decodes, «Резервная@2524.66 копия@2526.06» and then «есть@2527.40 настройка@2527.92», so the setup line has to sit just before 2524.6. «на» has p .02, and «айфоне» starts at 2522.5, so I keep the reader's 2522.0."
+ },
+ {
+  "i": 144,
+  "start": 2524.6,
+  "end": 2526.3,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "t_vad «резервная@2525.19 копия@2526.07». A female voice (200–230 Hz) starts at 2524.2, as Ian's male voice stops",
+  "note": "The start falls between the female-voice onset (2524.2) and Whisper's word time (2525.19).",
+  "adjudication": "The matcher's 2482.1 is interpolated on Katya's later «Я его когда начала включать…», which is the wrong line, and the time comes before 143, breaking order. The reader's t_vad «резервная@2525.19 копия@2526.07» ('a backup') is reproduced by my unprompted decode of the mix: «Резервная@2524.66 копия.@2526.06». On the stem a female voice (195–229 Hz) runs from 2524.0 to 2526.25, between Ian's male stretches at 2523.0–2523.75 and 2526.75–2527.75. The reader's 2524.6 matches the first word."
+ },
+ {
+  "i": 145,
+  "start": 2526.4,
+  "end": 2531.3,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "t_vad «есть@2526.51 настройка@2527.01 стирать@2528.45 или не стирать@2529.27 если это неправильно@2530.03–2531.17». t_vocals «Есть настройка типа стирать или не стирать, если неправильно» 2527.14–2531.16. t_plain «там есть@2526.48 настройка…». Male voice at 2527.4–2531.4",
+  "note": "The matcher put this at 2532.2, but that is Katya's reply (146). The real line starts at 2526.4.",
+  "adjudication": "The matcher's 2532.2 is anchored on «Одно/А, наверное, здесь было тоже такое, мне кажется», which is Katya's reply 'maybe that's what happened here too' (item 146), so it is the wrong line. The reader's line is confirmed by whisper.json t_vocals «Есть@2527.14 настройка@2527.78 типа стирать@2528.66 или не стирать, если неправильно@2530.32». My independent decode agrees: «есть@2527.40 настройка@2527.92 типа стирать@2528.70 или не стирать если что-то неправильное@2530.66», ending at 2531.38. That is 'there's a setting, like, to wipe it or not if… wrong'. A male voice starts at 2526.5–2526.75 (−32.8 dB, 152 Hz), right after Katya's «копия»@2526.06. That is the unrecognised 'No, I mean', so the start is 2526.4 and comes before 146 at 2531.7."
+ },
+ {
+  "i": 146,
+  "start": 2531.7,
+  "end": 2537.7,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«А,@2531.68 наверное@2532.2, здесь был тоже такой, мне кажется»@2531.7–2535.1 (t_plain/t_vocals/t_vad), then «Или я куда-то, не куда-то»@2535.84–2537.68",
+  "note": "The matcher had this right (2532.2 on pass1). The targeted passes catch the opening «А» half a second earlier."
+ },
+ {
+  "i": 147,
+  "start": 2537.6,
+  "end": 2538.4,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "t_plain «А может, у…»@2537.72–2538.42, read as «А может, удалённо?». t_vocals hears «Потому что…»@2537.68. A male voice (about 105–115 Hz) at 2537.4–2538.2 overlaps the end of Katya's line",
+  "note": "A short interjection, cut off by Katya's «Нет»."
+ },
+ {
+  "i": 148,
+  "start": 2538.1,
+  "end": 2549.4,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Нет,@2538.12 я его когда начала включать@2539.62, и вот там несколько раз неправильно шутила@2542.6, и этот, ну, был платошка@2546.84 на заставке@2547.6, то есть был платошка@2548.66» (t_plain/t_vad)",
+  "note": "The matcher had this right. I refined the start to the word «Нет»."
+ },
+ {
+  "i": 149,
+  "start": 2546.6,
+  "end": 2547.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Stage direction. There is nothing to match. It is placed just before the background children's lines",
+  "note": "The kids' lines are background overlapping the end of 148, so this direction sits inside 148 rather than after it. That keeps the run in order before 154's real start."
+ },
+ {
+  "i": 150,
+  "start": 2547.0,
+  "end": 2548.2,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised in any pass, plain, Demucs vocals, VAD, or prompted. Katya's voice dominates the stem. The bounds are 148 (start 2538.1) and 154, which really starts at 2550.96–2551.2 («С одной стороны, у меня с британцами [Бердянском] связано»)",
+  "note": "The Transformers game (150–153) is spread by text length over 2547.0–2551.0, so it stays before 154's real start. The neighbour time given for 154 (2559.59, «Это наша жизнь») is about 8 s late. There are high-pitched shouts at 2551.8–2553.0, so the kids may actually overlap the opening of 154."
+ },
+ {
+  "i": 151,
+  "start": 2548.2,
+  "end": 2548.85,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Placed by text length between 150 and 154's real start (2551.0)",
+  "note": "See 150."
+ },
+ {
+  "i": 152,
+  "start": 2548.85,
+  "end": 2549.95,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Placed by text length between 151 and 154's real start (2551.0)",
+  "note": "See 150."
+ },
+ {
+  "i": 153,
+  "start": 2549.95,
+  "end": 2551.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "Not recognised. Placed by text length, ending where 154 starts («С@2550.96 одной стороны@2551.44»)",
+  "note": "See 150. Item 154 should be timed at about 2551.0, not 2559.59."
+ },
+ {
+  "i": 154,
+  "start": 2551.64,
+  "end": 2560.0,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«С одной стороны, у меня из британского [с Бердянском] сказано [связано]»@2551.64–2554.26, «каждая улочка, это вот все сгибы [с Геной], сгибы»@2556.4–2558.52, «Это наша жизнь»@2559.59–2559.69",
+  "note": "The matcher put this item at 2559.59–2578.27, but that ASR is item 156's content. The true start (2551.64) is earlier than the interpolated neighbour 153 (2556.86). Items 150–153 are the kids' Transformers game, unrecognised background that overlaps this line, and child-pitched bursts sit at about 2549.0, 2552.5, 2555.8 and 2559.0. Those items need to sit at or before 2551.64, or merge will pull this start up.",
+  "adjudication": "The line opens at «С одной стороны, у меня с британцами [с Бердянском] сказано [связано]»@2551.64; the other passes put it at 2551.22, 2551.44 and 2551.48. The rest follows in order: «каждая улочка, это вот все с Геном, с Геном, с Геном» (every little street… it's all Hena) and then «это наша жизнь»@2559.48–2559.72 (it's our life). This is the opening half of the pair that item 161 closes with «с другой стороны». The matcher's 2559.59 lands only on the last phrase, «Это наша жизнь», and the text it matched («чувства, эмоции, воспоминания, огород») belongs to item 156, so its claim fails on meaning. Neighbour 153 is an interpolated kids' line with no evidence of its own, so it does not block this start."
+ },
+ {
+  "i": 155,
+  "start": 2559.9,
+  "end": 2560.9,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No ASR. Placed in the 0.6 s gap between «жизнь»@2559.69 (end of 154) and «это наши чувства»@2560.31 (start of 156). A faint male-pitched blip (~110 Hz) at about 2560.5 may be a quiet «Конечно».",
+  "note": "Interpolated in the matcher too. Order pins this short line between 154 and 156."
+ },
+ {
+  "i": 156,
+  "start": 2560.31,
+  "end": 2577.9,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«это наши чувства, это наши эмоции, это наши воспоминания»@2560.31–2563.29, «Это огород, который Гена плакал [посадил] на сей день [Платону]»@2564.55–2567.43, «Я так думаю, у нас туда может быть что-то [не пустят]»@2567.7–2569.36, «Но это часть нашей жизни»@2575.59–2577.63",
+  "note": "The matcher started this at 2578.27, after the speech had ended, and gave its ASR to 154. The line actually runs from «чувства» at 2560.31.",
+  "adjudication": "The line runs from «это наши чувства, это наши эмоции, это наши воспоминания»@2560.31 through «Это огород, который Гена плакал [посадил]»@2564.55 and «я так думаю, он нас туда просто не отпустит»@2567.7 (t_vad) to «Но это часть нашей жизни»@2575.59–2577.63, which is exactly the English. The matcher's 2578.27 is the end of «жизни», after the line is over, and the next words, «Я хочу, чтобы ребенок это помнил»@2578.41, open item 159. It fits playback order: after 155 (2559.9) and before 157 (2569.4)."
+ },
+ {
+  "i": 157,
+  "start": 2569.36,
+  "end": 2571.4,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognised words. A loud, high-pitched (550–570 Hz) unrecognised voice runs 2569.36–2571.4, starting the moment Katya stops after «что-то»@2569.36. That fits a shouting child in the 6 s gap in her speech.",
+  "note": "Bounds: after 156's start (2560.31), before 159 (2578.41). The transcript lists it after 'part of our life', but the kids overlap Katya. The only clear unrecognised child-like voice in that span is here."
+ },
+ {
+  "i": 158,
+  "start": 2574.94,
+  "end": 2577.6,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognised words. The next high-pitched (485–550 Hz) unrecognised voice bursts at 2574.94–2575.3 and recurs at 2575.8, 2576.4–2576.9 and 2577.2–2577.5, under «Но это часть нашей жизни»@2575.59.",
+  "note": "Must start between 157 and «Я хочу, чтобы ребенок»@2578.41."
+ },
+ {
+  "i": 159,
+  "start": 2578.41,
+  "end": 2597.6,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«Я хочу, чтобы ребенок это помнил»@2578.41, «И как Гена хотел, [в Бердянск]…»@2580.44, «То есть и Платоша»@2585.61, «Если мы вернемся сначала в Нурденск [Бердянск], то что у нас будет?»@2589.79, «Может так и будет, но что-то типа летом там, с вами здесь»@2594.38–2597.3",
+  "note": "The matcher's proposal (2582.63) was about 4 s late. The line starts at «Я хочу».",
+  "adjudication": "'…and I want my child to remember it' is «Я хочу, чтобы ребенок это помнил»@2578.41 (2578.33 in t_vad). It is followed by «И как Гена хотел…»@2580.44, «То есть и Платоша»@2585.61, «мы вернемся сначала в [Бердянск]»@2589.79 and «летом там, зимой здесь»@2596.3–2597.25 (summers there, winters here). The matcher's 2582.63 is the end of «Не как Гена хотел в Фордянске», so it drops the first two sentences of the line. Order holds: after 158 (2574.9) and before 160 (2600.0)."
+ },
+ {
+  "i": 160,
+  "start": 2600.42,
+  "end": 2605.3,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Есть еще вторая тема [второй телефон]»@2600.42 (pass1 «Есть еще второй сезон, вот такой я себе и не хотел [не помню]»@2600.0), «Вон такой, если вы хотите»@2601.78–2602.6",
+  "note": "Back in the kitchen recording (cue 50, Hena's phone). The second half ('try one combo, then another…') was not recognised. The end is where voice energy drops at about 2605.3, before 161."
+ },
+ {
+  "i": 161,
+  "start": 2606.38,
+  "end": 2615.94,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«Поэтому, но с другой стороны, в Нурденск [Бердянск], честно сказать, вы знаете»@2606.38–2610.32, «знаете, с гиперзагены [с гибели Гены] у меня просто какой-то в ком обиды»@2610.24–2615.1",
+  "note": "The matcher's proposal is correct."
+ },
+ {
+  "i": 162,
+  "start": 2617.0,
+  "end": 2619.3,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No ASR. There is a near-silent edit point at 2616.1–2617.0, where the hill recording (cue 51) ends, then faint voiced audio in the female range (190–240 Hz) at 2617.04–2619.2, before Katya restarts with «В общем, громадные часы»@2621.77.",
+  "note": "The matcher reused 164's segment (2621.77). But 164's own text begins 'So, there was this huge clock' = «В общем, громадные часы», so this ellipsis fragment must come before that restart. Placed at the opening of the kitchen-clock clip (cue 53). The faint tone might instead be the lullaby (cue 49)."
+ },
+ {
+  "i": 163,
+  "start": 2620.64,
+  "end": 2622.86,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No ASR. Male-range voiced audio (110–140 Hz) at 2620.64–2621.3, possibly continuing at about 160 Hz to 2622.86, comes just before or under «В общем»@2621.77.",
+  "note": "Ian's interruption is what makes Katya restart with «В общем». It must fall between 162 and 164's start. The matcher had it at 2632.63 (interpolated), after the clock sentence, which is too late."
+ },
+ {
+  "i": 164,
+  "start": 2623.4,
+  "end": 2646.15,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«В общем, громадные часы, и вот как стрелки, и Гена вот так вот уперся, … толкает в другую сторону, в обратную»@2621.77–2632.15, «Опять рассказывай [рассказываю], у меня опять мурашки пошли»@2633.47–2635.19, «после похорон вечером я девочкам рассказала этот сон»@2635.14–2641.76, «А на следующий день»@2644.89–2646.15",
+  "note": "The matcher started this at 2632.63, but the sentence it describes begins at 2621.77. Female pitch only appears from about 2622.9, so «В общем» may be up to about 1 s later than whisper's word time. 'And the next day...' is «А на следующий день»@2644.89.",
+  "adjudication": "The reader identified the right speech, «В общем, громадные часы… Гена вот так вот уперся… толкает в другую сторону, в обратную», followed by «у меня опять мурашки пошли»@2634.6, «После похорон вечером я девочкам рассказала этот сон»@2638.66 and «А на следующий день»@2644.89–2646.15. The targeted pass separates the two clock sentences: «Громадные вот такие часы»@2616.26 is item 162, Ian's «[Платоша]… Руль наоборот у тебя весь»@2619.58–2621.6 is item 163, and then the resumption «в общем, громадные часы» is item 164. The matcher's 2632.63 is the end of the clock sentence, which is the line's own opening, so it fails. I refined the start to 2623.4 because fresh decodes put the first word later: «В@2623.56 общем@2624.04» in the mix, «В@2623.98» and «общем@2623.40» in the vocal stem, with «громадные» at 2624.6 in every pass. Pitch agrees: about 160 Hz (Ian) until 2622.8, female 210–246 Hz from 2623.4. This fits the reader's own caveat."
+ },
+ {
+  "i": 165,
+  "start": 2645.25,
+  "end": 2646.0,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognised words. A child-pitched shout (430–640 Hz, about −27 dB) at 2645.25–2645.6 is under «следующий день».",
+  "note": "Order puts the kids after 'And the next day...' (2644.89) and before '...we woke up' (2646.53). The matcher's 2636.55 is an interpolated guess. Louder child voices also occur at 2647.0–2649.0 and 2650.5–2651.0, but those come after 167's start."
+ },
+ {
+  "i": 166,
+  "start": 2646.0,
+  "end": 2646.6,
+  "conf": "low",
+  "method": "reader",
+  "evidence": "No recognised words. A voiced burst with strong broadband high-frequency energy (pitch about 380–520 Hz) at 2646.04–2646.56 is consistent with a child's 'brrrr' trill.",
+  "note": "Placed between 165 and 167. The matcher's 2642.71 falls on clicks or ticks in a pause, not speech."
+ },
+ {
+  "i": 167,
+  "start": 2646.53,
+  "end": 2671.2,
+  "conf": "high",
+  "method": "reader",
+  "evidence": "«получается, мы проснулись, это как раз 9 дней было, мы сидели завтракали, в кладбище собирались, а девочки говорят, смотри, часы пошли в обратную сторону»@2646.53–2657.77, «потом они то замирали, но вообще часы остановились, вот когда перед поклонами [похоронами]»@2661.66–2671.14",
+  "note": "The matcher started this at 2644.89, but «А на следующий день» belongs to 164's 'And the next day...'. This line starts with «получается, мы проснулись». It ends where Katya is cut off at «перед похоронами»."
+ },
+ {
+  "i": 168,
+  "start": 2671.25,
+  "end": 2672.6,
+  "conf": "medium",
+  "method": "reader",
+  "evidence": "A loud child voice (−20 dB, 400–485 Hz) at 2671.25–2672.5, which whisper garbled as «часы»@2671.82. Katya answers immediately with «не перебивали [не перебивай]»@2672.66.",
+  "note": "Not recognised as words, but it falls exactly where order and Katya's 'Don't interrupt' put it."
+ },
+ {
+  "i": 169,
+  "start": 2672.66,
+  "end": 2701.98,
+  "conf": "high",
+  "method": "adjudicated:reader",
+  "evidence": "«не перебивали [не перебивай]»@2672.66, «Перед похоронами они вообще остановились»@2677.1, «А вот это получается, как на следующий день они пошли в обратную сторону»@2679.4, «Потом они иногда останавливались / Шли вперед, потом шли назад / Иногда очень быстро, иногда чуть-чуть»@2682.72–2689.78, «А потом я просто начала задавать вопросы Сонечку [Солнышко]»@2691.32, «ну, ты меня слышишь?»@2695.52, «Стрелка стоит, раз, назад сдвинулась»@2699.56–2701.14",
+  "note": "The matcher started this at 2679.32. 'Don't interrupt' is whisper's «не перебивали»@2672.66, heard right after Platon's shout. The line ends with 'moved back' (about 2701.1–2701.98), at the end of the audio.",
+  "adjudication": "'Don't interrupt' is «не перебивай»: t_vad has it at 2672.54, t_vocals at 2672.56 and p3 at 2672.66 (as «не перебивали»). 'Before the funeral it had stopped completely' is «Перед похоронами они вообще остановились»@2677.1, followed by «А вот это получается, как на следующий день они пошли в обратную сторону»@2679.4. The line closes with «Шли вперед, потом шли назад», «начала задавать вопросы Сонечку [Солнышку]», «ты меня слышишь?» and «Стрелка стоит, раз, назад сдвинулась»@2699.56–2701.14. The matcher's 2679.32 skips the first two sentences. On order: the vocal stem has a loud child-pitched burst (f0 400–500 Hz) at 2671.4–2672.4, then child-pitched «Он не выключается»@2675.0 for Platon's item 168. Platon therefore starts before Katya's «не перебивай», so this start is after 168 (2671.3)."
+ }
+]

@@ -1,0 +1,51 @@
+[
+ {
+  "i": 1,
+  "note": "reproduced unprompted: «Домой.»@14.84 (original audio, 7.6–27.6 s)"
+ },
+ {
+  "i": 3,
+  "conf": "low",
+  "note": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ },
+ {
+  "i": 4,
+  "conf": "medium",
+  "note": "reproduced unprompted in the reviewer's window: «Домой.»@107.48 (vocals 104–110 s)"
+ },
+ {
+  "i": 6,
+  "conf": "low",
+  "note": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ },
+ {
+  "i": 13,
+  "conf": "low",
+  "note": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ },
+ {
+  "i": 15,
+  "conf": "medium",
+  "note": "reproduced unprompted: «Настоящий неподлив.»@259.52 (vocals 257–263 s), «Настоящий не подлива»@259.32 (original 257–263 s)"
+ },
+ {
+  "i": 48,
+  "conf": "high",
+  "note": "reproduced unprompted word for word: «Наверное, для безопасности, эволюционно так сложилось.»@691.78 (original 655–703 s)"
+ },
+ {
+  "i": 136,
+  "conf": "high",
+  "note": "reproduced unprompted: «Типа все так радовались, ну как радовались…»@2284.58 (vocals 2280–2296 s, ru, normalised); the word «Мариуполь» itself only appeared in a prompted run"
+ },
+ {
+  "i": 137,
+  "conf": "low",
+  "note": "placed by sound, not words: the vocal stem rises from near-silence into held sung pitches at 2354.5 s, as cue 49 (the lullaby) begins; no lyric was recognised by any pass, so it is not 'confident' in the sense of recognised speech"
+ },
+ {
+  "i": 138,
+  "conf": "low",
+  "note": "not reproduced: the reviewer's evidence came from prompted decodes or could not be replayed unprompted (its stated window and a ±10 s window, original and Demucs vocals); position kept, confidence lowered"
+ }
+]

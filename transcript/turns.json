@@ -1,0 +1,1181 @@
+[
+ {
+  "kind": "turn",
+  "spk": "Andriy",
+  "src_line": 1,
+  "text": "Let’s go…",
+  "i": 0
+ },
+ {
+  "kind": "turn",
+  "spk": "Frania",
+  "src_line": 3,
+  "text": "Home, Hek.",
+  "i": 1
+ },
+ {
+  "kind": "dir",
+  "text": "[sounds of tableware, chairs moving, indistinct chatter]",
+  "src_line": 6,
+  "i": 2
+ },
+ {
+  "kind": "turn",
+  "spk": "Bohdan’s mother",
+  "src_line": 7,
+  "text": "...our dinner will be unconventional…while we reminisce about him, we will watch videos from his life... [indistinct]... we won’t cry; instead, we’ll be as cheerful and life-loving as our son was...",
+  "i": 3
+ },
+ {
+  "kind": "turn",
+  "spk": "Frania",
+  "src_line": 9,
+  "text": "Home!",
+  "i": 4
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 11,
+  "text": "Yes, hold on. Plastic surgery of a medial surface defect of the foot.",
+  "i": 5
+ },
+ {
+  "kind": "turn",
+  "spk": "Bohdan’s sister",
+  "src_line": 13,
+  "text": "We all know what he was like... [indistinct]... he’d be trying to cheer us up right now...",
+  "i": 6
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 15,
+  "text": "Reconstruction of a flap from the dorsum of the foot.",
+  "i": 7
+ },
+ {
+  "kind": "turn",
+  "spk": "Frania",
+  "src_line": 17,
+  "text": "Home!",
+  "i": 8
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 19,
+  "text": "Do you have a copy, perhaps?",
+  "i": 9
+ },
+ {
+  "kind": "turn",
+  "spk": "Bohdan’s sister",
+  "src_line": 21,
+  "text": "...when he was just a child, how he grew up, how he matured. We’ll be watching all these stages, remembering him. And as we look at him...",
+  "i": 10
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 23,
+  "text": "Well, I'll finish writing it up. A raised dorsal flap, next…",
+  "i": 11
+ },
+ {
+  "kind": "turn",
+  "spk": "Nikolaich",
+  "src_line": 25,
+  "text": "Fields? Yeah, the thing is, the guy who hired me—he was working as an agronomist—stepped on a mine. I helped load him into the ambulance myself... [indistinct]... He was trying to find a better way out... A tractor passed that way, but on the way back it didn’t make it. The blast, fuck, you could hear it from like eight kilometers away…",
+  "i": 12
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 27,
+  "text": "Homeostasis, next... Anyway, I’ll write all of it down.",
+  "i": 13
+ },
+ {
+  "kind": "turn",
+  "spk": "Nikolaich",
+  "src_line": 29,
+  "text": "Left leg was gone, the arm was shattered... [indistinct] tied it off with a tourniquet.",
+  "i": 14
+ },
+ {
+  "kind": "turn",
+  "spk": "Sania",
+  "src_line": 31,
+  "text": "A film about Kyiv, about real life, none of that watered-down stuff!",
+  "i": 15
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 33,
+  "text": "Thank you!",
+  "i": 16
+ },
+ {
+  "kind": "turn",
+  "spk": "Nikolaich",
+  "src_line": 35,
+  "text": "...the second one died instantly. Hell of a guy, an accordion player—everyone knew him.",
+  "i": 17
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 37,
+  "text": "Rushing straight into the fire like a firefighter, finding the courage! Showing up at their station to put out the blaze! Rushing into real fire and then extinguishing it from the ladder!",
+  "i": 18
+ },
+ {
+  "kind": "turn",
+  "spk": "Frania",
+  "src_line": 39,
+  "text": "Grandpaaaaa!",
+  "i": 19
+ },
+ {
+  "kind": "turn",
+  "spk": "Chapa",
+  "src_line": 41,
+  "text": "Just brutal. So, the unit he was in, in the 47th, went to Orikhiv. They were, like, far from the zero line. Well, not too far—around fifteen kilometers. They were sitting in a basement, at headquarters. And a damn 500 kg bomb hit that place—a Shahed carries 50 kg—and it blew everything to hell. Guys, the whole place. Only two people made it out alive. And we, with one of the guys…",
+  "i": 20
+ },
+ {
+  "kind": "turn",
+  "spk": "Mrs. Anya",
+  "src_line": 43,
+  "text": "No-no, you can’t go there! This way, sweetheart.",
+  "i": 21
+ },
+ {
+  "kind": "turn",
+  "spk": "Chapa",
+  "src_line": 45,
+  "text": "...at the very beginning of all this, we volunteered with Fleet5. And he was like, “So? You ready? Gonna go?”—“Nah, not yet.”—“Well, I’m ready. I’m going.” And now, yesterday, he fucking died under the rubble.",
+  "i": 22
+ },
+ {
+  "kind": "dir",
+  "text": "[Indistinct]",
+  "src_line": 47,
+  "i": 23
+ },
+ {
+  "kind": "turn",
+  "spk": "Patient",
+  "src_line": 48,
+  "text": "...in a pit, at the torture site. After the torture... [indistinct]",
+  "i": 24
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 50,
+  "text": "After the torture—you mean after captivity?",
+  "i": 25
+ },
+ {
+  "kind": "turn",
+  "spk": "Patient",
+  "src_line": 52,
+  "text": "While in captivity! They chucked me in the pit after, like, torturing—with the taser. Wanted me to say “Glory to Russia.”",
+  "i": 26
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 54,
+  "text": "Okay, and what are your complaints now?",
+  "i": 27
+ },
+ {
+  "kind": "turn",
+  "spk": "Another patient",
+  "src_line": 56,
+  "text": "About the katsaps!",
+  "i": 28
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 58,
+  "text": "Well, that’s the main complaint for all of us these days.",
+  "i": 29
+ },
+ {
+  "kind": "turn",
+  "spk": "Woman at the Liquor Factory",
+  "src_line": 60,
+  "text": "I want them to build a children’s Disneyland here! And a waterpark. I’ve dreamt about it for 20 years. Believe me, the whole of Europe will come here—we’ll feed them Ukrainian dishes…",
+  "i": 30
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 62,
+  "text": "Does it pull, hurt, burn? What’s the sensation?",
+  "i": 31
+ },
+ {
+  "kind": "turn",
+  "spk": "Patient",
+  "src_line": 64,
+  "text": "Just aches a bit.",
+  "i": 32
+ },
+ {
+  "kind": "turn",
+  "spk": "Woman at the Liquor Factory",
+  "src_line": 67,
+  "text": "And we’ll sing Oy tam na tovchku, na bazari...",
+  "i": 33
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek and Frania’s grandpa",
+  "src_line": 69,
+  "text": "No, no—the small distillery has to stay! (laughs)",
+  "i": 34
+ },
+ {
+  "kind": "turn",
+  "spk": "Woman at the Liquor Factory",
+  "src_line": 71,
+  "text": "I’m begging you—hear me out! Let there be a Ukrainian Disneyland!",
+  "i": 35
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 75,
+  "text": "Aside from that—anything else? Just this, yeah?",
+  "i": 36
+ },
+ {
+  "kind": "dir",
+  "text": "[Indistinct]",
+  "src_line": 79,
+  "i": 37
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 82,
+  "text": "I’m guessing it went pretty deep? There’s a ton of nerves and arteries in there. Easy to make things worse—but we’ll try to clean it up carefully.",
+  "i": 38
+ },
+ {
+  "kind": "turn",
+  "spk": "Mrs. Anya",
+  "src_line": 86,
+  "text": "...about 90 kilometers before Lviv—I always forget the name of that little town—anyway, she says, “Go there, there’s a big two-story house.” Grandma says her younger sister studied medicine there, finished her master’s. And I say, “Alright then!” So we got in a taxi, went there, and stayed for a bit over two months.",
+  "i": 39
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 88,
+  "text": "Okay, everything written here is correct? Form 100. Injury received while on active duty on December 4th, in the combat zone, as a result of mortar shelling. First aid was provided during evacuation stages, from the 5th to the 9th at Novomoskovsk Central District Hospital in Dnipropetrovsk Oblast. Then transferred for surgery in Khmelnytskyi... Any serious illnesses before this? Any surgeries, apart from the injury?",
+  "i": 40
+ },
+ {
+  "kind": "turn",
+  "spk": "Mrs. Anya",
+  "src_line": 90,
+  "text": "Oh, thank you! (laughs)",
+  "i": 41
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 92,
+  "text": "And now, function-wise—is everything working? Can you move it in and out? Is the sensation still there? [indistinct]",
+  "i": 42
+ },
+ {
+  "kind": "turn",
+  "spk": "Tour guide",
+  "src_line": 94,
+  "text": "...certain barriers that grow between us...",
+  "i": 43
+ },
+ {
+  "kind": "turn",
+  "spk": "Vitalii Hodziatskyi",
+  "src_line": 96,
+  "text": "The symphony he wrote right after Leningrad—yes, that one—it has this invasion motif\ntam-tam, ta-ram-tam, tam-tam-ta-ram, you know the one. He wrote it in 1941, about the fascists. And here…",
+  "i": 44
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 99,
+  "text": "Hepatitis? Kidney disease? Type 1 diabetes? Ischemic or hypertensive conditions? Peptic ulcers?",
+  "i": 45
+ },
+ {
+  "kind": "turn",
+  "spk": "Zenon",
+  "src_line": 101,
+  "text": "...the skin tissue, the limb—it’ll start to die, and then they’ll have to amputate. But if you realize there’s a chance, they pack the wound, wrap it up with special gauze dressings, and then, if there’s no bleeding, they slowly start to loosen the tourniquet, and then… the limb can be saved.",
+  "i": 46
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 103,
+  "text": "Any peeling, chafing, stretch marks on the skin? Rashes?",
+  "i": 47
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 105,
+  "text": "Probably for safety. I mean, evolutionarily speaking, it’s just how it developed…",
+  "i": 48
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 107,
+  "text": "No, I just... My husband was wounded. Instant death. As I understand it—the aorta…",
+  "i": 49
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 109,
+  "text": "A very rapid drop in circulating blood volume. I mean, technically, under the right conditions, you can do something. But it has to be fast. Really precise. Like, apply a tourniquet or even a stick, anything—just not too tight, to not crush the arm…",
+  "i": 50
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 111,
+  "text": "No, it was below the collarbone. The wound was somewhere here.",
+  "i": 51
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 113,
+  "text": "Ah. I don’t know, I mean, there are cases where people survive, it’s possible, but [indistinct] ...also very fast. But in that case, they reacted very well—they packed the wound, clamped it—and at the field hospital there happened to be a vascular surgeon on rotation, and another good surgeon too—together they saved his life.",
+  "i": 52
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 115,
+  "text": "Just a stroke of luck, really.",
+  "i": 53
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 117,
+  "text": "Yeah, yeah. Exceptionally lucky. Usually, you’ve got like a minute—and that’s it.",
+  "i": 54
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 119,
+  "text": "And that’s it, yeah?",
+  "i": 55
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 121,
+  "text": "You have about 10 seconds to do something. And in combat—that’s often just not realistic.",
+  "i": 56
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 123,
+  "text": "He was out on a mission.",
+  "i": 57
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 125,
+  "text": "Well, if there is active combat work, then…",
+  "i": 58
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 127,
+  "text": "My husband was a sapper. They were working, almost done with the job. Had to clear the mines so the vehicles could get through. Infantry went first, then it was them, sweeping—and then the tech would roll in. And they were just about done—and then it hit. There was probably a tank somewhere nearby—no sound, nothing. No time to duck. He was with another guy—that one got a concussion.",
+  "i": 59
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 129,
+  "text": "Sounds like he couldn’t help—no one else was nearby.",
+  "i": 60
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 131,
+  "text": "Yeah. And my husband—he stood up and... and... collapsed.",
+  "i": 61
+ },
+ {
+  "kind": "turn",
+  "spk": "Serhii",
+  "src_line": 133,
+  "text": "Damn.",
+  "i": 62
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 135,
+  "text": "Goddamn war.",
+  "i": 63
+ },
+ {
+  "kind": "turn",
+  "spk": "Soldier",
+  "src_line": 139,
+  "text": "To prayer.",
+  "i": 64
+ },
+ {
+  "kind": "turn",
+  "spk": "Soldier and choir of soldiers",
+  "src_line": 141,
+  "text": "Ukraine, holy mother of heroes, come into my heart.\nCome as a storm of the Caucasian wind,\nthe murmur of the Carpathian streams,\nThe battles of the glorious Conqueror, Father Khmel,\nthe triumph and thunder of the guns of revolution,\nthe joyful chime of St. Sophia’s bells.\nLet my soul be reborn in You,\nlet it be illumined by Your glory,\nfor You, Most Holy, are my whole life,\nfor You are all my happiness.\nRing for me with the clatter of shackles,\nwith the creak of gallows in the somber dawns.\nBring me the cries of those tortured in cellars, in prisons, and in exile,\nso that my faith may be granite,\nso that the strength of my resolve may grow,\nso that I may go bravely into battle—\nas Your heroes went before me—\nfor Your glory, for Your sacred ideals;\nto avenge the shame of bondage, the trampled honor,\nthe scorn of Your tormentors,\nthe innocent blood of Your murdered children,\nthe noble deaths of the heroes of the Ukrainian nation,\nand of thousands more, unknown to us,\nwhose bones lie scattered or secretly buried.\nBurn away all frailty in my heart with life-giving fire.\nLet me know neither fear nor doubt.\nstrengthen my spirit,\ntemper my will,\ndwell within my heart!\nRaise me to deeds of clarity and courage,\nand in those deeds let me find my death—\na sweet death in torment for You.\nAnd I shall dissolve within You\nand live forever in You,\neternal Ukraine—holy, mighty, united.",
+  "i": 65
+ },
+ {
+  "kind": "turn",
+  "spk": "Soldier",
+  "src_line": 177,
+  "text": "Glory to Ukraine!",
+  "i": 66
+ },
+ {
+  "kind": "turn",
+  "spk": "Choir",
+  "src_line": 179,
+  "text": "Glory to the heroes!",
+  "i": 67
+ },
+ {
+  "kind": "turn",
+  "spk": "Soldier",
+  "src_line": 181,
+  "text": "Glory to the nation!",
+  "i": 68
+ },
+ {
+  "kind": "turn",
+  "spk": "Choir",
+  "src_line": 183,
+  "text": "Death to the enemies!",
+  "i": 69
+ },
+ {
+  "kind": "turn",
+  "spk": "Soldier",
+  "src_line": 185,
+  "text": "Ukraine!",
+  "i": 70
+ },
+ {
+  "kind": "turn",
+  "spk": "Choir",
+  "src_line": 187,
+  "text": "Above all!",
+  "i": 71
+ },
+ {
+  "kind": "turn",
+  "spk": "Soldier",
+  "src_line": 189,
+  "text": "Ukraine!",
+  "i": 72
+ },
+ {
+  "kind": "turn",
+  "spk": "Choir",
+  "src_line": 191,
+  "text": "Above all!",
+  "i": 73
+ },
+ {
+  "kind": "turn",
+  "spk": "Soldier",
+  "src_line": 193,
+  "text": "Ukraine!",
+  "i": 74
+ },
+ {
+  "kind": "turn",
+  "spk": "Choir",
+  "src_line": 195,
+  "text": "Above all!",
+  "i": 75
+ },
+ {
+  "kind": "turn",
+  "spk": "Commander",
+  "src_line": 199,
+  "text": "But I want to talk about the last day. [Indistinct] ... most likely, it will not end well. The unit that went on this mission consisted solely of volunteers who made this decision for themselves—because they were the best-trained people in this unit, the most combat-ready people, and only they could carry out this task. During the battle that ensued during the exit, Kostya was wounded, holding the fight for fifteen minutes before that. And I will say that if not for Kostya’s actions, I would be very sorry, but I doubt that I could be here. His actions, his training, his maximalism, and his desire to be the best, allowed all of us to get out of there. All of us who did.",
+  "i": 76
+ },
+ {
+  "kind": "turn",
+  "spk": "Kostya",
+  "src_line": 201,
+  "text": "Ha—and the tigers fell at my feet! Ha…",
+  "i": 77
+ },
+ {
+  "kind": "turn",
+  "spk": "Commander",
+  "src_line": 203,
+  "text": "Through Kostya’s sacrifice, seventeen people made it out alive. Unfortunately, we lost our brother, but we saved seventeen lives—because of Kostya. I am proud to have known him as a warrior. He was the best soldier in this unit—the best I’ve met in my entire life. Brother... to live as a warrior is to live forever.",
+  "i": 78
+ },
+ {
+  "kind": "turn",
+  "spk": "Funeral hostess",
+  "src_line": 205,
+  "text": "So, dear ones, the time for farewells has come. And... last to go will be those closest...",
+  "i": 79
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 207,
+  "text": "Dad, today you're at the stone factory! At the stone factory!",
+  "i": 80
+ },
+ {
+  "kind": "turn",
+  "spk": "Funeral hostess",
+  "src_line": 209,
+  "text": "...Alright, come forward to say your goodbyes.",
+  "i": 81
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 211,
+  "text": "Here, they press stones of one type into one single lump. See? They compress all the rocks, from one type of waste stone. See, they’re all getting pressed together.",
+  "i": 82
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 213,
+  "text": "Yeah, yeah—that was us there. Our 135th and [indistinct] .",
+  "i": 83
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 215,
+  "text": "That was the end of winter, right?",
+  "i": 84
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 217,
+  "text": "Ours held the line: two weeks—a hundred guys. Then another group, fifty guys, held it for five days. The last ones, they were near “the Plane,” maybe you heard? That’s where the “Garages” were, that was ours too. The “Garages”—those were ours. So in the end, we held them for three weeks, and they…",
+  "i": 85
+ },
+ {
+  "kind": "turn",
+  "spk": "Kostya",
+  "src_line": 219,
+  "text": "Let’s go, guys, keep working!",
+  "i": 86
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 221,
+  "text": "Six taken prisoner—fuck…",
+  "i": 87
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 223,
+  "text": "Look, Dad, stop right there!",
+  "i": 88
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 225,
+  "text": "...five killed, thirty wounded…",
+  "i": 89
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 227,
+  "text": "Look, Dad, a little cross!",
+  "i": 90
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 229,
+  "text": "...and sixty concussed, out of 150 people. You know what a concussion is? I don’t know, maybe people don’t know, it’s a brain jolt…",
+  "i": 91
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 231,
+  "text": "Here lie the treasures of Captain Buger!",
+  "i": 92
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 233,
+  "text": "...10% skull torsion. Like, you hear “concussion,” and it sounds mild—but really, it’s fucked: blood pressure at 200, splitting headaches, and early old age. That’s the outlook. Not a pretty one. I even started thinking about joining the snipers.",
+  "i": 93
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 235,
+  "text": "You think you can?",
+  "i": 94
+ },
+ {
+  "kind": "turn",
+  "spk": "Frania (reacting to the air raid siren)",
+  "src_line": 237,
+  "text": "Oh, the pooooolice!",
+  "i": 95
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 239,
+  "text": "I mean, I’m an instructor—I know everyone. And my buddy, he’s the commander of the sniper unit. So I started thinking, maybe I should go join the snipers, since I’m going back anyway. But here’s the problem: I can’t see shit. You gotta line up the sights, and I can’t do it without glasses, you know?",
+  "i": 96
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 241,
+  "text": "Ah, so your eyesight’s fucked, huh?",
+  "i": 97
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 243,
+  "text": "Yeah, I gotta wear glasses for that stuff (laughs). I shoot okay, but I can’t make out all the angles, and with that kind of shooting, you need precise adjustments…",
+  "i": 98
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 245,
+  "text": "Dad, lift this rock! Oh, it’s dirt! There’s dirt, sand, and branches here.",
+  "i": 99
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 247,
+  "text": "So I was thinking maybe I should go as a marksman, just straight up, fuck it.",
+  "i": 100
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 248,
+  "text": "What’s that?",
+  "i": 101
+ },
+ {
+  "kind": "turn",
+  "spk": "Liokha",
+  "src_line": 250,
+  "text": "Look, there’s snipers, right? They camp out for two, three days. But a marksman, he moves with the group...",
+  "i": 102
+ },
+ {
+  "kind": "dir",
+  "text": "[Indistinct—prayer, funeral chant]",
+  "src_line": 252,
+  "i": 103
+ },
+ {
+  "kind": "turn",
+  "spk": "Priests",
+  "src_line": 253,
+  "text": "Christ is risen from the dead! By death He conquered death, and to those in the graves, He granted life. Christ is risen!",
+  "i": 104
+ },
+ {
+  "kind": "turn",
+  "spk": "Congregation",
+  "src_line": 255,
+  "text": "Truly, He is risen.",
+  "i": 105
+ },
+ {
+  "kind": "turn",
+  "spk": "Priests",
+  "src_line": 257,
+  "text": "Christ is risen from the dead! By death He conquered death, and to those in the graves, He granted life.",
+  "i": 106
+ },
+ {
+  "kind": "dir",
+  "text": "[Indistinct]",
+  "src_line": 259,
+  "i": 107
+ },
+ {
+  "kind": "turn",
+  "spk": "Ruslan",
+  "src_line": 260,
+  "text": "So here’s the deal: there’s the hoof, and it’s important to make sure there are no gaps, no moisture gets in, so the foot doesn’t start to rot. You’ve got to fit the sole exactly—it has to hug the whole contour of the hoof perfectly. And you know, especially when they take off the old hoof, it’s actually so nice to see the foot.",
+  "i": 108
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 262,
+  "text": "No way! I had no idea.",
+  "i": 109
+ },
+ {
+  "kind": "turn",
+  "spk": "Ruslan",
+  "src_line": 264,
+  "text": "You can’t even imagine how they change them, right?",
+  "i": 110
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 266,
+  "text": "Never even thought about it.",
+  "i": 111
+ },
+ {
+  "kind": "turn",
+  "spk": "Ruslan",
+  "src_line": 268,
+  "text": "I’ll show you.",
+  "i": 112
+ },
+ {
+  "kind": "turn",
+  "spk": "Levin",
+  "src_line": 272,
+  "text": "And right here he’s got a windmill by Maria Prymachenko, and here, a trident, drawn by a neural network.",
+  "i": 113
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 274,
+  "text": "Are you the only artist who ever tattooed him?",
+  "i": 114
+ },
+ {
+  "kind": "turn",
+  "spk": "Levin",
+  "src_line": 276,
+  "text": "Yeah, yeah. And you know, what made Bohdan really stand out was how he squealed during the sessions—no one squealed like that. I’d give him a full hour of anesthetic, all the stuff, all the bullshit, and still—“kheeeeeeeh!” It was iconic. Totally unforgettable.",
+  "i": 115
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 278,
+  "text": "I mean, for real, it hurts.",
+  "i": 116
+ },
+ {
+  "kind": "turn",
+  "spk": "Levin",
+  "src_line": 280,
+  "text": "Yeah, you’re getting jabbed with a fucking needle.",
+  "i": 117
+ },
+ {
+  "kind": "turn",
+  "spk": "Kostya",
+  "src_line": 284,
+  "text": "Kitty-kitty, come here, come, little one! Come here, oh you’re so nice, oh you’re so small, oh come here to me. My little one, ah, kitty-kitty-kitty.",
+  "i": 118
+ },
+ {
+  "kind": "turn",
+  "spk": "Kostya",
+  "src_line": 288,
+  "text": "I made it here! Thought I’d be climbing up that slope, but nope, the road leads this way. We’ll see what’s ahead. And now I go that way!",
+  "i": 119
+ },
+ {
+  "kind": "dir",
+  "text": "[Indistinct]",
+  "src_line": 290,
+  "i": 120
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 291,
+  "text": "Dima, we’re sorting through stuff! We’re sorting!",
+  "i": 121
+ },
+ {
+  "kind": "turn",
+  "spk": "Dima",
+  "src_line": 293,
+  "text": "Got it, Hek. Frania, is this yours or what?",
+  "i": 122
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 295,
+  "text": "We’re sorting this stuff out.",
+  "i": 123
+ },
+ {
+  "kind": "turn",
+  "spk": "Dima",
+  "src_line": 297,
+  "text": "I hauled so many chairs at my station (laughs). Go ahead, see what you can make of these.",
+  "i": 124
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 299,
+  "text": "I’ll take this to the car, and you stack this here... He went that way... Dad! The main flag of Ukraine! Dad, there’s the main flag of Ukraine—come, I’ll show you. Dima, come on, I’ll show you the main flag of Ukraine!",
+  "i": 125
+ },
+ {
+  "kind": "turn",
+  "spk": "Dima",
+  "src_line": 301,
+  "text": "Alright, we’re about to head out, and you’ll show me.",
+  "i": 126
+ },
+ {
+  "kind": "turn",
+  "spk": "Priests",
+  "src_line": 303,
+  "text": "Lord, have mercy. Lord, have mercy.",
+  "i": 127
+ },
+ {
+  "kind": "dir",
+  "text": "[The Ukrainian national anthem plays. Then, a funeral bugle call. A priest speaks faintly in the background.]",
+  "src_line": 305,
+  "i": 128
+ },
+ {
+  "kind": "turn",
+  "spk": "Commander",
+  "src_line": 306,
+  "text": "Line up! Attention! Raise the State Flag over the fallen Senior Soldier Hennadiy Kolesnyk.",
+  "i": 129
+ },
+ {
+  "kind": "dir",
+  "text": "[Bugle call]",
+  "src_line": 308,
+  "i": 130
+ },
+ {
+  "kind": "dir",
+  "text": "[Indistinct: Ruslan and Ian speaking faintly]",
+  "src_line": 309,
+  "i": 131
+ },
+ {
+  "kind": "turn",
+  "spk": "Commander",
+  "src_line": 310,
+  "text": "Dear friends, family, and comrades of the fallen hero of Ukraine, Hennadiy Kolesnyk—today, we bid farewell to a warrior who gave the most precious thing he had for our country: his life. But it is precisely thanks to warriors like Hennadiy that Ukraine has existed, exists, and will continue to exist. It is men like Hennadiy who have been, are, and will always be the finest sons of our nation. We must remember this, we must honor it, and we must do everything within our power to ensure that Hennadiy’s sacrifice was not in vain. We must do everything we can to bring our victory closer—a victory that will surely come...Glory to Ukraine!",
+  "i": 132
+ },
+ {
+  "kind": "turn",
+  "spk": "Crowd",
+  "src_line": 312,
+  "text": "Glory to the heroes!",
+  "i": 133
+ },
+ {
+  "kind": "turn",
+  "spk": "Commander",
+  "src_line": 314,
+  "text": "Dear family... On behalf of the command of the Third Assault Brigade, I ask you to accept this flag.",
+  "i": 134
+ },
+ {
+  "kind": "turn",
+  "spk": "Priest",
+  "src_line": 316,
+  "text": "Today, we are gathered to honor the remarkable figure of a defender of Ukraine: our comrade, a son of his nation, a son of his family. And anyone who holds great love for his memory, his heroism, and his dignity may come forward to speak words of farewell, of gratitude, of love…",
+  "i": 135
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 318,
+  "text": "...and everyone was so relieved that, by sheer luck, he didn’t end up in Mariupol…",
+  "i": 136
+ },
+ {
+  "kind": "turn",
+  "spk": "Sasha (singing)",
+  "src_line": 320,
+  "text": "Like that honey, like that honey, sweet as honey... Better look at him who, at him who…",
+  "i": 137
+ },
+ {
+  "kind": "turn",
+  "spk": "Frania",
+  "src_line": 322,
+  "text": "Who’s knocking?",
+  "i": 138
+ },
+ {
+  "kind": "turn",
+  "spk": "Sasha",
+  "src_line": 324,
+  "text": "Better look at him…",
+  "i": 139
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 328,
+  "text": "I mean, that’s all that’s left... Just the phone numbers. All the photos, the messages, they got wiped.",
+  "i": 140
+ },
+ {
+  "kind": "dir",
+  "text": "[In the background]",
+  "src_line": 330,
+  "i": 141
+ },
+ {
+  "kind": "turn",
+  "spk": "Frania",
+  "text": "Mister Poopoo!",
+  "src_line": 331,
+  "i": 142
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 332,
+  "text": "iPhones have this thing...",
+  "i": 143
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 334,
+  "text": "A backup?",
+  "i": 144
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 336,
+  "text": "No, I mean, there’s a setting, like, to wipe it or not if you enter the wrong password too many times.",
+  "i": 145
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 338,
+  "text": "Ah, yeah, maybe that’s what happened here too. Or maybe I pressed something by accident.",
+  "i": 146
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 340,
+  "text": "Could it have been wiped remotely?",
+  "i": 147
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 342,
+  "text": "No. When I tried to turn it on—I got the password wrong a few times—there was still that photo of Platoshka on the lock screen.",
+  "i": 148
+ },
+ {
+  "kind": "dir",
+  "text": "[In the background]",
+  "src_line": 344,
+  "i": 149
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 345,
+  "text": "These are the bad robot Transformers!!",
+  "i": 150
+ },
+ {
+  "kind": "turn",
+  "spk": "Zhanna",
+  "src_line": 347,
+  "text": "Are they very scary?",
+  "i": 151
+ },
+ {
+  "kind": "turn",
+  "spk": "Platon",
+  "src_line": 349,
+  "text": "Yeah! They’re destroying the city!",
+  "i": 152
+ },
+ {
+  "kind": "turn",
+  "spk": "Zhanna",
+  "src_line": 351,
+  "text": "Whoa, then we’ve got to stop them!",
+  "i": 153
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 353,
+  "text": "Honestly, with Berdiansk... every little street there is tied to Hena. It’s all Hena, it’s our life.",
+  "i": 154
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 355,
+  "text": "Of course.",
+  "i": 155
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 357,
+  "text": "It’s our feelings, our emotions, our memories. That kitchen garden—Hena planted it for Platon. I mean, I don’t think they’ll let us back there... but it’s part of our life.",
+  "i": 156
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 359,
+  "text": "They’re smashing the city! Zhanna can’t hold them off!!",
+  "i": 157
+ },
+ {
+  "kind": "turn",
+  "spk": "Platon",
+  "src_line": 361,
+  "text": "Only the good Transformers can stop this! We have to run away for now!!",
+  "i": 158
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 363,
+  "text": "...and I want my child to remember it. And how Hena wanted to go back to Berdiansk. I’d suggest staying in Kyiv, and Platosha too, but Hena would say, “First we’ll go back to Berdiansk, and then we’ll see... maybe we’ll spend summers there, winters here.”",
+  "i": 159
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 365,
+  "text": "There’s a second phone too, but I can’t remember the password for that one either. I’ll try one combo, then another, no idea if it’ll lock me out or not.",
+  "i": 160
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 367,
+  "text": "But honestly, ever since Hena died, there’s just this lump of hurt when I think about Berdiansk.",
+  "i": 161
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 371,
+  "text": "...there was this huge clock…",
+  "i": 162
+ },
+ {
+  "kind": "turn",
+  "spk": "Ian",
+  "src_line": 373,
+  "text": "Platosha, your steering wheel’s facing the wrong way, see?",
+  "i": 163
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 375,
+  "text": "So, there was this huge clock, and the hands are like this—and Hena’s there, pushing the hand the other way, backward. I’m getting goosebumps just talking about it. After the funeral, that evening, I told the girls about this dream. And the next day...",
+  "i": 164
+ },
+ {
+  "kind": "turn",
+  "spk": "Platon",
+  "src_line": 377,
+  "text": "Hektor, help me, I’m driving!!!",
+  "i": 165
+ },
+ {
+  "kind": "turn",
+  "spk": "Hek",
+  "src_line": 379,
+  "text": "Go, brrrrr!",
+  "i": 166
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 381,
+  "text": "...we woke up—it was exactly nine days—we were having breakfast, getting ready to go to the cemetery, and the girls go, “Look, the clock is moving backwards.” Then it would freeze... But before the funeral, the clock had completely stopped.",
+  "i": 167
+ },
+ {
+  "kind": "turn",
+  "spk": "Platon",
+  "src_line": 383,
+  "text": "Uncle Ian, I think your scooter won’t turn off!",
+  "i": 168
+ },
+ {
+  "kind": "turn",
+  "spk": "Katya",
+  "src_line": 385,
+  "text": "Don’t interrupt. Before the funeral, it had stopped completely. And then, the next day, it started going backwards. Then sometimes it would stop, go forward, then back again—sometimes really fast, sometimes just a little. And then I just started asking questions: “Sunshine, can you hear me?” The hand was still, and then suddenly, it moved back.",
+  "i": 169
+ }
+]

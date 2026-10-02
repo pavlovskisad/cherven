@@ -11,14 +11,19 @@ Running time 45:04. 53 cues. 93 speech turns.
 ## 1. What ships
 
 ```
-index.html        the entire display: markup, CSS, JS, all data embedded
-cherven.mp3       the audio (NOT in this repo yet — see §7)
-vercel.json       static config
+index.html        the wall: cue sheet + speech, markup, CSS, JS, all data embedded
+transcript.html   the edited transcript alone, synced to the audio — see §11
+cherven.mp3       the audio, the master byte for byte (see §7)
+vercel.json       static config; cleanUrls, so the second page is /transcript
+.vercelignore     keeps transcript/ (tooling and intermediate data) off the site
+transcript/       how transcript.html's timing was made, and how to remake it
 CLAUDE.md         this file
 ```
 
-No build step, no dependencies, no framework. One file. Keep it that way unless
-there is a reason not to.
+No build step for the site, no dependencies, no framework. Each page is one
+self-contained file. Keep it that way unless there is a reason not to.
+`transcript/` holds Python tooling that writes data *into* transcript.html; the
+deployed page never depends on it.
 
 ---
 
@@ -107,12 +112,15 @@ Current placement method:
 its real moment. It will never appear under the wrong recording, which is the
 error that would read as broken. This is accepted and deliberate.
 
-**Upgrade path when someone wants real sync:** run Whisper on the mp3 with word
-timestamps and speaker diarization (WhisperX + pyannote), which yields actual
-Ukrainian/Russian segments with times, then align the English turns onto those
-segments **using the cue windows as constraints**. That turns one 45-minute
-alignment problem into 31 small ones. Regenerate `turns[].at` only; nothing else
-in the pipeline changes.
+**Upgrade path when someone wants real sync:** most of it now exists. The
+second page (§11) is timed from the audio itself, and `transcript/whisper.json`
+holds pooled Whisper large-v3 recognition of the whole piece with word
+timestamps. The wall's own transcript is a *different, older* text (93 turns,
+not in playback order), so its turns cannot simply borrow §11's times; to sync
+the wall, align its `turns[].text` against `whisper.json` the same way —
+`transcript/README.md` describes the method and what failed. Regenerate
+`turns[].at` only; nothing else in the wall changes. Diarization was not needed:
+playback order plus recognised speech placed the edited transcript without it.
 
 ---
 
@@ -221,20 +229,20 @@ tracks position inside the cue and the scrub reflects it.
 
 Static. No server. `vercel.json` sets long cache on the audio.
 
-**The audio is not in the repo yet.** 45 minutes at 210 kbps is ~71 MB. Options,
-best first:
+**The audio is in the repo: `cherven.mp3` is the master, unchanged** — 68 MB,
+211 kbps VBR, sha256 `8fefd409…`, identical to the asset on the `audio`
+release. It was not re-encoded: the audio is the work, and a second lossy
+generation was judged a poor trade for 26 MB. Keep it that way; if size ever
+forces a re-encode, encode once from this file and never from a copy.
 
-1. Re-encode for the web and commit it:
-   ```
-   ffmpeg -i cherven.mp3 -c:a libmp3lame -b:a 128k cherven.mp3   # ~43 MB
-   ```
-2. Opus in WebM is roughly half that again at equal quality and is fine for a
-   controlled kiosk (Chrome, Safari 15+). Change `CONFIG.AUDIO` to match.
-3. Vercel Blob or any CDN if the repo should stay light. `CONFIG.AUDIO` takes an
-   absolute URL.
-
-Keep the master. Do not re-encode from an already lossy intermediate more than
-once.
+**It must be served same-origin, or from any host that sends a real audio
+type.** It was first hotlinked from the GitHub release. That worked on every
+desktop browser and failed on every iOS one with MediaError code 4: the release
+CDN sends `application/octet-stream` with `Content-Disposition: attachment`,
+and iOS hands media to AVFoundation, which trusts the declared type rather than
+sniffing the bytes. Desktop engines sniff, so the fault is invisible until it
+reaches a phone. Vercel serves `.mp3` as `audio/mpeg`. Note that Linux WebKit
+(GStreamer) also sniffs, so it is **not** a stand-in for iOS on this point.
 
 ### Config
 
@@ -361,3 +369,56 @@ second may not be. Set it in the room against the actual throw.
 - Do not remove the gate. See §7.
 - Do not "clean up" the overlapping cue data to make it tidy. The overlap is the
   piece.
+
+---
+
+## 11. The transcript page — `transcript.html`, served at `/transcript`
+
+The **edited** English transcript alone, synced to the same `cherven.mp3`. It
+is a separate text from the one embedded in the wall: edited by the artist,
+paraphrased in places, some phrases absent, and — crucially — **in playback
+order**. `transcript/source.txt` holds it exactly as supplied and is the source
+of truth for the words. 159 speech turns, 11 stage directions, 38 speakers.
+
+### Display
+
+Same physical rules as the wall (§2): white field, black Times, live sliders,
+the same gate (`Let’s go`), the same fullscreen button and loop robustness. One
+column moves under a fixed **reading line**; the line being spoken sits on it at
+full ink, spoken lines fall to the *spoken weight*, upcoming lines are faint.
+A long turn travels through the reading line linearly in time (a reading aid,
+not word sync). The **prayer is timed line by line** — 35 verse lines, each lit
+as it is recited — because it was recognised well enough to allow it. Below
+~24em of measure the column sets ragged right (§6, justification needs measure).
+Tap a line to jump to it. `Sync offset` compensates for a delaying sound chain.
+
+### Timing — read before trusting or editing it
+
+Every line's time came from the audio, not from cue windows. `timing.json`
+records per line: start, end, confidence, method and the recognised speech it
+was matched to. Confidence means:
+
+- **high / medium** — matched to recognised speech that is **reproducible from
+  saved, unprompted recognition** (`whisper.json`). Starts good to ~1–2 s.
+- **low** — no recognisable speech (children, voices under music, sung
+  liturgy). Kept in order between confident neighbours, placed by text length
+  or by the sound itself (energy/pitch onsets). Its exact second is an estimate.
+
+Three things about the method are not obvious and cost time to learn:
+
+1. **Whisper on the plain mix hears only about a third of the speech.** Music
+   beds make it emit training-data subtitle credits («Субтитры сделал
+   DimaTorzok») instead of decoding; `hallucination_silence_threshold` then
+   skips ahead and discards real speech. Recall came from pooling passes that
+   fail differently: the plain mix, **Demucs-isolated vocals**, VAD-gated and
+   short-window focused decodes. Each hears lines the others miss.
+2. **Prompted decodes are not evidence.** A decode given the expected words as
+   `initial_prompt` can echo them. Several first-round matches rested on
+   prompted output; each was re-decoded unprompted and six failed — they are
+   now low, recorded in `transcript/verified_overrides.json`.
+3. **Memory.** Shell-launched processes share a ~8 GB cgroup cap; two
+   concurrent large-v3 decodes (4 GB each) get OOM-killed. Run decodes one at a
+   time, one process per job (CTranslate2 keeps what it allocates).
+
+`transcript/README.md` has the files, the commands and how to change words
+without redoing the timing.
