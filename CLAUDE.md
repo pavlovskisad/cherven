@@ -15,7 +15,9 @@ index.html        the wall: cue sheet + speech, markup, CSS, JS, all data embedd
 transcript.html   the edited transcript alone, synced to the audio — see §11
 cherven.mp3       the audio, the master byte for byte (see §7)
 vercel.json       static config; cleanUrls, so the second page is /transcript
-.vercelignore     keeps transcript/ (tooling and intermediate data) off the site
+.vercelignore     keeps transcript/, install/ and INSTALL.md off the site
+install/          Mac kiosk launchers for the gallery laptop — see §7
+INSTALL.md        the installation checklist for the venue
 transcript/       how transcript.html's timing was made, and how to remake it
 CLAUDE.md         this file
 ```
@@ -262,11 +264,37 @@ Browsers block autoplay with sound without a user gesture. The gate screen is
 that gesture and should not be engineered away. For an unattended kiosk:
 
 ```
-chromium --kiosk --autoplay-policy=no-user-gesture-required \
-         --disable-features=Translate --incognito https://<deploy>/
+chrome --kiosk --autoplay-policy=no-user-gesture-required \
+       --user-data-dir=<a profile of its own> <page>?autostart=1
 ```
 
-That flag genuinely removes the click. Nothing in the page can.
+That flag genuinely removes the click. Nothing in the page can. With it,
+`?autostart=1` (both pages) calls `play()` on load and lifts the gate once
+playback begins. Without the flag `play()` is refused and the gate simply
+stays, so the parameter is harmless anywhere else.
+
+**Never `--incognito`.** Both pages save every panel setting to
+`localStorage` (`cherven-wall-settings`, `cherven-transcript-settings`, plus
+`cherven-transcript` for mode and cues) and restore it on load. That is how
+the values tuned in the room survive a power cycle. Incognito wipes them on
+every launch. **Reset settings** in each panel clears them.
+
+### The installation build — `install/` and `INSTALL.md`
+
+The gallery laptop (a Mac) runs a **local copy**, not the deploy: the venue
+network is not trusted, and the pages need nothing but their own folder.
+`install/Cherven wall.command` and `install/Cherven transcript.command` are
+double-click launchers. Both call `install/launch.sh`, which opens Chrome in
+kiosk mode on the `file://` URL with `?autostart=1`, on the dedicated profile
+`~/.cherven-chrome`, under `caffeinate` so the Mac never sleeps. A previous
+kiosk on that profile is closed first: otherwise Chrome hands the URL to the
+running copy and ignores the new flags. `INSTALL.md` is the setup checklist
+(copy, launch, tune, macOS settings, autologin). Both are in `.vercelignore`.
+
+Tested in Chromium from `file://`: audio plays, autostart lifts the gate with
+the flag and leaves it without, settings survive a reload, and reset clears
+them. Not tested on a real Mac here. The launcher script was dry-run with
+stand-ins for Chrome and `caffeinate`, from a path containing spaces.
 
 ### Robustness already in place
 
@@ -353,7 +381,10 @@ second may not be. Set it in the room against the actual throw.
    headers, never mid-sentence. The `date` field is already parsed out and there
    is a `Date in margin` toggle rendering it as a centred caption.
 3. Lock the slider values in the room, then write them into the `:root` defaults
-   so the deployed build opens correct with no panel visit.
+   so the deployed build opens correct with no panel visit. On the gallery
+   laptop this is no longer needed: the panel's values persist (§7). To carry
+   them into the code, read them from the browser's console:
+   `localStorage['cherven-wall-settings']`.
 4. Consider whether the panel should be removable from the production build, or
    just left behind the `C` key. Leaving it is probably right — a gallery
    technician will need it.

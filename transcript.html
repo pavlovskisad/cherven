@@ -217,7 +217,9 @@
   <label>Edge feather <span id="featherVal"></span></label>
   <input type="range" id="feather" min="0" max="22" step="0.5" value="0">
   <button id="full">Fullscreen</button>
+  <button id="resetBtn">Reset settings</button>
   <div class="note">
+    Settings are saved in this browser.<br>
     <kbd>C</kbd> panel &nbsp;<kbd>F</kbd> fullscreen &nbsp;<kbd>Space</kbd> play<br>
     <kbd>S</kbd> subtitles / scroll &nbsp;<kbd>D</kbd> cues on / off<br>
     For a kiosk: <kbd>?mode=scroll</kbd> or <kbd>?mode=subs</kbd>, <kbd>&amp;cues=1</kbd><br>
@@ -598,6 +600,25 @@
   }
   scrub.addEventListener('input', () => seek(+scrub.value));
 
+  // Settings tuned in the room survive a restart: every panel slider is saved
+  // to this browser and restored on load. (A kiosk must not run --incognito,
+  // or this is wiped each launch — see install/.)
+  const SAVE_KEY = 'cherven-transcript-settings';
+  const saved = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); } catch (e) { return null; } })() || {};
+  // put a saved value back into its slider; true if there was one
+  const restore = id => {
+    if (!(id in saved)) return false;
+    document.getElementById(id).value = saved[id];
+    return true;
+  };
+  let resetting = false;
+  function saveSettings() {
+    if (resetting) return;
+    const out = {};
+    panel.querySelectorAll('input[type=range]').forEach(el => { if (el.id !== 'scrub') out[el.id] = el.value; });
+    try { localStorage.setItem(SAVE_KEY, JSON.stringify(out)); } catch (e) {}
+  }
+
   const VAL = {};
   const bind = (id, prop, fmt, relayout, initial = true) => {
     const el = document.getElementById(id);
@@ -610,11 +631,11 @@
       if (relayout) dirty = true;
     };
     el.addEventListener('input', push);
-    if (initial) push();
+    if (restore(id) || initial) push();
     else if (out) out.textContent = el.value;
   };
   // Size opens on the responsive default in :root; the slider only takes over
-  // once it is moved, so a phone and a 4K wall both open sensibly.
+  // once it is moved (or was saved), so a phone and a 4K wall both open sensibly.
   document.getElementById('size').value = Math.round(parseFloat(getComputedStyle(track).fontSize));
   bind('size',    '--size',    v => v + 'px', true, false);
   bind('lead',    '--lead',    v => v,        true);
@@ -681,6 +702,12 @@
     toggleFull();
     panel.classList.remove('open');
   });
+  panel.addEventListener('input', saveSettings);
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    resetting = true;
+    try { localStorage.removeItem(SAVE_KEY); localStorage.removeItem('cherven-transcript'); } catch (e) {}
+    location.reload();
+  });
 
   function start() {
     gate.classList.add('off');
@@ -723,6 +750,13 @@
       'Pick the Cherven mp3, or drop it anywhere on this window.<br>' +
       'No audio to hand? Double-click here, then press <kbd>C</kbd> and drag the position.';
   }
+
+  // ?autostart=1 starts without the click. Sound without a gesture is only
+  // allowed when the browser was launched for it (install/ runs Chrome with
+  // --autoplay-policy=no-user-gesture-required); anywhere else play() is
+  // refused and the gate simply stays, so the link is safe to share.
+  if (CONFIG.AUDIO && new URLSearchParams(location.search).has('autostart'))
+    audio.play().then(() => gate.classList.add('off'), () => {});
 
   ['dragenter', 'dragover'].forEach(ev => document.addEventListener(ev, e => {
     e.preventDefault(); document.body.classList.add('dragging');

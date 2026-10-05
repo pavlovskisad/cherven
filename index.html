@@ -222,8 +222,10 @@
   <button id="bars" class="on">Progress hairlines</button>
   <button id="clockBtn">Elapsed line</button>
   <button id="full">Fullscreen</button>
+  <button id="resetBtn">Reset settings</button>
 
   <div class="note">
+    Settings are saved in this browser.<br>
     <kbd>C</kbd> panel &nbsp;<kbd>F</kbd> fullscreen &nbsp;<kbd>Space</kbd> play<br>
     <kbd>1</kbd><kbd>2</kbd> modes &nbsp;<kbd>D</kbd> notes &nbsp;<kbd>T</kbd> transcript<br>
     <kbd>←</kbd><kbd>→</kbd> seek 10s, with shift 60s
@@ -542,6 +544,16 @@
   }
   scrub.addEventListener('input', () => seek(+scrub.value));
 
+  // Settings tuned in the room survive a restart: every panel slider and
+  // toggle is saved to this browser and restored on load. (A kiosk must not
+  // run --incognito, or this is wiped each launch — see install/.)
+  const SAVE_KEY = 'cherven-wall-settings';
+  const saved = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); } catch (e) { return null; } })();
+  if (saved && saved.ranges) for (const [id, v] of Object.entries(saved.ranges)) {
+    const el = document.getElementById(id);
+    if (el && el.type === 'range' && id !== 'scrub') el.value = v;
+  }
+
   const VAL = {};
   const bind = (id, prop, fmt, relayout) => {
     const el = document.getElementById(id);
@@ -576,6 +588,7 @@
     document.body.classList.toggle('ghosted', mode === 'ghosted');
     Object.keys(MODES).forEach(k => document.getElementById(k).classList.toggle('on', k === id));
     requestAnimationFrame(place);
+    if (typeof saveSettings === 'function') setTimeout(saveSettings, 0);
   }
   Object.keys(MODES).forEach(k =>
     document.getElementById(k).addEventListener('click', () => setMode(k)));
@@ -606,6 +619,39 @@
   });
   toggle('bars', 'noBars');
   toggle('clockBtn', 'noClock');
+
+  // body class -> its panel button; for the "no…" classes the button is lit
+  // when the class is absent
+  const FLAGS = { noDesc: 'descBtn', talkOn: 'talkBtn', grotesk: 'fontBtn', showDate: 'dateBtn',
+                  noBars: 'bars', noClock: 'clockBtn' };
+  const INVERTED = { noDesc: 1, noBars: 1, noClock: 1 };
+  let resetting = false;
+  function saveSettings() {
+    if (resetting) return;
+    const ranges = {};
+    document.querySelectorAll('#panel input[type=range]').forEach(el => { if (el.id !== 'scrub') ranges[el.id] = el.value; });
+    const flags = {};
+    for (const cls in FLAGS) flags[cls] = document.body.classList.contains(cls);
+    try { localStorage.setItem(SAVE_KEY, JSON.stringify({ ranges, flags, mode })); } catch (e) {}
+  }
+  if (saved && saved.flags) {
+    for (const [cls, on] of Object.entries(saved.flags)) {
+      if (!FLAGS[cls]) continue;
+      document.body.classList.toggle(cls, on);
+      document.getElementById(FLAGS[cls]).classList.toggle('on', INVERTED[cls] ? !on : on);
+    }
+    if (saved.mode === 'ghosted') setMode('mGhost');
+    requestAnimationFrame(place);
+  }
+  // keys 1/2/D/T click or switch through the same controls, so listening on
+  // the panel plus setMode catches every change
+  panel.addEventListener('input', saveSettings);
+  panel.addEventListener('click', () => setTimeout(saveSettings, 0));
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    resetting = true;          // the panel's own click listener would save again
+    try { localStorage.removeItem(SAVE_KEY); } catch (e) {}
+    location.reload();
+  });
 
   // One fullscreen path for the corner button, the panel button and F. Toggles
   // rather than only entering, so the tappable control can also get back out —
@@ -691,6 +737,13 @@
       'Pick the Cherven mp3, or drop it anywhere on this window.<br>' +
       'No audio to hand? Double-click here, then press <kbd>C</kbd> and drag the scrub.';
   }
+
+  // ?autostart=1 starts without the click. Sound without a gesture is only
+  // allowed when the browser was launched for it (install/ runs Chrome with
+  // --autoplay-policy=no-user-gesture-required); anywhere else play() is
+  // refused and the gate simply stays, so the link is safe to share.
+  if (CONFIG.AUDIO && new URLSearchParams(location.search).has('autostart'))
+    audio.play().then(() => gate.classList.add('off'), () => {});
 
   ['dragenter', 'dragover'].forEach(ev => document.addEventListener(ev, e => {
     e.preventDefault(); document.body.classList.add('dragging');
