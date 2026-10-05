@@ -199,7 +199,7 @@
   <button id="modePanel">Mode: subtitles / scroll</button>
   <button id="cuesPanel">Cues on / off</button>
   <label>Linger after speech, sec <span id="lingerVal"></span></label>
-  <input type="range" id="linger" min="0" max="5" step="0.1" value="1.2">
+  <input type="range" id="linger" min="0" max="10" step="0.1" value="3">
   <label>Subtitle size <span id="subsizeVal"></span></label>
   <input type="range" id="subsize" min="12" max="96" step="1" value="37">
   <label>Subtitle height from bottom, % <span id="subposVal"></span></label>
@@ -208,6 +208,8 @@
   <input type="range" id="submeasure" min="14" max="60" step="1" value="34">
   <label>Cue size <span id="cuesizeVal"></span></label>
   <input type="range" id="cuesize" min="10" max="60" step="1" value="23">
+  <label>Cue linger, extra sec <span id="cuelingerVal"></span></label>
+  <input type="range" id="cuelinger" min="0" max="30" step="1" value="8">
   <label>Reading line, share of height <span id="lineVal"></span></label>
   <input type="range" id="line" min="0.15" max="0.7" step="0.01" value="0.38">
   <label>Spoken weight <span id="pastVal"></span></label>
@@ -248,9 +250,10 @@
   const CUES = /*CUES*/[{"n":1,"title":"Let’s go","desc":"Lisove cemetery, crowd lines up on both sides of the road, from the gates – we wait a long time for the arrival of Tokha’s body to start the funeral. A coffin appears; next to me is Andriy, one of Tokha’s closest, oldest friends, he says: “Let’s go.” August 2023","start":0,"end":7},{"n":2,"title":"Boulders","desc":"Evening; Hek, Frania, and I are at home; I play the ukulele, they play with LEGOs. Spring 2022","start":8,"end":176},{"n":3,"title":"Bohdan’s memorial luncheon","desc":"Memorial lunch after Bohdan’s funeral, his sister is the first to speak to everyone. People stand and sit, clattering dishes. August 2023","start":2,"end":279},{"n":4,"title":"Conclusion","desc":"Serhii writes down a diagnosis in a patient’s record at the military hospital. Summer 2022","start":109,"end":293},{"n":5,"title":"Saving Private Ryan","desc":"Accidentally overheard story. Summer 2023","start":121,"end":237},{"n":6,"title":"African lullaby","desc":"We listen to a lullaby. Summer 2023","start":121,"end":236},{"n":7,"title":"Nikolaich","desc":"Nikolaich recalls his acquaintance, a tractor driver who had blown up on a mine in the summer of 2022; they worked together at the same company then. Summer 2023","start":178,"end":296},{"n":8,"title":"Film ne podliva","desc":"Sashko talks about his dream to make a film about Kyiv, “not some gravy,” but a story about the real Kyiv and its real people. Summer 2023","start":255,"end":281},{"n":9,"title":"Into the fire","desc":"Hek greets me at home with a story about why he wants to be a firefighter and what kind of firefighter he would like to be. Summer 2023","start":291,"end":314},{"n":10,"title":"Chapa talks in Kutt","desc":"My old friend tells me about the circumstances of Bohdan’s death. August 2023","start":312,"end":480},{"n":11,"title":"Kativnya","desc":"A wounded man during his examination tells Serhii that he was taken prisoner — to the “torture room”— as a civilian, and upon release, immediately joined the army. December 2023","start":327,"end":662},{"n":12,"title":"Disneyland","desc":"A woman who once worked at the Liquor and Vodka Factory speaks during a public discussion about the developer's plans with residents of the blocks nearest to the factory building. August 2023","start":378,"end":417},{"n":13,"title":"Krainia street","desc":"Driving from Kostya’s funeral; Lisove Cemetery is located on Krainia (“Far Edge”, “The last”) street. June 2023","start":121,"end":140},{"n":14,"title":"Teleradiobomba","desc":"Jamming a bit with Bodya, Hek, and Frania at Ruslan's, for Alina's birthday. Summer 2023","start":121,"end":633},{"n":15,"title":"Bandura","desc":"Rehearsal in the Ukrainian House, a piece for bandura by Maxim Kolomiiets, written in March 2022 in Kyiv. June 2023","start":121,"end":552},{"n":16,"title":"Damba","desc":"Fragment of \"Dam\" by Ed Sol, written a few days after the Hydroelectric Power Station was blown up at Kakhovka, Ed’s hometown. June 2023","start":121,"end":662},{"n":17,"title":"Ensemble rehearses","desc":"Fragment of ensemble rehearsal. June 2023","start":121,"end":333},{"n":18,"title":"Frania’s morning song","desc":"Frania sings morning songs while I try to wake up. Summer 2023","start":121,"end":616},{"n":19,"title":"Palevo","desc":"Ruslan found my phone when I was recording how he lulls Una. I came to get a tattoo before Hena’s funeral. June 2023","start":121,"end":375},{"n":20,"title":"Steps","desc":"Walking the stairs of the Ukrainian House during rehearsals. June 2023","start":121,"end":648},{"n":21,"title":"Anya","desc":"Meeting Mrs. Anya at the playground, a resident of our district; she talks about the start of the full-scale invasion. May 2023","start":284,"end":646},{"n":22,"title":"Last rites for Hena","desc":"Memorial service for Hena in St. Michael's Cathedral. June 2023","start":387,"end":641},{"n":23,"title":"The theme of an onslaught","desc":"Fragment of a conversation with the composer Vitaliy Hodziatsky, one of the Sixtiers, about the start of World War II and this war. June 2023","start":565,"end":638},{"n":24,"title":"Mykola’s vest","desc":"A fragment of a guide's story about the embroidered vest of Mykola Babiychuk, which he gave to Katya Libkind in early March 2022, when patients from the psychoneurological dispensary in Pushcha-Vodytsia were evacuated to Pavlivska Hospital. June 2023","start":537,"end":570},{"n":25,"title":"Tourniquet","desc":"Morning with Zenon, drinking coffee and smoking on the balcony. He talks about changes in the law regarding the rules for applying and converting tourniquets. July 2023","start":520,"end":659},{"n":26,"title":"Muezzin","desc":"Recording of a muezzin performing azan (call to prayer); also our balcony. Summer 2022","start":635,"end":734},{"n":27,"title":"Epicenter","desc":"Walking through a bombed Epicenter (building supplies hypermarket) in Chernihiv, visiting grandma. Spring 2022","start":655,"end":899},{"n":28,"title":"Artery","desc":"Conversation between Serhii and Katya, Hena's wife, near the fountain at Zoloti Vorota. June 2023","start":717,"end":907},{"n":29,"title":"Hena is dead","desc":"Evening city noise from the balcony on the day we learned about Hena's death. June 2023","start":797,"end":1058},{"n":30,"title":"Molytva","desc":"Prayer of a Ukrainian nationalist at Hena’s funeral. Read by his brothers-in-arms from the Third Assault Brigade. June 2023","start":916,"end":1082},{"n":31,"title":"Libkind’s tour","desc":"Katya Libkind gives us a tour of the exhibition at the Khanenko Museum. March 2023","start":337,"end":1780},{"n":32,"title":"The bravest man I’ve known","desc":"Speech by Kostya’s commander at his funeral. June 2023","start":1081,"end":1370},{"n":33,"title":"Kostya","desc":"Evening/night when I learned about Kostya's death. Reviewing instagram stories saved by him — about work, mountaineering, travel, sea, snowboarding. In one video, he speaks from the top of some Romanian mountain, in another, he beckons a cat somewhere in Norway. June 2023","start":1081,"end":1809},{"n":34,"title":"Marvel car","desc":"Liokha, my stepfather, shows us and the kids his “marvel car” — a soldier’s house on wheels. The kids are thrilled. We talk about his brothers-in-arms who stood in Bakhmut. Recording made the day we rushed over because he suddenly got a few days off with unclear prospects afterward. Summer 2023","start":1231,"end":1383},{"n":35,"title":"Air raid alarm Paskotynka","desc":"Walking with the kids at Paskotynka. Playing with stone altars built here by witches and their friends. Sudden air raid alarm. “Oooo, police!” — Frania excitedly exclaims. Summer 2023","start":1189,"end":1383},{"n":36,"title":"Bečići","desc":"Recording of the sea in Montenegro, made by Katya at my request, when she and Platon went there to recover. Sounds of the beach, Platon, and other kids. July 2023","start":1258,"end":1384},{"n":37,"title":"N","desc":"Visiting N. \"at the base.\" We are happy to see each other. Summer 2022","start":1292,"end":1482},{"n":38,"title":"Easter","desc":"Easter, together with kids and parents, we stand in a circle of those wanting to bless their baskets. Next to us, a delegation of priests — sprinkling the holy water, singing. Courtyard of St. Michael's Cathedral. April 2023","start":1425,"end":1546},{"n":39,"title":"Pidkova","desc":"Came to Ruslan to tattoo a horseshoe in memory of Hena (his code name was Horseshoe). Rus tells me about shoeing horses — supposedly, for them, it’s the most anticipated, pleasant event. He once stumbled upon an ASMR video about it, and he now plays it for me. We discuss tattoos, Rus draws many options, we choose, I play with Una and feed her from a bottle to that ASMR soundtrack. June 2023","start":1293,"end":2339},{"n":40,"title":"Work in progress","desc":"Getting a tattoo. June 2023","start":1445,"end":2333},{"n":41,"title":"The only master","desc":"Returning from Volodarka from Bohdan’s funeral. Levin tells us about his tattoos (he was Bohdan’s only tattoo artist): a replica of Maria Prymachenko, a trident. Says Bohdan squealed unforgettably during sessions; we agree that tattoos are painful, and squealing is correct. Bohdan always arrived for sessions with a girlfriend, brother, brought friends — like to a celebration. August 2023\nIn February 2024 Levin joined the UAF.","start":1564,"end":1618},{"n":42,"title":"Tokha’s funeral. 88","desc":"Priest conducts Tokha’s memorial service. Stands in the same place where Kostya’s commander spoke two months ago. Very hot, a girl faints in the crowd. Tokha’s comrades sit her down nearby, and an ambulance arrives. The priest sings for a very long time. After the memorial service, we go to bury Tokha. As Vova and I are here for the second time this summer, we count how many rows have been added from Kostya to Tokha: 11 rows of 8 graves each. 88 graves. August 2023","start":4,"end":2267},{"n":43,"title":"Main flag","desc":"Hek, Dima, and I are gathering equipment after a concert at the Ukrainian House. Hek wants to show us “the main flag of Ukraine”. June 2023","start":1677,"end":1803},{"n":44,"title":"The last salute for Bohdan","desc":"The anthem and salute shots at Bohdan’s funeral before the coffin is lowered into the grave. August 2023","start":1713,"end":1804},{"n":45,"title":"Trumpet for Kostya","desc":"Trumpet and drums at Kostya's funeral. June 2023","start":1798,"end":2262},{"n":46,"title":"Trumpet for Hena","desc":"The same musical theme at Hena's funeral. Speech by his brother-in-arms. June 2023","start":1859,"end":2268},{"n":47,"title":"Funeral walk","desc":"Fragment of the walk at Bohdan’s funeral — the cemetery in Volodarka is a few kilometers from the central square, where the whole city came to say goodbye to Bohdan. From the square, we walk very slowly in a huge procession, down one long street. Everyone who lives or works here has come out and is kneeling on the roadside; it looks and seems endless. Bohdan’s mother's friend gets up and runs to her, they cry and hug. We walk for about 40 minutes, maybe an hour — an eternity. August 2023","start":2092,"end":2259},{"n":48,"title":"Flags","desc":"Walking through the cemetery after Kostya's funeral; flags near the graves flutter in the wind. August 2023","start":2325,"end":2522},{"n":49,"title":"Yak toy miud","desc":"Sasha sings a lullaby. July 2023","start":2349,"end":2704},{"n":50,"title":"Empty","desc":"We came with the kids to support Katya and Platon, a day or two after the news about Hena. Talking to her in the kitchen, she tells about the circumstances of his death, shows Hena’s phone — all information is erased. June 2023","start":2485,"end":2614},{"n":51,"title":"Kitchen garden of memory","desc":"Zhanna, Katya, and the kids are walking on Volodymyrska Hill. I joined them, and we sit near the fountain. Katya reminisces about various things from her life; heard here is a fragment of her thoughts about Berdiansk, memory, about “the garden Hena planted for Platon.” Hena very much wanted to return. June 2023","start":2537,"end":2618},{"n":52,"title":"Cricket","desc":"Sound of crickets from the studio window. Heard in the last stages of editing this work in August; stopped, recorded, and added here. August 2023","start":2637,"end":2704},{"n":53,"title":"And then the clock hand just moved backwards","desc":"Another fragment of the same recording. Katya talks about the kitchen clock, which suddenly went off before the funeral. June 2023","start":2608,"end":2704}]/*ENDCUES*/;
 
   // How long a line stays after its voice stops is the "Linger" slider
-  // (default 1.2 s), then it falls away. First this was 1.5 s held and 6 s
+  // (default 3 s, then a 1 s fade). First this was 1.5 s held and 6 s
   // fading — lines seemed to stay long after they were said; then 0.5 s and
-  // 1.5 s — everything vanished too fast. The room decides, so it is live.
+  // 1.5 s — everything vanished too fast; then 1.2 s, still too short on the
+  // wall. The room decides, so it is live.
   const DECAY = 3;
   const ATTACK = 0.25;  // just enough to avoid flicker, as on the wall
 
@@ -392,7 +395,7 @@
     return out.length ? out : [text];
   }
 
-  const SUB_IN = 0.12, SUB_OUT = 0.5, SUB_MAXLINES = 3;
+  const SUB_IN = 0.12, SUB_OUT = 1.0, SUB_MAXLINES = 3;
   const READ_CPS = 14;           // comfortable subtitle reading speed, characters a second
   const subsEl = document.getElementById('subs');
   const chunks = [];
@@ -440,7 +443,7 @@
     return p;
   }
 
-  const linger = () => VAL.linger ?? 1.2;
+  const linger = () => VAL.linger ?? 3;
   const shownSubs = new Map();
   function renderSubs(t) {
     let vis = [];
@@ -473,9 +476,13 @@
   // data problem), so no more than three show at once: a cue that finds all
   // slots taken waits for one to free, and is skipped only if its sound has
   // ended by then. The schedule is worked out once, so seeking is exact.
-  const CUE_SLOTS = 3, CUE_IN = 0.5, CUE_OUT = 1.0;
-  const cueSched = [];
-  {
+  const CUE_SLOTS = 3, CUE_IN = 0.5, CUE_OUT = 2.0;
+  let cueSched = [];
+  // "Cue linger" adds seconds to every cue's reading time (default 8). Longer
+  // means later cues wait for a slot: at +8 the ten 2:01 cues are all through
+  // by about 3:00; past +12 the 19 s cue 13 can lose its slot entirely.
+  function scheduleCues(extra) {
+    cueSched = [];
     // freeAt[k]: when slot k (a column of the header row) is next free
     const freeAt = Array(CUE_SLOTS).fill(-Infinity);
     const sorted = CUES.slice().sort((a, b) => a.start - b.start || a.n - b.n);
@@ -487,11 +494,12 @@
         slot = freeAt.indexOf(t0);
       }
       if (t0 >= c.end) continue;
-      const read = Math.min(Math.max(4 + (c.title.length + c.desc.length) / 12, 9), 30);
+      const read = Math.min(Math.max(4 + (c.title.length + c.desc.length) / 12, 9), 30) + extra;
       cueSched.push({ c, s: t0, e: t0 + read, slot });
       freeAt[slot] = t0 + read + CUE_OUT;
     }
   }
+  scheduleCues(8);
   const cuesEl = document.getElementById('cues');
   const shownCues = new Map();
   function cueEl(c) {
@@ -605,17 +613,23 @@
   // or this is wiped each launch — see install/.)
   const SAVE_KEY = 'cherven-transcript-settings';
   const saved = (() => { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); } catch (e) { return null; } })() || {};
+  // Only sliders someone actually moved are saved, so a changed default in the
+  // code still reaches a browser that saved settings earlier. The first build
+  // saved every slider; its subtitle linger at the old default (1.2 s, judged
+  // too short) is dropped rather than kept as if chosen.
+  if (!saved.v) { if (saved.linger === '1.2') delete saved.linger; }
+  const moved = new Set(Object.keys(saved).filter(k => k !== 'v'));
   // put a saved value back into its slider; true if there was one
   const restore = id => {
-    if (!(id in saved)) return false;
+    if (!(id in saved) || id === 'v') return false;
     document.getElementById(id).value = saved[id];
     return true;
   };
   let resetting = false;
   function saveSettings() {
     if (resetting) return;
-    const out = {};
-    panel.querySelectorAll('input[type=range]').forEach(el => { if (el.id !== 'scrub') out[el.id] = el.value; });
+    const out = { v: 2 };
+    for (const id of moved) out[id] = document.getElementById(id).value;
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(out)); } catch (e) {}
   }
 
@@ -646,6 +660,10 @@
   bind('feather', '--feather', v => v);
   bind('offset',  null,        v => v);
   bind('linger',  null,        v => v);
+  bind('cuelinger', null,      v => v);
+  const cueLinger = document.getElementById('cuelinger');
+  cueLinger.addEventListener('input', () => { scheduleCues(VAL.cuelinger); cuesEl.replaceChildren(); shownCues.clear(); });
+  scheduleCues(VAL.cuelinger);
   // Subtitle and cue sizes open on their responsive defaults, like type size.
   document.getElementById('subsize').value = Math.round(parseFloat(getComputedStyle(subsEl).fontSize));
   document.getElementById('cuesize').value = Math.round(parseFloat(getComputedStyle(cuesEl).fontSize));
@@ -702,7 +720,11 @@
     toggleFull();
     panel.classList.remove('open');
   });
-  panel.addEventListener('input', saveSettings);
+  panel.addEventListener('input', e => {
+    if (e.target.type !== 'range' || e.target.id === 'scrub') return;
+    moved.add(e.target.id);
+    saveSettings();
+  });
   document.getElementById('resetBtn').addEventListener('click', () => {
     resetting = true;
     try { localStorage.removeItem(SAVE_KEY); localStorage.removeItem('cherven-transcript'); } catch (e) {}

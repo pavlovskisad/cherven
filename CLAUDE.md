@@ -449,18 +449,25 @@ remembered in that browser; the URL overrides it. Default: subtitles, cues off.
   voices are up — which in this piece is most of the time.
 - **Scroll** — the full column under a reading line, as first built.
 
-**Lingering.** Lines used to hold 1.5 s after their speech and fade over 6 s —
-7.5 s of afterglow on every line. Now 0.5 s and 1.5 s. Stage directions span
+**Lingering.** Lines first held 1.5 s after their speech and faded over 6 s
+(too long), then 0.5 s and 1.5 s (everything vanished), then 1.2 s (still too
+short on the wall). Now the **Linger** slider, default 3 s, then a 1 s fade.
+Stage directions span
 the sound they describe (the anthem-and-bugle direction covers 168 s), which is
 no reason to keep the words up that long: they show for a reading time, 3–6 s.
 
 **Cues** (`D`, or the on-screen switch): number, title and description from
-the wall's own `CUES` (copied in by `build.py`, never a second copy), top left,
-from each cue's start for a reading time of 7–24 s. At most three at once; a
-cue finding no free slot waits for one. That matters at 2:01, where the data
+the wall's own `CUES` (copied in by `build.py`, never a second copy), in a
+row at the top, from each cue's start for a reading time of 9–30 s plus the
+**Cue linger** slider (default +8 s), then a 2 s fade. At most three at once;
+a cue finding no free slot waits for one. That matters at 2:01, where the data
 starts ten cues together (§3 known problem 1) — they appear three at a time
-and are all through by 2:39. The schedule is computed once, so seeking is
-exact; no cue is ever skipped.
+and at +8 s are all through by about 3:00. The schedule is recomputed only
+when the slider moves, so seeking is exact. No cue is skipped up to +12 s;
+beyond that cue 13 (19 s long) can lose its turn.
+
+**Saved settings** keep only the sliders someone actually moved, so a new
+default in the code still reaches a browser that saved settings earlier.
 
 ### Timing — read before trusting or editing it
 
