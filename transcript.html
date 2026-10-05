@@ -354,7 +354,7 @@
   function weight(T, t, past, future) {
     if (t < T.start) return future;
     if (t < T.start + ATTACK) return future + (1 - future) * (t - T.start) / ATTACK;
-    const off = T.show + (VAL.linger ?? 1.2);
+    const off = T.show + (VAL.linger ?? 3);
     if (t < off) return 1;
     const k = Math.min((t - off) / DECAY, 1);
     return 1 - (1 - past) * (k * k * (3 - 2 * k));
