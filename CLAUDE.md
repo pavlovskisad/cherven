@@ -368,9 +368,12 @@ second may not be. Set it in the room against the actual throw.
 ## 10. Things not to do
 
 - Do not add an alpha channel or transparency. See §2.
-- Do not add a fixed subtitle band at the bottom. Timing is window-accurate,
-  ~±30s; a fixed strip promises real-time sync and reads as broken. Speech
-  belongs nested inside its own cue.
+- Do not add a fixed subtitle band to **the wall**. Its timing is
+  window-accurate, ~±30s; a fixed strip promises real-time sync and reads as
+  broken. Speech belongs nested inside its own cue. (The transcript page, §11,
+  has a subtitle mode because its timing comes from the audio — but its
+  low-confidence lines are still estimates, so the same caution applies there
+  in proportion.)
 - Do not assume one cue at a time. See §3.
 - Do not use margins inside `.row`. See §5.
 - Do not remove the gate. See §7.
@@ -400,6 +403,33 @@ not word sync). The **prayer is timed line by line** — 35 verse lines, each li
 as it is recited — because it was recognised well enough to allow it. Below
 ~24em of measure the column sets ragged right (§6, justification needs measure).
 Tap a line to jump to it. `Sync offset` compensates for a delaying sound chain.
+
+**Two modes, switchable on screen** (bottom right, on the cursor's 2 s fade —
+a phone has no keyboard), with `S`, or by URL for a kiosk
+(`/transcript?mode=scroll|subs&cues=1`). A choice made on the page is
+remembered in that browser; the URL overrides it. Default: subtitles, cues off.
+
+- **Subtitles** — only what is being said, low and centred, at most three
+  lines. Speeches are cut into sentence-sized pieces (≤ ~84 characters, long
+  sentences at commas and dashes) and the turn's span is shared between them by
+  length; the prayer uses its 35 line times. Each piece gets reading time
+  (0.9 s + 1 s per 22 characters) but never overlaps the next piece of the same
+  speech. Names show when a new voice starts, and on every line while two
+  voices are up — which in this piece is most of the time.
+- **Scroll** — the full column under a reading line, as first built.
+
+**Lingering.** Lines used to hold 1.5 s after their speech and fade over 6 s —
+7.5 s of afterglow on every line. Now 0.5 s and 1.5 s. Stage directions span
+the sound they describe (the anthem-and-bugle direction covers 168 s), which is
+no reason to keep the words up that long: they show for a reading time, 3–6 s.
+
+**Cues** (`D`, or the on-screen switch): number, title and description from
+the wall's own `CUES` (copied in by `build.py`, never a second copy), top left,
+from each cue's start for a reading time of 7–24 s. At most three at once; a
+cue finding no free slot waits for one. That matters at 2:01, where the data
+starts ten cues together (§3 known problem 1) — they appear three at a time
+and are all through by 2:39. The schedule is computed once, so seeking is
+exact; no cue is ever skipped.
 
 ### Timing — read before trusting or editing it
 

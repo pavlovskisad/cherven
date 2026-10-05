@@ -26,7 +26,7 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
     window.requestAnimationFrame = cb => { window.__raf = cb; return 1; };
     window.setInterval = () => 0;             // the rAF-stall fallback is irrelevant on a virtual clock
   });
-  await pg.goto(`http://127.0.0.1:${srv.address().port}/`, { waitUntil: 'load' });
+  await pg.goto(`http://127.0.0.1:${srv.address().port}/?mode=scroll`, { waitUntil: 'load' });   // the video is of the scrolling view
   await pg.evaluate(() => document.fonts.ready);
   await pg.evaluate(() => {
     document.getElementById('gate').classList.add('off');

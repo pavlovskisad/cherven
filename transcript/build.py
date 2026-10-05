@@ -54,8 +54,20 @@ def main():
     new, n = re.subn(r"/\*TURNS\*/.*?/\*END\*/", lambda m: "/*TURNS*/" + data + "/*END*/", html, flags=re.S)
     if n != 1:
         sys.exit("could not find exactly one /*TURNS*/.../*END*/ block in transcript.html")
+
+    # The cue sheet comes from the wall's own data, never a second copy, so a
+    # fix to index.html's CUES reaches this page on the next build.
+    wall = (HERE.parent / "index.html").read_text(encoding="utf-8")
+    m = re.search(r"const CUES = (\[.*?\]);\n", wall, re.S)
+    if not m:
+        sys.exit("could not find CUES in index.html")
+    cues = [{k: c[k] for k in ("n", "title", "desc", "start", "end")} for c in json.loads(m.group(1))]
+    cdata = json.dumps(cues, ensure_ascii=False, separators=(",", ":"))
+    new, n = re.subn(r"/\*CUES\*/.*?/\*ENDCUES\*/", lambda m: "/*CUES*/" + cdata + "/*ENDCUES*/", new, flags=re.S)
+    if n != 1:
+        sys.exit("could not find exactly one /*CUES*/.../*ENDCUES*/ block in transcript.html")
     PAGE.write_text(new, encoding="utf-8")
-    print(f"wrote {len(out)} items into {PAGE.name} ({len(data)} bytes of data)")
+    print(f"wrote {len(out)} items and {len(cues)} cues into {PAGE.name} ({len(data) + len(cdata)} bytes of data)")
 
 
 if __name__ == "__main__":
