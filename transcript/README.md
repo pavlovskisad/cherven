@@ -100,3 +100,23 @@ doubtful line can be judged without re-running anything.
   prayer is the exception: timed line by line from the recitation.
 - If the room's sound chain adds latency (Bluetooth, some AV processors), set
   the **Sync offset** slider on the page rather than editing timings.
+
+## Video
+
+`render_video.js` renders the page to video frame by frame on a virtual clock
+(`performance.now` and `requestAnimationFrame` replaced, piece time set through
+a hook added to a served copy), so picture and sound line up exactly — a
+real-time screen recording drops frames and drifts. 1920×1080, 25 fps,
+x264 CRF 17. Run segments in parallel (each starts 6 s early so the scroll
+easing has settled by its first kept frame), then join and add the audio:
+
+```
+for seg in "0 676.24" "676.24 1352.48" "1352.48 2028.72" "2028.72 2704.92"; do
+  set -- $seg; node transcript/render_video.js $1 $2 seg_$1.mp4 &
+done; wait
+ls seg_*.mp4 | sort -t_ -k2 -g | sed "s/.*/file '&'/" > segs.txt
+ffmpeg -f concat -safe 0 -i segs.txt -i cherven.mp3 -map 0:v -map 1:a \
+       -c:v copy -c:a aac -b:a 320k -shortest -movflags +faststart Cherven-transcript.mp4
+```
+
+Four workers on 4 cores take about 27 minutes. The result is ~300 MB.
