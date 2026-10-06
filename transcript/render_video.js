@@ -1,5 +1,8 @@
 // Deterministic frame render of transcript.html to video (needs node + playwright, ffmpeg).
-//   node render.js T0 T1 out.mp4      (seconds; writes video only, no audio)
+//   node render_video.js T0 T1 out.mp4      (seconds; writes video only, no audio)
+// The view is the cinema one, subtitles with cue cards, at the page's default
+// settings; QUERY overrides it, e.g. QUERY='?mode=scroll' for the scrolling
+// column.
 // The page runs on a virtual clock: performance.now and requestAnimationFrame
 // are replaced, and the piece time is set directly through a hook added to a
 // served copy of the page. Each frame advances exactly 1/FPS, so text and
@@ -26,13 +29,13 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
     window.requestAnimationFrame = cb => { window.__raf = cb; return 1; };
     window.setInterval = () => 0;             // the rAF-stall fallback is irrelevant on a virtual clock
   });
-  await pg.goto(`http://127.0.0.1:${srv.address().port}/?mode=scroll`, { waitUntil: 'load' });   // the video is of the scrolling view
+  await pg.goto(`http://127.0.0.1:${srv.address().port}/${process.env.QUERY || '?mode=subs&cues=1'}`, { waitUntil: 'load' });
   await pg.evaluate(() => document.fonts.ready);
   await pg.evaluate(() => {
     document.getElementById('gate').classList.add('off');
     document.body.style.cursor = 'none';
   });
-  const enc = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
+  const enc = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'png', '-i', '-',
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p', '-r', String(FPS), OUT],
     { stdio: ['pipe', 'inherit', 'inherit'] });
   const first = Math.round(T0 * FPS), last = Math.round(T1 * FPS), warm = Math.max(0, first - WARM * FPS);
@@ -41,7 +44,7 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
     const t = f / FPS;
     await pg.evaluate(t => { window.__now = t * 1000; window.__setT(t); const cb = window.__raf; window.__raf = null; if (cb) cb(t * 1000); }, t);
     if (f < first) continue;
-    const buf = await pg.screenshot({ type: 'jpeg', quality: 92 });
+    const buf = await pg.screenshot({ type: 'png' });   // lossless into x264: one lossy step, not two
     if (!enc.stdin.write(buf)) await new Promise(r => enc.stdin.once('drain', r));
     if ((f - first) % (FPS * 60) === 0) console.log(`${OUT}: ${(t / 60).toFixed(1)} min, ${((f - first + 1) / ((Date.now() - t0) / 1000)).toFixed(1)} fps`);
   }

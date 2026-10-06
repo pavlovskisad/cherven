@@ -30,15 +30,22 @@ if [ ! -f "$ROOT/$PAGE" ] || [ ! -f "$ROOT/cherven.mp3" ]; then
   exit 1
 fi
 
+# The lossless master, when it has been downloaded beside the pages (see
+# INSTALL.md), plays instead of the MP3. Same edit, sample for sample, so
+# every timing holds.
+AUDIO=""
+if [ -f "$ROOT/cherven.wav" ]; then AUDIO="&audio=cherven.wav"; fi
+
 # A kiosk already running on this profile would swallow the new launch (Chrome
 # hands the URL to the running copy and ignores the flags), so close it first.
 pkill -f -- "--user-data-dir=$PROFILE" 2>/dev/null && sleep 2
 
 # file:// URL; escape what would otherwise end or break the path
 path="$(printf '%s' "$ROOT/$PAGE" | sed -e 's/%/%25/g' -e 's/ /%20/g' -e 's/#/%23/g' -e 's/?/%3F/g')"
-URL="file://$path?autostart=1"
+URL="file://$path?autostart=1$AUDIO"
 
 echo "Cherven: $URL"
+if [ -n "$AUDIO" ]; then echo "Audio: cherven.wav (lossless)"; else echo "Audio: cherven.mp3 (no cherven.wav found)"; fi
 echo "Cmd+Q quits. C opens the settings panel."
 
 exec caffeinate -dimsu "$CHROME" \

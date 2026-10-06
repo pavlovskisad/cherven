@@ -255,6 +255,14 @@
     LOOP: true,
     START_AT: 0
   };
+  // ?audio=<file> plays another file from beside the page instead. The
+  // installation uses it for the lossless WAV, which is too big for the repo
+  // (install/launch.sh adds it when cherven.wav is in the folder). Only a
+  // bare file name is accepted.
+  {
+    const a = new URLSearchParams(location.search).get('audio');
+    if (a && /^[\w.-]+\.(wav|mp3|m4a|flac|ogg)$/i.test(a)) CONFIG.AUDIO = './' + a;
+  }
   const N = CUES.length;
 
   const stage = document.getElementById('stage');
