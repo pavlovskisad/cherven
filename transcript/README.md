@@ -132,7 +132,11 @@ ffmpeg -f concat -safe 0 -i segs.txt -i cherven.wav -map 0:v -map 1:a \
 a MOV carrying the WAV's PCM untouched; MOV, because MP4 has no standard place
 for PCM. The WAV and `cherven.mp3` are the same edit sample for sample
 (cross-correlated at five points: zero offset, r ≥ 0.999), so the timing
-measured on the MP3 holds. For a small file, `-i cherven.mp3` and an `.mp4`
+measured on the MP3 holds. **When an `.mp4` is required** (H.264 MP4 is
+the usual festival spec), MP4 has no standard place for PCM, so the WAV goes
+in as ALAC, Apple Lossless: `-c:v copy -c:a alac`, about 500 MB at 4K.
+Lossless — the decoded 24-bit samples hash the same as the WAV's
+(`-c:a pcm_s24le -f md5`). For a small file, `-i cherven.mp3` and an `.mp4`
 name instead copies the MP3 frames as they are. The first export re-encoded
 to AAC, a second lossy generation, and was redone. No `-shortest`, which could
 drop the last audio frame. Never join or convert in QuickTime's "Export As": it
