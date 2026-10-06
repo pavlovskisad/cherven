@@ -116,7 +116,17 @@ for seg in "0 676.24" "676.24 1352.48" "1352.48 2028.72" "2028.72 2704.92"; do
 done; wait
 ls seg_*.mp4 | sort -t_ -k2 -g | sed "s/.*/file '&'/" > segs.txt
 ffmpeg -f concat -safe 0 -i segs.txt -i cherven.mp3 -map 0:v -map 1:a \
-       -c:v copy -c:a aac -b:a 320k -shortest -movflags +faststart Cherven-transcript.mp4
+       -c copy -movflags +faststart Cherven-transcript.mp4
 ```
+
+**The audio is copied, never re-encoded** (`-c copy`): the MP3 frames go into
+the MP4 exactly as they are in `cherven.mp3`. The first export used
+`-c:a aac -b:a 320k`, a second lossy generation, and was redone. Checked:
+the audio packets' MD5 matches the original file's, every decoded sample is
+identical, and the only difference is 101 samples (2.3 ms) of silent MP3
+padding at the very end that MP4 doesn't trim. Splitting into parts and
+re-joining with `-c copy` keeps the same MD5. No `-shortest`, which could
+drop the last audio frame. Never use QuickTime's "Export As" to join or
+convert: it re-encodes.
 
 Four workers on 4 cores take about 27 minutes. The result is ~300 MB.
