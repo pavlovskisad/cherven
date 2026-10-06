@@ -106,27 +106,30 @@ doubtful line can be judged without re-running anything.
 `render_video.js` renders the page to video frame by frame on a virtual clock
 (`performance.now` and `requestAnimationFrame` replaced, piece time set through
 a hook added to a served copy), so picture and sound line up exactly — a
-real-time screen recording drops frames and drifts. 1920×1080, 25 fps,
-x264 CRF 17. Run segments in parallel (each starts 6 s early so the scroll
-easing has settled by its first kept frame), then join and add the audio:
+real-time screen recording drops frames and drifts. It records the cinema view,
+subtitles with cue cards, at the page's default settings (`QUERY='?mode=scroll'`
+for the scrolling column). 1920×1080, 25 fps, lossless PNG frames into x264
+CRF 17. Run segments in parallel (each starts 6 s early so anything in motion
+has settled by its first kept frame), then join and add the audio:
 
 ```
 for seg in "0 676.24" "676.24 1352.48" "1352.48 2028.72" "2028.72 2704.92"; do
   set -- $seg; node transcript/render_video.js $1 $2 seg_$1.mp4 &
 done; wait
 ls seg_*.mp4 | sort -t_ -k2 -g | sed "s/.*/file '&'/" > segs.txt
-ffmpeg -f concat -safe 0 -i segs.txt -i cherven.mp3 -map 0:v -map 1:a \
-       -c copy -movflags +faststart Cherven-transcript.mp4
+ffmpeg -f concat -safe 0 -i segs.txt -i cherven.wav -map 0:v -map 1:a \
+       -c copy -movflags +faststart Cherven-transcript.mov
 ```
 
-**The audio is copied, never re-encoded** (`-c copy`): the MP3 frames go into
-the MP4 exactly as they are in `cherven.mp3`. The first export used
-`-c:a aac -b:a 320k`, a second lossy generation, and was redone. Checked:
-the audio packets' MD5 matches the original file's, every decoded sample is
-identical, and the only difference is 101 samples (2.3 ms) of silent MP3
-padding at the very end that MP4 doesn't trim. Splitting into parts and
-re-joining with `-c copy` keeps the same MD5. No `-shortest`, which could
-drop the last audio frame. Never use QuickTime's "Export As" to join or
-convert: it re-encodes.
+**The audio is copied, never re-encoded** (`-c copy`). With the lossless master
+(`cherven.wav`, 24-bit 44.1 kHz, the `lossless-audio` release) the result is
+a MOV carrying the WAV's PCM untouched; MOV, because MP4 has no standard place
+for PCM. The WAV and `cherven.mp3` are the same edit sample for sample
+(cross-correlated at five points: zero offset, r ≥ 0.999), so the timing
+measured on the MP3 holds. For a small file, `-i cherven.mp3` and an `.mp4`
+name instead copies the MP3 frames as they are. The first export re-encoded
+to AAC, a second lossy generation, and was redone. No `-shortest`, which could
+drop the last audio frame. Never join or convert in QuickTime's "Export As": it
+re-encodes.
 
-Four workers on 4 cores take about 27 minutes. The result is ~300 MB.
+Four workers on 4 cores take roughly 40 minutes.

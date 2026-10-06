@@ -237,6 +237,16 @@ release. It was not re-encoded: the audio is the work, and a second lossy
 generation was judged a poor trade for 26 MB. Keep it that way; if size ever
 forces a re-encode, encode once from this file and never from a copy.
 
+**The lossless master is a WAV** on the `lossless-audio` release:
+24-bit, 44.1 kHz, 716 MB — too big for the repo (GitHub's 100 MB file limit)
+and for the site. It is the same edit as the MP3, sample for sample
+(cross-correlated at five points: zero offset, r ≥ 0.999), so every timing
+measured on the MP3 holds for it. Both pages accept `?audio=<bare file name>`
+to play a file beside them instead of `CONFIG.AUDIO`; the installation
+launcher passes `audio=cherven.wav` when that file is in the folder, and the
+video export muxes the WAV's PCM untouched into a MOV (`transcript/README.md`).
+Chrome plays the 24-bit WAV from `file://`, seeking included (tested).
+
 **It must be served same-origin, or from any host that sends a real audio
 type.** It was first hotlinked from the GitHub release. That worked on every
 desktop browser and failed on every iOS one with MediaError code 4: the release
@@ -441,7 +451,12 @@ a phone has no keyboard), with `S`, or by URL for a kiosk
 remembered in that browser; the URL overrides it. Default: subtitles, cues off.
 
 - **Subtitles** — only what is being said, low and centred, at most three
-  lines. Speeches are cut into sentence-sized pieces (≤ ~84 characters, long
+  lines. A line never re-wraps while it is up: whether it carries its
+  speaker's name is decided once, when it appears (it was decided per frame,
+  so a name vanished when the other voice faded and the line re-flowed, six
+  times across the piece). Lines pushed up by a new one glide there over
+  0.4 s (eased, in wall time) rather than jumping. Both checked by stepping
+  the whole piece frame by frame. Speeches are cut into sentence-sized pieces (≤ ~84 characters, long
   sentences at commas and dashes) and the turn's span is shared between them by
   length; the prayer uses its 35 line times. Each piece gets reading time
   (0.9 s + 1 s per 22 characters) but never overlaps the next piece of the same

@@ -17,6 +17,21 @@ Keep it in the home folder, not Downloads, Desktop or Documents: macOS asks
 permission before Chrome may read those, and the prompt hides behind a full
 screen page.
 
+### The lossless audio
+
+The folder comes with `cherven.mp3`. To play the lossless WAV instead, put it
+in `cherven-main` named exactly **`cherven.wav`**. Either copy your own file
+there in Finder and rename it, or download it from the release (716 MB):
+
+```
+curl -L -o ~/cherven-main/cherven.wav https://github.com/pavlovskisad/cherven/releases/download/lossless-audio/Ian.Spektor.-.Cherven.-.01.Cherven.wav
+```
+
+The launchers use `cherven.wav` whenever it is there, and the Terminal window
+says which file is playing ("Audio: cherven.wav (lossless)"). The WAV and the
+MP3 are the same edit, sample for sample, so every subtitle and cue lands at
+the same moment. Updating the folder with the line above keeps the WAV.
+
 ## 2. Start it
 
 Double-click one of:
@@ -69,7 +84,8 @@ System Settings:
   change, no processing.
   - Open **Audio MIDI Setup** (Applications → Utilities), select the output
     device and set Format to **44,100 Hz**, the file's own rate, so macOS
-    doesn't resample it.
+    doesn't resample it, and to **24-bit** if the device offers it (the WAV
+    is 24-bit).
   - Set the Mac's volume to full and control the level at the venue's
     mixer.
 - **Software Update**: turn off automatic updates for the duration.
@@ -94,8 +110,8 @@ The Mac then boots straight into the piece.
 - **The "Let's go" screen stays up**: Chrome was not allowed to start the
   sound by itself. Quit Chrome completely (Cmd+Q) and double-click the
   launcher again, or just click *Let's go* once.
-- **"Could not load the audio"**: `cherven.mp3` is missing from the folder.
-  Run the command in step 1 again.
+- **"Could not load the audio"**: `cherven.mp3` (or `cherven.wav`) is missing
+  or incomplete. Run the command in step 1 again, and re-copy the WAV.
 - **Online fallback**: `https://cherven.vercel.app` (wall) and
   `https://cherven.vercel.app/transcript` work in any browser, but need one
   click to start, and the venue's internet.
