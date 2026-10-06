@@ -10,7 +10,11 @@
 const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), { spawn } = require('child_process');
 const [T0, T1, OUT] = [parseFloat(process.argv[2]), parseFloat(process.argv[3]), process.argv[4]];
-const FPS = 25, W = 1920, H = 1080, WARM = 6;
+// The layout is 1920x1080 CSS pixels, drawn at SCALE device pixels per CSS
+// pixel: 2 gives a 3840x2160 video with the same composition and twice the
+// detail in every glyph. At 1080p the type looked soft on a large or Retina
+// screen, which upscales it.
+const FPS = 25, W = 1920, H = 1080, WARM = 6, SCALE = +(process.env.SCALE || 2);
 
 let html = fs.readFileSync(require('path').join(__dirname, '..', 'transcript.html'), 'utf8');
 const hook = 'let virtualT = 0;';
@@ -22,7 +26,7 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
   const srv = http.createServer((q, r) => { r.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); r.end(html); });
   await new Promise(r => srv.listen(0, r));
   const b = await chromium.launch({ executablePath: process.env.CHROME || undefined });
-  const pg = await b.newPage({ viewport: { width: W, height: H } });
+  const pg = await b.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: SCALE });
   await pg.addInitScript(() => {
     window.__now = 0;
     performance.now = () => window.__now;
@@ -36,20 +40,30 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
     document.body.style.cursor = 'none';
   });
   const enc = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'png', '-i', '-',
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p', '-r', String(FPS), OUT],
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '12', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-r', String(FPS), OUT],
     { stdio: ['pipe', 'inherit', 'inherit'] });
   const first = Math.round(T0 * FPS), last = Math.round(T1 * FPS), warm = Math.max(0, first - WARM * FPS);
   const t0 = Date.now();
+  // Most frames repeat the one before: text sits still between changes. All
+  // that moves on screen is the subtitle and cue elements (their content,
+  // opacity and glide transform) and the body's classes, so when that state
+  // is unchanged the previous screenshot is reused. NOSKIP=1 disables this;
+  // a test render with and without it gave identical frames.
+  let buf = null, lastSig = null, shots = 0;
   for (let f = warm; f < last; f++) {
     const t = f / FPS;
-    await pg.evaluate(t => { window.__now = t * 1000; window.__setT(t); const cb = window.__raf; window.__raf = null; if (cb) cb(t * 1000); }, t);
+    const sig = await pg.evaluate(t => {
+      window.__now = t * 1000; window.__setT(t); const cb = window.__raf; window.__raf = null; if (cb) cb(t * 1000);
+      return document.body.className + '|' + document.getElementById('subs').innerHTML + '|' + document.getElementById('cues').innerHTML;
+    }, t);
     if (f < first) continue;
-    const buf = await pg.screenshot({ type: 'png' });   // lossless into x264: one lossy step, not two
+    if (!buf || sig !== lastSig || process.env.NOSKIP) { buf = await pg.screenshot({ type: 'png' }); shots++; }   // lossless into x264: one lossy step, not two
+    lastSig = sig;
     if (!enc.stdin.write(buf)) await new Promise(r => enc.stdin.once('drain', r));
     if ((f - first) % (FPS * 60) === 0) console.log(`${OUT}: ${(t / 60).toFixed(1)} min, ${((f - first + 1) / ((Date.now() - t0) / 1000)).toFixed(1)} fps`);
   }
   enc.stdin.end();
   await new Promise(r => enc.on('close', r));
   await b.close(); srv.close();
-  console.log(`${OUT}: done, ${last - first} frames in ${((Date.now() - t0) / 60000).toFixed(1)} min`);
+  console.log(`${OUT}: done, ${last - first} frames (${shots} drawn) in ${((Date.now() - t0) / 60000).toFixed(1)} min`);
 })();

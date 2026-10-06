@@ -108,8 +108,14 @@ doubtful line can be judged without re-running anything.
 a hook added to a served copy), so picture and sound line up exactly — a
 real-time screen recording drops frames and drifts. It records the cinema view,
 subtitles with cue cards, at the page's default settings (`QUERY='?mode=scroll'`
-for the scrolling column). 1920×1080, 25 fps, lossless PNG frames into x264
-CRF 17. Run segments in parallel (each starts 6 s early so anything in motion
+for the scrolling column). **3840×2160**, 25 fps: the layout is the page at
+1920×1080 drawn at two device pixels per CSS pixel (`SCALE`, default 2), so
+the composition is unchanged and every glyph has twice the detail — the 1080p
+render looked soft once a large or Retina screen upscaled it. Lossless PNG
+frames into x264, `-preset slow -crf 12 -tune stillimage`. A frame whose
+on-screen state (subtitle and cue elements, body classes) matches the one
+before reuses its screenshot; a test with and without that gave identical
+frames, and it draws about a quarter of them. Run segments in parallel (each starts 6 s early so anything in motion
 has settled by its first kept frame), then join and add the audio:
 
 ```
@@ -132,4 +138,4 @@ to AAC, a second lossy generation, and was redone. No `-shortest`, which could
 drop the last audio frame. Never join or convert in QuickTime's "Export As": it
 re-encodes.
 
-Four workers on 4 cores take roughly 40 minutes.
+
