@@ -456,9 +456,11 @@ Stage directions span
 the sound they describe (the anthem-and-bugle direction covers 168 s), which is
 no reason to keep the words up that long: they show for a reading time, 3–6 s.
 
-**Cues** (`D`, or the on-screen switch): number, title and description from
-the wall's own `CUES` (copied in by `build.py`, never a second copy), in a
-row at the top, from each cue's start for a reading time of 9–30 s plus the
+**Cues** (`D`, or the on-screen switch): title and description, no number,
+from the wall's own `CUES` (copied in by `build.py`, never a second copy), in
+a row at the top. Cue titles ~32 px at 1920 wide, descriptions at 0.78 of
+that; subtitles stay a step larger (~37 px) at every width, so the voices
+lead. Shown from each cue's start for a reading time of 9–30 s plus the
 **Cue linger** slider (default +8 s), then a 2 s fade. At most three at once;
 a cue finding no free slot waits for one. That matters at 2:01, where the data
 starts ten cues together (§3 known problem 1) — they appear three at a time

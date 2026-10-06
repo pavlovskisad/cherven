@@ -28,8 +28,8 @@
     --subsize: clamp(18px, 1.15vw + 15px, 58px);
     --subpos: 9;          /* distance of the bottom line from the foot, in vh */
     --submeasure: 34;     /* subtitle width in em */
-    /* cue cards: ~23px at 1920 wide */
-    --cuesize: clamp(14px, 0.6vw + 11px, 34px);
+    /* cue cards: ~32px at 1920 wide (was ~23px, too small on the wall) */
+    --cuesize: clamp(18px, 1vw + 13px, 52px);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -88,7 +88,7 @@
   #subs p.nolabel .who { display: none; }
   #subs p.dir { font-size: calc(var(--dir) * 1em); }
 
-  /* Cue cards: number, title and the cue's description, from the wall's own
+  /* Cue cards: title and the cue's description, from the wall's own
      cue sheet, in a row across the top — three fixed slots, so a card keeps
      its place until it fades and its neighbours never shift. Below 900px a
      row of three is too narrow to read, so they stack. Same tiers as the
@@ -104,10 +104,8 @@
   @media (min-width: 900px) { .cue { grid-column: var(--slot); grid-row: 1; } }
   @media (max-width: 899px) { #cues { grid-template-columns: 1fr; } }
   .cue { background: #fff; padding: 0 0 0.9em 0; }
-  .cue .head { display: flex; gap: 0.4em; }
-  .cue .idx { flex: 0 0 auto; width: 2.2em; }
   .cue .title { font-weight: 700; }
-  .cue .desc { font-size: 0.78em; padding-left: calc(2.2em / 0.78 + 0.4em / 0.78); text-align: left; }
+  .cue .desc { font-size: 0.78em; text-align: left; }
 
   /* On-screen switches. Keys need a keyboard and the panel needs one to open,
      so on a phone these are the only way in. Same 2 s fade as the cursor, so
@@ -207,7 +205,7 @@
   <label>Subtitle width, em <span id="submeasureVal"></span></label>
   <input type="range" id="submeasure" min="14" max="60" step="1" value="34">
   <label>Cue size <span id="cuesizeVal"></span></label>
-  <input type="range" id="cuesize" min="10" max="60" step="1" value="23">
+  <input type="range" id="cuesize" min="10" max="80" step="1" value="32">
   <label>Cue linger, extra sec <span id="cuelingerVal"></span></label>
   <input type="range" id="cuelinger" min="0" max="30" step="1" value="8">
   <label>Reading line, share of height <span id="lineVal"></span></label>
@@ -505,13 +503,11 @@
   function cueEl(c) {
     const d = document.createElement('div');
     d.className = 'cue';
-    const head = document.createElement('div');
-    head.className = 'head';
-    const idx = document.createElement('span'); idx.className = 'idx'; idx.textContent = c.n + '.';
-    const ti = document.createElement('span'); ti.className = 'title'; ti.textContent = c.title;
-    head.append(idx, ti);
+    // title and description only: the cue number is the cue sheet's
+    // bookkeeping, not something to read on the wall
+    const ti = document.createElement('div'); ti.className = 'title'; ti.textContent = c.title;
     const desc = document.createElement('div'); desc.className = 'desc'; desc.textContent = c.desc;
-    d.append(head, desc);
+    d.append(ti, desc);
     return d;
   }
   function renderCues(t) {
@@ -618,6 +614,9 @@
   // saved every slider; its subtitle linger at the old default (1.2 s, judged
   // too short) is dropped rather than kept as if chosen.
   if (!saved.v) { if (saved.linger === '1.2') delete saved.linger; }
+  // Before v3 every slider was saved, cue size included, at the old small
+  // default; the cue size was then made bigger, so an old save gives it up.
+  if (!(saved.v >= 3)) delete saved.cuesize;
   const moved = new Set(Object.keys(saved).filter(k => k !== 'v'));
   // put a saved value back into its slider; true if there was one
   const restore = id => {
@@ -628,7 +627,7 @@
   let resetting = false;
   function saveSettings() {
     if (resetting) return;
-    const out = { v: 2 };
+    const out = { v: 3 };
     for (const id of moved) out[id] = document.getElementById(id).value;
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(out)); } catch (e) {}
   }
