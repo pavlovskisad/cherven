@@ -64,7 +64,14 @@ System Settings:
   after a power failure".
 - **Focus**: Do Not Disturb on, so no notification lands on the wall.
 - **Sound**: output to the venue's system. Use a cable or the venue's
-  interface, not Bluetooth (Bluetooth adds delay, and drops out).
+  interface, not Bluetooth (Bluetooth adds delay, drops out, and re-encodes
+  the sound). The pages play `cherven.mp3` exactly as it is: no volume
+  change, no processing.
+  - Open **Audio MIDI Setup** (Applications → Utilities), select the output
+    device and set Format to **44,100 Hz**, the file's own rate, so macOS
+    doesn't resample it.
+  - Set the Mac's volume to full and control the level at the venue's
+    mixer.
 - **Software Update**: turn off automatic updates for the duration.
 
 ## 5. Surviving a power cut (optional, for an unattended day)
