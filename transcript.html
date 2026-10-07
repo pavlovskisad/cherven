@@ -98,12 +98,14 @@
     transform: translateX(-50%);
     width: min(calc(var(--submeasure) * 1em), calc(100vw - 2 * var(--pad)));
     font-size: var(--subsize); line-height: 1.25; color: var(--ink);
-    flex-direction: column; justify-content: flex-end; gap: 0.3em;
-    text-align: center; pointer-events: none;
+    height: 0; text-align: center; pointer-events: none;
   }
   body.subs #stage { display: none; }
-  body.subs #subs { display: flex; }
-  #subs p { text-wrap: balance; }
+  body.subs #subs { display: block; }
+  /* Fixed rows: a line keeps its row from the moment it appears until it is
+     gone. --pitch (set from the tallest piece, see measurePitch) is one row. */
+  #subs p { text-wrap: balance; position: absolute; left: 0; right: 0;
+            bottom: calc(var(--row) * var(--pitch, 3em)); }
   #subs .who { font-weight: 600; }
   #subs .who i { font-style: normal; font-weight: 400; }
   #subs p.nolabel .who { display: none; }
@@ -484,62 +486,85 @@
   const VERSE_OUT = 0.3;
   const hold = c => c.verse ? 0 : linger();
   const fade = c => c.verse ? VERSE_OUT : SUB_OUT;
-  const shownSubs = new Map();
-  function subsAt(t) {
-    const vis = [];
+  // ---- Rows ------------------------------------------------------------------
+  // Lines never change place. They used to stack from the foot, so every new
+  // line pushed the others up (a glide only softened the jump). Now there are
+  // ROWS fixed rows, the lowest first. A piece takes a row when it comes up and
+  // keeps it until it is gone:
+  //  - a voice that goes on speaking replaces its own previous line, in its
+  //    own row (the old line fades in ROW_SWAP s as the new one arrives), so
+  //    in a conversation each voice keeps its place; but not before that line
+  //    has had its reading time: fast speech takes a free row instead;
+  //  - a new voice takes the lowest free row;
+  //  - with every row taken by other voices, the oldest line gives way.
+  // Worked out once for the whole piece (again when Linger moves), so seeking
+  // is exact. Whether a line shows its speaker's name is decided here too:
+  // when it starts a speech, or while another voice is up.
+  const ROWS = 3, ROW_SWAP = 0.15;
+  const readTime = c => Math.max(1.2 + c.text.length / READ_CPS, 1.8);
+  let subSched = [];
+  function scheduleSubs() {
+    subSched = [];
+    const rows = Array(ROWS).fill(null);
     for (const c of chunks) {
-      if (c.start > t) break;
-      if (t < c.end + hold(c) + fade(c)) vis.push(c);
+      const t = c.start, voice = c.dir ? '[direction]' : c.spk;
+      for (let r = 0; r < ROWS; r++) if (rows[r] && rows[r].x <= t) rows[r] = null;
+      // the voice's own row, once its last line there has had time to be read
+      let r = rows.findIndex(q => q && q.voice === voice && t >= q.s + readTime(q.c));
+      if (r < 0) r = rows.findIndex(q => !q);
+      if (r < 0) r = rows.findIndex(q => q && q.voice === voice);
+      if (r < 0) r = rows.reduce((m, q, i) => q.s < rows[m].s ? i : m, 0);
+      const prev = rows[r];
+      if (prev) { prev.x = Math.min(prev.x, t); prev.e = Math.min(prev.e, t - ROW_SWAP); }
+      const label = c.dir || c.k === 0 ||
+        rows.some((q, i) => i !== r && q && !q.c.dir && q.voice !== voice);
+      const q = { c, row: r, voice, label, s: t, e: c.end + hold(c), x: c.end + hold(c) + fade(c) };
+      rows[r] = q;
+      subSched.push(q);
     }
-    return vis.slice(-SUB_MAXLINES);
   }
-  // Names when a new voice starts, and on every line whenever two voices are
-  // up at once — in this piece that is most of the time. Decided once, when
-  // the line comes up, and never changed while it is on screen: deciding it
-  // every frame dropped a name the moment the other voice faded, and the
-  // shorter line re-wrapped (two lines to one, and back) under the reader.
-  function labelled(c) {
-    if (c.dir || c.k === 0) return true;
-    return new Set(subsAt(c.start).filter(x => !x.dir).map(x => x.ti)).size >= 2;
+
+  // One row is as tall as the tallest piece at the current size and width, so
+  // no line can reach into the row above. Measured off screen over every piece.
+  let pitch = 0;
+  function measurePitch() {
+    const probe = document.createElement('div');
+    probe.style.cssText = 'position:absolute;visibility:hidden;left:-9999px;top:0;';
+    probe.style.width = subsEl.getBoundingClientRect().width + 'px' || '';
+    subsEl.append(probe);
+    let h = 0;
+    for (const c of chunks) {
+      const p = subEl(c);
+      p.style.position = 'static';
+      probe.replaceChildren(p);
+      h = Math.max(h, p.getBoundingClientRect().height);
+    }
+    probe.remove();
+    const font = parseFloat(getComputedStyle(subsEl).fontSize);
+    pitch = h + 0.3 * font;
+    root.style.setProperty('--pitch', pitch.toFixed(1) + 'px');
   }
-  // A new line arriving below pushes the others up. They glide there over
-  // GLIDE seconds of wall time instead of jumping, so the eye can follow.
-  const GLIDE = 0.4;
-  // share of the move still to go, eased in and out (cubic)
-  const glideLeft = p => p >= 1 ? 0 : 1 - (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(2 - 2 * p, 3) / 2);
-  let lastSubT = null;
+
+  const shownSubs = new Map();
   function renderSubs(t) {
-    const vis = subsAt(t);
+    if (!subSched.length) scheduleSubs();   // first frame: after the sliders are restored
+    if (!pitch) measurePitch();
+    const vis = subSched.filter(q => q.s <= t && t < q.x);
     const keep = new Set(vis);
-    for (const [c, el] of shownSubs) if (!keep.has(c)) { el.remove(); shownSubs.delete(c); }
-    vis.forEach(c => {
-      if (shownSubs.has(c)) return;
-      const el = subEl(c);
-      el.classList.toggle('nolabel', !labelled(c));
-      shownSubs.set(c, el);
-    });
-    order(subsEl, vis.map(c => shownSubs.get(c)));
-    const wall = performance.now() / 1000;
-    const jumped = lastSubT === null || Math.abs(t - lastSubT) > 1;   // a seek: place, don't glide
-    lastSubT = t;
-    vis.forEach(c => {
-      const el = shownSubs.get(c);
-      const a = Math.min((t - c.start) / SUB_IN, 1);
-      const off = t - (c.end + hold(c));
-      const w = off > 0 ? Math.max(1 - off / fade(c), 0) : a;
+    for (const [q, el] of shownSubs) if (!keep.has(q)) { el.remove(); shownSubs.delete(q); }
+    for (const q of vis) {
+      let el = shownSubs.get(q);
+      if (!el) {
+        el = subEl(q.c);
+        el.classList.toggle('nolabel', !q.label);
+        el.style.setProperty('--row', q.row);
+        subsEl.append(el);
+        shownSubs.set(q, el);
+      }
+      const a = Math.min((t - q.s) / SUB_IN, 1);
+      const w = t > q.e ? Math.max((q.x - t) / Math.max(q.x - q.e, 0.01), 0) : 1;
       el.style.opacity = Math.max(0, Math.min(w, a)).toFixed(3);
-      // where layout puts the line on screen, without the glide's own shift
-      // (the block grows upwards from its foot, so a line's place inside it
-      // never changes: the block moves, and the lines with it)
-      const y = el.getBoundingClientRect().top - (el._shift || 0);
-      const left = el._t0 == null ? 0 : el._from * glideLeft((wall - el._t0) / GLIDE);
-      if (el._y != null && Math.abs(y - el._y) > 0.5 && !jumped) { el._from = left + (el._y - y); el._t0 = wall; }
-      else if (jumped) el._t0 = null;
-      el._y = y;
-      const shift = el._t0 == null ? 0 : el._from * glideLeft((wall - el._t0) / GLIDE);
-      el._shift = Math.abs(shift) < 0.5 ? 0 : shift;
-      el.style.transform = el._shift ? `translateY(${shift.toFixed(1)}px)` : '';
-    });
+    }
   }
 
   // ---- Cue cards -----------------------------------------------------------
@@ -620,8 +645,9 @@
   // once, as the card appears (it is still at opacity 0), never while read.
   function fitCue(el) {
     if (mode !== 'subs' || innerWidth < 900) return;
+    if (!pitch) measurePitch();
     const sub = parseFloat(getComputedStyle(subsEl).fontSize);
-    const safe = innerHeight * (1 - css('--subpos') / 100) - (6 * 1.25 + 2 * 0.3 + 0.5) * sub;
+    const safe = innerHeight * (1 - css('--subpos') / 100) - ROWS * pitch - 0.5 * sub;
     const bottom = () => el.getBoundingClientRect().bottom - parseFloat(getComputedStyle(el).paddingBottom);
     for (let k = 1; bottom() > safe && k > 0.6; ) { k *= 0.97; el.style.fontSize = k.toFixed(3) + 'em'; }
   }
@@ -785,9 +811,12 @@
   const cueLinger = document.getElementById('cuelinger');
   cueLinger.addEventListener('input', () => { scheduleCues(VAL.cuelinger); cuesEl.replaceChildren(); shownCues.clear(); });
   // cards are fitted once, against these: when one moves, fit them again
-  ['cuesize', 'subsize', 'subpos'].forEach(id => document.getElementById(id)
-    .addEventListener('input', () => { cuesEl.replaceChildren(); shownCues.clear(); }));
-  addEventListener('resize', () => { cuesEl.replaceChildren(); shownCues.clear(); });
+  ['cuesize', 'subsize', 'subpos', 'submeasure'].forEach(id => document.getElementById(id)
+    .addEventListener('input', () => { pitch = 0; cuesEl.replaceChildren(); shownCues.clear(); }));
+  addEventListener('resize', () => { pitch = 0; cuesEl.replaceChildren(); shownCues.clear(); });
+  document.getElementById('linger').addEventListener('input', () => {
+    scheduleSubs(); subsEl.replaceChildren(); shownSubs.clear();
+  });
   scheduleCues(VAL.cuelinger);
   // Subtitle and cue sizes open on their responsive defaults, like type size.
   document.getElementById('subsize').value = Math.round(parseFloat(getComputedStyle(subsEl).fontSize));

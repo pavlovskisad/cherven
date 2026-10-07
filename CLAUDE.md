@@ -458,12 +458,20 @@ a phone has no keyboard), with `S`, or by URL for a kiosk
 remembered in that browser; the URL overrides it. Default: subtitles, cues off.
 
 - **Subtitles** — only what is being said, low and centred, at most three
-  lines. A line never re-wraps while it is up: whether it carries its
-  speaker's name is decided once, when it appears (it was decided per frame,
-  so a name vanished when the other voice faded and the line re-flowed, six
-  times across the piece). Lines pushed up by a new one glide there over
-  0.4 s (eased, in wall time) rather than jumping. Both checked by stepping
-  the whole piece frame by frame. Speeches are cut into sentence-sized pieces (≤ ~84 characters, long
+  lines. **Lines never move.** They used to stack from the foot, so each new
+  line pushed the others up (a glide only softened it, and the artist found
+  it frustrating). Now there are three **fixed rows**, each as tall as the
+  tallest piece at the current size (two lines). A piece keeps its row from
+  appearing to going. A voice that goes on speaking replaces its own previous
+  line in its own row (0.15 s swap), once that line has had its reading time;
+  a new voice takes the lowest free row; with all rows held by other voices
+  the oldest line gives way. Scheduled once for the piece (again when Linger
+  moves), so seeking is exact. Whether a line shows its speaker's name is
+  decided once, in that schedule (a per-frame decision once made lines
+  re-wrap). Stepping the whole piece frame by frame at 1920×1080 and 1280×800:
+  0 px movement, 0 re-wraps; 8 of 344 pieces get under 80% of their reading
+  time, all where three voices overlap or in the fast "Glory to Ukraine"
+  chant. Speeches are cut into sentence-sized pieces (≤ ~84 characters, long
   sentences at commas and dashes) and the turn's span is shared between them by
   length; the prayer uses its 35 line times. Each piece gets reading time
   (0.9 s + 1 s per 22 characters) but never overlaps the next piece of the same
