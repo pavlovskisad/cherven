@@ -432,7 +432,8 @@
       return;
     }
     let spans;
-    if (Array.isArray(T.lines) && T.lines.length === T.text.split('\n').length) {
+    const verse = Array.isArray(T.lines) && T.lines.length === T.text.split('\n').length;
+    if (verse) {
       const rows = T.text.split('\n');
       spans = rows.map((txt, k) => ({ text: txt, start: T.lines[k], end: k < rows.length - 1 ? T.lines[k + 1] : T.end }));
     } else {
@@ -452,7 +453,9 @@
       const need = sp.start + Math.max(1.2 + sp.text.length / READ_CPS, 1.8);
       const cap = k < spans.length - 1 ? spans[k + 1].start : Infinity;
       chunks.push({ ti, k, dir: false, spk: T.spk, text: sp.text, start: sp.start,
-                    end: Math.min(Math.max(sp.end, need), cap) });
+                    end: Math.min(Math.max(sp.end, need), cap),
+                    // a verse line hands over to the next one (see hold())
+                    verse: verse && k < spans.length - 1 });
     });
   });
   chunks.sort((a, b) => a.start - b.start);
@@ -471,12 +474,22 @@
   }
 
   const linger = () => VAL.linger ?? 3;
+  // How long a piece stays after its end, and how long it then takes to go.
+  // The prayer is read one line at a time and the soldiers repeat each line
+  // (lead, then the group, ~4 s a line), so a lingering line was still on
+  // screen through the whole next lead: the top line was always the one just
+  // finished, and the text read one line behind the voices. A verse line
+  // therefore holds exactly while it is said and repeated, and goes quickly
+  // when the next line's lead begins. Its last line lingers like speech.
+  const VERSE_OUT = 0.3;
+  const hold = c => c.verse ? 0 : linger();
+  const fade = c => c.verse ? VERSE_OUT : SUB_OUT;
   const shownSubs = new Map();
   function subsAt(t) {
     const vis = [];
     for (const c of chunks) {
       if (c.start > t) break;
-      if (t < c.end + linger() + SUB_OUT) vis.push(c);
+      if (t < c.end + hold(c) + fade(c)) vis.push(c);
     }
     return vis.slice(-SUB_MAXLINES);
   }
@@ -512,8 +525,8 @@
     vis.forEach(c => {
       const el = shownSubs.get(c);
       const a = Math.min((t - c.start) / SUB_IN, 1);
-      const off = t - (c.end + linger());
-      const w = off > 0 ? Math.max(1 - off / SUB_OUT, 0) : a;
+      const off = t - (c.end + hold(c));
+      const w = off > 0 ? Math.max(1 - off / fade(c), 0) : a;
       el.style.opacity = Math.max(0, Math.min(w, a)).toFixed(3);
       // where layout puts the line on screen, without the glide's own shift
       // (the block grows upwards from its foot, so a line's place inside it
@@ -541,11 +554,39 @@
   // "Cue linger" adds seconds to every cue's reading time (default 8). Longer
   // means later cues wait for a slot: at +8 the ten 2:01 cues are all through
   // by about 3:00; past +12 the 19 s cue 13 can lose its slot entirely.
+  // A cue whose recording centres on someone speaking shows its card as that
+  // voice is first heard, not where the cue sheet starts the recording: the
+  // sheet starts each one at its ambience, so "Anya" came up 55 s before
+  // Mrs. Anya spoke, "Pidkova" 4 min before Ruslan, "Artery" 25 s after
+  // Katya and Serhii began. Each entry names the speaker of the anchoring
+  // line (and a phrase, where that speaker also talks in a neighbouring
+  // cue); the line's time is looked up in TURNS, so it follows any re-timing.
+  // Cues led by sound keep the sheet's start: "Trumpet for Hena" (trumpet,
+  // speech 100 s later), "Tokha's funeral" (under the whole piece), the
+  // luncheon (dishes first), "Libkind's tour" (shares its guide with
+  // "Mykola's vest"), and every cue without speech.
+  const CUE_VOICE = {
+    1: ['Andriy'], 2: ['Frania'], 4: ['Serhii'], 7: ['Nikolaich'], 8: ['Sania'], 9: ['Hek'],
+    10: ['Chapa'], 11: ['Patient'], 12: ['Woman at the Liquor Factory'], 21: ['Mrs. Anya'],
+    23: ['Vitalii Hodziatskyi'], 24: ['Tour guide'], 25: ['Zenon'], 28: ['Serhii', 'evolutionarily'],
+    30: ['Soldier', 'To prayer'], 32: ['Commander'], 33: ['Kostya'], 34: ['Liokha'],
+    35: ['Hek', 'stone factory'], 38: ['Priests'], 39: ['Ruslan'], 41: ['Levin'],
+    43: ['Hek', 'sorting'], 49: ['Sasha (singing)'], 50: ['Katya', 'phone numbers'],
+    51: ['Zhanna'], 53: ['Katya', 'huge clock'],
+  };
+  const CUE_LEAD = 0.5;          // the card is up just as the voice starts
+  const cueStart = c => {
+    const v = CUE_VOICE[c.n];
+    if (!v) return c.start;
+    const T = TURNS.find(T => T.kind === 'turn' && T.spk === v[0] && (!v[1] || T.text.includes(v[1]))
+                              && T.start >= c.start - 30 && T.start <= c.end);
+    return T ? Math.max(0, T.start - CUE_LEAD) : c.start;
+  };
   function scheduleCues(extra) {
     cueSched = [];
     // freeAt[k]: when slot k (a column of the header row) is next free
     const freeAt = Array(CUE_SLOTS).fill(-Infinity);
-    const sorted = CUES.slice().sort((a, b) => a.start - b.start || a.n - b.n);
+    const sorted = CUES.map(c => ({ ...c, start: cueStart(c) })).sort((a, b) => a.start - b.start || a.n - b.n);
     for (const c of sorted) {
       let t0 = c.start;
       let slot = freeAt.findIndex(f => f <= t0);            // leftmost free slot

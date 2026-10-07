@@ -468,7 +468,12 @@ remembered in that browser; the URL overrides it. Default: subtitles, cues off.
   length; the prayer uses its 35 line times. Each piece gets reading time
   (0.9 s + 1 s per 22 characters) but never overlaps the next piece of the same
   speech. Names show when a new voice starts, and on every line while two
-  voices are up — which in this piece is most of the time.
+  voices are up — which in this piece is most of the time. **The prayer
+  shows one line at a time**: one soldier reads each line and the group
+  repeats it (~4 s a line, line starts verified against loudness onsets in
+  the WAV), so a lingering line sat on screen through the whole next lead
+  and the text read one line behind. A verse line holds while it is said and
+  repeated, then goes in 0.3 s when the next lead starts.
 - **Scroll** — the full column under a reading line, as first built.
 
 **Lingering.** Lines first held 1.5 s after their speech and faded over 6 s
@@ -477,6 +482,16 @@ short on the wall). Now the **Linger** slider, default 3 s, then a 1 s fade.
 Stage directions span
 the sound they describe (the anthem-and-bugle direction covers 168 s), which is
 no reason to keep the words up that long: they show for a reading time, 3–6 s.
+
+**Cue cards follow their speakers.** The sheet starts each recording at its
+ambience, so a card could come up minutes before the person it describes
+spoke ("Anya" 55 s early, "Pidkova" 4 min, "Artery" 25 s late). `CUE_VOICE`
+maps 27 speech cues to the speaker (and a phrase, where needed) of their
+first line; the card shows 0.5 s before that line, its time read from
+`TURNS`, so re-timing carries through. Sound-led cues (trumpets, Tokha's
+funeral, the luncheon, Libkind's tour) and cues without speech keep the
+sheet's start. Some anchors are low-confidence lines (±~10 s), still far
+closer than the sheet's ambience starts.
 
 **Cues** (`D`, or the on-screen switch): title and description, no number,
 from the wall's own `CUES` (copied in by `build.py`, never a second copy), in
