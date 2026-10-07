@@ -19,6 +19,7 @@ vercel.json       static config; cleanUrls, so the second page is /transcript
 install/          Mac kiosk launchers for the gallery laptop — see §7
 INSTALL.md        the installation checklist for the venue
 transcript/       how transcript.html's timing was made, and how to remake it
+fonts/            Inter, the transcript page's typeface (embedded), its licence
 CLAUDE.md         this file
 ```
 
@@ -441,7 +442,7 @@ bracket between confident neighbours, the widest being sung or liturgical.
 
 ### Display
 
-Same physical rules as the wall (§2): white field, black Times, live sliders,
+Same physical rules as the wall (§2): white field, black type, live sliders,
 the same gate (`Let’s go`), the same fullscreen button and loop robustness. One
 column moves under a fixed **reading line**; the line being spoken sits on it at
 full ink, spoken lines fall to the *spoken weight*, upcoming lines are faint.
@@ -496,6 +497,14 @@ starts ten cues together (§3 known problem 1) — they appear three at a time
 and at +8 s are all through by about 3:00. The schedule is recomputed only
 when the slider moves, so seeking is exact. No cue is skipped up to +12 s;
 beyond that cue 13 (19 s long) can lose its turn.
+
+**Typeface: Inter**, not Times — the artist's choice for reading on the wall
+(tall lowercase, open shapes, minimal). The variable font is subset to the
+page's characters and embedded as a data URI (~104 KB), so the page stays one
+file and works offline from `file://`; names and cue titles at weight 600.
+Source, licence (OFL) and how to re-subset: `fonts/`. The wall (`/`) is still
+Times. Inter is wider than Times, so five long cue cards now fit themselves
+to 78–94%.
 
 **Inverted** (`I`, the on-screen switch, the panel, or `&invert=1`): white
 on black, via `--ink`/`--paper` on `:root`. Remembered with mode and cues.
