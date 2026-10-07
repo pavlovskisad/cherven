@@ -473,9 +473,14 @@ no reason to keep the words up that long: they show for a reading time, 3–6 s.
 
 **Cues** (`D`, or the on-screen switch): title and description, no number,
 from the wall's own `CUES` (copied in by `build.py`, never a second copy), in
-a row at the top. Cue titles ~32 px at 1920 wide, descriptions at 0.78 of
-that; subtitles stay a step larger (~37 px) at every width, so the voices
-lead. Shown from each cue's start for a reading time of 9–30 s plus the
+a row at the top. At 1920×1080: subtitles ~44.5 px, cue titles ~38.6 px,
+descriptions at 0.78 of that, scroll text ~36 px (all raised 20% in October
+2026; a size set by hand before then grows with them). Subtitles stay a step
+larger than cues at every size, so the voices lead. Sizes are also bounded by
+screen height (shorter than 16:9) and, on squarish screens (4:3, 5:4), follow
+width exactly as at 1920: without that a long cue ran into the subtitles at
+1280×800 and 1024×768. Checked by stepping the whole piece at 1920×1080,
+1280×800, 1280×720, 1024×768 and 1280×1024: no collision anywhere. Shown from each cue's start for a reading time of 9–30 s plus the
 **Cue linger** slider (default +8 s), then a 2 s fade. At most three at once;
 a cue finding no free slot waits for one. That matters at 2:01, where the data
 starts ten cues together (§3 known problem 1) — they appear three at a time

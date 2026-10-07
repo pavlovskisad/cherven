@@ -15,7 +15,7 @@
     --ink: #000;
     /* ~30px at 1920 wide, ~18px on a phone, capped for 4K. The size slider
        overrides this with a fixed px value once it is touched. */
-    --size: clamp(17px, 0.78vw + 15px, 44px);
+    --size: clamp(20px, 0.94vw + 18px, 53px);   /* all three sizes 20% up, Oct 2026 */
     --lead: 1.3;
     --dir: 0.78;          /* stage directions: the apparatus tier, as notes are on the wall */
     --measure: 32;        /* column width in em */
@@ -24,12 +24,24 @@
     --future: 0.14;
     --pad: 6vw;
     --feather: 0;
-    /* subtitle mode: ~37px at 1920 wide, ~19px on a phone */
-    --subsize: clamp(18px, 1.15vw + 15px, 58px);
+    /* subtitle mode: ~44px at 1920x1080, ~23px on a phone. The vh term only
+       bites on screens shorter than 16:9 (1280x800, 4:3), where the width
+       formula let long cue cards reach down into the subtitles. */
+    --subsize: clamp(21.6px, min(1.38vw + 18px, 4.12vh), 70px);
     --subpos: 9;          /* distance of the bottom line from the foot, in vh */
     --submeasure: 34;     /* subtitle width in em */
-    /* cue cards: ~32px at 1920 wide (was ~23px, too small on the wall) */
-    --cuesize: clamp(18px, 1vw + 13px, 52px);
+    /* cue cards: ~39px at 1920 wide (was ~23px, then ~32px: too small on the wall) */
+    --cuesize: clamp(21.6px, min(1.2vw + 15.6px, 3.58vh), 62px);
+  }
+  /* Squarish screens (4:3, 5:4): width is the tight side, so subtitles and
+     cues scale with it, exactly as at 1920 wide: same line breaks, same
+     clearance between the cue row and the subtitles. Without this a long cue
+     ran into the subtitles at 1024x768. */
+  @media (max-aspect-ratio: 3/2) {
+    :root {
+      --subsize: clamp(21.6px, 2.3175vw, 70px);
+      --cuesize: clamp(18px, 2.0125vw, 62px);
+    }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -189,7 +201,7 @@
   <label>Sync offset, sec (+ = text later) <span id="offsetVal"></span></label>
   <input type="range" id="offset" min="-3" max="3" step="0.1" value="0">
   <label>Type size <span id="sizeVal"></span></label>
-  <input type="range" id="size" min="12" max="80" step="1" value="30">
+  <input type="range" id="size" min="12" max="96" step="1" value="36">
   <label>Line spacing <span id="leadVal"></span></label>
   <input type="range" id="lead" min="1" max="2.2" step="0.05" value="1.3">
   <label>Column width, em <span id="measureVal"></span></label>
@@ -199,13 +211,13 @@
   <label>Linger after speech, sec <span id="lingerVal"></span></label>
   <input type="range" id="linger" min="0" max="10" step="0.1" value="3">
   <label>Subtitle size <span id="subsizeVal"></span></label>
-  <input type="range" id="subsize" min="12" max="96" step="1" value="37">
+  <input type="range" id="subsize" min="12" max="110" step="1" value="44">
   <label>Subtitle height from bottom, % <span id="subposVal"></span></label>
   <input type="range" id="subpos" min="2" max="60" step="1" value="9">
   <label>Subtitle width, em <span id="submeasureVal"></span></label>
   <input type="range" id="submeasure" min="14" max="60" step="1" value="34">
   <label>Cue size <span id="cuesizeVal"></span></label>
-  <input type="range" id="cuesize" min="10" max="80" step="1" value="32">
+  <input type="range" id="cuesize" min="10" max="96" step="1" value="39">
   <label>Cue linger, extra sec <span id="cuelingerVal"></span></label>
   <input type="range" id="cuelinger" min="0" max="30" step="1" value="8">
   <label>Reading line, share of height <span id="lineVal"></span></label>
@@ -656,6 +668,9 @@
   // Before v3 every slider was saved, cue size included, at the old small
   // default; the cue size was then made bigger, so an old save gives it up.
   if (!(saved.v >= 3)) delete saved.cuesize;
+  // v4 made all type 20% bigger; a size set by hand before that grows with it
+  if (!(saved.v >= 4)) for (const k of ['size', 'subsize', 'cuesize'])
+    if (k in saved) saved[k] = String(Math.round(saved[k] * 1.2));
   const moved = new Set(Object.keys(saved).filter(k => k !== 'v'));
   // put a saved value back into its slider; true if there was one
   const restore = id => {
@@ -666,7 +681,7 @@
   let resetting = false;
   function saveSettings() {
     if (resetting) return;
-    const out = { v: 3 };
+    const out = { v: 4 };
     for (const id of moved) out[id] = document.getElementById(id).value;
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(out)); } catch (e) {}
   }
