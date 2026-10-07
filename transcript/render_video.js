@@ -15,6 +15,12 @@ const [T0, T1, OUT] = [parseFloat(process.argv[2]), parseFloat(process.argv[3]),
 // detail in every glyph. At 1080p the type looked soft on a large or Retina
 // screen, which upscales it.
 const FPS = 25, W = 1920, H = 1080, WARM = 6, SCALE = +(process.env.SCALE || 2);
+// SETTINGS: panel values as JSON, e.g. '{"subsize":52,"cuesize":42}', put in
+// the page's saved settings before it loads, so it opens as tuned in the room.
+// OUT=hd encodes 1920x1080 straight from the 2x frames (lanczos), for players
+// that cannot take 4K: sharper than drawing at 1x, one lossy step only.
+const SETTINGS = process.env.SETTINGS ? JSON.parse(process.env.SETTINGS) : null;
+const HD = process.env.OUT === 'hd';
 
 let html = fs.readFileSync(require('path').join(__dirname, '..', 'transcript.html'), 'utf8');
 const hook = 'let virtualT = 0;';
@@ -33,6 +39,9 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
     window.requestAnimationFrame = cb => { window.__raf = cb; return 1; };
     window.setInterval = () => 0;             // the rAF-stall fallback is irrelevant on a virtual clock
   });
+  if (SETTINGS) await pg.addInitScript(s => {
+    try { localStorage.setItem('cherven-transcript-settings', JSON.stringify({ v: 5, ...Object.fromEntries(Object.entries(s).map(([k, v]) => [k, String(v)])) })); } catch (e) {}
+  }, SETTINGS);
   await pg.goto(`http://127.0.0.1:${srv.address().port}/${process.env.QUERY || '?mode=subs&cues=1'}`, { waitUntil: 'load' });
   await pg.evaluate(() => document.fonts.ready);
   await pg.evaluate(() => {
@@ -40,7 +49,10 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
     document.body.style.cursor = 'none';
   });
   const enc = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'png', '-i', '-',
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '12', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-r', String(FPS), OUT],
+    ...(HD ? ['-vf', 'scale=1920:1080:flags=lanczos+accurate_rnd+full_chroma_int', '-crf', '10', '-profile:v', 'high', '-level', '4.1',
+              '-color_range', 'tv', '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709']
+           : ['-crf', '12']),
+    '-c:v', 'libx264', '-preset', 'slow', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-r', String(FPS), OUT],
     { stdio: ['pipe', 'inherit', 'inherit'] });
   const first = Math.round(T0 * FPS), last = Math.round(T1 * FPS), warm = Math.max(0, first - WARM * FPS);
   const t0 = Date.now();

@@ -127,6 +127,17 @@ ffmpeg -f concat -safe 0 -i segs.txt -i cherven.wav -map 0:v -map 1:a \
        -c copy -movflags +faststart Cherven-transcript.mov
 ```
 
+**Settings and HD in one pass.** `SETTINGS` takes the panel's values as JSON
+and `OUT=hd` encodes 1920×1080 straight from the 2× frames (lanczos, High
+4.1, BT.709) — sharper than scaling a compressed 4K file. The October 2026
+festival render, white on black:
+
+```
+SCALE=2 OUT=hd QUERY='?mode=subs&cues=1&invert=1' \
+SETTINGS='{"offset":0,"linger":3,"subsize":52,"subpos":9,"submeasure":34,"cuesize":42,"cuelinger":8}' \
+node transcript/render_video.js T0 T1 seg.mp4
+```
+
 **For a player that cannot take 4K**, make HD from the 4K render rather
 than rendering at 1080p: each output pixel then averages four drawn ones, so
 the type is cleaner than drawing it at 1080p.
