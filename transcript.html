@@ -15,7 +15,7 @@
     --ink: #000;
     /* ~30px at 1920 wide, ~18px on a phone, capped for 4K. The size slider
        overrides this with a fixed px value once it is touched. */
-    --size: clamp(20px, 0.94vw + 18px, 53px);   /* all three sizes 20% up, Oct 2026 */
+    --size: clamp(22px, 1.034vw + 19.8px, 58px);   /* 20% up, then 10% more, Oct 2026 */
     --lead: 1.3;
     --dir: 0.78;          /* stage directions: the apparatus tier, as notes are on the wall */
     --measure: 32;        /* column width in em */
@@ -24,24 +24,16 @@
     --future: 0.14;
     --pad: 6vw;
     --feather: 0;
-    /* subtitle mode: ~44px at 1920x1080, ~23px on a phone. The vh term only
-       bites on screens shorter than 16:9 (1280x800, 4:3), where the width
-       formula let long cue cards reach down into the subtitles. */
-    --subsize: clamp(21.6px, min(1.38vw + 18px, 4.12vh), 70px);
+    /* Subtitles ~49px and cue titles ~42.5px at 1920x1080 (the original sizes
+       +20%, then +10%). On any other screen both scale with the 1920x1080
+       frame fitted inside it, as a video would be: min(vw, vh) terms. Then
+       the cue row clears the subtitles wherever it does at 1920x1080;
+       width-led formulas let long cues run into them at 1280x800 and 4:3. */
+    --subsize: clamp(23.8px, min(2.549vw, 4.532vh), 77px);
     --subpos: 9;          /* distance of the bottom line from the foot, in vh */
     --submeasure: 34;     /* subtitle width in em */
     /* cue cards: ~39px at 1920 wide (was ~23px, then ~32px: too small on the wall) */
-    --cuesize: clamp(21.6px, min(1.2vw + 15.6px, 3.58vh), 62px);
-  }
-  /* Squarish screens (4:3, 5:4): width is the tight side, so subtitles and
-     cues scale with it, exactly as at 1920 wide: same line breaks, same
-     clearance between the cue row and the subtitles. Without this a long cue
-     ran into the subtitles at 1024x768. */
-  @media (max-aspect-ratio: 3/2) {
-    :root {
-      --subsize: clamp(21.6px, 2.3175vw, 70px);
-      --cuesize: clamp(18px, 2.0125vw, 62px);
-    }
+    --cuesize: clamp(19.8px, min(2.214vw, 3.938vh), 68px);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -201,7 +193,7 @@
   <label>Sync offset, sec (+ = text later) <span id="offsetVal"></span></label>
   <input type="range" id="offset" min="-3" max="3" step="0.1" value="0">
   <label>Type size <span id="sizeVal"></span></label>
-  <input type="range" id="size" min="12" max="96" step="1" value="36">
+  <input type="range" id="size" min="12" max="96" step="1" value="40">
   <label>Line spacing <span id="leadVal"></span></label>
   <input type="range" id="lead" min="1" max="2.2" step="0.05" value="1.3">
   <label>Column width, em <span id="measureVal"></span></label>
@@ -211,13 +203,13 @@
   <label>Linger after speech, sec <span id="lingerVal"></span></label>
   <input type="range" id="linger" min="0" max="10" step="0.1" value="3">
   <label>Subtitle size <span id="subsizeVal"></span></label>
-  <input type="range" id="subsize" min="12" max="110" step="1" value="44">
+  <input type="range" id="subsize" min="12" max="120" step="1" value="49">
   <label>Subtitle height from bottom, % <span id="subposVal"></span></label>
   <input type="range" id="subpos" min="2" max="60" step="1" value="9">
   <label>Subtitle width, em <span id="submeasureVal"></span></label>
   <input type="range" id="submeasure" min="14" max="60" step="1" value="34">
   <label>Cue size <span id="cuesizeVal"></span></label>
-  <input type="range" id="cuesize" min="10" max="96" step="1" value="39">
+  <input type="range" id="cuesize" min="10" max="110" step="1" value="43">
   <label>Cue linger, extra sec <span id="cuelingerVal"></span></label>
   <input type="range" id="cuelinger" min="0" max="30" step="1" value="8">
   <label>Reading line, share of height <span id="lineVal"></span></label>
@@ -561,6 +553,18 @@
     d.append(ti, desc);
     return d;
   }
+  // A card must end above the room the subtitles may need: three pieces of
+  // two lines each, plus their gaps. The two longest descriptions (cues 41
+  // and 47) run to 14 lines in a third of the width and covered subtitles at
+  // 1920x1080. Such a card alone is set smaller, just enough to fit. Decided
+  // once, as the card appears (it is still at opacity 0), never while read.
+  function fitCue(el) {
+    if (mode !== 'subs' || innerWidth < 900) return;
+    const sub = parseFloat(getComputedStyle(subsEl).fontSize);
+    const safe = innerHeight * (1 - css('--subpos') / 100) - (6 * 1.25 + 2 * 0.3 + 0.5) * sub;
+    const bottom = () => el.getBoundingClientRect().bottom - parseFloat(getComputedStyle(el).paddingBottom);
+    for (let k = 1; bottom() > safe && k > 0.6; ) { k *= 0.97; el.style.fontSize = k.toFixed(3) + 'em'; }
+  }
   function renderCues(t) {
     const vis = cueSched.filter(q => q.s <= t && t < q.e + CUE_OUT);
     const keep = new Set(vis);
@@ -573,6 +577,7 @@
     });
     vis.sort((a, b) => a.slot - b.slot);   // stacked order on narrow screens
     order(cuesEl, vis.map(q => shownCues.get(q)));
+    vis.forEach(q => { const el = shownCues.get(q); if (!el._fitted) { fitCue(el); el._fitted = true; } });
     vis.forEach(q => {
       const el = shownCues.get(q);
       const a = Math.min((t - q.s) / CUE_IN, 1);
@@ -671,6 +676,9 @@
   // v4 made all type 20% bigger; a size set by hand before that grows with it
   if (!(saved.v >= 4)) for (const k of ['size', 'subsize', 'cuesize'])
     if (k in saved) saved[k] = String(Math.round(saved[k] * 1.2));
+  // v5: another 10%
+  if (!(saved.v >= 5)) for (const k of ['size', 'subsize', 'cuesize'])
+    if (k in saved) saved[k] = String(Math.round(saved[k] * 1.1));
   const moved = new Set(Object.keys(saved).filter(k => k !== 'v'));
   // put a saved value back into its slider; true if there was one
   const restore = id => {
@@ -681,7 +689,7 @@
   let resetting = false;
   function saveSettings() {
     if (resetting) return;
-    const out = { v: 4 };
+    const out = { v: 5 };
     for (const id of moved) out[id] = document.getElementById(id).value;
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(out)); } catch (e) {}
   }
@@ -716,6 +724,10 @@
   bind('cuelinger', null,      v => v);
   const cueLinger = document.getElementById('cuelinger');
   cueLinger.addEventListener('input', () => { scheduleCues(VAL.cuelinger); cuesEl.replaceChildren(); shownCues.clear(); });
+  // cards are fitted once, against these: when one moves, fit them again
+  ['cuesize', 'subsize', 'subpos'].forEach(id => document.getElementById(id)
+    .addEventListener('input', () => { cuesEl.replaceChildren(); shownCues.clear(); }));
+  addEventListener('resize', () => { cuesEl.replaceChildren(); shownCues.clear(); });
   scheduleCues(VAL.cuelinger);
   // Subtitle and cue sizes open on their responsive defaults, like type size.
   document.getElementById('subsize').value = Math.round(parseFloat(getComputedStyle(subsEl).fontSize));
@@ -739,7 +751,7 @@
     document.body.classList.toggle('cuesOn', cuesOn);
     modeBtn.textContent = mode === 'subs' ? 'Scroll' : 'Subtitles';
     cuesBtn.textContent = cuesOn ? 'Hide cues' : 'Show cues';
-    if (!cuesOn) { cuesEl.replaceChildren(); shownCues.clear(); }
+    cuesEl.replaceChildren(); shownCues.clear();   // re-fitted for the new mode
     if (mode !== 'subs') { subsEl.replaceChildren(); shownSubs.clear(); }
     y = null; dirty = true;                      // the column snaps into place on return
     if (save) try { localStorage.setItem('cherven-transcript', JSON.stringify({ mode, cues: cuesOn })); } catch (e) {}
