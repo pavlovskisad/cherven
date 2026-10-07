@@ -127,6 +127,20 @@ ffmpeg -f concat -safe 0 -i segs.txt -i cherven.wav -map 0:v -map 1:a \
        -c copy -movflags +faststart Cherven-transcript.mov
 ```
 
+**For a player that cannot take 4K**, make HD from the 4K render rather
+than rendering at 1080p: each output pixel then averages four drawn ones, so
+the type is cleaner than drawing it at 1080p.
+
+```
+ffmpeg -i video-4k.mp4 -vf "scale=1920:1080:flags=lanczos+accurate_rnd+full_chroma_int" \
+       -c:v libx264 -preset slow -crf 10 -tune stillimage -profile:v high -level 4.1 \
+       -pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 \
+       -color_trc bt709 -movflags +faststart video-hd.mp4
+```
+
+High profile, level 4.1 and BT.709 tags are what hardware players expect of
+1080p25; white sits at video-range 235, as it should.
+
 **The audio is copied, never re-encoded** (`-c copy`). With the lossless master
 (`cherven.wav`, 24-bit 44.1 kHz, the `lossless-audio` release) the result is
 a MOV carrying the WAV's PCM untouched; MOV, because MP4 has no standard place
