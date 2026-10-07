@@ -48,6 +48,12 @@ Consequences to preserve:
   value depends on throw distance and must be set on site.
 - Every control that affects appearance is a live slider for this reason. The
   room decides, not the code. Do not bake in "better defaults" from a laptop.
+- The transcript page has an **inverted** switch (white on black: `I`, the
+  on-screen switch, `&invert=1`), added at the artist's request. It is a
+  different object on a projector, not a theme: the "black" is the
+  projector's own unlit grey, so the frame edge and spill show, and the type
+  is pure projected light. White on black stays the exception; the default
+  is still the white field.
 
 ---
 
@@ -490,6 +496,10 @@ starts ten cues together (§3 known problem 1) — they appear three at a time
 and at +8 s are all through by about 3:00. The schedule is recomputed only
 when the slider moves, so seeking is exact. No cue is skipped up to +12 s;
 beyond that cue 13 (19 s long) can lose its turn.
+
+**Inverted** (`I`, the on-screen switch, the panel, or `&invert=1`): white
+on black, via `--ink`/`--paper` on `:root`. Remembered with mode and cues.
+To render the video inverted: `QUERY='?mode=subs&cues=1&invert=1'`.
 
 **Saved settings** keep only the sliders someone actually moved, so a new
 default in the code still reaches a browser that saved settings earlier.

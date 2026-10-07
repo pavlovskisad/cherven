@@ -13,6 +13,7 @@
      now always sits in the same place on the wall. */
   :root {
     --ink: #000;
+    --paper: #fff;
     /* ~30px at 1920 wide, ~18px on a phone, capped for 4K. The size slider
        overrides this with a fixed px value once it is touched. */
     --size: clamp(22px, 1.034vw + 19.8px, 58px);   /* 20% up, then 10% more, Oct 2026 */
@@ -35,9 +36,15 @@
     /* cue cards: ~39px at 1920 wide (was ~23px, then ~32px: too small on the wall) */
     --cuesize: clamp(19.8px, min(2.214vw, 3.938vh), 68px);
   }
+  /* Inverted (I, or the switch): white type on black. On a projector this is
+     a different object, not a theme: the "black" is the projector's own
+     unlit grey, so the frame edge and spill show more, while the type is
+     pure projected light. Edge feather still works, as it ramps to black. */
+  :root.inverted { --ink: #fff; --paper: #000; }
+  :root.inverted #ctl button, :root.inverted #gate .hint { color: #777; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
-    height: 100%; background: #fff; overflow: hidden;
+    height: 100%; background: var(--paper); overflow: hidden;
     font-family: "Times New Roman", Times, "Liberation Serif", serif;
     -webkit-font-smoothing: antialiased; cursor: none;
   }
@@ -47,7 +54,7 @@
      being cut by them. This is a mask on what is drawn, not an alpha channel
      on the output — the projector still receives an opaque white image. */
   #stage {
-    position: fixed; inset: 0; background: #fff; overflow: hidden;
+    position: fixed; inset: 0; background: var(--paper); overflow: hidden;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 86%, transparent 100%);
             mask-image: linear-gradient(to bottom, transparent 0, #000 10%, #000 86%, transparent 100%);
   }
@@ -107,7 +114,7 @@
   body.cuesOn #cues { display: grid; }
   @media (min-width: 900px) { .cue { grid-column: var(--slot); grid-row: 1; } }
   @media (max-width: 899px) { #cues { grid-template-columns: 1fr; } }
-  .cue { background: #fff; padding: 0 0 0.9em 0; }
+  .cue { background: var(--paper); padding: 0 0 0.9em 0; }
   .cue .title { font-weight: 700; }
   .cue .desc { font-size: 0.78em; text-align: left; }
 
@@ -133,7 +140,7 @@
   body.noFeather .feather { display: none; }
 
   #gate {
-    position: fixed; inset: 0; background: #fff; z-index: 40;
+    position: fixed; inset: 0; background: var(--paper); z-index: 40;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 18px; font-size: 12px; letter-spacing: 0.1em;
@@ -175,6 +182,7 @@
 <div id="ctl">
   <button id="modeBtn">Scroll</button>
   <button id="cuesBtn">Show cues</button>
+  <button id="invBtn">Black</button>
   <button id="fs">Fullscreen</button>
 </div>
 <div class="feather" id="fx"></div>
@@ -200,6 +208,7 @@
   <input type="range" id="measure" min="14" max="60" step="1" value="32">
   <button id="modePanel">Mode: subtitles / scroll</button>
   <button id="cuesPanel">Cues on / off</button>
+  <button id="invPanel">Colours: black on white / white on black</button>
   <label>Linger after speech, sec <span id="lingerVal"></span></label>
   <input type="range" id="linger" min="0" max="10" step="0.1" value="3">
   <label>Subtitle size <span id="subsizeVal"></span></label>
@@ -225,8 +234,8 @@
   <div class="note">
     Settings are saved in this browser.<br>
     <kbd>C</kbd> panel &nbsp;<kbd>F</kbd> fullscreen &nbsp;<kbd>Space</kbd> play<br>
-    <kbd>S</kbd> subtitles / scroll &nbsp;<kbd>D</kbd> cues on / off<br>
-    For a kiosk: <kbd>?mode=scroll</kbd> or <kbd>?mode=subs</kbd>, <kbd>&amp;cues=1</kbd><br>
+    <kbd>S</kbd> subtitles / scroll &nbsp;<kbd>D</kbd> cues on / off &nbsp;<kbd>I</kbd> invert<br>
+    For a kiosk: <kbd>?mode=scroll</kbd> or <kbd>?mode=subs</kbd>, <kbd>&amp;cues=1</kbd>, <kbd>&amp;invert=1</kbd><br>
     <kbd>←</kbd> <kbd>→</kbd> seek 10s, with shift 60s. Tap a line to jump to it.<br>
     Timing comes from the audio itself (transcript/README.md). If the room's
     sound chain adds delay, set it with the offset.
@@ -745,19 +754,26 @@
   const qs = new URLSearchParams(location.search);
   let mode = ['subs', 'scroll'].includes(qs.get('mode')) ? qs.get('mode') : (prefs.mode || 'subs');
   let cuesOn = qs.has('cues') ? qs.get('cues') !== '0' : !!prefs.cues;
-  const modeBtn = document.getElementById('modeBtn'), cuesBtn = document.getElementById('cuesBtn');
+  let inverted = qs.has('invert') ? qs.get('invert') !== '0' : !!prefs.invert;
+  const modeBtn = document.getElementById('modeBtn'), cuesBtn = document.getElementById('cuesBtn'),
+        invBtn = document.getElementById('invBtn');
   function applySwitches(save) {
     document.body.classList.toggle('subs', mode === 'subs');
     document.body.classList.toggle('cuesOn', cuesOn);
     modeBtn.textContent = mode === 'subs' ? 'Scroll' : 'Subtitles';
     cuesBtn.textContent = cuesOn ? 'Hide cues' : 'Show cues';
+    root.classList.toggle('inverted', inverted);
+    invBtn.textContent = inverted ? 'White' : 'Black';    // what a press gives
     cuesEl.replaceChildren(); shownCues.clear();   // re-fitted for the new mode
     if (mode !== 'subs') { subsEl.replaceChildren(); shownSubs.clear(); }
     y = null; dirty = true;                      // the column snaps into place on return
-    if (save) try { localStorage.setItem('cherven-transcript', JSON.stringify({ mode, cues: cuesOn })); } catch (e) {}
+    if (save) try { localStorage.setItem('cherven-transcript', JSON.stringify({ mode, cues: cuesOn, invert: inverted })); } catch (e) {}
   }
   const toggleMode = () => { mode = mode === 'subs' ? 'scroll' : 'subs'; applySwitches(true); };
   const toggleCues = () => { cuesOn = !cuesOn; applySwitches(true); };
+  const toggleInv = () => { inverted = !inverted; applySwitches(true); };
+  invBtn.addEventListener('click', e => { e.stopPropagation(); toggleInv(); });
+  document.getElementById('invPanel').addEventListener('click', toggleInv);
   modeBtn.addEventListener('click', e => { e.stopPropagation(); toggleMode(); });
   cuesBtn.addEventListener('click', e => { e.stopPropagation(); toggleCues(); });
   document.getElementById('modePanel').addEventListener('click', toggleMode);
@@ -861,6 +877,7 @@
     if (k === 'f') toggleFull();
     if (k === 's') toggleMode();
     if (k === 'd') toggleCues();
+    if (k === 'i') toggleInv();
     if (e.key === 'ArrowRight') { e.preventDefault(); seek(now() + (e.shiftKey ? 60 : 10)); }
     if (e.key === 'ArrowLeft')  { e.preventDefault(); seek(now() - (e.shiftKey ? 60 : 10)); }
     if (e.code === 'Space') {
