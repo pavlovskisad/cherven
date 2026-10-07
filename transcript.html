@@ -98,14 +98,14 @@
     transform: translateX(-50%);
     width: min(calc(var(--submeasure) * 1em), calc(100vw - 2 * var(--pad)));
     font-size: var(--subsize); line-height: 1.25; color: var(--ink);
-    height: 0; text-align: center; pointer-events: none;
+    text-align: center; pointer-events: none;
   }
   body.subs #stage { display: none; }
   body.subs #subs { display: block; }
-  /* Fixed rows: a line keeps its row from the moment it appears until it is
-     gone. --pitch (set from the tallest piece, see measurePitch) is one row. */
-  #subs p { text-wrap: balance; position: absolute; left: 0; right: 0;
-            bottom: calc(var(--row) * var(--pitch, 3em)); }
+  /* One subtitle at a time, as in a film: a block of one or two lines whose
+     foot is always in the same place. A dialogue pair is two p's. */
+  #subs .ev { display: flex; flex-direction: column; gap: 0.15em; }
+  #subs p { text-wrap: balance; }
   #subs .who { font-weight: 600; }
   #subs .who i { font-style: normal; font-weight: 400; }
   #subs p.nolabel .who { display: none; }
@@ -486,85 +486,113 @@
   const VERSE_OUT = 0.3;
   const hold = c => c.verse ? 0 : linger();
   const fade = c => c.verse ? VERSE_OUT : SUB_OUT;
-  // ---- Rows ------------------------------------------------------------------
-  // Lines never change place. They used to stack from the foot, so every new
-  // line pushed the others up (a glide only softened the jump). Now there are
-  // ROWS fixed rows, the lowest first. A piece takes a row when it comes up and
-  // keeps it until it is gone:
-  //  - a voice that goes on speaking replaces its own previous line, in its
-  //    own row (the old line fades in ROW_SWAP s as the new one arrives), so
-  //    in a conversation each voice keeps its place; but not before that line
-  //    has had its reading time: fast speech takes a free row instead;
-  //  - a new voice takes the lowest free row;
-  //  - with every row taken by other voices, the oldest line gives way.
-  // Worked out once for the whole piece (again when Linger moves), so seeking
-  // is exact. Whether a line shows its speaker's name is decided here too:
-  // when it starts a speech, or while another voice is up.
-  const ROWS = 3, ROW_SWAP = 0.15;
+  // ---- One subtitle at a time --------------------------------------------
+  // Subtitles work as in a film. One subtitle is on screen at a time, always
+  // at the same foot; the next replaces it whole. Nothing stacks, nothing
+  // moves, nothing lingers elsewhere. (A stack pushed lines up as new ones
+  // came; fixed rows then had lines appearing and leaving in three places at
+  // once. Both read as chaos on the wall.)
+  //  - Each piece is a subtitle from its start until the next one begins, or,
+  //    in a pause, until Linger after its speech ends.
+  //  - Every subtitle stays at least MIN_ON s: the next waits that long.
+  //  - Words arriving before the subtitle on screen has been read join it
+  //    (see below): the same voice runs on, a second voice gets its line.
+  //  - The name shows when the voice changes or a speech begins.
+  // Worked out once for the piece (again when Linger moves): seeking is exact.
+  // How many lines a piece takes, roughly: CPL characters a line at the
+  // default size and width (Inter at 34em). Only used to keep merged
+  // subtitles to MAX_LINES; the cue cards measure the real thing (pitch).
+  // EARLY_MAX: no words go up more than this long before they are said.
+  const MIN_ON = 1.0, CPL = 58, MAX_LINES = 3, EARLY_MAX = 3;
   const readTime = c => Math.max(1.2 + c.text.length / READ_CPS, 1.8);
+  const lineLen = c => c.text.length + (c.dir ? 0 : c.spk.length + 2);
+  const nLines = c => Math.ceil(lineLen(c) / CPL);
   let subSched = [];
   function scheduleSubs() {
     subSched = [];
-    const rows = Array(ROWS).fill(null);
+    let cur = null, lastVoice = null;
+    const linesOf = q => q.items.reduce((n, c) => n + nLines(c), 0);
+    const readOf = q => Math.max(...q.items.map(c => c.start - q.s + readTime(c)));
     for (const c of chunks) {
-      const t = c.start, voice = c.dir ? '[direction]' : c.spk;
-      for (let r = 0; r < ROWS; r++) if (rows[r] && rows[r].x <= t) rows[r] = null;
-      // the voice's own row, once its last line there has had time to be read
-      let r = rows.findIndex(q => q && q.voice === voice && t >= q.s + readTime(q.c));
-      if (r < 0) r = rows.findIndex(q => !q);
-      if (r < 0) r = rows.findIndex(q => q && q.voice === voice);
-      if (r < 0) r = rows.reduce((m, q, i) => q.s < rows[m].s ? i : m, 0);
-      const prev = rows[r];
-      if (prev) { prev.x = Math.min(prev.x, t); prev.e = Math.min(prev.e, t - ROW_SWAP); }
-      const label = c.dir || c.k === 0 ||
-        rows.some((q, i) => i !== r && q && !q.c.dir && q.voice !== voice);
-      const q = { c, row: r, voice, label, s: t, e: c.end + hold(c), x: c.end + hold(c) + fade(c) };
-      rows[r] = q;
-      subSched.push(q);
+      const voice = c.dir ? null : c.spk;
+      // Planned as a film subtitler would, knowing what comes next: a piece
+      // arriving before the subtitle on screen has had its reading time joins
+      // it, if the whole still fits in MAX_LINES — the same voice's next words
+      // run on in its line, another voice gets a line of its own.
+      if (cur && !c.dir && !cur.items[0].dir && c.start < cur.s + readOf(cur)
+          && c.start - cur.s <= EARLY_MAX) {
+        const last = cur.items[cur.items.length - 1];
+        if (last.spk === voice && last.ti === c.ti) {
+          const joined = { ...last, text: last.text + ' ' + c.text, end: c.end, verse: c.verse };
+          if (!c.verse && !last.verse && linesOf(cur) - nLines(last) + nLines(joined) <= MAX_LINES) {
+            cur.items[cur.items.length - 1] = joined;
+            cur.e = Math.max(cur.e, c.end + hold(c)); cur.x = Math.max(cur.x, cur.e + fade(c));
+            continue;
+          }
+        } else if (cur.items.length < 2 && linesOf(cur) + nLines(c) <= MAX_LINES) {
+          cur.items.push(c); cur.labels = [true, true];
+          cur.e = Math.max(cur.e, c.end + hold(c)); cur.x = Math.max(cur.x, cur.e + fade(c));
+          lastVoice = voice;
+          continue;
+        }
+      }
+      let s = c.start;
+      if (cur) {
+        s = Math.max(s, cur.s + MIN_ON);
+        cur.x = Math.min(cur.x, s);
+        cur.e = Math.min(cur.e, cur.x);
+      }
+      const label = !c.dir && (c.k === 0 || voice !== lastVoice);
+      cur = { items: [c], labels: [label], s, e: c.end + hold(c), x: c.end + hold(c) + fade(c) };
+      subSched.push(cur);
+      lastVoice = voice;
     }
+    for (const q of subSched) q.x = Math.max(q.x, q.s + 0.01);
   }
 
-  // One row is as tall as the tallest piece at the current size and width, so
-  // no line can reach into the row above. Measured off screen over every piece.
+  function evEl(q) {
+    const d = document.createElement('div');
+    d.className = 'ev';
+    q.items.forEach((c, i) => {
+      const p = subEl(c);
+      if (!q.labels[i]) p.classList.add('nolabel');
+      d.append(p);
+    });
+    return d;
+  }
+  // The tallest subtitle at the current size and width, for the cue cards to
+  // keep clear of. Measured off screen over every subtitle.
   let pitch = 0;
   function measurePitch() {
+    if (!subSched.length) scheduleSubs();
     const probe = document.createElement('div');
-    probe.style.cssText = 'position:absolute;visibility:hidden;left:-9999px;top:0;';
-    probe.style.width = subsEl.getBoundingClientRect().width + 'px' || '';
+    probe.style.cssText = 'position:absolute;visibility:hidden;left:0;right:0;bottom:0;';
     subsEl.append(probe);
     let h = 0;
-    for (const c of chunks) {
-      const p = subEl(c);
-      p.style.position = 'static';
-      probe.replaceChildren(p);
-      h = Math.max(h, p.getBoundingClientRect().height);
-    }
+    for (const q of subSched) { probe.replaceChildren(evEl(q)); h = Math.max(h, probe.getBoundingClientRect().height); }
     probe.remove();
-    const font = parseFloat(getComputedStyle(subsEl).fontSize);
-    pitch = h + 0.3 * font;
-    root.style.setProperty('--pitch', pitch.toFixed(1) + 'px');
+    pitch = h;
   }
 
-  const shownSubs = new Map();
+  let shownEv = null, shownEl = null;
+  const shownSubs = { clear() { shownEv = null; shownEl = null; } };
   function renderSubs(t) {
     if (!subSched.length) scheduleSubs();   // first frame: after the sliders are restored
-    if (!pitch) measurePitch();
-    const vis = subSched.filter(q => q.s <= t && t < q.x);
-    const keep = new Set(vis);
-    for (const [q, el] of shownSubs) if (!keep.has(q)) { el.remove(); shownSubs.delete(q); }
-    for (const q of vis) {
-      let el = shownSubs.get(q);
-      if (!el) {
-        el = subEl(q.c);
-        el.classList.toggle('nolabel', !q.label);
-        el.style.setProperty('--row', q.row);
-        subsEl.append(el);
-        shownSubs.set(q, el);
-      }
-      const a = Math.min((t - q.s) / SUB_IN, 1);
-      const w = t > q.e ? Math.max((q.x - t) / Math.max(q.x - q.e, 0.01), 0) : 1;
-      el.style.opacity = Math.max(0, Math.min(w, a)).toFixed(3);
+    // the subtitle whose window holds t (binary search: windows do not overlap)
+    let lo = 0, hi = subSched.length - 1, q = null;
+    while (lo <= hi) {
+      const m = (lo + hi) >> 1;
+      if (subSched[m].s <= t) { q = subSched[m]; lo = m + 1; } else hi = m - 1;
     }
+    if (q && t >= q.x) q = null;
+    if (q !== shownEv) {
+      shownEv = q; shownEl = q ? evEl(q) : null;
+      subsEl.replaceChildren(...(shownEl ? [shownEl] : []));
+    }
+    if (!q) return;
+    const a = Math.min((t - q.s) / SUB_IN, 1);
+    const w = t > q.e ? Math.max((q.x - t) / Math.max(q.x - q.e, 0.01), 0) : 1;
+    shownEl.style.opacity = Math.max(0, Math.min(w, a)).toFixed(3);
   }
 
   // ---- Cue cards -----------------------------------------------------------
@@ -647,7 +675,7 @@
     if (mode !== 'subs' || innerWidth < 900) return;
     if (!pitch) measurePitch();
     const sub = parseFloat(getComputedStyle(subsEl).fontSize);
-    const safe = innerHeight * (1 - css('--subpos') / 100) - ROWS * pitch - 0.5 * sub;
+    const safe = innerHeight * (1 - css('--subpos') / 100) - pitch - 0.5 * sub;
     const bottom = () => el.getBoundingClientRect().bottom - parseFloat(getComputedStyle(el).paddingBottom);
     for (let k = 1; bottom() > safe && k > 0.6; ) { k *= 0.97; el.style.fontSize = k.toFixed(3) + 'em'; }
   }
@@ -815,7 +843,7 @@
     .addEventListener('input', () => { pitch = 0; cuesEl.replaceChildren(); shownCues.clear(); }));
   addEventListener('resize', () => { pitch = 0; cuesEl.replaceChildren(); shownCues.clear(); });
   document.getElementById('linger').addEventListener('input', () => {
-    scheduleSubs(); subsEl.replaceChildren(); shownSubs.clear();
+    scheduleSubs(); pitch = 0; subsEl.replaceChildren(); shownSubs.clear();
   });
   scheduleCues(VAL.cuelinger);
   // Subtitle and cue sizes open on their responsive defaults, like type size.

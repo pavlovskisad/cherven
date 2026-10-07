@@ -458,20 +458,22 @@ a phone has no keyboard), with `S`, or by URL for a kiosk
 remembered in that browser; the URL overrides it. Default: subtitles, cues off.
 
 - **Subtitles** — only what is being said, low and centred, at most three
-  lines. **Lines never move.** They used to stack from the foot, so each new
-  line pushed the others up (a glide only softened it, and the artist found
-  it frustrating). Now there are three **fixed rows**, each as tall as the
-  tallest piece at the current size (two lines). A piece keeps its row from
-  appearing to going. A voice that goes on speaking replaces its own previous
-  line in its own row (0.15 s swap), once that line has had its reading time;
-  a new voice takes the lowest free row; with all rows held by other voices
-  the oldest line gives way. Scheduled once for the piece (again when Linger
-  moves), so seeking is exact. Whether a line shows its speaker's name is
-  decided once, in that schedule (a per-frame decision once made lines
-  re-wrap). Stepping the whole piece frame by frame at 1920×1080 and 1280×800:
-  0 px movement, 0 re-wraps; 8 of 344 pieces get under 80% of their reading
-  time, all where three voices overlap or in the fast "Glory to Ukraine"
-  chant. Speeches are cut into sentence-sized pieces (≤ ~84 characters, long
+  lines. **One subtitle at a time, as in a film.** It always sits at the same
+  foot and the next replaces it whole: nothing stacks, moves or lingers
+  elsewhere. Two earlier designs failed on the wall: a stack from the foot
+  (each new line pushed the others up) and three fixed rows (lines appearing
+  and leaving in three places at once — "chaotic"). The schedule is planned
+  for the whole piece, as a subtitler would with the script: words arriving
+  before the subtitle on screen has had its reading time join it, if the
+  result fits three lines — the same voice runs on in its line, a second
+  voice gets a line of its own (a dialogue pair, both named) — but nothing
+  goes up more than 3 s before it is said. Each subtitle stays at least 1 s.
+  In a pause the last one stays for Linger, then the screen clears. Names
+  show when the voice changes or a speech begins. Result: 293 subtitles, 36
+  dialogue pairs; 42 below comfortable reading time (median 68% of it), all in
+  dense overlapping speech. 0 px movement and no re-wraps, stepped frame by
+  frame at two sizes. Rendering: `.ev` block per subtitle, opacity on the
+  block (tests read it there). Speeches are cut into sentence-sized pieces (≤ ~84 characters, long
   sentences at commas and dashes) and the turn's span is shared between them by
   length; the prayer uses its 35 line times. Each piece gets reading time
   (0.9 s + 1 s per 22 characters) but never overlaps the next piece of the same
