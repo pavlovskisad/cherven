@@ -119,13 +119,12 @@
   #cues {
     display: none; position: fixed; top: calc(var(--pad) * 0.5);
     left: var(--pad); right: var(--pad);
-    grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 2.5em; align-items: start;
+    grid-template-columns: minmax(0, 24em); align-items: start;   /* one card at a time */
     font-size: var(--cuesize); line-height: 1.3; color: var(--ink);
     pointer-events: none; z-index: 5;
   }
   body.cuesOn #cues { display: grid; }
-  @media (min-width: 900px) { .cue { grid-column: var(--slot); grid-row: 1; } }
-  @media (max-width: 899px) { #cues { grid-template-columns: 1fr; } }
+  .cue { grid-column: 1; grid-row: 1; }
   .cue { background: var(--paper); padding: 0 0 0.9em 0; }
   .cue .title { font-weight: 600; }
   .cue .desc { font-size: 0.78em; text-align: left; }
@@ -597,16 +596,13 @@
 
   // ---- Cue cards -----------------------------------------------------------
 
-  // Each cue appears at its start and stays long enough to read. Cues overlap
-  // heavily (CLAUDE.md §3), and the data starts ten of them at 2:01 (a known
-  // data problem), so no more than three show at once: a cue that finds all
-  // slots taken waits for one to free, and is skipped only if its sound has
-  // ended by then. The schedule is worked out once, so seeking is exact.
-  const CUE_SLOTS = 3, CUE_IN = 0.5, CUE_OUT = 2.0;
+  // Each cue's card appears at its start (or its speaker's first words, below)
+  // and stays long enough to read, one card at a time (scheduleCues). The
+  // schedule is worked out once, so seeking is exact.
+  const CUE_IN = 0.5, CUE_OUT = 2.0;
   let cueSched = [];
-  // "Cue linger" adds seconds to every cue's reading time (default 8). Longer
-  // means later cues wait for a slot: at +8 the ten 2:01 cues are all through
-  // by about 3:00; past +12 the 19 s cue 13 can lose its slot entirely.
+  // "Cue linger" adds seconds to a card's reading time (default 8) when no
+  // other card is waiting.
   // A cue whose recording centres on someone speaking shows its card as that
   // voice is first heard, not where the cue sheet starts the recording: the
   // sheet starts each one at its ambience, so "Anya" came up 55 s before
@@ -619,7 +615,7 @@
   // luncheon (dishes first), "Libkind's tour" (shares its guide with
   // "Mykola's vest"), and every cue without speech.
   const CUE_VOICE = {
-    1: ['Andriy'], 2: ['Frania'], 4: ['Serhii'], 7: ['Nikolaich'], 8: ['Sania'], 9: ['Hek'],
+    2: ['Frania'], 4: ['Serhii'], 7: ['Nikolaich'], 8: ['Sania'], 9: ['Hek'],
     10: ['Chapa'], 11: ['Patient'], 12: ['Woman at the Liquor Factory'], 21: ['Mrs. Anya'],
     23: ['Vitalii Hodziatskyi'], 24: ['Tour guide'], 25: ['Zenon'], 28: ['Serhii', 'evolutionarily'],
     30: ['Soldier', 'To prayer'], 32: ['Commander'], 33: ['Kostya'], 34: ['Liokha'],
@@ -635,23 +631,26 @@
                               && T.start >= c.start - 30 && T.start <= c.end);
     return T ? Math.max(0, T.start - CUE_LEAD) : c.start;
   };
+  // One card on screen at a time, never two situations at once (the artist's
+  // call: a card may come late rather than share the screen). Cards queue in
+  // order of their start, "Let's go" always first. A card gets its reading
+  // time; the Cue linger extra only when no card is waiting by then, so the
+  // queue drains: half the cards show within 5 s of their moment, the worst
+  // waits ~2 min in the ten-cue pile-up the sheet starts at 2:01 (CLAUDE.md
+  // §3, known problem 1). Every card is shown, even one whose sound has ended.
   function scheduleCues(extra) {
     cueSched = [];
-    // freeAt[k]: when slot k (a column of the header row) is next free
-    const freeAt = Array(CUE_SLOTS).fill(-Infinity);
-    const sorted = CUES.map(c => ({ ...c, start: cueStart(c) })).sort((a, b) => a.start - b.start || a.n - b.n);
-    for (const c of sorted) {
-      let t0 = c.start;
-      let slot = freeAt.findIndex(f => f <= t0);            // leftmost free slot
-      if (slot < 0) {                                       // none: wait for the first to free
-        t0 = Math.min(...freeAt);
-        slot = freeAt.indexOf(t0);
-      }
-      if (t0 >= c.end) continue;
-      const read = Math.min(Math.max(4 + (c.title.length + c.desc.length) / 12, 9), 30) + extra;
-      cueSched.push({ c, s: t0, e: t0 + read, slot });
-      freeAt[slot] = t0 + read + CUE_OUT;
-    }
+    const sorted = CUES.map(c => ({ ...c, start: cueStart(c) }))
+      .sort((a, b) => (b.n === 1) - (a.n === 1) || a.start - b.start || a.n - b.n);
+    let free = -Infinity;
+    sorted.forEach((c, i) => {
+      const t0 = Math.max(c.start, free);
+      const read = Math.min(Math.max(4 + (c.title.length + c.desc.length) / 12, 9), 30);
+      const next = sorted[i + 1];
+      const e = t0 + read + (next && next.start <= t0 + read ? 0 : extra);
+      cueSched.push({ c, s: t0, e, slot: 0 });
+      free = e + CUE_OUT;
+    });
   }
   scheduleCues(8);
   const cuesEl = document.getElementById('cues');

@@ -504,36 +504,18 @@ sheet's start. Some anchors are low-confidence lines (±~10 s), still far
 closer than the sheet's ambience starts.
 
 **Cues** (`D`, or the on-screen switch): title and description, no number,
-from the wall's own `CUES` (copied in by `build.py`, never a second copy), in
-a row at the top. At 1920×1080: subtitles ~49 px, cue titles ~42.5 px,
-descriptions at 0.78 of that, scroll text ~40 px (the original sizes +20%,
-then +10%, October 2026; a size set by hand grows with them). Subtitles stay
-a step larger than cues, so the voices lead. On every other screen subtitles
-and cues scale with the 1920×1080 frame fitted inside it, as a video would
-(`min(vw, vh)`), so the composition is the same everywhere. A card that would
-reach the room the subtitles may need (three pieces of two lines) is set
-smaller, once, as it appears: 4 of 53 at 1920×1080 — Funeral walk 81%, Tokha's
-funeral 86%, The only master 89%, Pidkova 94%. Before this, those covered
-subtitle lines. Whole piece stepped at 1920×1080, 1280×800, 1280×720,
-1024×768 and 2560×1440: no collision anywhere. Shown from each cue's start for a reading time of 9–30 s plus the
-**Cue linger** slider (default +8 s), then a 2 s fade. At most three at once;
-a cue finding no free slot waits for one. That matters at 2:01, where the data
-starts ten cues together (§3 known problem 1) — they appear three at a time
-and at +8 s are all through by about 3:00. The schedule is recomputed only
-when the slider moves, so seeking is exact. No cue is skipped up to +12 s;
-beyond that cue 13 (19 s long) can lose its turn.
-
-**Typeface: Inter**, not Times — the artist's choice for reading on the wall
-(tall lowercase, open shapes, minimal). The variable font is subset to the
-page's characters and embedded as a data URI (~104 KB), so the page stays one
-file and works offline from `file://`; names and cue titles at weight 600.
-Source, licence (OFL) and how to re-subset: `fonts/`. The wall (`/`) is still
-Times. Inter is wider than Times, so five long cue cards now fit themselves
-to 78–94%.
-
-**Inverted** (`I`, the on-screen switch, the panel, or `&invert=1`): white
-on black, via `--ink`/`--paper` on `:root`. Remembered with mode and cues.
-To render the video inverted: `QUERY='?mode=subs&cues=1&invert=1'`.
+from the wall's own `CUES` (copied in by `build.py`, never a second copy).
+**One card at a time**, top left, at most 24em wide — the artist's rule: never
+two situations on screen, even if a card comes late. Cards queue in order of
+their start (or their speaker's first line, above), **"Let's go" always
+first**. A card gets its reading time (9–30 s); the **Cue linger** extra
+(default +8 s) only when no other card is waiting, so the queue drains: half
+the cards show within ~5 s of their moment, the worst ~2 min late in the
+ten-cue pile-up the sheet starts at 2:01 (§3 known problem 1). Every card is
+shown; two come up just after their sound has ended. Cue titles ~42.5 px at
+1920×1080, descriptions at 0.78; subtitles stay a step larger. At one card
+and 24em, no card reaches the subtitles (closest 400 px), so none needs to
+fit itself smaller (`fitCue` stays as a guard).
 
 **Saved settings** keep only the sliders someone actually moved, so a new
 default in the code still reaches a browser that saved settings earlier.
