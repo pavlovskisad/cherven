@@ -27,17 +27,15 @@ there in Finder and rename it, or download it from the release (716 MB):
 curl -L -o ~/cherven-main/cherven.wav https://github.com/pavlovskisad/cherven/releases/download/lossless-audio/Ian.Spektor.-.Cherven.-.01.Cherven.wav
 ```
 
-The launchers use `cherven.wav` whenever it is there, and the Terminal window
+The launcher uses `cherven.wav` whenever it is there, and the Terminal window
 says which file is playing ("Audio: cherven.wav (lossless)"). The WAV and the
 MP3 are the same edit, sample for sample, so every subtitle and cue lands at
 the same moment. Updating the folder with the line above keeps the WAV.
 
 ## 2. Start it
 
-Double-click one of:
-
-- **Cherven wall.command**: the cue sheet with speech.
-- **Cherven transcript.command**: the edited transcript (subtitles or scroll).
+Double-click **Cherven.command**: subtitles with the cue cards, white on
+black.
 
 Chrome opens full screen and the piece starts by itself and loops. A Terminal
 window opens behind it; leave it there. **Cmd+Q** quits. Double-clicking again
@@ -46,21 +44,28 @@ restarts it.
 If macOS says the file can't be opened, right-click it, choose **Open**, then
 **Open** again. You only have to do that once.
 
+On a laptop set up before November 2026, updating leaves the old **Cherven
+wall.command** and **Cherven transcript.command** in the folder. Both now open
+the same page as Cherven.command; you can delete them.
+
 ## 3. Tune it on the wall
 
-Press **C** for the settings panel. Every slider and switch is **saved
-automatically** and comes back on every restart. **Reset settings** at the
-bottom of the panel returns to the defaults. Settings are kept separately for
-the wall and the transcript.
+Press **C** for the settings panel. Every slider is **saved automatically**
+and comes back on every restart. **Reset settings** at the bottom of the panel
+returns to the defaults.
 
-- Type size and margin should fit the throw.
-- **Edge feather** dissolves the bright edge of the projected rectangle into
-  the wall. It is off by default; raise it until the frame stops reading.
-- On the transcript page: **S** switches subtitles/scroll, **D** cues on/off,
-  and **Linger** sets how long a line stays.
-- **Sync offset** (transcript page): if words land late against the sound,
-  usually because of a delay in the sound system, move it until they match.
+- **Subtitle size** and **Cue size** should fit the throw.
+- **Linger** sets how long a subtitle stays after its speech; **Cue linger**
+  how long a cue card stays.
+- **Edge feather** dissolves the edge of the projected rectangle into the
+  wall. It is off by default; raise it until the frame stops reading.
+- **Sync offset**: if words land late against the sound, usually because of a
+  delay in the sound system, move it until they match.
 - **← / →** seek 10 s (shift: 60 s). **Space** pauses. **F** fullscreen.
+
+The page always opens as subtitles, cue cards, white on black. **S** (scroll
+view), **D** (cues) and **I** (black on white) change that until the next
+start only.
 
 Close the panel with **C** when done. The cursor hides itself after 2 s.
 
@@ -112,6 +117,5 @@ The Mac then boots straight into the piece.
   launcher again, or just click *Let's go* once.
 - **"Could not load the audio"**: `cherven.mp3` (or `cherven.wav`) is missing
   or incomplete. Run the command in step 1 again, and re-copy the WAV.
-- **Online fallback**: `https://cherven.vercel.app` (wall) and
-  `https://cherven.vercel.app/transcript` work in any browser, but need one
-  click to start, and the venue's internet.
+- **Online fallback**: `https://cherven.vercel.app` works in any browser, but
+  needs one click to start, and the venue's internet.

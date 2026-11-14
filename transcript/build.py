@@ -1,7 +1,7 @@
-"""Write the timed transcript into transcript.html.
+"""Write the timed transcript and the cue sheet into index.html (the page).
 
     python3 transcript/parse.py     source.txt  -> turns.json
-    python3 transcript/build.py     turns.json + timing.json -> transcript.html
+    python3 transcript/build.py     turns.json + timing.json + cues.json -> index.html
 
 timing.json holds one entry per item of turns.json, by index:
     {"i": 12, "start": 241.3, "end": 247.9, "conf": "high", "evidence": "..."}
@@ -15,7 +15,7 @@ import json, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).parent
-PAGE = HERE.parent / "transcript.html"
+PAGE = HERE.parent / "index.html"
 DUR = 2704.9
 
 
@@ -53,19 +53,17 @@ def main():
     data = json.dumps(out, ensure_ascii=False, separators=(",", ":"))
     new, n = re.subn(r"/\*TURNS\*/.*?/\*END\*/", lambda m: "/*TURNS*/" + data + "/*END*/", html, flags=re.S)
     if n != 1:
-        sys.exit("could not find exactly one /*TURNS*/.../*END*/ block in transcript.html")
+        sys.exit("could not find exactly one /*TURNS*/.../*END*/ block in index.html")
 
-    # The cue sheet comes from the wall's own data, never a second copy, so a
-    # fix to index.html's CUES reaches this page on the next build.
-    wall = (HERE.parent / "index.html").read_text(encoding="utf-8")
-    m = re.search(r"const CUES = (\[.*?\]);\n", wall, re.S)
-    if not m:
-        sys.exit("could not find CUES in index.html")
-    cues = [{k: c[k] for k in ("n", "title", "desc", "start", "end")} for c in json.loads(m.group(1))]
+    # The cue sheet: transcript/cues.json is its one copy (taken from the
+    # first version's page, the "wall", removed in November 2026, last at
+    # commit 2469f2a). Edit it there and rebuild.
+    cues = [{k: c[k] for k in ("n", "title", "desc", "start", "end")}
+            for c in json.loads((HERE / "cues.json").read_text(encoding="utf-8"))]
     cdata = json.dumps(cues, ensure_ascii=False, separators=(",", ":"))
     new, n = re.subn(r"/\*CUES\*/.*?/\*ENDCUES\*/", lambda m: "/*CUES*/" + cdata + "/*ENDCUES*/", new, flags=re.S)
     if n != 1:
-        sys.exit("could not find exactly one /*CUES*/.../*ENDCUES*/ block in transcript.html")
+        sys.exit("could not find exactly one /*CUES*/.../*ENDCUES*/ block in index.html")
     PAGE.write_text(new, encoding="utf-8")
     print(f"wrote {len(out)} items and {len(cues)} cues into {PAGE.name} ({len(data) + len(cdata)} bytes of data)")
 

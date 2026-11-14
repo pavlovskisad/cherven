@@ -1,4 +1,4 @@
-# Build tooling and intermediate data for transcript.html. Kept in the repo so
+# Build tooling, the cue sheet and intermediate data for index.html. Kept in the repo so
 # the timing can be regenerated; not part of what the site serves.
 transcript/
 # The Mac launchers and the installation checklist: for the gallery laptop,

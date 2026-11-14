@@ -1,8 +1,8 @@
-// Deterministic frame render of transcript.html to video (needs node + playwright, ffmpeg).
+// Deterministic frame render of the page (index.html) to video (needs node + playwright, ffmpeg).
 //   node render_video.js T0 T1 out.mp4      (seconds; writes video only, no audio)
-// The view is the cinema one, subtitles with cue cards, at the page's default
-// settings; QUERY overrides it, e.g. QUERY='?mode=scroll' for the scrolling
-// column.
+// The view is the page's default: subtitles with cue cards, white on black;
+// QUERY overrides it, e.g. QUERY='?invert=0' for black on white, or
+// QUERY='?mode=scroll' for the scrolling column.
 // The page runs on a virtual clock: performance.now and requestAnimationFrame
 // are replaced, and the piece time is set directly through a hook added to a
 // served copy of the page. Each frame advances exactly 1/FPS, so text and
@@ -22,7 +22,7 @@ const FPS = 25, W = 1920, H = 1080, WARM = 6, SCALE = +(process.env.SCALE || 2);
 const SETTINGS = process.env.SETTINGS ? JSON.parse(process.env.SETTINGS) : null;
 const HD = process.env.OUT === 'hd';
 
-let html = fs.readFileSync(require('path').join(__dirname, '..', 'transcript.html'), 'utf8');
+let html = fs.readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
 const hook = 'let virtualT = 0;';
 if (!html.includes(hook)) throw new Error('hook point missing');
 html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
@@ -42,7 +42,7 @@ html = html.replace(hook, hook + ' window.__setT = t => { virtualT = t; };')
   if (SETTINGS) await pg.addInitScript(s => {
     try { localStorage.setItem('cherven-transcript-settings', JSON.stringify({ v: 5, ...Object.fromEntries(Object.entries(s).map(([k, v]) => [k, String(v)])) })); } catch (e) {}
   }, SETTINGS);
-  await pg.goto(`http://127.0.0.1:${srv.address().port}/${process.env.QUERY || '?mode=subs&cues=1'}`, { waitUntil: 'load' });
+  await pg.goto(`http://127.0.0.1:${srv.address().port}/${process.env.QUERY || ''}`, { waitUntil: 'load' });
   await pg.evaluate(() => document.fonts.ready);
   await pg.evaluate(() => {
     document.getElementById('gate').classList.add('off');

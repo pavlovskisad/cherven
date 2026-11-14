@@ -1,8 +1,9 @@
-# transcript/ — timing for transcript.html
+# transcript/ — timing and data for the page
 
-`transcript.html` shows the edited English transcript alone, synced to
-`cherven.mp3`. Nothing in this folder is served (see `.vercelignore`); it is
-the material and tooling that produced the timing embedded in that page.
+`index.html`, the home page, shows the edited English transcript synced to
+`cherven.mp3`, with the cue sheet's cards. Nothing in this folder is served
+(see `.vercelignore`); it is the material and tooling that produced the
+timing embedded in that page, and the cue sheet it copies in.
 
 ## Files
 
@@ -19,7 +20,8 @@ the material and tooling that produced the timing embedded in that page.
 | `merge_review.py` | matcher + review + overrides → `timing.json`, enforcing playback order |
 | `audit_evidence.py` | checks every confident timing against saved recognition |
 | `timing.json` | **final timing** — per line: start, end, confidence, method, evidence, notes |
-| `build.py` | `turns.json` + `timing.json` → the `TURNS` array inside `transcript.html` |
+| `cues.json` | **the cue sheet** — 53 cues: number, title, description, date, start, end (seconds). Its one copy: edit here, then build |
+| `build.py` | `turns.json` + `timing.json` + `cues.json` → the `TURNS` and `CUES` arrays inside `index.html` |
 
 ## To change the words
 
@@ -36,10 +38,18 @@ line shifts the indices after it**, so `timing.json` must be redone for that
 stretch — either by hand (each entry quotes the speech it was matched to, so
 neighbours are easy to place) or by re-running the alignment.
 
+## To change a cue
+
+Edit its `title`, `desc`, `start` or `end` in `cues.json`, then
+`python3 transcript/build.py`. A cue card shows at the cue's `start`, or, for
+the 27 cues mapped in `CUE_VOICE` in `index.html`, as its speaker's first line
+is heard; see CLAUDE.md §4.
+
 ## How the timing was made
 
-The transcript arrived with no timecodes, but — unlike the one embedded in the
-main wall — **in playback order**. That makes alignment a monotone matching
+The transcript arrived with no timecodes, but — unlike the older transcript
+the first version of this project (the "wall", removed in November 2026) was
+built on — **in playback order**. That makes alignment a monotone matching
 problem rather than a guess inside a cue window.
 
 1. **Recognise the audio** (`whisper.json`). Whisper large-v3 (faster-whisper,
@@ -82,7 +92,7 @@ To rebuild from the saved data:
 python3 transcript/merge_review.py transcript/review/round1.json \
         transcript/review/round2_gaps.json transcript/review/skeptic.json   # → timing.json
 python3 transcript/audit_evidence.py                                         # confident ⇒ reproducible
-python3 transcript/build.py                                                  # → transcript.html
+python3 transcript/build.py                                                  # → index.html
 ```
 
 `timing.json` carries, per line, the method that decided it, the recognised
